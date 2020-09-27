@@ -1,0 +1,15 @@
+.container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 25px;
+  grid-row-gap: 25px;
+  margin: 40px;
+}
+
+.addBtn {
+  position: fixed;
+  right: 100px;
+  bottom: 90px;
+  z-index: 1;
+}
+
