@@ -19,6 +19,8 @@ import { WorkplaceComponent } from './container/main-screen/workplace/workplace.
 import { CreateWorkplaceDialogComponent } from './container/main-screen/create-workplace-dialog/create-workplace-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { AppRoutingModule } from './app-routing.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MainScreenComponent,
     WorkplaceComponent,
     CreateWorkplaceDialogComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatGridListModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
