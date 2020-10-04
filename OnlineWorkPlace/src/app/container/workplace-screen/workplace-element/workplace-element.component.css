@@ -1,0 +1,19 @@
+.container {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: orange;
+  width: 230px;
+}
+
+.images {
+  margin-top: 10px;
+  padding: 5px;
+  background-color: red;
+  height: 40px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 450;
+}

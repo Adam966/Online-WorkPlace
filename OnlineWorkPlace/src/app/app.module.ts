@@ -21,6 +21,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { WorkplaceScreenComponent } from './container/workplace-screen/workplace-screen.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import { WorkplaceElementComponent } from './container/workplace-screen/workplace-element/workplace-element.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     WorkplaceComponent,
     CreateWorkplaceDialogComponent,
     PageNotFoundComponent,
+    WorkplaceScreenComponent,
+    WorkplaceElementComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MatGridListModule,
     MatDialogModule,
     MatMenuModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
