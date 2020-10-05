@@ -4,8 +4,8 @@
     <span>Online Workplace</span>
     <span class="example-spacer"></span>
     <div *ngIf="changeToolbar">
-      <mat-icon class="example-icon">add</mat-icon>
-      <mat-icon class="example-icon">storage</mat-icon>
+      <mat-icon>add</mat-icon>
+      <mat-icon>storage</mat-icon>
       <mat-icon
         matBadgeOverlap="true"
         matBadgeSize="small"
@@ -14,7 +14,7 @@
         matBadgePosition="above"
         class="example-icon">notifications</mat-icon>
     </div>
-    <mat-icon class="example-icon" [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
+    <mat-icon [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-menu class="my-menu" #menu="matMenu">

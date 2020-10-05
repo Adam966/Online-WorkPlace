@@ -24,6 +24,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { WorkplaceScreenComponent } from './container/workplace-screen/workplace-screen.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import { WorkplaceElementComponent } from './container/workplace-screen/workplace-element/workplace-element.component';
+import { RegistrationDialogComponent } from './login/registration-dialog/registration-dialog.component';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { WorkplaceElementComponent } from './container/workplace-screen/workplac
     PageNotFoundComponent,
     WorkplaceScreenComponent,
     WorkplaceElementComponent,
+    RegistrationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,8 @@ import { WorkplaceElementComponent } from './container/workplace-screen/workplac
     MatDialogModule,
     MatMenuModule,
     AppRoutingModule,
-    MatBadgeModule
+    MatBadgeModule,
+    NgxMasonryModule
   ],
   providers: [],
   bootstrap: [AppComponent]

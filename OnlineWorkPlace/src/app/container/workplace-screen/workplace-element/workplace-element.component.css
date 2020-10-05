@@ -4,6 +4,7 @@
   border-radius: 10px;
   background-color: orange;
   width: 230px;
+  cursor: pointer;
 }
 
 .images {

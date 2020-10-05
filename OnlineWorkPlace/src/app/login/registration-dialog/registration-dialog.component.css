@@ -1,0 +1,36 @@
+.mat-form-field {
+  width: 100%;
+}
+
+.title {
+  margin: 15px 15px 35px;
+  font-size: 36px;
+}
+
+.form {
+  margin-left: 55px;
+}
+
+.button {
+  background-color: #36497A;
+  color: white;
+  display: block;
+  left: 50%;
+}
+
+.photo {
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 125px;
+  height: 125px;
+}
+
+.right {
+  float: right;
+  width: 270px;
+}
+
+.left {
+  float: left;
+  width: 460px;
+}
