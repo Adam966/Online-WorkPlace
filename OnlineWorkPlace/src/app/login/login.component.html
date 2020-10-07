@@ -3,19 +3,39 @@
   <div class="split right">
     <div class="centered">
       <mat-card class="card">
-        <mat-card-title class="title">SIGN IN</mat-card-title>
+        <mat-card-title class="title">Sign In</mat-card-title>
         <mat-card-content>
-          <form>
+          <form #signUpForm="ngForm" (ngSubmit)="login(signUpForm)">
             <mat-form-field>
-              <mat-label class="mat-label">Name</mat-label>
-              <input type="text" matInput>
+              <mat-label class="mat-label">Email</mat-label>
+              <input
+                matInput
+                ngModel
+                type="email"
+                email
+                required
+                name="email"
+                #email="ngModel"
+                autocomplete="username">
+              <mat-error *ngIf="email.invalid">"Please enter value"</mat-error>
             </mat-form-field>
             <mat-form-field>
               <mat-label class="mat-label">Password</mat-label>
-              <input type="password" matInput>
+              <input
+                matInput
+                ngModel
+                type="password"
+                required
+                name="password"
+                #password="ngModel"
+                autocomplete="current-password">
+              <mat-error *ngIf="password.invalid">"Please enter value"</mat-error>
             </mat-form-field>
+            <button mat-button
+                    class="text"
+                    type="submit"
+                    [disabled]="signUpForm.invalid">Login</button>
           </form>
-          <button mat-button style="background-color: #36497A" class="text" routerLink="/main">Login</button>
         </mat-card-content>
         <u (click)="registration()">Sign Up</u>
       </mat-card>

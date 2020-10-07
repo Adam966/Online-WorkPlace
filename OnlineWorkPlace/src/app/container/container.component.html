@@ -4,7 +4,7 @@
     <span>Online Workplace</span>
     <span class="example-spacer"></span>
     <div *ngIf="changeToolbar">
-      <mat-icon>add</mat-icon>
+      <mat-icon [matMenuTriggerFor]="add">add</mat-icon>
       <mat-icon>storage</mat-icon>
       <mat-icon
         matBadgeOverlap="true"
@@ -12,17 +12,26 @@
         matBadge="15"
         matBadgeColor="warn"
         matBadgePosition="above"
-        class="example-icon">notifications</mat-icon>
+        [matMenuTriggerFor]="notifications">notifications</mat-icon>
     </div>
     <mat-icon [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-menu class="my-menu" #menu="matMenu">
-  <button mat-menu-item><img src="" alt="">Adam Ivan</button>
+  <p mat-menu-item><img src="" alt="">Adam Ivan</p>
   <hr>
   <button mat-menu-item><mat-icon>person</mat-icon>Profile</button>
   <button mat-menu-item><mat-icon>settings</mat-icon>Settings</button>
   <button mat-raised-button color="primary" style="margin-left: 65px; margin-top: 15px">Log out</button>
+</mat-menu>
+<mat-menu #add class="my-menu">
+  <button mat-menu-item><mat-icon>add</mat-icon>Add User</button>
+  <button mat-menu-item><mat-icon>add</mat-icon>Add Task</button>
+  <button mat-menu-item><mat-icon>add</mat-icon>Add Note</button>
+  <button mat-menu-item><mat-icon>add</mat-icon>Add Thread</button>
+</mat-menu>
+<mat-menu #notifications class="my-menu">
+
 </mat-menu>
 <router-outlet></router-outlet>
 

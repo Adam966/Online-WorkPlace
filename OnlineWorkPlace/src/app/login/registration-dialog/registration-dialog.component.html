@@ -1,27 +1,69 @@
 <div class="left">
   <h1 class="title">Registration</h1>
-  <form class="form">
+  <form class="form" #registrationForm="ngForm" (ngSubmit)="register(registrationForm)">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
-      <input type="text" matInput>
+      <input
+        matInput
+        ngModel
+        type="email"
+        required
+        email
+        name="email"
+        #email="ngModel">
+      <mat-error *ngIf="email.invalid">"Please enter valid email!"</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
-      <input type="text" matInput>
+      <input
+        matInput
+        ngModel
+        type="text"
+        required
+        name="name"
+        #name="ngModel">
+      <mat-error *ngIf="name.invalid">"Please enter value!"</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Surname</mat-label>
-      <input type="text" matInput>
+      <input
+        matInput
+        ngModel
+        type="text"
+        required
+        name="surname"
+        #surname="ngModel">
+      <mat-error *ngIf="surname.invalid">"Please enter value!"</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
-      <input type="password" matInput>
+      <input
+        matInput
+        ngModel
+        type="password"
+        required
+        name="password"
+        #password="ngModel">
+      <mat-error *ngIf="password.invalid">"Please enter value!"</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Repeat password</mat-label>
-      <input type="password" matInput>
+      <input
+        matInput
+        ngModel
+        type="password"
+        required
+        name="repeatPassword"
+        #repeatPassword="ngModel"
+        autocomplete="new-password">
+      <mat-error *ngIf="repeatPassword.invalid">"Passwords dont match!"</mat-error>
     </mat-form-field>
-    <button mat-button class="button">Register</button>
+    <button
+      mat-button
+      class="button"
+      type="submit"
+      [disabled]="registrationForm.invalid"
+    >Register</button>
   </form>
 </div>
 <div class="right">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-create-workplace-dialog',
@@ -12,4 +13,7 @@ export class CreateWorkplaceDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  createWorkplace(workplaceForm: NgForm): void {
+    console.log(workplaceForm);
+  }
 }

@@ -7,7 +7,7 @@ import {ActivatedRoute, Route, Router} from '@angular/router';
   styleUrls: ['./container.component.css']
 })
 export class ContainerComponent implements OnInit {
-  changeToolbar = false;
+  changeToolbar = true;
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {

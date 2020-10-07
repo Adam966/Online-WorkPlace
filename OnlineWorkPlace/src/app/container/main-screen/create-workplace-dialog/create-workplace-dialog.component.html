@@ -1,13 +1,31 @@
 <mat-card class="centered">
   <mat-card-title class="title">Create Workplace</mat-card-title>
   <mat-card-content>
-    <mat-form-field class="max-width">
-      <mat-label>Workplace name</mat-label>
-      <input matInput>
-    </mat-form-field>
-    <mat-form-field class="max-width">
-      <mat-label>Workplace description</mat-label>
-      <textarea matInput></textarea>
-    </mat-form-field>
+    <form ngForm #workplaceForm="ngForm" (ngSubmit)="createWorkplace(workplaceForm)">
+      <mat-form-field class="max-width">
+        <mat-label>Workplace name</mat-label>
+        <input
+          matInput
+          ngModel
+          type="text"
+          name="name"
+          required
+          #name="ngModel">
+        <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
+      </mat-form-field>
+      <mat-form-field class="max-width">
+        <mat-label>Workplace description</mat-label>
+        <textarea
+          matInput
+          ngModel
+          type="text"
+          name="content"
+          required
+          #content="ngModel">
+        </textarea>
+        <mat-error *ngIf="content.invalid">"Please enter value"</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="workplaceForm.invalid" type="submit">Create</button>
+    </form>
   </mat-card-content>
 </mat-card>

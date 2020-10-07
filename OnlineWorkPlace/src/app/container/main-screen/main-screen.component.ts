@@ -10,7 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class MainScreenComponent implements OnInit {
   workPlaces: {name: string, description: string}[] = [];
-  constructor(public dialog: MatDialog, private router: Router, private route: ActivatedRoute) { }
+  constructor(public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
     this.createDummyData();
