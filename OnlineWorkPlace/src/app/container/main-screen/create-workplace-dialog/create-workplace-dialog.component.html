@@ -1,7 +1,7 @@
 <mat-card class="centered">
   <mat-card-title class="title">Create Workplace</mat-card-title>
   <mat-card-content>
-    <form ngForm #workplaceForm="ngForm" (ngSubmit)="createWorkplace(workplaceForm)">
+    <form ngForm #workplaceForm="ngForm" (ngSubmit)="createWorkplace()">
       <mat-form-field class="max-width">
         <mat-label>Workplace name</mat-label>
         <input
@@ -19,13 +19,17 @@
           matInput
           ngModel
           type="text"
-          name="content"
+          name="description"
           required
-          #content="ngModel">
+          #description="ngModel">
         </textarea>
-        <mat-error *ngIf="content.invalid">"Please enter value"</mat-error>
+        <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" [disabled]="workplaceForm.invalid" type="submit">Create</button>
+        <button mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="workplaceForm.invalid">
+          Create</button>
     </form>
   </mat-card-content>
 </mat-card>

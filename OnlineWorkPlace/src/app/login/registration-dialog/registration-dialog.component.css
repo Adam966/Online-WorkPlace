@@ -18,11 +18,12 @@
   left: 50%;
 }
 
-.photo {
+.img {
   border: 1px solid black;
   border-radius: 50%;
   width: 125px;
   height: 125px;
+  margin: 0 auto;
 }
 
 .right {

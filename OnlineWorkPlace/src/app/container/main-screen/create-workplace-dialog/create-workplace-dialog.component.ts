@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-workplace-dialog',
@@ -7,13 +8,15 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./create-workplace-dialog.component.css']
 })
 export class CreateWorkplaceDialogComponent implements OnInit {
+  @ViewChild('workplaceForm')
+  form: NgForm;
 
-  constructor() { }
+  constructor(private dialog: MatDialogRef<CreateWorkplaceDialogComponent>) { }
 
   ngOnInit(): void {
   }
 
-  createWorkplace(workplaceForm: NgForm): void {
-    console.log(workplaceForm);
+  createWorkplace(): void {
+    this.dialog.close(this.form.value);
   }
 }

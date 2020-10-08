@@ -1,7 +1,12 @@
 <div class="container">
   <p class="title">{{element.title}}</p>
-  <p>{{element.content}}</p>
+  <div *ngIf="taskB; else task">
+    <p>{{element.content}}</p>
+  </div>
+  <ng-template #task>
+    <p class="text"><mat-icon>check_box_outline_blank</mat-icon>5/7</p>
+  </ng-template>
   <div class="images">
-
+    <img src="#" class="img" *ngFor="let image of images">
   </div>
 </div>

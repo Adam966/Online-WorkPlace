@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CreateWorkplaceDialogComponent} from './create-workplace-dialog/create-workplace-dialog.component';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-main-screen',
@@ -10,6 +10,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class MainScreenComponent implements OnInit {
   workPlaces: {name: string, description: string}[] = [];
+  dialogRef: MatDialogRef<CreateWorkplaceDialogComponent>;
+
   constructor(public dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
@@ -23,7 +25,11 @@ export class MainScreenComponent implements OnInit {
   }
 
   addWorkPlace(): void {
-    this.dialog.open(CreateWorkplaceDialogComponent);
+    this.dialogRef = this.dialog.open(CreateWorkplaceDialogComponent);
+    this.dialogRef.afterClosed()
+      .subscribe((workplace) => {
+        this.workPlaces.push(workplace);
+      });
   }
 
 

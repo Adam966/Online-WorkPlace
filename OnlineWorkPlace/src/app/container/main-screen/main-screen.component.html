@@ -1,5 +1,9 @@
 <div class="container">
-  <app-workplace *ngFor="let workPlace of workPlaces" [workPlace]="workPlace" (click)="getWorkPlace()"></app-workplace>
+  <app-workplace
+    *ngFor="let workPlace of workPlaces"
+    [workPlace]="workPlace"
+    (click)="getWorkPlace()">
+  </app-workplace>
  </div>
 <div>
   <button (click)="addWorkPlace()" mat-fab color="primary" class="addBtn">

@@ -10,6 +10,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('signUpForm')
+  form: NgForm;
+
   constructor(private dialog: MatDialog, private router: Router) { }
 
   ngOnInit(): void {
@@ -19,8 +22,7 @@ export class LoginComponent implements OnInit {
     this.dialog.open(RegistrationDialogComponent);
   }
 
-  login(form: NgForm): void {
-    console.log(form);
+  login(): void {
     this.router.navigate(['/main']);
   }
 }

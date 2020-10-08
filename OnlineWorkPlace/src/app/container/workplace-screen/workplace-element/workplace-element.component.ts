@@ -8,9 +8,11 @@ import {Component, Input, OnInit} from '@angular/core';
 export class WorkplaceElementComponent implements OnInit {
   @Input()
   element: { title: string, content: string };
+  images: string[] = ['title', 'title', 'title'];
+  taskB = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }
