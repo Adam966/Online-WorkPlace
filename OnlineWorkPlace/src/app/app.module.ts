@@ -57,7 +57,7 @@ import { NgxMasonryModule } from 'ngx-masonry';
     MatMenuModule,
     AppRoutingModule,
     MatBadgeModule,
-    NgxMasonryModule
+    NgxMasonryModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
