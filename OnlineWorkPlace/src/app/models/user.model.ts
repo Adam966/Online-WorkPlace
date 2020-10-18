@@ -4,5 +4,5 @@ export interface UserModel {
   userSurname: string;
   email: string;
   photo?: string;
-  token: string;
+  token?: string;
 }

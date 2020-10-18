@@ -7,7 +7,7 @@
         <mat-card-content>
           <form
             #signUpForm="ngForm"
-            (ngSubmit)="login()">
+            (ngSubmit)="login(signUpForm)">
             <mat-form-field>
               <mat-label class="mat-label">Email</mat-label>
               <input

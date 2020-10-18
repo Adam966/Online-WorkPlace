@@ -26,6 +26,11 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { WorkplaceElementComponent } from './container/workplace-screen/workplace-element/workplace-element.component';
 import { RegistrationDialogComponent } from './login/registration-dialog/registration-dialog.component';
 import { NgxMasonryModule } from 'ngx-masonry';
+import {NgxsModule} from '@ngxs/store';
+import {LoginState} from './store/login';
+import {WorkplaceState} from './store/workplace';
+import {HttpClientModule} from '@angular/common/http';
+import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 
 @NgModule({
   declarations: [
@@ -58,6 +63,11 @@ import { NgxMasonryModule } from 'ngx-masonry';
     AppRoutingModule,
     MatBadgeModule,
     NgxMasonryModule,
+    HttpClientModule,
+    NgxsModule.forRoot([LoginState, WorkplaceState], {
+      developmentMode: true
+    }),
+    NgxsLoggerPluginModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

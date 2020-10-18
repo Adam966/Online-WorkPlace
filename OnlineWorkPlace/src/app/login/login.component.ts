@@ -1,8 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {RegistrationDialogComponent} from './registration-dialog/registration-dialog.component';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
+import {Store} from '@ngxs/store';
+import {Login} from '../store/login';
+import {LoginApiService} from './login-api.service';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +13,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('signUpForm')
-  form: NgForm;
-
-  constructor(private dialog: MatDialog, private router: Router) { }
+  constructor(private dialog: MatDialog, private router: Router, private store: Store, private loginService: LoginApiService) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +22,12 @@ export class LoginComponent implements OnInit {
     this.dialog.open(RegistrationDialogComponent);
   }
 
-  login(): void {
-    this.router.navigate(['/main']);
+  login(form: NgForm): void {
+    this.loginService.login({email: form.value.email, password: form.value.password})
+      .subscribe((user) => {
+        console.log(user);
+        this.store.dispatch(new Login(user));
+        this.router.navigate(['/main']);
+      });
   }
 }
