@@ -23,11 +23,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: NgForm): void {
-    this.loginService.login({email: form.value.email, password: form.value.password})
-      .subscribe((user) => {
-        console.log(user);
-        this.store.dispatch(new Login(user));
-        this.router.navigate(['/main']);
-      });
+    this.loginService.login({email: form.value.email, password: form.value.password});
   }
 }

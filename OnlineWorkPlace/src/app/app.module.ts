@@ -31,6 +31,7 @@ import {LoginState} from './store/login';
 import {WorkplaceState} from './store/workplace';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -64,9 +65,8 @@ import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
     MatBadgeModule,
     NgxMasonryModule,
     HttpClientModule,
-    NgxsModule.forRoot([LoginState, WorkplaceState], {
-      developmentMode: true
-    }),
+    MatProgressSpinnerModule,
+  NgxsModule.forRoot([LoginState, WorkplaceState], {developmentMode: true}),
     NgxsLoggerPluginModule.forRoot()
   ],
   providers: [],

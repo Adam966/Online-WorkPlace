@@ -7,11 +7,13 @@ import {ContainerComponent} from './container/container.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {WorkplaceScreenComponent} from './container/workplace-screen/workplace-screen.component';
 import {MainScreenComponent} from './container/main-screen/main-screen.component';
+import {ContainerGuard} from './container/container.guard';
 
 const appRouting = [
   {path: '', component: AppComponent},
   {path: 'login', component: LoginComponent},
   {path: 'main', component: ContainerComponent,
+    canActivate: [ContainerGuard],
     children: [
       {path: 'workplace', component: WorkplaceScreenComponent},
       {path: 'dashboard', component: MainScreenComponent}

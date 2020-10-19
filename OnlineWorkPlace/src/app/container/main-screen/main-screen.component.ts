@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CreateWorkplaceDialogComponent} from './create-workplace-dialog/create-workplace-dialog.component';
 import {Router} from '@angular/router';
+import {WorkplaceService} from './workplace/service/workplace.service';
+import {WorkplaceModel} from '../../models/workplace.model';
 
 @Component({
   selector: 'app-main-screen',
@@ -9,29 +11,27 @@ import {Router} from '@angular/router';
   styleUrls: ['./main-screen.component.css']
 })
 export class MainScreenComponent implements OnInit {
-  workPlaces: {name: string, description: string}[] = [];
+  workPlaces: WorkplaceModel[] = [];
   dialogRef: MatDialogRef<CreateWorkplaceDialogComponent>;
 
-  constructor(public dialog: MatDialog, private router: Router) { }
+  constructor(public dialog: MatDialog, private router: Router, private workplaceService: WorkplaceService) { }
 
   ngOnInit(): void {
-    this.createDummyData();
-  }
-
-  private createDummyData(): void {
-    for (let i = 0; i < 8; i++) {
-      this.workPlaces.push({name: 'Work place name', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis. Sed porttitor rhoncus enim eget lacinia. Ut ac'});
-    }
+    this.workplaceService.getAllWorkplaces(1)
+      .subscribe(response => {
+        this.workPlaces = response;
+      });
   }
 
   addWorkPlace(): void {
     this.dialogRef = this.dialog.open(CreateWorkplaceDialogComponent);
     this.dialogRef.afterClosed()
       .subscribe((workplace) => {
-        this.workPlaces.push(workplace);
+        if (workplace) {
+          this.workPlaces.push(workplace);
+        }
       });
   }
-
 
   getWorkPlace(): void {
     this.router.navigate(['main/workplace']);

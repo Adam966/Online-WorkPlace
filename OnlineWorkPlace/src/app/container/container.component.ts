@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Route, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-container',
@@ -8,6 +8,7 @@ import {ActivatedRoute, Route, Router} from '@angular/router';
 })
 export class ContainerComponent implements OnInit {
   changeToolbar = true;
+  isLoading = false;
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {

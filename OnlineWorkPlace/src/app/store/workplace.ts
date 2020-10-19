@@ -9,7 +9,7 @@ export class Workplace {
 }
 
 @State<WorkplaceModel> ({
-  name: 'workplace',
+  name: 'workplaces',
   defaults: { id: null, name: null, description: null, AdminUserId: null }
 })
 @Injectable()

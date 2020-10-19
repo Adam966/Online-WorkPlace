@@ -8,7 +8,7 @@ export class Login {
 }
 
 @State<UserModel> ({
-  name: 'auth',
+  name: 'user',
   defaults: { id: null, userName: null, userSurname: null, email: null, photo: null, token: null}
 })
 @Injectable()
