@@ -27,9 +27,9 @@
 </mat-menu>
 <mat-menu #add class="my-menu">
   <button mat-menu-item><mat-icon>add</mat-icon>Add User</button>
-  <button mat-menu-item><mat-icon>add</mat-icon>Add Task</button>
-  <button mat-menu-item><mat-icon>add</mat-icon>Add Note</button>
-  <button mat-menu-item><mat-icon>add</mat-icon>Add Thread</button>
+  <button mat-menu-item (click)="createTaskDialog()"><mat-icon>add</mat-icon>Add Task</button>
+  <button mat-menu-item (click)="createDialog('Note')"><mat-icon>add</mat-icon>Add Note</button>
+  <button mat-menu-item (click)="createDialog('Thread')"><mat-icon>add</mat-icon>Add Thread</button>
 </mat-menu>
 <mat-menu #notifications class="my-menu"></mat-menu>
   <div *ngIf="isLoading" class="isLoading">

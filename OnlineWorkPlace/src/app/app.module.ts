@@ -32,6 +32,10 @@ import {WorkplaceState} from './store/workplace';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { NoteThreadDialogComponent } from './container/workplace-screen/create-dialog/note-thread-dialog/note-thread-dialog.component';
+import { ChecklistDialogComponent } from './container/workplace-screen/create-dialog/checklist-dialog/checklist-dialog.component';
+import { TaskComponent } from './container/workplace-screen/create-dialog/checklist-dialog/task/task.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -45,6 +49,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     WorkplaceScreenComponent,
     WorkplaceElementComponent,
     RegistrationDialogComponent,
+    NoteThreadDialogComponent,
+    ChecklistDialogComponent,
+    TaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,12 +68,13 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatGridListModule,
     MatDialogModule,
     MatMenuModule,
+    MatCheckboxModule,
     AppRoutingModule,
     MatBadgeModule,
     NgxMasonryModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-  NgxsModule.forRoot([LoginState, WorkplaceState], {developmentMode: true}),
+    NgxsModule.forRoot([LoginState, WorkplaceState], {developmentMode: true}),
     NgxsLoggerPluginModule.forRoot()
   ],
   providers: [],

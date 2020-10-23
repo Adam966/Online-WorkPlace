@@ -1,0 +1,32 @@
+.container {
+  width: 500px;
+  }
+
+.content {
+  width: 57%;
+  float: left;
+  padding: 15px;
+}
+
+.aside {
+  margin-top: 20px;
+  width: 37%;
+  float: left;
+}
+
+.aside p mat-icon {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+mat-form-field {
+  display: block;
+  width: 95%;
+}
+
+button {
+  clear: left;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

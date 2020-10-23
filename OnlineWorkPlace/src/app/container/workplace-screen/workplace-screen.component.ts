@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {WorkplaceElementModel} from '../../models/workplacemodels/workplaceelement.model';
+import {WorkplaceElementApiService} from './service/workplace-element-api.service';
 
 @Component({
   selector: 'app-workplace-screen',
@@ -6,35 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./workplace-screen.component.css']
 })
 export class WorkplaceScreenComponent implements OnInit {
-  workPlaceElements: { title: string, content: string }[] = [
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis. Sed porttitor rhoncus enim eget lacinia. Ut ac'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis.'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis. Sed porttitor rhoncus enim eget lacinia. Ut ac'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis. Sed porttitor rhoncus enim eget lacinia. Ut ac'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis.'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis. Sed porttitor rhoncus enim eget lacinia. Ut ac'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis. Sed porttitor rhoncus enim eget lacinia. Ut ac'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis.'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis. Sed porttitor rhoncus enim eget lacinia. Ut ac'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis. Sed porttitor rhoncus enim eget lacinia. Ut ac'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis.'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis. Sed porttitor rhoncus enim eget lacinia. Ut ac'},
-    {title: 'title text', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna'},
-  ];
-  constructor() { }
+  workPlaceElements: WorkplaceElementModel[];
+  constructor(private elementApiService: WorkplaceElementApiService) { }
 
   ngOnInit(): void {
+    this.elementApiService.getWorkPlaceElements(1)
+      .subscribe(response => {
+        this.workPlaceElements = response;
+      });
   }
-
 }

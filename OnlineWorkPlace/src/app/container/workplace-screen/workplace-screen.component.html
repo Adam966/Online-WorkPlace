@@ -1,4 +1,7 @@
-<ngx-masonry class="container">
-  <app-workplace-element [element]="element" ngxMasonryItem  *ngFor="let element of workPlaceElements"></app-workplace-element>
-</ngx-masonry>
+<div class="container">
+  <ngx-masonry [ordered]=true>
+    <app-workplace-element [element]="element" ngxMasonryItem  *ngFor="let element of workPlaceElements"></app-workplace-element>
+  </ngx-masonry>
+</div>
+
 

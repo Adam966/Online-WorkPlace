@@ -1,0 +1,32 @@
+.container {
+  border: 1px solid black;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  width: 300px  ;
+  height: 120px;
+}
+
+mat-checkbox {
+  margin-left: 10px;
+  margin-right: 15px;
+}
+
+.images {
+  float: left;
+  margin-top: 10px;
+  height: 55px;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.img {
+  height: 35px;
+  width: 35px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.right {
+  float: right;
+  margin-right: 10px;
+}

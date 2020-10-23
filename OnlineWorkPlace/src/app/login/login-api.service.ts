@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 })
 export class LoginApiService {
   private url = 'https://729558d8-59b2-4855-a889-e219fbce401b.mock.pstmn.io/';
-  isLoggedIn = false;
+  isLoggedIn = true;
   constructor(private http: HttpClient, private store: Store, private router: Router) { }
 
   login(user: {email: string, password: string}): void {

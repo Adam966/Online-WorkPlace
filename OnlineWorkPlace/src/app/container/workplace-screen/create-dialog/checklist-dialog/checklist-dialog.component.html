@@ -1,0 +1,21 @@
+<div class="container">
+  <mat-form-field>
+    <mat-label>Task name</mat-label>
+    <input
+      matInput
+      ngModel
+      type="text"
+      name="name"
+      required
+      #name="ngModel">
+    <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
+  </mat-form-field>
+  <div class="content">
+    <app-task *ngFor="let item of tasks" class="task"></app-task>
+  </div>
+  <div class="aside">
+    <p><mat-icon>add</mat-icon>Add task</p>
+    <p><mat-icon>palette</mat-icon>Choose color</p>
+  </div>
+  <button mat-raised-button color="primary">Create</button>
+</div>

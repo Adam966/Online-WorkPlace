@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="content">
+    <form ngForm #form="ngForm" (ngSubmit)="createElement(form)">
+      <p>
+        <mat-form-field>
+        <mat-label>{{type}} name</mat-label>
+        <input
+          matInput
+          ngModel
+          type="text"
+          name="name"
+          required
+          #name="ngModel">
+        <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
+      </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <mat-label>{{type}} name</mat-label>
+          <textarea
+            rows="10"
+            matInput
+            ngModel
+            type="text"
+            name="description"
+            required
+            #description="ngModel">
+          </textarea>
+          <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
+        </mat-form-field>
+      </p>
+    </form>
+  </div>
+  <div class="aside">
+      <p *ngIf="type === 'Note'"><mat-icon>access_time</mat-icon>Set notifications</p>
+      <p><mat-icon>person_add</mat-icon>Add user</p>
+      <p><mat-icon>palette</mat-icon>Choose color</p>
+      <p><mat-icon>delete</mat-icon>Delete {{type}}</p>
+  </div>
+  <button mat-raised-button color="primary" [disabled]="form.invalid" type="submit">
+    Create
+  </button>
+</div>
