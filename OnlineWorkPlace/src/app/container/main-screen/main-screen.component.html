@@ -1,6 +1,6 @@
 <div class="container">
   <app-workplace
-    *ngFor="let workPlace of workPlaces"
+    *ngFor="let workPlace of workPlaces$ | async"
     [workPlace]="workPlace"
     (click)="getWorkPlace()">
   </app-workplace>

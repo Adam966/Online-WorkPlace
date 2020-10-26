@@ -1,22 +1,30 @@
 .container {
-  width: 500px;
-  }
+  max-height: 450px;
+  width: 550px;
+  overflow-y: scroll;
+}
 
 .content {
-  width: 57%;
+  margin-top: 5px;
+  width: 60%;
   float: left;
-  padding: 15px;
 }
 
 .aside {
-  margin-top: 20px;
-  width: 37%;
+  margin-left: 15px;
+  width: 35%;
   float: left;
 }
 
 .aside p mat-icon {
   margin-right: 10px;
   vertical-align: middle;
+}
+
+.aside p {
+  margin-right: 10px;
+  vertical-align: middle;
+  cursor: pointer;
 }
 
 mat-form-field {

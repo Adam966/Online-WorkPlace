@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TaskModel} from '../../../../models/workplacemodels/task.model';
 
 @Component({
   selector: 'app-checklist-dialog',
@@ -6,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./checklist-dialog.component.css']
 })
 export class ChecklistDialogComponent implements OnInit {
-  tasks: string[] = ['string', 'string', 'string'];
+  tasks: TaskModel[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  addTask(): void {
+    this.tasks.push(new TaskModel());
+  }
 }

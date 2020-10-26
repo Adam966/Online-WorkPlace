@@ -1,6 +1,6 @@
 <div class="container">
   <ngx-masonry [ordered]=true>
-    <app-workplace-element [element]="element" ngxMasonryItem  *ngFor="let element of workPlaceElements"></app-workplace-element>
+    <app-workplace-element [element]="element" ngxMasonryItem  *ngFor="let element of workPlaceElements$ | async"></app-workplace-element>
   </ngx-masonry>
 </div>
 

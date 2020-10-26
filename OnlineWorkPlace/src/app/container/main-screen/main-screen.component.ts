@@ -3,6 +3,9 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CreateWorkplaceDialogComponent} from './create-workplace-dialog/create-workplace-dialog.component';
 import {Router} from '@angular/router';
 import {WorkplaceService} from './workplace/service/workplace.service';
+import {AddWorkplace, GetWorkplaces, WorkplaceState} from '../../store/workplace';
+import {Observable} from 'rxjs';
+import {Select, Store} from '@ngxs/store';
 import {WorkplaceModel} from '../../models/workplace.model';
 
 @Component({
@@ -11,24 +14,23 @@ import {WorkplaceModel} from '../../models/workplace.model';
   styleUrls: ['./main-screen.component.css']
 })
 export class MainScreenComponent implements OnInit {
-  workPlaces: WorkplaceModel[] = [];
+  @Select(WorkplaceState)
+  workPlaces$: Observable<WorkplaceModel[]>;
+
   dialogRef: MatDialogRef<CreateWorkplaceDialogComponent>;
 
-  constructor(public dialog: MatDialog, private router: Router, private workplaceService: WorkplaceService) { }
+  constructor(public dialog: MatDialog, private router: Router, private workplaceService: WorkplaceService, private store: Store) { }
 
   ngOnInit(): void {
-    this.workplaceService.getAllWorkplaces(1)
-      .subscribe(response => {
-        this.workPlaces = response;
-      });
+    this.store.dispatch(new GetWorkplaces(1));
   }
 
   addWorkPlace(): void {
     this.dialogRef = this.dialog.open(CreateWorkplaceDialogComponent);
     this.dialogRef.afterClosed()
-      .subscribe((workplace) => {
+      .subscribe(workplace => {
         if (workplace) {
-          this.workPlaces.push(workplace);
+          this.store.dispatch(new AddWorkplace(workplace));
         }
       });
   }

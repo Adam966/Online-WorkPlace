@@ -1,24 +1,26 @@
 <div class="container">
-  <mat-checkbox>
-
-  </mat-checkbox>
-  <mat-form-field>
-    <mat-label>Description</mat-label>
-    <textarea
-      matInput
-      ngModel
-      type="text"
-      name="name"
-      required
-      #description="ngModel"></textarea>
-    <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
-  </mat-form-field>
+  <div class="input">
+    <mat-checkbox color="primary"></mat-checkbox>
+    <mat-form-field class="input">
+      <mat-label>Description</mat-label>
+      <textarea
+        cdkTextareaAutosize="false"
+        rows="2"
+        matInput
+        ngModel
+        type="text"
+        name="name"
+        required
+        #description="ngModel">{{task.description}}</textarea>
+      <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
+    </mat-form-field>
+  </div>
   <div class="images">
     <img class="img" *ngFor="let image of images" src="https://cdn.shopify.com/s/files/1/0045/5104/9304/t/27/assets/AC_ECOM_SITE_2020_REFRESH_1_INDEX_M2_THUMBS-V2-1.jpg?v=8913815134086573859">
   </div>
   <div class="right">
     <mat-icon>person_add</mat-icon>
     <mat-icon>access_time</mat-icon>
-    <mat-icon>delete</mat-icon>
+    <mat-icon (click)="removeTask()">delete</mat-icon>
   </div>
 </div>

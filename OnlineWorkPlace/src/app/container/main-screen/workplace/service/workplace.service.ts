@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {WorkplaceModel} from '../../../../models/workplace.model';
+import {Store} from '@ngxs/store';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,10 @@ export class WorkplaceService {
 
   getAllWorkplaces(userId: number): Observable<WorkplaceModel[]> {
     return this.http.get<WorkplaceModel[]>(this.url + 'getWorkplace', {
-      params: new HttpParams().append('userId', userId.toString())
-    });
+      params: new HttpParams().append('userId', userId.toString())});
+  }
+
+  addWorkplace(data: WorkplaceModel): void {
+    this.http.put(this.url + 'addWorkplace', data);
   }
 }

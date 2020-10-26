@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {WorkplaceModel} from '../../../models/workplace.model';
 
 @Component({
   selector: 'app-workplace',
@@ -7,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class WorkplaceComponent implements OnInit {
   @Input()
-  workPlace: {name: string, description: string};
+  workPlace: WorkplaceModel;
 
   constructor() { }
 

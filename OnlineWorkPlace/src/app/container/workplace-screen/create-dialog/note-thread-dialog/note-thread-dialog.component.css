@@ -1,5 +1,7 @@
 .container {
   width: 500px;
+  max-height: 430px;
+  overflow-y: scroll;
 }
 
 .border {
@@ -7,7 +9,7 @@
 }
 
 .content {
-  width: 57%;
+  width: 56%;
   float: left;
   padding: 15px;
 }
@@ -21,6 +23,7 @@
 .aside p mat-icon {
   margin-right: 10px;
   vertical-align: middle;
+  cursor: pointer;
 }
 
 mat-form-field {

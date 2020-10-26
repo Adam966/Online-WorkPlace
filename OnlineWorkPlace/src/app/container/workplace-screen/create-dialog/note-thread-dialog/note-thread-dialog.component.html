@@ -18,7 +18,6 @@
         <mat-form-field>
           <mat-label>{{type}} name</mat-label>
           <textarea
-            rows="10"
             matInput
             ngModel
             type="text"
@@ -32,7 +31,12 @@
     </form>
   </div>
   <div class="aside">
-      <p *ngIf="type === 'Note'"><mat-icon>access_time</mat-icon>Set notifications</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a notification</mat-label>
+        <input matInput [matDatepicker]="datePicker">
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+      </mat-form-field>
       <p><mat-icon>person_add</mat-icon>Add user</p>
       <p><mat-icon>palette</mat-icon>Choose color</p>
       <p><mat-icon>delete</mat-icon>Delete {{type}}</p>

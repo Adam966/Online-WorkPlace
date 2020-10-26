@@ -36,6 +36,9 @@ import { NoteThreadDialogComponent } from './container/workplace-screen/create-d
 import { ChecklistDialogComponent } from './container/workplace-screen/create-dialog/checklist-dialog/checklist-dialog.component';
 import { TaskComponent } from './container/workplace-screen/create-dialog/checklist-dialog/task/task.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {WorkplaceElementState} from './store/workplace-element';
 
 @NgModule({
   declarations: [
@@ -74,10 +77,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     NgxMasonryModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    NgxsModule.forRoot([LoginState, WorkplaceState], {developmentMode: true}),
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxsModule.forRoot([LoginState, WorkplaceState, WorkplaceElementState], {developmentMode: true}),
     NgxsLoggerPluginModule.forRoot()
   ],
-  providers: [],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
