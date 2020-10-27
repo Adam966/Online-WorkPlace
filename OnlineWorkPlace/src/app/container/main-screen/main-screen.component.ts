@@ -7,6 +7,7 @@ import {AddWorkplace, GetWorkplaces, WorkplaceState} from '../../store/workplace
 import {Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
 import {WorkplaceModel} from '../../models/workplace.model';
+import {ApplicationModel, SetApplicationState} from '../../store/application';
 
 @Component({
   selector: 'app-main-screen',
@@ -22,7 +23,10 @@ export class MainScreenComponent implements OnInit {
   constructor(public dialog: MatDialog, private router: Router, private workplaceService: WorkplaceService, private store: Store) { }
 
   ngOnInit(): void {
-    this.store.dispatch(new GetWorkplaces(1));
+    this.store.dispatch(new GetWorkplaces(1))
+      .subscribe(() => {
+        this.store.dispatch(new SetApplicationState(false));
+      });
   }
 
   addWorkPlace(): void {

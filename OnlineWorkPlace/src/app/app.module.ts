@@ -39,6 +39,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {WorkplaceElementState} from './store/workplace-element';
+import {ApplicationState} from './store/application';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,7 @@ import {WorkplaceElementState} from './store/workplace-element';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgxsModule.forRoot([LoginState, WorkplaceState, WorkplaceElementState], {developmentMode: true}),
+    NgxsModule.forRoot([LoginState, WorkplaceState, WorkplaceElementState, ApplicationState], {developmentMode: true}),
     NgxsLoggerPluginModule.forRoot()
   ],
   providers: [MatDatepickerModule],

@@ -13,7 +13,7 @@ const appRouting = [
   {path: '', component: AppComponent},
   {path: 'login', component: LoginComponent},
   {path: 'main', component: ContainerComponent,
-    canActivate: [],
+    canActivate: [ContainerGuard],
     children: [
       {path: 'workplace', component: WorkplaceScreenComponent},
       {path: 'dashboard', component: MainScreenComponent}
