@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 
 export class SetApplicationState {
   static readonly type = '[Application] GetApplicationState';
-  constructor(public application: boolean) {}
+  constructor(public applicationState: boolean) {}
 }
 
 export class ApplicationModel {
@@ -18,7 +18,7 @@ export class ApplicationModel {
 @Injectable()
 export class ApplicationState {
   @Action(SetApplicationState)
-  getApplicationState(ctx: StateContext<boolean>, action: boolean): void {
-    ctx.patchState(action);
+  getApplicationState(ctx: StateContext<boolean>, action: SetApplicationState): void {
+    ctx.setState(action.applicationState);
   }
 }

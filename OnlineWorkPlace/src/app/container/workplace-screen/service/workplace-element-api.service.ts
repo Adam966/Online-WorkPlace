@@ -8,7 +8,8 @@ import {Store} from '@ngxs/store';
   providedIn: 'root'
 })
 export class WorkplaceElementApiService {
-  private url = 'https://729558d8-59b2-4855-a889-e219fbce401b.mock.pstmn.io/';
+  //private url = 'https://729558d8-59b2-4855-a889-e219fbce401b.mock.pstmn.io/';
+  private url = 'http://localhost:3000/';
 
   constructor(private http: HttpClient) {}
 

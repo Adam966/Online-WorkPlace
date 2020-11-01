@@ -33,7 +33,7 @@
   <mat-menu #notifications class="my-menu">
 
   </mat-menu>
-  <div *ngIf="applicationState | async" class="isLoading">
+  <div *ngIf="(applicationState$ | async)" class="isLoading">
     <mat-spinner></mat-spinner>
   </div>
   <div [ngClass]="{ 'content' : isLoading }">

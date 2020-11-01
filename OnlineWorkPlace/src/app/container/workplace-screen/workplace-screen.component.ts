@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {WorkplaceElementModel} from '../../models/workplacemodels/workplaceelement.model';
 import {WorkplaceElementApiService} from './service/workplace-element-api.service';
 import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {GetWorkplacesElements, WorkplaceElementState} from '../../store/workplace-element';
+import {SetApplicationState} from '../../store/application';
 
 @Component({
   selector: 'app-workplace-screen',
@@ -13,6 +14,7 @@ import {GetWorkplacesElements, WorkplaceElementState} from '../../store/workplac
 export class WorkplaceScreenComponent implements OnInit {
   @Select(WorkplaceElementState)
   workPlaceElements$: Observable<WorkplaceElementModel[]>;
+
   constructor(private elementApiService: WorkplaceElementApiService, private store: Store) { }
 
   ngOnInit(): void {

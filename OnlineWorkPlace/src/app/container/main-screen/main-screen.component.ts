@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CreateWorkplaceDialogComponent} from './create-workplace-dialog/create-workplace-dialog.component';
 import {Router} from '@angular/router';
@@ -7,14 +7,16 @@ import {AddWorkplace, GetWorkplaces, WorkplaceState} from '../../store/workplace
 import {Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
 import {WorkplaceModel} from '../../models/workplace.model';
-import {ApplicationModel, SetApplicationState} from '../../store/application';
+import {SetApplicationState} from '../../store/application';
+import {delay, tap} from 'rxjs/operators';
+import set = Reflect.set;
 
 @Component({
   selector: 'app-main-screen',
   templateUrl: './main-screen.component.html',
   styleUrls: ['./main-screen.component.css']
 })
-export class MainScreenComponent implements OnInit {
+export class MainScreenComponent implements OnInit, AfterViewInit {
   @Select(WorkplaceState)
   workPlaces$: Observable<WorkplaceModel[]>;
 
@@ -23,10 +25,7 @@ export class MainScreenComponent implements OnInit {
   constructor(public dialog: MatDialog, private router: Router, private workplaceService: WorkplaceService, private store: Store) { }
 
   ngOnInit(): void {
-    this.store.dispatch(new GetWorkplaces(1))
-      .subscribe(() => {
-        this.store.dispatch(new SetApplicationState(false));
-      });
+
   }
 
   addWorkPlace(): void {
@@ -41,5 +40,15 @@ export class MainScreenComponent implements OnInit {
 
   getWorkPlace(): void {
     this.router.navigate(['main/workplace']);
+    this.store.dispatch(new SetApplicationState(true));
+  }
+
+  ngAfterViewInit(): void {
+    this.store.dispatch(new GetWorkplaces(1))
+      .subscribe(() => {
+        setTimeout(() => {
+          this.store.dispatch(new SetApplicationState(true));
+        });
+      });
   }
 }

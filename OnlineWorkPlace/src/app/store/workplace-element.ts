@@ -1,7 +1,9 @@
-import {Action, State, StateContext} from '@ngxs/store';
+import {Action, State, StateContext, Store} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {WorkplaceElementModel} from '../models/workplacemodels/workplaceelement.model';
 import {WorkplaceElementApiService} from '../container/workplace-screen/service/workplace-element-api.service';
+import {SetApplicationState} from './application';
+import {tap} from 'rxjs/operators';
 
 export class GetWorkplacesElements {
   static readonly type = '[WorkPlace Component] GetWorkplaces';
@@ -19,12 +21,18 @@ export class AddWorkplaceElement {
 })
 @Injectable()
 export class WorkplaceElementState {
-  constructor(private workplaceElementService: WorkplaceElementApiService) {}
+  constructor(private workplaceElementService: WorkplaceElementApiService, private store: Store) {}
 
   @Action(GetWorkplacesElements)
   getWorkplaces(ctx: StateContext<WorkplaceElementModel[]>, action: number): void {
     this.workplaceElementService.getWorkPlaceElements(action)
+      .pipe(tap(() => {
+        })
+      )
       .subscribe(response => {
+        setTimeout(() => {
+          this.store.dispatch(new SetApplicationState(false));
+        });
         ctx.setState(response);
       });
   }
