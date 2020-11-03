@@ -27,9 +27,6 @@ export class WorkplaceState {
     this.workplaceService.getAllWorkplaces(action)
       .subscribe(response => {
         ctx.setState(response);
-        setTimeout(() => {
-          this.store.dispatch(new SetApplicationState(false));
-        });
       });
   }
 

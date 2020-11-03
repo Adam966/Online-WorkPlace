@@ -19,7 +19,7 @@ export class ContainerComponent implements OnInit {
   applicationState$: Observable<boolean>;
 
   isLoading = false;
-  changeToolbar: boolean;
+  changeToolbar = true;
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
 

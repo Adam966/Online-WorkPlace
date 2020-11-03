@@ -21,8 +21,6 @@ export class LoginApiService {
         this.store.dispatch(new Login(response));
         localStorage.setItem('Token', response.token);
         this.router.navigate(['/main']);
-      }, error => {
-        console.log(error.message);
       });
   }
 }

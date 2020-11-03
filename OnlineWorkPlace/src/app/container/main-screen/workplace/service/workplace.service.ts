@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {WorkplaceModel} from '../../../../models/workplace.model';
 import {Store} from '@ngxs/store';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

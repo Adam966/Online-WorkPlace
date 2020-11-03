@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [ngStyle]="{'background-color': element ? element.backGroundColor : 'white'}">
   <mat-form-field>
     <mat-label>Task name</mat-label>
     <input
@@ -7,15 +7,24 @@
       type="text"
       name="name"
       required
-      #name="ngModel">
+      #name="ngModel"
+      [(ngModel)]="element ? element.name : ''">
     <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
   </mat-form-field>
   <div class="content">
-    <app-task *ngFor="let item of tasks; index as i" [index]="i" [task]="item" class="task"></app-task>
+    <app-task
+      *ngFor="let task of tasks; index as i"
+      [index]="i"
+      [task]="task" class="task">
+    </app-task>
   </div>
   <div class="aside">
     <p (click)="addTask()"><mat-icon>add</mat-icon>Add task</p>
     <p><mat-icon>palette</mat-icon>Choose color</p>
   </div>
-  <button mat-raised-button color="primary" [disabled]="name.invalid">Create</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="createCheckList()"
+    [disabled]="name.invalid">Create</button>
 </div>

@@ -20,7 +20,7 @@ export class WorkplaceElementComponent implements OnInit {
   ngOnInit(): void {
     if (this.element.hasOwnProperty('tasks')) {
       this.task = true;
-      this.checkTask(this.element as unknown as ChecklistModel);
+      this.checkTask(this.element as ChecklistModel);
     }
     if (this.element.hasOwnProperty('dueDate')) {
     }

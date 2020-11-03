@@ -1,5 +1,5 @@
 export interface WorkplaceElementModel {
-  id: number;
+  id?: number;
   name: string;
   backGroundColor: string;
 }

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [ngStyle]="{'background-color': element ? element.backGroundColor : 'white'}">
   <div class="content">
     <form ngForm #form="ngForm" (ngSubmit)="createElement(form)">
       <p>
@@ -10,7 +10,8 @@
           type="text"
           name="name"
           required
-          #name="ngModel">
+          #name="ngModel"
+          [ngModel]="element ? element.name : ''">
         <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
       </mat-form-field>
       </p>
@@ -23,7 +24,8 @@
             type="text"
             name="description"
             required
-            #description="ngModel">
+            #description="ngModel"
+            [ngModel]="element ? element.description : ''">
           </textarea>
           <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
         </mat-form-field>
@@ -31,7 +33,7 @@
     </form>
   </div>
   <div class="aside">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" *ngIf="type === 'Note'">
         <mat-label>Choose a notification</mat-label>
         <input matInput [matDatepicker]="datePicker">
         <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
@@ -41,7 +43,7 @@
       <p><mat-icon>palette</mat-icon>Choose color</p>
       <p><mat-icon>delete</mat-icon>Delete {{type}}</p>
   </div>
-  <button mat-raised-button color="primary" [disabled]="form.invalid" type="submit">
-    Create
+  <button mat-raised-button color="primary" [disabled]="form.invalid" type="submit" (click)="createElement(form)">
+    {{element ? 'Update' : 'Create'}}
   </button>
 </div>

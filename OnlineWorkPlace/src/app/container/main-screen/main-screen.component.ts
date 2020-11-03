@@ -16,7 +16,7 @@ import set = Reflect.set;
   templateUrl: './main-screen.component.html',
   styleUrls: ['./main-screen.component.css']
 })
-export class MainScreenComponent implements OnInit, AfterViewInit {
+export class MainScreenComponent implements OnInit {
   @Select(WorkplaceState)
   workPlaces$: Observable<WorkplaceModel[]>;
 
@@ -25,7 +25,7 @@ export class MainScreenComponent implements OnInit, AfterViewInit {
   constructor(public dialog: MatDialog, private router: Router, private workplaceService: WorkplaceService, private store: Store) { }
 
   ngOnInit(): void {
-
+    this.store.dispatch(new GetWorkplaces(1));
   }
 
   addWorkPlace(): void {
@@ -40,15 +40,5 @@ export class MainScreenComponent implements OnInit, AfterViewInit {
 
   getWorkPlace(): void {
     this.router.navigate(['main/workplace']);
-    this.store.dispatch(new SetApplicationState(true));
-  }
-
-  ngAfterViewInit(): void {
-    this.store.dispatch(new GetWorkplaces(1))
-      .subscribe(() => {
-        setTimeout(() => {
-          this.store.dispatch(new SetApplicationState(true));
-        });
-      });
   }
 }

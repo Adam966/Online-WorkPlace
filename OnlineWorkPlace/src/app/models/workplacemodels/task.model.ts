@@ -1,6 +1,6 @@
 export class TaskModel {
-  id: number;
+  id?: number;
   description: string;
-  dueDate: Date;
+  dueDate?: Date;
   isCompleted: number;
 }

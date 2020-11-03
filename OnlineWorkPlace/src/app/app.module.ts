@@ -29,7 +29,7 @@ import { NgxMasonryModule } from 'ngx-masonry';
 import {NgxsModule} from '@ngxs/store';
 import {LoginState} from './store/login';
 import {WorkplaceState} from './store/workplace';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NoteThreadDialogComponent } from './container/workplace-screen/create-dialog/note-thread-dialog/note-thread-dialog.component';
@@ -40,6 +40,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {WorkplaceElementState} from './store/workplace-element';
 import {ApplicationState} from './store/application';
+import {AuthenticationInterceptor} from './interceptor/authentication/authentication-interceptor.service';
+import {HandleResponseInterceptor} from './interceptor/response/handle-response.interceptor';
 
 @NgModule({
   declarations: [
@@ -83,7 +85,7 @@ import {ApplicationState} from './store/application';
     NgxsModule.forRoot([LoginState, WorkplaceState, WorkplaceElementState, ApplicationState], {developmentMode: true}),
     NgxsLoggerPluginModule.forRoot()
   ],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule, { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true}, { provide: HTTP_INTERCEPTORS, useClass: HandleResponseInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

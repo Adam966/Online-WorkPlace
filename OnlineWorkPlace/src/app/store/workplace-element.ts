@@ -26,13 +26,7 @@ export class WorkplaceElementState {
   @Action(GetWorkplacesElements)
   getWorkplaces(ctx: StateContext<WorkplaceElementModel[]>, action: number): void {
     this.workplaceElementService.getWorkPlaceElements(action)
-      .pipe(tap(() => {
-        })
-      )
       .subscribe(response => {
-        setTimeout(() => {
-          this.store.dispatch(new SetApplicationState(false));
-        });
         ctx.setState(response);
       });
   }
