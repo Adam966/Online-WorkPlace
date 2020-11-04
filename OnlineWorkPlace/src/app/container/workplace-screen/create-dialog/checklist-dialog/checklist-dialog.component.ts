@@ -5,6 +5,8 @@ import {ChecklistModel} from '../../../../models/workplacemodels/checklist.model
 import {AddWorkplaceElement} from '../../../../store/workplace-element';
 import {NoteModel} from '../../../../models/workplacemodels/note.model';
 import {Store} from '@ngxs/store';
+import {NgForm} from '@angular/forms';
+import {log} from 'util';
 
 @Component({
   selector: 'app-checklist-dialog',
@@ -28,7 +30,8 @@ export class ChecklistDialogComponent implements OnInit {
     this.tasks.push(new TaskModel());
   }
 
-  createCheckList(): void {
-    this.store.dispatch(new AddWorkplaceElement(new ChecklistModel()));
+  createCheckList(form: NgForm): void {
+    console.log(form);
+    // this.store.dispatch(new AddWorkplaceElement(new ChecklistModel()));
   }
 }

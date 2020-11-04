@@ -33,7 +33,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NoteThreadDialogComponent } from './container/workplace-screen/create-dialog/note-thread-dialog/note-thread-dialog.component';
-import { ChecklistDialogComponent } from './container/workplace-screen/create-dialog/checklist-dialog/checklist-dialog.component';
 import { TaskComponent } from './container/workplace-screen/create-dialog/checklist-dialog/task/task.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -42,6 +41,9 @@ import {WorkplaceElementState} from './store/workplace-element';
 import {ApplicationState} from './store/application';
 import {AuthenticationInterceptor} from './interceptor/authentication/authentication-interceptor.service';
 import {HandleResponseInterceptor} from './interceptor/response/handle-response.interceptor';
+import {ChecklistDialogComponent} from './container/workplace-screen/create-dialog/checklist-dialog/checklist-dialog.component';
+import { UserLabelComponent } from './container/workplace-screen/create-dialog/user-label/user-label.component';
+import { ColorLabelComponent } from './container/workplace-screen/create-dialog/color-label/color-label.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import {HandleResponseInterceptor} from './interceptor/response/handle-response.
     NoteThreadDialogComponent,
     ChecklistDialogComponent,
     TaskComponent,
+    UserLabelComponent,
+    ColorLabelComponent,
   ],
   imports: [
     BrowserModule,

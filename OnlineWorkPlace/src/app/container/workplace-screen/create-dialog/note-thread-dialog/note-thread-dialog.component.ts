@@ -1,11 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {WorkplaceElementModel} from '../../../../models/workplacemodels/workplaceelement.model';
 import {NoteModel} from '../../../../models/workplacemodels/note.model';
 import {ThreadModel} from '../../../../models/workplacemodels/thread.model';
 import {Store} from '@ngxs/store';
 import {AddWorkplaceElement} from '../../../../store/workplace-element';
+import {UserModel} from '../../../../models/user.model';
+import {LabelModel} from '../../../../models/label.model';
 
 @Component({
   selector: 'app-note-thread-dialog',
@@ -15,6 +16,10 @@ import {AddWorkplaceElement} from '../../../../store/workplace-element';
 export class NoteThreadDialogComponent implements OnInit {
   type: string;
   element: ThreadModel | NoteModel;
+
+  users: UserModel[];
+  labels: LabelModel[];
+
   constructor(@Inject(MAT_DIALOG_DATA) private data: any, private store: Store) { }
 
   ngOnInit(): void {
@@ -27,6 +32,7 @@ export class NoteThreadDialogComponent implements OnInit {
   }
 
   createElement(form: NgForm): void {
+    console.log(form);
     if (this.type === 'Note') {
       this.store.dispatch(new AddWorkplaceElement(
         new NoteModel(
@@ -42,5 +48,17 @@ export class NoteThreadDialogComponent implements OnInit {
         ))
       );
     }
+  }
+
+  addLabel(label: LabelModel): void {
+
+  }
+
+  addUser(user: UserModel): void {
+
+  }
+
+  deleteElement(): void {
+
   }
 }

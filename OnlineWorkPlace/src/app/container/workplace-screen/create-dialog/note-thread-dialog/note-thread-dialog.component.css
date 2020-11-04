@@ -1,7 +1,6 @@
 .container {
-  width: 500px;
-  max-height: 430px;
-  overflow-y: scroll;
+  width: 700px;
+  max-height: 500px;
 }
 
 .border {
@@ -9,20 +8,40 @@
 }
 
 .content {
-  width: 56%;
+  width: 65%;
   float: left;
   padding: 15px;
 }
 
 .aside {
-  margin-top: 100px;
-  width: 37%;
+  padding-top: 15px;
+  width: 23%;
   float: left;
 }
 
 .aside p mat-icon {
   margin-right: 10px;
   vertical-align: middle;
+}
+
+.line {
+  margin-top: 20px;
+}
+
+.line div {
+  float: left;
+  margin-right: 5%;
+  width: 45%;
+}
+
+.img {
+  height: 35px;
+  width: 35px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.aside p {
   cursor: pointer;
 }
 
@@ -36,4 +55,8 @@ button {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+p input {
+  width: 30px;
 }
