@@ -1,8 +1,7 @@
 import {Action, State, StateContext, Store} from '@ngxs/store';
 import {WorkplaceModel} from '../models/workplace.model';
 import {Injectable} from '@angular/core';
-import {WorkplaceService} from '../container/main-screen/workplace/service/workplace.service';
-import {SetApplicationState} from './application';
+import {WorkplaceService} from '../services/workplace-api/workplace.service';
 
 export class GetWorkplaces {
   static readonly type = '[Main Component] GetWorkplaces';
@@ -20,7 +19,7 @@ export class AddWorkplace {
 })
 @Injectable()
 export class WorkplaceState {
-  constructor(private workplaceService: WorkplaceService, private store: Store) {}
+  constructor(private workplaceService: WorkplaceService) {}
 
   @Action(GetWorkplaces)
   getWorkplaces(ctx: StateContext<WorkplaceModel[]>, action: number): void {

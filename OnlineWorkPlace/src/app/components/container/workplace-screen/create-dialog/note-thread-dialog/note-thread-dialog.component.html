@@ -1,0 +1,91 @@
+<div class="container" [ngStyle]="{'background-color': element ? element.backGroundColor : 'white'}">
+  <form ngForm #form="ngForm" (ngSubmit)="createElement(form)">
+    <div class="content">
+<!-- --------------------------------------- Main Inputs ------------------------------------------------- -->
+      <mat-form-field>
+        <mat-label>{{type}} name</mat-label>
+        <input
+          matInput
+          ngModel
+          type="text"
+          name="name"
+          required
+          #name="ngModel"
+          [ngModel]="element ? element.name : ''">
+        <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{type}} description</mat-label>
+        <textarea
+          [mat-autosize]="true"
+          matInput
+          ngModel
+          type="text"
+          name="description"
+          required
+          #description="ngModel"
+          [ngModel]="element ? element.description : ''">
+          </textarea>
+        <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
+      </mat-form-field>
+<!-- --------------------------------------- Assigned labels and users ------------------------------------------------- -->
+      <div class="line">
+        <div>
+          <p>Assigned user</p>
+              <app-user-label *ngFor="let user of users"></app-user-label>
+        </div>
+        <div>
+          <p>Assigned labels</p>
+            <app-color-label *ngFor="let label of labels"></app-color-label>
+        </div>
+      </div>
+    </div>
+<!-- --------------------------------------- Aside bar icons ------------------------------------------------- -->
+    <div class="aside">
+      <p [mat-menu-trigger-for]="userList">
+        <mat-icon>person_add</mat-icon>
+        Add user
+      </p>
+      <mat-menu #userList="matMenu">
+        <app-user-label
+          *ngFor="let user of users"
+          (click)="addUser(user)">
+        </app-user-label>
+      </mat-menu>
+      <p [mat-menu-trigger-for]="labelList">
+        <mat-icon>label</mat-icon>
+        Choose Label
+      </p>
+      <mat-menu #labelList="matMenu">
+        <app-color-label
+          *ngFor="let label of labels"
+          (click)="addLabel(label)">
+        </app-color-label>
+      </mat-menu>
+      <p (click)="datePicker.open()">
+        <mat-datepicker #datePicker></mat-datepicker>
+        <mat-icon>schedule</mat-icon>
+        Set Notification
+      </p>
+      <p (click)="deleteElement()">
+        <mat-icon>delete</mat-icon>
+        Delete {{type}}
+      </p>
+      <mat-form-field>
+        <mat-label>Due Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="datePicker"
+            name="date"
+            ngModel>
+      </mat-form-field>
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="form.invalid"
+      type="submit">
+      {{element ? 'Update' : 'Create'}}
+    </button>
+  </form>
+</div>
