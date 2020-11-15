@@ -15,9 +15,10 @@ import {LabelModel} from '../../../../../models/label.model';
 })
 export class NoteThreadDialogComponent implements OnInit {
   type: string;
-  element: ThreadModel | NoteModel;
+  element: ThreadModel | NoteModel = null;
+  status: boolean;
 
-  users: UserModel[] = [null, null, null, null];
+  users: UserModel[] = [null, null, null, null, null, null, null, null, null, null, null, null];
   labels: LabelModel[] = [null, null, null, null, null, null, null, null, null, null, null, null];
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any, private store: Store) { }
@@ -29,6 +30,7 @@ export class NoteThreadDialogComponent implements OnInit {
     } else {
       this.element = this.data?.object as ThreadModel;
     }
+    this.status = this.element !== undefined;
   }
 
   createElement(form: NgForm): void {
@@ -51,13 +53,24 @@ export class NoteThreadDialogComponent implements OnInit {
   }
 
   addLabel(label: LabelModel): void {
+    this.labels.push(label);
   }
 
   addUser(user: UserModel): void {
-
+    this.users.push(user);
   }
 
   deleteElement(): void {
 
+  }
+
+  remove(element: UserModel | LabelModel, i: number): void {
+    if (element instanceof LabelModel) {
+      this.labels.splice(i, 1);
+      console.log(this.labels);
+    } else {
+      this.users.splice(i, 1);
+      console.log(this.users);
+    }
   }
 }

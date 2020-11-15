@@ -3,19 +3,15 @@
   max-height: 500px;
 }
 
-.border {
-  border: 1px solid red;
-}
-
 .content {
-  width: 65%;
+  width: 60%;
   float: left;
   padding: 15px;
 }
 
 .aside {
   padding-top: 15px;
-  width: 23%;
+  width: 35%;
   float: left;
 }
 
@@ -24,21 +20,14 @@
   vertical-align: middle;
 }
 
-.line {
+.assigned div {
+  display: flex;
+  overflow-x: scroll;
+  margin-top: -15px;
+}
+
+.assigned div h3 {
   margin-top: 20px;
-}
-
-.line div {
-  float: left;
-  margin-right: 5%;
-  width: 45%;
-}
-
-.img {
-  height: 35px;
-  width: 35px;
-  margin-right: 5px;
-  border-radius: 50%;
 }
 
 .aside p {
@@ -61,7 +50,20 @@ p input {
   width: 30px;
 }
 
-mat-menu {
-  display: flex;
-  flex-flow: column;
+::ng-deep .pop-up-menu {
+  max-height: 200px;
+  min-width: 150px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.users-inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+li {
+  cursor: pointer;
 }
