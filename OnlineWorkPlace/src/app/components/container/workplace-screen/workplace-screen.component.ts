@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {WorkplaceElementModel} from '../../../models/workplacemodels/workplaceelement.model';
 import {WorkplaceElementApiService} from '../../../services/workplace-element-api/workplace-element-api.service';
 import {Select, Store} from '@ngxs/store';
@@ -7,9 +7,10 @@ import {GetWorkplacesElements, WorkplaceElementState} from '../../../store/workp
 import {NoteModel} from '../../../models/workplacemodels/note.model';
 import {ThreadModel} from '../../../models/workplacemodels/thread.model';
 import {NoteThreadDialogComponent} from './create-dialog/note-thread-dialog/note-thread-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ChecklistDialogComponent} from './create-dialog/checklist-dialog/checklist-dialog.component';
 import {ChecklistModel} from '../../../models/workplacemodels/checklist.model';
+import {GetWorkplaceLabels, GetWorkplaceUsers} from '../../../store/workplace-settings';
 
 @Component({
   selector: 'app-workplace-screen',
@@ -24,29 +25,38 @@ export class WorkplaceScreenComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new GetWorkplacesElements(1));
+    this.store.dispatch(new GetWorkplaceLabels(1));
+    this.store.dispatch(new GetWorkplaceUsers(1));
   }
 
-  openEditDialog(element: WorkplaceElementModel): void {
+  openEditDialog(element: WorkplaceElementModel, i: number): void {
+    let dialogRef: MatDialogRef<any>;
     if (element.hasOwnProperty('tasks')) {
-      this.dialog.open(ChecklistDialogComponent, {
+      dialogRef = this.dialog.open(ChecklistDialogComponent, {
         data: {
-          object: element as ChecklistModel
+          object: element as ChecklistModel,
+          index: i
         }
       });
     } else if (element.hasOwnProperty('dueDate')) {
-      this.dialog.open(NoteThreadDialogComponent, {
+      dialogRef = this.dialog.open(NoteThreadDialogComponent, {
         data: {
           type: 'Note',
-          object: element as NoteModel
+          object: element as NoteModel,
+          index: i
         }
       });
     } else {
-      this.dialog.open(NoteThreadDialogComponent, {
+      dialogRef = this.dialog.open(NoteThreadDialogComponent, {
         data: {
           type: 'Thread',
-          object: element as ThreadModel
+          object: element as ThreadModel,
+          index: i
         }
       });
     }
+
+    dialogRef.afterClosed()
+      .subscribe();
   }
 }

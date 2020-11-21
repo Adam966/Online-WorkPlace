@@ -11,15 +11,19 @@ export class HandleResponseInterceptor implements HttpInterceptor {
   constructor(private store: Store) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    setTimeout(() => {
-      this.store.dispatch(new SetApplicationState(true));
-    });
+    if (!request.url.includes('getUserPhoto')) {
+      setTimeout(() => {
+        this.store.dispatch(new SetApplicationState(true));
+      });
+    }
     return next.handle(request)
       .pipe(
         finalize(() => {
-          setTimeout(() => {
-            this.store.dispatch(new SetApplicationState(false));
-          });
+          if (!request.url.includes('getUserPhoto')) {
+            setTimeout(() => {
+              this.store.dispatch(new SetApplicationState(false));
+            });
+          }
         }),
         catchError((error: HttpErrorResponse) => {
           return this.handleError(error);

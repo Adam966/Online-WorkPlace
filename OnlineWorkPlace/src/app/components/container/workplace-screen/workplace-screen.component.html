@@ -3,8 +3,8 @@
     <app-workplace-element
       ngxMasonryItem
       [element]="element"
-      *ngFor="let element of workPlaceElements$ | async"
-      (click)="openEditDialog(element)">
+      *ngFor="let element of workPlaceElements$ | async; let i = index"
+      (click)="openEditDialog(element, i)">
     </app-workplace-element>
   </ngx-masonry>
 </div>

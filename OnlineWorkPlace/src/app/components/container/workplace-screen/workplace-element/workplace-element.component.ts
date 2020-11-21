@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {WorkplaceElementModel} from '../../../../models/workplacemodels/workplaceelement.model';
 import {ChecklistModel} from '../../../../models/workplacemodels/checklist.model';
+import {WorkplaceElementApiService} from '../../../../services/workplace-element-api/workplace-element-api.service';
 
 @Component({
   selector: 'app-workplace-element',
@@ -11,11 +12,11 @@ export class WorkplaceElementComponent implements OnInit {
   @Input()
   element: WorkplaceElementModel;
 
-  images: string[] = ['title', 'title', 'title'];
+  images: string[] = ['img', 'img', 'img'];
   task = false;
   taskInfo: string;
 
-  constructor() { }
+  constructor(private workplaceElementService: WorkplaceElementApiService) { }
 
   ngOnInit(): void {
     if (this.element.hasOwnProperty('tasks')) {
@@ -24,6 +25,14 @@ export class WorkplaceElementComponent implements OnInit {
     }
     if (this.element.hasOwnProperty('dueDate')) {
     }
+
+/*    for (let i = 0; i < 3; i++) {
+      this.workplaceElementService.getUserPhoto(1)
+        .subscribe((data) => {
+          data.photo = 'data:image/jpeg;base64,' + data.photo;
+          this.images.push(data.photo);
+        });
+    }*/
   }
 
   checkTask(checklistModel: ChecklistModel): void {

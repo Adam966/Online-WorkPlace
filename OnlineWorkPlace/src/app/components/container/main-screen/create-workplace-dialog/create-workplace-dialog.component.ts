@@ -17,6 +17,6 @@ export class CreateWorkplaceDialogComponent implements OnInit {
   }
 
   createWorkplace(): void {
-    this.dialog.close(this.form.valid ? this.form.value : null);
+    this.dialog.close(this.form.valid ?? null);
   }
 }

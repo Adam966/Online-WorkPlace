@@ -1,13 +1,21 @@
-<div class="container" [ngStyle]="{'background-color': element.backGroundColor}">
+<div class="container" [ngStyle]="{'background-color': element.backGroundColor ? element.backGroundColor : 'white'}">
   <p class="title">{{element.name}}</p>
-  <div *ngIf="!task; else taskTemplate">
+  <div>
+    <app-color-label
+      class="labels"
+      *ngFor="let image of images"
+    ></app-color-label>
+  </div>
+  <div
+    class="clearFloat"
+    *ngIf="!task; else taskTemplate">
     <p>{{element.description}}</p>
   </div>
   <ng-template #taskTemplate>
-    <p class="text"><mat-icon>check_box_outline_blank</mat-icon>{{taskInfo}}</p>
+    <p class="text clearFloat"><mat-icon>check_box_outline_blank</mat-icon>{{taskInfo}}</p>
   </ng-template>
   <div class="scrollbar images">
-    <img class="img" *ngFor="let image of images" src="https://cdn.shopify.com/s/files/1/0045/5104/9304/t/27/assets/AC_ECOM_SITE_2020_REFRESH_1_INDEX_M2_THUMBS-V2-1.jpg?v=8913815134086573859">
+    <img class="img" *ngFor="let image of images" [src]="image">
   </div>
   <div></div>
 </div>

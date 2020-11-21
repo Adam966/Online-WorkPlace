@@ -1,5 +1,5 @@
-<div class="container" [ngStyle]="{'background-color': element ? element.backGroundColor : 'white'}">
-  <form ngForm #form="ngForm" (ngSubmit)="createElement(form)">
+<div class="container">
+  <form ngForm #form="ngForm" (ngSubmit)="handleElement(form)">
     <div class="content">
       <!-- --------------------------------------- Main Inputs ------------------------------------------------- -->
       <mat-form-field>
@@ -39,9 +39,12 @@
         <mat-menu class="pop-up-menu" #userList="matMenu">
           <ul>
             <li
-              *ngFor="let user of users"
-              (click)="addUser(user)">
-                <app-user-label class="users-inline"></app-user-label>
+              *ngFor="let user of users$ | async"
+              (click)="addElement(user)">
+                <app-user-label
+                  class="users-inline"
+                  [user]="user"
+                ></app-user-label>
                 <span class="users-inline">Adam Ivan</span>
             </li>
           </ul>
@@ -53,20 +56,25 @@
         <mat-menu class="pop-up-menu" #labelList="matMenu">
           <ul>
             <li
-              *ngFor="let label of labels"
-              (click)="addLabel(label)">
-              <app-color-label class="element"></app-color-label>
+              *ngFor="let label of labels$ | async"
+              (click)="addElement(label)">
+              <app-color-label
+                class="element"
+                [label]="label">
+              </app-color-label>
             </li>
           </ul>
         </mat-menu>
+        <!-- --------------------------------------- Date Input ------------------------------------------------------>
         <p (click)="datePicker.open()">
           <mat-datepicker #datePicker></mat-datepicker>
           <mat-icon>schedule</mat-icon>
           Set Notification
         </p>
         <p
-          *ngIf="status"
-          (click)="deleteElement()">
+          *ngIf="isUpdateState"
+          [mat-dialog-close]="i"
+          (click)="delete()">
           <mat-icon>delete</mat-icon>
           Delete {{type}}
         </p>
@@ -75,7 +83,7 @@
           <input
             matInput
             [matDatepicker]="datePicker"
-            name="date"
+            name="notificationDate"
             ngModel>
         </mat-form-field>
       </div>
@@ -86,7 +94,7 @@
           <div>
             <app-color-label
               *ngFor="let label of labels; let i = index"
-              (click)="remove(label, i)">
+              (click)="removeElement(label, i)">
             </app-color-label>
           </div>
         </ng-template>
@@ -95,7 +103,7 @@
           <div>
             <app-user-label
               *ngFor="let user of users; let i = index"
-              (click)="remove(user, i)">
+              (click)="removeElement(user, i)">
             </app-user-label>
           </div>
         </ng-template>

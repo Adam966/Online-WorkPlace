@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {LabelModel} from '../../../../../models/label.model';
 
 @Component({
   selector: 'app-color-label',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./color-label.component.css']
 })
 export class ColorLabelComponent implements OnInit {
+  @Input()
+  label: LabelModel;
 
   constructor() { }
 

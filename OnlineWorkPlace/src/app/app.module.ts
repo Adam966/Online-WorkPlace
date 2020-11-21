@@ -18,7 +18,6 @@ import {NgxsModule} from '@ngxs/store';
 import {LoginState} from './store/login';
 import {WorkplaceState} from './store/workplace';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import { NoteThreadDialogComponent } from './components/container/workplace-screen/create-dialog/note-thread-dialog/note-thread-dialog.component';
 import { TaskComponent } from './components/container/workplace-screen/create-dialog/checklist-dialog/task/task.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -30,6 +29,8 @@ import {ChecklistDialogComponent} from './components/container/workplace-screen/
 import { UserLabelComponent } from './components/container/workplace-screen/create-dialog/user-label/user-label.component';
 import { ColorLabelComponent } from './components/container/workplace-screen/create-dialog/color-label/color-label.component';
 import {MaterialModule} from './material/material.module';
+import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
+import {WorkplaceSettingsState} from './store/workplace-settings';
 
 @NgModule({
   declarations: [
@@ -58,8 +59,8 @@ import {MaterialModule} from './material/material.module';
     NgxMasonryModule,
     HttpClientModule,
     MaterialModule,
-    NgxsModule.forRoot([LoginState, WorkplaceState, WorkplaceElementState, ApplicationState], {developmentMode: true}),
-    NgxsLoggerPluginModule.forRoot()
+    NgxsModule.forRoot([LoginState, WorkplaceState, WorkplaceElementState, ApplicationState, WorkplaceSettingsState], {developmentMode: true}),
+    NgxsReduxDevtoolsPluginModule.forRoot()
   ],
   providers: [
     MatDatepickerModule,

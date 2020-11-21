@@ -3,10 +3,12 @@ import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {NoteModel} from '../../../../../models/workplacemodels/note.model';
 import {ThreadModel} from '../../../../../models/workplacemodels/thread.model';
-import {Store} from '@ngxs/store';
-import {AddWorkplaceElement} from '../../../../../store/workplace-element';
+import {Select, Store} from '@ngxs/store';
+import {AddWorkplaceElement, DeleteWorkplaceElement} from '../../../../../store/workplace-element';
 import {UserModel} from '../../../../../models/user.model';
 import {LabelModel} from '../../../../../models/label.model';
+import {WorkplaceSettingsState} from '../../../../../store/workplace-settings';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-note-thread-dialog',
@@ -14,63 +16,67 @@ import {LabelModel} from '../../../../../models/label.model';
   styleUrls: ['./note-thread-dialog.component.css']
 })
 export class NoteThreadDialogComponent implements OnInit {
+  private index: number;
   type: string;
-  element: ThreadModel | NoteModel = null;
-  status: boolean;
+  element: ThreadModel | NoteModel;
+  isUpdateState: boolean;
 
-  users: UserModel[] = [null, null, null, null, null, null, null, null, null, null, null, null];
-  labels: LabelModel[] = [null, null, null, null, null, null, null, null, null, null, null, null];
+  @Select(WorkplaceSettingsState.users)
+  users$: Observable<UserModel[]>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private store: Store) { }
+  @Select(WorkplaceSettingsState.labels)
+  labels$: Observable<LabelModel[]>;
+
+  users: UserModel[] = [];
+  labels: LabelModel[] = [];
+
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private store: Store) {}
 
   ngOnInit(): void {
+    this.index = this.data?.index;
     this.type = this.data.type;
-    if (this.type === 'Note') {
-      this.element = this.data?.object as NoteModel;
-    } else {
-      this.element = this.data?.object as ThreadModel;
-    }
-    this.status = this.element !== undefined;
+    this.element = this.data?.object;
+    this.isUpdateState = this.element !== undefined;
   }
 
-  createElement(form: NgForm): void {
-    console.log(form);
+  handleElement(form: NgForm): void {
+    const data = {
+      id: this.element?.id ?? null,
+      backGroundColor: this.element?.backGroundColor ?? null,
+      name: form.value.name,
+      description: form.value.description,
+      assignedUsers: this.users,
+      assignedLabels: this.labels,
+    };
+    this.setDueDate(data, form);
+    this.store.dispatch(new AddWorkplaceElement(data, this?.index));
+  }
+
+  private setDueDate(data: { name: any; description: any }, form: NgForm): void {
     if (this.type === 'Note') {
-      this.store.dispatch(new AddWorkplaceElement(
-        new NoteModel(
-          form.value.name,
-          form.value.description
-        ))
-      );
-    } else {
-      this.store.dispatch(new AddWorkplaceElement(
-        new ThreadModel(
-          form.value.name,
-          form.value.description
-        ))
-      );
+      const temp = 'dueDate';
+      data[temp] = new Date(form.value.notificationDate);
     }
   }
 
-  addLabel(label: LabelModel): void {
-    this.labels.push(label);
+  delete(): void {
+    this.store.dispatch(new DeleteWorkplaceElement(this.index));
   }
 
-  addUser(user: UserModel): void {
-    this.users.push(user);
+  ////////////////////////////////// ELEMENT ACTIONS ///////////////////////////////////////
+  addElement(element: UserModel | LabelModel): void {
+    if (element instanceof LabelModel) {
+      this.labels.push(element);
+    } else {
+      this.users.push(element);
+    }
   }
 
-  deleteElement(): void {
-
-  }
-
-  remove(element: UserModel | LabelModel, i: number): void {
+  removeElement(element: UserModel | LabelModel, i: number): void {
     if (element instanceof LabelModel) {
       this.labels.splice(i, 1);
-      console.log(this.labels);
     } else {
       this.users.splice(i, 1);
-      console.log(this.users);
     }
   }
 }
