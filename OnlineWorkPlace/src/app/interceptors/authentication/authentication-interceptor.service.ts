@@ -16,7 +16,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
     if (!request.url.includes('login')) {
       const changedReq = request.clone({
         // get token from cookies
-        headers: request.headers.set('Authorization', 'Bearer: ahgf456jgaô36875dfj77687kgá64567rgaouriga527')
+        headers: request.headers.set('Authorization', 'Bearer ahgf456jgaô36875dfj77687kgá64567rgaouriga527')
       });
       return next.handle(changedReq);
     }

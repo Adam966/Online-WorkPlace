@@ -2,6 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {WorkplaceElementModel} from '../../../../models/workplacemodels/workplaceelement.model';
 import {ChecklistModel} from '../../../../models/workplacemodels/checklist.model';
 import {WorkplaceElementApiService} from '../../../../services/workplace-element-api/workplace-element-api.service';
+import {WorkplaceSettingsState} from '../../../../store/workplace-settings';
+import {UserModel} from '../../../../models/user.model';
+import {Select} from '@ngxs/store';
+import {LabelModel} from '../../../../models/label.model';
 
 @Component({
   selector: 'app-workplace-element',
@@ -12,7 +16,12 @@ export class WorkplaceElementComponent implements OnInit {
   @Input()
   element: WorkplaceElementModel;
 
-  images: string[] = ['img', 'img', 'img'];
+  @Select(WorkplaceSettingsState.users)
+  users$: UserModel[];
+
+  @Select(WorkplaceSettingsState.labels)
+  labels$: LabelModel[];
+
   task = false;
   taskInfo: string;
 
@@ -25,14 +34,6 @@ export class WorkplaceElementComponent implements OnInit {
     }
     if (this.element.hasOwnProperty('dueDate')) {
     }
-
-/*    for (let i = 0; i < 3; i++) {
-      this.workplaceElementService.getUserPhoto(1)
-        .subscribe((data) => {
-          data.photo = 'data:image/jpeg;base64,' + data.photo;
-          this.images.push(data.photo);
-        });
-    }*/
   }
 
   checkTask(checklistModel: ChecklistModel): void {

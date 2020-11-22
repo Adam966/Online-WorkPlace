@@ -27,6 +27,7 @@ export class WorkplaceScreenComponent implements OnInit {
     this.store.dispatch(new GetWorkplacesElements(1));
     this.store.dispatch(new GetWorkplaceLabels(1));
     this.store.dispatch(new GetWorkplaceUsers(1));
+
   }
 
   openEditDialog(element: WorkplaceElementModel, i: number): void {
@@ -36,7 +37,8 @@ export class WorkplaceScreenComponent implements OnInit {
         data: {
           object: element as ChecklistModel,
           index: i
-        }
+        },
+        panelClass: 'dialogStyle'
       });
     } else if (element.hasOwnProperty('dueDate')) {
       dialogRef = this.dialog.open(NoteThreadDialogComponent, {
@@ -44,7 +46,8 @@ export class WorkplaceScreenComponent implements OnInit {
           type: 'Note',
           object: element as NoteModel,
           index: i
-        }
+        },
+        panelClass: 'dialogStyle'
       });
     } else {
       dialogRef = this.dialog.open(NoteThreadDialogComponent, {
@@ -52,7 +55,8 @@ export class WorkplaceScreenComponent implements OnInit {
           type: 'Thread',
           object: element as ThreadModel,
           index: i
-        }
+        },
+        panelClass: 'dialogStyle'
       });
     }
 

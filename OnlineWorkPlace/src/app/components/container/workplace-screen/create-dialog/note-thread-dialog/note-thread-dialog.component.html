@@ -45,7 +45,7 @@
                   class="users-inline"
                   [user]="user"
                 ></app-user-label>
-                <span class="users-inline">Adam Ivan</span>
+                <span class="users-inline">{{user.username + ' ' +  user.usersurname}}</span>
             </li>
           </ul>
         </mat-menu>

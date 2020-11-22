@@ -3,7 +3,8 @@
   <div>
     <app-color-label
       class="labels"
-      *ngFor="let image of images"
+      *ngFor="let label of labels$ | async"
+      [label]="label"
     ></app-color-label>
   </div>
   <div
@@ -15,7 +16,10 @@
     <p class="text clearFloat"><mat-icon>check_box_outline_blank</mat-icon>{{taskInfo}}</p>
   </ng-template>
   <div class="scrollbar images">
-    <img class="img" *ngFor="let image of images" [src]="image">
+    <app-user-label
+      *ngFor="let user of users$ | async"
+      [user]="user">
+    </app-user-label>
   </div>
   <div></div>
 </div>
