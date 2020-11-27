@@ -5,7 +5,7 @@ import {NoteModel} from '../../../../../models/workplacemodels/note.model';
 import {ThreadModel} from '../../../../../models/workplacemodels/thread.model';
 import {Select, Store} from '@ngxs/store';
 import {AddWorkplaceElement, DeleteWorkplaceElement} from '../../../../../store/workplace-element';
-import {UserModel} from '../../../../../models/user.model';
+import {User} from '../../../../../models/user.model';
 import {LabelModel} from '../../../../../models/label.model';
 import {WorkplaceSettingsState} from '../../../../../store/workplace-settings';
 import {Observable} from 'rxjs';
@@ -22,13 +22,13 @@ export class NoteThreadDialogComponent implements OnInit {
   isUpdateState: boolean;
 
   @Select(WorkplaceSettingsState.users)
-  users$: Observable<UserModel[]>;
+  users$: Observable<User[]>;
 
   @Select(WorkplaceSettingsState.labels)
   labels$: Observable<LabelModel[]>;
 
-  users: UserModel[] = [];
-  labels: LabelModel[] = [];
+  users: User[];
+  labels: LabelModel[];
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any, private store: Store) {}
 
@@ -37,6 +37,8 @@ export class NoteThreadDialogComponent implements OnInit {
     this.type = this.data.type;
     this.element = this.data?.object;
     this.isUpdateState = this.element !== undefined;
+    this.users = [...this.element.assignedUsers];
+    this.labels = [...this.element.assignedLabels];
   }
 
   handleElement(form: NgForm): void {
@@ -64,16 +66,16 @@ export class NoteThreadDialogComponent implements OnInit {
   }
 
   ////////////////////////////////// ELEMENT ACTIONS ///////////////////////////////////////
-  addElement(element: UserModel | LabelModel): void {
-    if (element instanceof LabelModel) {
+  addElement(element: User | LabelModel): void {
+    if ('color' in element) {
       this.labels.push(element);
     } else {
       this.users.push(element);
     }
   }
 
-  removeElement(element: UserModel | LabelModel, i: number): void {
-    if (element instanceof LabelModel) {
+  removeElement(element: User | LabelModel, i: number): void {
+    if ('color' in element) {
       this.labels.splice(i, 1);
     } else {
       this.users.splice(i, 1);

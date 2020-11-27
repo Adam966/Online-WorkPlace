@@ -11,6 +11,7 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ChecklistDialogComponent} from './create-dialog/checklist-dialog/checklist-dialog.component';
 import {ChecklistModel} from '../../../models/workplacemodels/checklist.model';
 import {GetWorkplaceLabels, GetWorkplaceUsers} from '../../../store/workplace-settings';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-workplace-screen',
@@ -21,13 +22,16 @@ export class WorkplaceScreenComponent implements OnInit {
   @Select(WorkplaceElementState)
   workPlaceElements$: Observable<WorkplaceElementModel[]>;
 
-  constructor(private elementApiService: WorkplaceElementApiService, private store: Store, private dialog: MatDialog) { }
+  constructor(
+    private elementApiService: WorkplaceElementApiService,
+    private store: Store,
+    private dialog: MatDialog,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    this.store.dispatch(new GetWorkplacesElements(1));
     this.store.dispatch(new GetWorkplaceLabels(1));
     this.store.dispatch(new GetWorkplaceUsers(1));
-
   }
 
   openEditDialog(element: WorkplaceElementModel, i: number): void {

@@ -43,7 +43,7 @@ export class HandleResponseInterceptor implements HttpInterceptor {
     } else {
 
     }
-    console.log(error.message);
+    console.log(error);
     return EMPTY;
   }
 }

@@ -1,9 +1,9 @@
-<div class="container" [ngStyle]="{'background-color': element.backGroundColor ? element.backGroundColor : 'white'}">
+<div class="container">
   <p class="title">{{element.name}}</p>
   <div>
     <app-color-label
       class="labels"
-      *ngFor="let label of labels$ | async"
+      *ngFor="let label of element.assignedLabels"
       [label]="label"
     ></app-color-label>
   </div>
@@ -17,7 +17,7 @@
   </ng-template>
   <div class="scrollbar images">
     <app-user-label
-      *ngFor="let user of users$ | async"
+      *ngFor="let user of element.assignedUsers"
       [user]="user">
     </app-user-label>
   </div>

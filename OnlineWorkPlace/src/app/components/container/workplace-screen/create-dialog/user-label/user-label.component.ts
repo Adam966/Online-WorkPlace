@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserModel} from '../../../../../models/user.model';
+import {User} from '../../../../../models/user.model';
 
 @Component({
   selector: 'app-user-label',
@@ -8,7 +8,7 @@ import {UserModel} from '../../../../../models/user.model';
 })
 export class UserLabelComponent implements OnInit {
   @Input()
-  user: UserModel;
+  user: User;
 
   constructor() { }
 

@@ -9,31 +9,6 @@
   padding: 15px;
 }
 
-.aside {
-  padding-top: 15px;
-  width: 35%;
-  float: left;
-}
-
-.aside p mat-icon {
-  margin-right: 10px;
-  vertical-align: middle;
-}
-
-.assigned div {
-  display: flex;
-  overflow-x: scroll;
-  margin-top: -15px;
-}
-
-.assigned div h3 {
-  margin-top: 20px;
-}
-
-.aside p {
-  cursor: pointer;
-}
-
 mat-form-field {
   display: block;
   width: 95%;
@@ -66,4 +41,30 @@ ul {
 
 li {
   cursor: pointer;
+}
+
+/*/ASIDE STYLE/*/
+.aside {
+  padding-top: 15px;
+  width: 35%;
+  float: left;
+}
+
+.aside p {
+  cursor: pointer;
+}
+
+.aside p mat-icon {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.assigned div div {
+  display: flex;
+  overflow-x: scroll;
+  margin-top: -15px;
+}
+
+.assigned div h3 {
+  margin-top: 20px;
 }

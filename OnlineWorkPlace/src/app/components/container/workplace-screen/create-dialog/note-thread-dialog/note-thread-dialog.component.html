@@ -1,5 +1,6 @@
 <div class="container">
-  <form ngForm #form="ngForm" (ngSubmit)="handleElement(form)">
+  <form ngForm #form="ngForm"
+        (ngSubmit)="handleElement(form)">
     <div class="content">
       <!-- --------------------------------------- Main Inputs ------------------------------------------------- -->
       <mat-form-field>
@@ -89,24 +90,26 @@
       </div>
       <!-- --------------------------------------- Assigned labels and users ------------------------------------------>
       <div class="assigned">
-        <ng-template [ngIf]="labels.length > 0">
-          <h3 >Assigned labels</h3>
+        <div>
+          <h3>Assigned labels</h3>
           <div>
             <app-color-label
               *ngFor="let label of labels; let i = index"
+              [label]="label"
               (click)="removeElement(label, i)">
             </app-color-label>
           </div>
-        </ng-template>
-        <ng-template [ngIf]="users.length > 0">
+        </div>
+        <div>
           <h3>Assigned user</h3>
           <div>
             <app-user-label
               *ngFor="let user of users; let i = index"
+              [user]="user"
               (click)="removeElement(user, i)">
             </app-user-label>
           </div>
-        </ng-template>
+        </div>
       </div>
     </div>
     <button

@@ -1,9 +1,17 @@
 import {WorkplaceElementModel} from './workplaceelement.model';
 import {LabelModel} from '../label.model';
-import {UserModel} from '../user.model';
+import {User} from '../user.model';
 
 export class NoteModel implements WorkplaceElementModel{
-  constructor( name: string, description: string,  assignedLabels: LabelModel[], assignedUsers: UserModel[], backGroundColor?: string, dueDate?: Date, id?: number) {
+  constructor(
+    name: string,
+    description: string,
+    assignedLabels: LabelModel[],
+    assignedUsers: User[],
+    backGroundColor?: string,
+    dueDate?: Date,
+    id?: number
+  ) {
     this.id = id;
     this.backGroundColor = backGroundColor;
     this.name = name;
@@ -19,5 +27,5 @@ export class NoteModel implements WorkplaceElementModel{
   description: string;
   dueDate?: Date;
   assignedLabels: LabelModel[];
-  assignedUsers: UserModel[];
+  assignedUsers: User[];
 }
