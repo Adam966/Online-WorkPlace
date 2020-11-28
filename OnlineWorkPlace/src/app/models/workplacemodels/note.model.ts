@@ -8,12 +8,10 @@ export class NoteModel implements WorkplaceElementModel{
     description: string,
     assignedLabels: LabelModel[],
     assignedUsers: User[],
-    backGroundColor?: string,
     dueDate?: Date,
     id?: number
   ) {
     this.id = id;
-    this.backGroundColor = backGroundColor;
     this.name = name;
     this.description = description;
     this.dueDate = dueDate;
@@ -22,7 +20,6 @@ export class NoteModel implements WorkplaceElementModel{
   }
 
   id?: number;
-  backGroundColor?: string;
   name: string;
   description: string;
   dueDate?: Date;

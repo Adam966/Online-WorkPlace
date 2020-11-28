@@ -8,19 +8,19 @@ export class ChecklistModel implements WorkplaceElementModel{
               tasks: TaskModel[],
               assignedLabels: LabelModel[],
               assignedUsers: User[],
-              backGroundColor?: string,
+              dueDate?: Date,
               id?: number)
   {
     this.id = id;
     this.name = name;
     this.tasks = tasks;
-    this.assignedLabels = assignedLabels;
-    this.assignedUsers = assignedUsers;
+    this.dueDate = dueDate;
   }
 
   id?: number;
   name: string;
   tasks: TaskModel[];
+  dueDate?: Date;
   assignedLabels: LabelModel[];
   assignedUsers: User[];
 }

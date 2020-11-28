@@ -1,6 +1,6 @@
 .container {
-  max-height: 450px;
-  width: 550px;
+  max-height: 550px;
+  width: 700px;
   overflow-y: scroll;
 }
 
@@ -41,4 +41,14 @@ button {
 
 p input {
   width: 30px;
+}
+
+.assigned div div {
+  display: flex;
+  overflow-x: scroll;
+  margin-top: -15px;
+}
+
+.assigned div h3 {
+  margin-top: 20px;
 }

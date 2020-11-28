@@ -9,10 +9,8 @@ export class ThreadModel implements WorkplaceElementModel {
     description: string,
     assignedLabels: LabelModel[],
     assignedUsers: User[],
-    backGroundColor?: string,
     id?: number
   ) {
-    this.backGroundColor = backGroundColor;
     this.id = id;
     this.name = name;
     this.description = description;
@@ -20,7 +18,6 @@ export class ThreadModel implements WorkplaceElementModel {
     this.assignedUsers = assignedUsers;
   }
 
-  backGroundColor: string;
   id?: number;
   name: string;
   description: string;

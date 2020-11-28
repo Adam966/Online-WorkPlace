@@ -31,6 +31,7 @@ import { ColorLabelComponent } from './components/container/workplace-screen/cre
 import {MaterialModule} from './material/material.module';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {WorkplaceSettingsState} from './store/workplace-settings';
+import {NgxsDispatchPluginModule} from '@ngxs-labs/dispatch-decorator';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import {WorkplaceSettingsState} from './store/workplace-settings';
     HttpClientModule,
     MaterialModule,
     NgxsModule.forRoot([LoginState, WorkplaceState, WorkplaceElementState, ApplicationState, WorkplaceSettingsState], {developmentMode: true}),
+    NgxsDispatchPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot()
   ],
   providers: [

@@ -9,6 +9,7 @@ import {User} from '../../../../../models/user.model';
 import {LabelModel} from '../../../../../models/label.model';
 import {WorkplaceSettingsState} from '../../../../../store/workplace-settings';
 import {Observable} from 'rxjs';
+import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 
 @Component({
   selector: 'app-note-thread-dialog',
@@ -33,25 +34,28 @@ export class NoteThreadDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) private data: any, private store: Store) {}
 
   ngOnInit(): void {
-    this.index = this.data?.index;
-    this.type = this.data.type;
     this.element = this.data?.object;
     this.isUpdateState = this.element !== undefined;
-    this.users = [...this.element.assignedUsers];
-    this.labels = [...this.element.assignedLabels];
+    this.type = this.data.type;
+
+    if (this.isUpdateState) {
+      this.index = this.data?.index;
+      this.users = [...this.element?.assignedUsers] ?? [];
+      this.labels = [...this.element?.assignedLabels] ?? [];
+    }
   }
 
-  handleElement(form: NgForm): void {
+  @Dispatch()
+  handleElement(form: NgForm): AddWorkplaceElement {
     const data = {
       id: this.element?.id ?? null,
-      backGroundColor: this.element?.backGroundColor ?? null,
       name: form.value.name,
       description: form.value.description,
       assignedUsers: this.users,
       assignedLabels: this.labels,
     };
     this.setDueDate(data, form);
-    this.store.dispatch(new AddWorkplaceElement(data, this?.index));
+    return new AddWorkplaceElement(data, this?.index);
   }
 
   private setDueDate(data: { name: any; description: any }, form: NgForm): void {
@@ -61,8 +65,9 @@ export class NoteThreadDialogComponent implements OnInit {
     }
   }
 
-  delete(): void {
-    this.store.dispatch(new DeleteWorkplaceElement(this.index));
+  @Dispatch()
+  delete(): DeleteWorkplaceElement {
+    return new DeleteWorkplaceElement(this.index);
   }
 
   ////////////////////////////////// ELEMENT ACTIONS ///////////////////////////////////////

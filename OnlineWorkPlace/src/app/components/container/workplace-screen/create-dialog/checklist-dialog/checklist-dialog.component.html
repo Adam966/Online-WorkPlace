@@ -8,7 +8,8 @@
         type="text"
         name="name"
         required
-        #name="ngModel">
+        #name="ngModel"
+        [ngModel]="element?.name">
       <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
     </mat-form-field>
     <div class="content">
@@ -18,19 +19,60 @@
         [task]="task" class="task">
       </app-task>
     </div>
+    <!-- --------------------------------------- Aside bar icons ------------------------------------------------------>
     <div class="aside">
       <p (click)="addTask()"><mat-icon>add</mat-icon>Add task</p>
-      <p><mat-icon>palette</mat-icon><input
-        matInput
-        type="color"
-        ngModel
-        name="color"
-        required></p>
+      <p [mat-menu-trigger-for]="labelList">
+        <mat-icon>label</mat-icon>
+        Choose Label
+      </p>
+      <mat-menu #labelList="matMenu" class="pop-up-menu">
+        <ul>
+          <li
+            (click)="addElement(label)"
+            *ngFor="let label of labels$ | async">
+            <app-color-label
+              [label]="label"
+              class="element">
+            </app-color-label>
+          </li>
+        </ul>
+      </mat-menu>
+      <p (click)="datePicker.open()">
+        <mat-datepicker
+          #datePicker
+          touchUi>
+        </mat-datepicker>
+        <mat-icon>schedule</mat-icon>
+        Set Notification
+      </p>
+      <mat-form-field>
+        <mat-label>Due Date</mat-label>
+        <input
+          [matDatepickerFilter]="notificationDateFilter"
+          [matDatepicker]="datePicker"
+          [ngModel]="element ? element?.dueDate : ''"
+          matInput
+          name="notificationDate"
+          ngModel>
+      </mat-form-field>
+      <div class="assigned">
+        <div>
+          <h3>Assigned labels</h3>
+          <div>
+            <app-color-label
+              (click)="removeElement(label, i)"
+              *ngFor="let label of labels; let i = index"
+              [label]="label">
+            </app-color-label>
+          </div>
+        </div>
+      </div>
     </div>
     <button
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="form.invalid">Create</button>
+      [disabled]="form.invalid">{{element ? 'Update' : 'Create'}}</button>
   </form>
 </div>

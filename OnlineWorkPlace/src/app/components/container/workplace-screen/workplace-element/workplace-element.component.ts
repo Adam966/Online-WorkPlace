@@ -24,6 +24,6 @@ export class WorkplaceElementComponent implements OnInit {
   }
 
   checkTask(checklistModel: ChecklistModel): void {
-    this.taskInfo = `${checklistModel.tasks.filter(item => item.isCompleted === 1).length}\\${checklistModel.tasks.length}`;
+    this.taskInfo = `${checklistModel.tasks.filter(item => item.isCompleted).length}\\${checklistModel.tasks.length}`;
   }
 }

@@ -1,31 +1,31 @@
 <div class="container">
-  <form ngForm #form="ngForm"
-        (ngSubmit)="handleElement(form)">
+  <form #form="ngForm" (ngSubmit)="handleElement(form)"
+        ngForm>
     <div class="content">
       <!-- --------------------------------------- Main Inputs ------------------------------------------------- -->
       <mat-form-field>
         <mat-label>{{type}} name</mat-label>
         <input
-          matInput
-          ngModel
-          type="text"
-          name="name"
-          required
           #name="ngModel"
-          [ngModel]="element ? element.name : ''">
+          [ngModel]="element ? element.name : ''"
+          matInput
+          name="name"
+          ngModel
+          required
+          type="text">
         <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>{{type}} description</mat-label>
         <textarea
-          [mat-autosize]="true"
-          matInput
-          ngModel
-          type="text"
-          name="description"
-          required
           #description="ngModel"
-          [ngModel]="element ? element.description : ''">
+          [mat-autosize]="true"
+          [ngModel]="element ? element.description : ''"
+          matInput
+          name="description"
+          ngModel
+          required
+          type="text">
           </textarea>
         <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
       </mat-form-field>
@@ -37,16 +37,16 @@
           <mat-icon>person_add</mat-icon>
           Add user
         </p>
-        <mat-menu class="pop-up-menu" #userList="matMenu">
+        <mat-menu #userList="matMenu" class="pop-up-menu">
           <ul>
             <li
-              *ngFor="let user of users$ | async"
-              (click)="addElement(user)">
-                <app-user-label
-                  class="users-inline"
-                  [user]="user"
-                ></app-user-label>
-                <span class="users-inline">{{user.username + ' ' +  user.usersurname}}</span>
+              (click)="addElement(user)"
+              *ngFor="let user of users$ | async">
+              <app-user-label
+                [user]="user"
+                class="users-inline"
+              ></app-user-label>
+              <span class="users-inline">{{user.username + ' ' + user.usersurname}}</span>
             </li>
           </ul>
         </mat-menu>
@@ -54,39 +54,46 @@
           <mat-icon>label</mat-icon>
           Choose Label
         </p>
-        <mat-menu class="pop-up-menu" #labelList="matMenu">
+        <mat-menu #labelList="matMenu" class="pop-up-menu">
           <ul>
             <li
-              *ngFor="let label of labels$ | async"
-              (click)="addElement(label)">
+              (click)="addElement(label)"
+              *ngFor="let label of labels$ | async">
               <app-color-label
-                class="element"
-                [label]="label">
+                [label]="label"
+                class="element">
               </app-color-label>
             </li>
           </ul>
         </mat-menu>
         <!-- --------------------------------------- Date Input ------------------------------------------------------>
-        <p (click)="datePicker.open()">
-          <mat-datepicker #datePicker></mat-datepicker>
-          <mat-icon>schedule</mat-icon>
-          Set Notification
-        </p>
+        <ng-template [ngIf]="type === 'Note'">
+          <p (click)="datePicker.open()">
+            <mat-datepicker
+              #datePicker
+              touchUi>
+            </mat-datepicker>
+            <mat-icon>schedule</mat-icon>
+            Set Notification
+          </p>
+          <mat-form-field>
+            <mat-label>Due Date</mat-label>
+            <input
+              [matDatepickerFilter]="notificationDateFilter"
+              [matDatepicker]="datePicker"
+              [ngModel]="element ? element.dueDate : ''"
+              matInput
+              name="notificationDate"
+              ngModel>
+          </mat-form-field>
+        </ng-template>
         <p
+          (click)="delete()"
           *ngIf="isUpdateState"
-          [mat-dialog-close]="i"
-          (click)="delete()">
+          [mat-dialog-close]="i">
           <mat-icon>delete</mat-icon>
           Delete {{type}}
         </p>
-        <mat-form-field>
-          <mat-label>Due Date</mat-label>
-          <input
-            matInput
-            [matDatepicker]="datePicker"
-            name="notificationDate"
-            ngModel>
-        </mat-form-field>
       </div>
       <!-- --------------------------------------- Assigned labels and users ------------------------------------------>
       <div class="assigned">
@@ -94,9 +101,9 @@
           <h3>Assigned labels</h3>
           <div>
             <app-color-label
+              (click)="removeElement(label, i)"
               *ngFor="let label of labels; let i = index"
-              [label]="label"
-              (click)="removeElement(label, i)">
+              [label]="label">
             </app-color-label>
           </div>
         </div>
@@ -104,18 +111,18 @@
           <h3>Assigned user</h3>
           <div>
             <app-user-label
+              (click)="removeElement(user, i)"
               *ngFor="let user of users; let i = index"
-              [user]="user"
-              (click)="removeElement(user, i)">
+              [user]="user">
             </app-user-label>
           </div>
         </div>
       </div>
     </div>
     <button
-      mat-raised-button
-      color="primary"
       [disabled]="form.invalid"
+      color="primary"
+      mat-raised-button
       type="submit">
       {{element ? 'Update' : 'Create'}}
     </button>
