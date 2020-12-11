@@ -1,6 +1,6 @@
 export interface WorkplaceModel {
-  id: number;
+  id?: number;
   name: string;
   description: string;
-  AdminUserId: number;
+  AdminUserId?: number;
 }

@@ -1,4 +1,4 @@
-import {User} from '../user.model';
+import {User} from '../application-models/user.model';
 
 export class TaskModel {
   constructor(description: string, assignedUsers: User[], isCompleted: boolean, id?: number, dueDate?: Date) {

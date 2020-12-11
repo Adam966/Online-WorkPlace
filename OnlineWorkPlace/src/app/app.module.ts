@@ -32,6 +32,8 @@ import {MaterialModule} from './material/material.module';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {WorkplaceSettingsState} from './store/workplace-settings';
 import {NgxsDispatchPluginModule} from '@ngxs-labs/dispatch-decorator';
+import { MessageComponent } from './components/container/error-message/message/message.component';
+import {MessageState} from './store/message-pop-up';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import {NgxsDispatchPluginModule} from '@ngxs-labs/dispatch-decorator';
     TaskComponent,
     UserLabelComponent,
     ColorLabelComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,7 @@ import {NgxsDispatchPluginModule} from '@ngxs-labs/dispatch-decorator';
     NgxMasonryModule,
     HttpClientModule,
     MaterialModule,
-    NgxsModule.forRoot([LoginState, WorkplaceState, WorkplaceElementState, ApplicationState, WorkplaceSettingsState], {developmentMode: true}),
+    NgxsModule.forRoot([LoginState, WorkplaceState, WorkplaceElementState, ApplicationState, WorkplaceSettingsState, MessageState], {developmentMode: true}),
     NgxsDispatchPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot()
   ],
