@@ -1,9 +1,9 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WorkplaceElementModel} from '../../../models/workplacemodels/workplaceelement.model';
 import {WorkplaceElementApiService} from '../../../services/workplace-element-api/workplace-element-api.service';
 import {Select, Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
-import {GetWorkplacesElements, WorkplaceElementState} from '../../../store/workplace-element';
+import { WorkplaceElementState} from '../../../store/workplace-element';
 import {NoteModel} from '../../../models/workplacemodels/note.model';
 import {ThreadModel} from '../../../models/workplacemodels/thread.model';
 import {NoteThreadDialogComponent} from './create-dialog/note-thread-dialog/note-thread-dialog.component';
@@ -11,7 +11,8 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ChecklistDialogComponent} from './create-dialog/checklist-dialog/checklist-dialog.component';
 import {ChecklistModel} from '../../../models/workplacemodels/checklist.model';
 import {GetWorkplaceLabels, GetWorkplaceUsers} from '../../../store/workplace-settings';
-import {ActivatedRoute} from '@angular/router';
+import {Dispatch} from '@ngxs-labs/dispatch-decorator';
+import {SetApplicationToolbarState} from '../../../store/application';
 
 @Component({
   selector: 'app-workplace-screen',
@@ -26,10 +27,16 @@ export class WorkplaceScreenComponent implements OnInit {
     private elementApiService: WorkplaceElementApiService,
     private store: Store,
     private dialog: MatDialog,
-    private route: ActivatedRoute
   ) { }
 
+  @Dispatch()
+  changeToolbarStatus(): SetApplicationToolbarState {
+    return new SetApplicationToolbarState(true);
+  }
+
   ngOnInit(): void {
+    this.changeToolbarStatus();
+    // remove these and introduce resolvers
     this.store.dispatch(new GetWorkplaceLabels(1));
     this.store.dispatch(new GetWorkplaceUsers(1));
   }

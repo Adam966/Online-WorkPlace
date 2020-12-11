@@ -7,6 +7,8 @@ import {AddWorkplace, GetWorkplaces, WorkplaceState} from '../../../store/workpl
 import {Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
 import {WorkplaceModel} from '../../../models/workplace.model';
+import {Dispatch} from '@ngxs-labs/dispatch-decorator';
+import { SetApplicationToolbarState} from '../../../store/application';
 
 
 @Component({
@@ -21,6 +23,11 @@ export class MainScreenComponent implements OnInit {
   dialogRef: MatDialogRef<CreateWorkplaceDialogComponent>;
 
   constructor(public dialog: MatDialog, private router: Router, private workplaceService: WorkplaceService, private store: Store) { }
+
+  @Dispatch()
+  changeToolbar(): SetApplicationToolbarState {
+    return new SetApplicationToolbarState(false);
+  }
 
   ngOnInit(): void {
     this.store.dispatch(new GetWorkplaces(1));

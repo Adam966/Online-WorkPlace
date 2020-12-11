@@ -1,9 +1,14 @@
-import {Action, State, StateContext} from '@ngxs/store';
+import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 
-export class SetApplicationState {
-  static readonly type = '[Application] GetApplicationState';
-  constructor(public applicationState: boolean) {}
+export class SetApplicationLoadingState {
+  static readonly type = '[Application] LoadingState';
+  constructor(public payload: boolean) {}
+}
+
+export class SetApplicationToolbarState {
+  static readonly type = '[Application] ToolbarState';
+  constructor(public payload: boolean) {}
 }
 
 export class ApplicationModel {
@@ -11,14 +16,38 @@ export class ApplicationModel {
   changeToolbar?: boolean;
 }
 
-@State<boolean> ({
+@State<ApplicationModel> ({
   name: 'application',
-  defaults: false
+  defaults: {
+    isLoading: null,
+    changeToolbar: null
+  }
 })
 @Injectable()
 export class ApplicationState {
-  @Action(SetApplicationState)
-  getApplicationState(ctx: StateContext<boolean>, action: SetApplicationState): void {
-    ctx.setState(action.applicationState);
+  @Selector()
+  static toolbarState(state: ApplicationModel): boolean {
+    return state.changeToolbar;
+  }
+
+  @Selector()
+  static isLoading(state: ApplicationModel): boolean {
+    return state.isLoading;
+  }
+
+  @Action(SetApplicationLoadingState)
+  setLoadingStatus(ctx: StateContext<ApplicationModel>, payload: boolean): void {
+    ctx.setState({
+      isLoading: payload,
+      changeToolbar: ctx.getState().changeToolbar
+    });
+  }
+
+  @Action(SetApplicationToolbarState)
+  setToolbarState(ctx: StateContext<ApplicationModel>, payload: boolean): void {
+    ctx.setState({
+      isLoading: ctx.getState().isLoading,
+      changeToolbar: payload
+    });
   }
 }

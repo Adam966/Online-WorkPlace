@@ -13,11 +13,11 @@ import {Observable} from 'rxjs';
   styleUrls: ['./container.component.css']
 })
 export class ContainerComponent implements OnInit {
-  @Select(ApplicationState)
-  applicationState$: Observable<boolean>;
+  @Select(ApplicationState.isLoading)
+  isLoading$!: Observable<boolean>;
 
-  isLoading = false;
-  changeToolbar = true;
+  @Select(ApplicationState.toolbarState)
+  toolbarState$!: Observable<boolean>;
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
 
