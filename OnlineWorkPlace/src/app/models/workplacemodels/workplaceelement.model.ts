@@ -1,4 +1,4 @@
-import {User, UserModel} from '../user.model';
+import {User} from '../application-models/user.model';
 import {LabelModel} from '../label.model';
 
 export interface WorkplaceElementModel {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {UserModel} from '../../models/user.model';
+import {UserModel} from '../../models/application-models/user.model';
 import {Store} from '@ngxs/store';
 import {Login} from '../../store/login';
 import {Router} from '@angular/router';

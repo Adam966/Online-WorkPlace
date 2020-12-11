@@ -1,10 +1,9 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {WorkplaceSettingsApiService} from '../services/workplace-settings-api/workplace-settings-api.service';
-import {UserModel} from '../models/user.model';
+import {UserModel} from '../models/application-models/user.model';
 import {LabelModel} from '../models/label.model';
 import {WorkplaceElementApiService} from '../services/workplace-element-api/workplace-element-api.service';
-import {tap} from 'rxjs/operators';
 
 export class GetWorkplaceUsers {
   static readonly type = '[WorkPlace Settings] GetWorkplaceUsers';

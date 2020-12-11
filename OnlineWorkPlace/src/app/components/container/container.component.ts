@@ -21,6 +21,8 @@ export class ContainerComponent implements OnInit {
   @Select(ApplicationState.toolbarState)
   toolbarState$!: Observable<boolean>;
 
+  error = false;
+
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit(): void {

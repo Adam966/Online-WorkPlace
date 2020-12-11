@@ -32,6 +32,7 @@ import {MaterialModule} from './material/material.module';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {WorkplaceSettingsState} from './store/workplace-settings';
 import {NgxsDispatchPluginModule} from '@ngxs-labs/dispatch-decorator';
+import { MessageComponent } from './components/container/error-message/message/message.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {NgxsDispatchPluginModule} from '@ngxs-labs/dispatch-decorator';
     TaskComponent,
     UserLabelComponent,
     ColorLabelComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,

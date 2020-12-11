@@ -1,5 +1,5 @@
 import {Action, State, StateContext, Store} from '@ngxs/store';
-import {UserModel} from '../models/user.model';
+import {UserModel} from '../models/application-models/user.model';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 

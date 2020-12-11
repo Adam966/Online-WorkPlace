@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TaskModel} from '../../../../../../models/workplacemodels/task.model';
-import {User} from '../../../../../../models/user.model';
+import {User} from '../../../../../../models/application-models/user.model';
 import {Select} from '@ngxs/store';
 import {WorkplaceSettingsState} from '../../../../../../store/workplace-settings';
 import {Observable} from 'rxjs';

@@ -5,7 +5,7 @@ import {NoteModel} from '../../../../../models/workplacemodels/note.model';
 import {ThreadModel} from '../../../../../models/workplacemodels/thread.model';
 import {Select, Store} from '@ngxs/store';
 import {AddWorkplaceElement, DeleteWorkplaceElement} from '../../../../../store/workplace-element';
-import {User} from '../../../../../models/user.model';
+import {User} from '../../../../../models/application-models/user.model';
 import {LabelModel} from '../../../../../models/label.model';
 import {WorkplaceSettingsState} from '../../../../../store/workplace-settings';
 import {Observable} from 'rxjs';
@@ -31,7 +31,7 @@ export class NoteThreadDialogComponent implements OnInit {
   users: User[];
   labels: LabelModel[];
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private store: Store) {}
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any) {}
 
   ngOnInit(): void {
     this.element = this.data?.object;

@@ -1,6 +1,6 @@
 import {WorkplaceElementModel} from './workplaceelement.model';
 import {LabelModel} from '../label.model';
-import {User} from '../user.model';
+import {User} from '../application-models/user.model';
 
 export class ThreadModel implements WorkplaceElementModel {
 
