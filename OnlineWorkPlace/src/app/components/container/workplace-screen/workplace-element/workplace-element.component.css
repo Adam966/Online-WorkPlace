@@ -1,0 +1,57 @@
+.container {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  width: 230px;
+  cursor: pointer;
+  background-color: #f5efdf;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 550;
+}
+
+.images {
+  margin-top: 10px;
+  height: 55px;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.img {
+  height: 35px;
+  width: 35px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.text {
+  font-size: 24px;
+}
+
+.labels {
+  display: flex;
+}
+
+.clearFloat {
+  clear: left;
+}
+
+p {
+  word-wrap:break-word;
+}
+
+app-color-label {
+  float: left;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 10px;
+  margin: 0 6px;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 50px;
+}
+

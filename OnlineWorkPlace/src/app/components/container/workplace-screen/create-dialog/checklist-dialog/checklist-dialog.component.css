@@ -1,0 +1,54 @@
+.container {
+  max-height: 550px;
+  width: 700px;
+  overflow-y: scroll;
+}
+
+.content {
+  margin-top: 5px;
+  width: 60%;
+  float: left;
+}
+
+.aside {
+  margin-left: 15px;
+  width: 35%;
+  float: left;
+}
+
+.aside p mat-icon {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.aside p {
+  margin-right: 10px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+mat-form-field {
+  display: block;
+  width: 95%;
+}
+
+button {
+  clear: left;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p input {
+  width: 30px;
+}
+
+.assigned div div {
+  display: flex;
+  overflow-x: scroll;
+  margin-top: -15px;
+}
+
+.assigned div h3 {
+  margin-top: 20px;
+}

@@ -1,0 +1,26 @@
+.mat-icon {
+  padding: 0 14px;
+  cursor: pointer;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.icon {
+  margin-right: 15px;
+}
+
+::ng-deep .my-menu {
+  width: 190px;
+}
+
+.isLoading {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  margin: 0 auto;
+}
+
+.content {
+  visibility: hidden;
+}

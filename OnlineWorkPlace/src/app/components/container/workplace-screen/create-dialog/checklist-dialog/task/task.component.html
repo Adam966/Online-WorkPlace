@@ -1,0 +1,45 @@
+<div class="container">
+      <mat-checkbox
+        class="checkbox"
+        color="primary"
+        [(ngModel)]="task.isCompleted">
+      </mat-checkbox>
+    <mat-form-field class="input">
+      <mat-label>Description</mat-label>
+      <textarea
+        rows="4"
+        cdkTextareaAutosize="false"
+        matInput
+        ngModel
+        type="text"
+        name="name"
+        required
+        [ngModel]="task.description"
+        #description="ngModel">
+      </textarea>
+      <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
+    </mat-form-field>
+  <div class="images">
+    <app-user-label
+      *ngFor="let user of users"
+      [user]="user"
+    ></app-user-label>
+  </div>
+  <div class="right">
+    <mat-icon [mat-menu-trigger-for]="userList">person_add</mat-icon>
+    <mat-icon (click)="removeTask()">delete</mat-icon>
+  </div>
+  <mat-menu #userList="matMenu" class="pop-up-menu">
+    <ul>
+      <li
+        (click)="addUser(user)"
+        *ngFor="let user of users$ | async">
+        <app-user-label
+          [user]="user"
+          class="users-inline"
+        ></app-user-label>
+        <span class="users-inline">{{user.username + ' ' + user.usersurname}}</span>
+      </li>
+    </ul>
+  </mat-menu>
+</div>

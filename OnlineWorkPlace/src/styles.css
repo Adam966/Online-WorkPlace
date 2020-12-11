@@ -4,20 +4,28 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
+  height: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: transparent;
+  border-radius: 10px;
+  background: #B8B6B6;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
+  height: 15px;
+  border-radius: 15px;
   background: #4f4e4e;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #373737;
+}
+
+.dialogStyle {
+  background-color: #f7efda;
 }

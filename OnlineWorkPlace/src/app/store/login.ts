@@ -9,7 +9,7 @@ export class Login {
 
 @State<UserModel> ({
   name: 'user',
-  defaults: { id: null, userName: null, userSurname: null, email: null, photo: null, token: null}
+  defaults: { id: null, username: null, usersurname: null, email: null, photo: null, token: null}
 })
 @Injectable()
 export class LoginState {

@@ -1,0 +1,17 @@
+.background {
+  display: inline-block;
+  border-radius: 15px;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  height: 15px;
+}
+
+.content {
+  display: inline-block;
+  white-space:nowrap;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}

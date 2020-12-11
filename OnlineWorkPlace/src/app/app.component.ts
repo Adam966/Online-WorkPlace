@@ -16,6 +16,6 @@ export class AppComponent implements OnInit {
   }
 
   private isUserLoggedIn(): void {
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl('main/workplace');
   }
 }

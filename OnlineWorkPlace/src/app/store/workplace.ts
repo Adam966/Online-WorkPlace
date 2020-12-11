@@ -1,21 +1,37 @@
-import {Action, State, StateContext} from '@ngxs/store';
+import {Action, State, StateContext, Store} from '@ngxs/store';
 import {WorkplaceModel} from '../models/workplace.model';
 import {Injectable} from '@angular/core';
+import {WorkplaceService} from '../services/workplace-api/workplace.service';
 
-export class Workplace {
-  static readonly type = '[Main Component] Login';
-  constructor() {
-  }
+export class GetWorkplaces {
+  static readonly type = '[Main Component] GetWorkplaces';
+  constructor(public workplaces: number) {}
 }
 
-@State<WorkplaceModel> ({
+export class AddWorkplace {
+  static readonly type = '[Main Component] AddWorkPlace';
+  constructor(public workplace: WorkplaceModel) {}
+}
+
+@State<WorkplaceModel[]> ({
   name: 'workplaces',
-  defaults: { id: null, name: null, description: null, AdminUserId: null }
+  defaults: []
 })
 @Injectable()
 export class WorkplaceState {
-  @Action(Workplace)
-  addWorkplaces(ctx: StateContext<WorkplaceModel>, action: Workplace): void {
+  constructor(private workplaceService: WorkplaceService) {}
 
+  @Action(GetWorkplaces)
+  getWorkplaces(ctx: StateContext<WorkplaceModel[]>, action: number): void {
+    this.workplaceService.getAllWorkplaces(action)
+      .subscribe(response => {
+        ctx.setState(response);
+      });
+  }
+
+  @Action(AddWorkplace)
+  addWorkplace(ctx: StateContext<WorkplaceModel[]>, action: AddWorkplace): void {
+    this.workplaceService.addWorkplace(action.workplace);
+    ctx.setState([...ctx.getState(), action.workplace]);
   }
 }

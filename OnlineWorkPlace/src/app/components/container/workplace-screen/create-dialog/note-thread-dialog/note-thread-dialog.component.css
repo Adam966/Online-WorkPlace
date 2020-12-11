@@ -1,0 +1,70 @@
+.container {
+  width: 700px;
+  max-height: 500px;
+}
+
+.content {
+  width: 60%;
+  float: left;
+  padding: 15px;
+}
+
+mat-form-field {
+  display: block;
+  width: 95%;
+}
+
+button {
+  clear: left;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p input {
+  width: 30px;
+}
+
+::ng-deep .pop-up-menu {
+  max-height: 200px;
+  min-width: 150px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.users-inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+li {
+  cursor: pointer;
+}
+
+/*/ASIDE STYLE/*/
+.aside {
+  padding-top: 15px;
+  width: 35%;
+  float: left;
+}
+
+.aside p {
+  cursor: pointer;
+}
+
+.aside p mat-icon {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.assigned div div {
+  display: flex;
+  overflow-x: scroll;
+  margin-top: -15px;
+}
+
+.assigned div h3 {
+  margin-top: 20px;
+}
