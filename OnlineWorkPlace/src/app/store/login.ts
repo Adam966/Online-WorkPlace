@@ -1,10 +1,16 @@
-import {Action, State, StateContext} from '@ngxs/store';
+import {Action, State, StateContext, Store} from '@ngxs/store';
 import {UserModel} from '../models/user.model';
 import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 
 export class Login {
-  static readonly type = '[Login Component] Login';
+  static readonly type = '[Login User] Login';
   constructor(public user: UserModel) {}
+}
+
+export class Logout {
+  static readonly type = '[Logout User] Logout';
+  constructor() {}
 }
 
 @State<UserModel> ({
@@ -13,8 +19,17 @@ export class Login {
 })
 @Injectable()
 export class LoginState {
+  constructor(private store: Store, private router: Router) {
+  }
   @Action(Login)
   login(ctx: StateContext<UserModel>, action: Login): void {
     ctx.setState(action.user);
+  }
+
+  @Action(Logout)
+  logout(): void {
+    this.store.reset(LoginState);
+    localStorage.clear();
+    this.router.navigate(['login']);
   }
 }
