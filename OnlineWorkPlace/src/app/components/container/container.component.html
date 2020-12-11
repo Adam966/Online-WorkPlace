@@ -24,7 +24,10 @@
     <hr>
     <button mat-menu-item><mat-icon>person</mat-icon>Profile</button>
     <button mat-menu-item><mat-icon>settings</mat-icon>Settings</button>
-    <button mat-raised-button color="primary" style="margin-left: 65px; margin-top: 15px">Log out</button>
+    <button mat-raised-button
+            color="primary"
+            style="margin-left: 65px; margin-top: 15px"
+            (click)="logout()">Log out</button>
   </mat-menu>
   <!-- APPLICATION CREATE ELEMENTS MENU -->
   <mat-menu #add class="my-menu">

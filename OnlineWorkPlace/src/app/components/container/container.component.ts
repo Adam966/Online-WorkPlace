@@ -6,6 +6,8 @@ import {ChecklistDialogComponent} from './workplace-screen/create-dialog/checkli
 import {Select} from '@ngxs/store';
 import {ApplicationState} from '../../store/application';
 import {Observable} from 'rxjs';
+import {Dispatch} from '@ngxs-labs/dispatch-decorator';
+import {Logout} from '../../store/login';
 
 @Component({
   selector: 'app-container',
@@ -35,5 +37,10 @@ export class ContainerComponent implements OnInit {
 
   createTaskDialog(): void {
     this.dialog.open(ChecklistDialogComponent);
+  }
+
+  @Dispatch()
+  logout(): Logout {
+    return new Logout();
   }
 }
