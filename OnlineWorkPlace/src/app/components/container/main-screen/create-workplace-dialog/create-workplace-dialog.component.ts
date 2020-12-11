@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
+import {Dispatch} from '@ngxs-labs/dispatch-decorator';
+import {SetPopUpMessage} from '../../../../store/message-pop-up';
 
 @Component({
   selector: 'app-create-workplace-dialog',
@@ -17,6 +19,15 @@ export class CreateWorkplaceDialogComponent implements OnInit {
   }
 
   createWorkplace(): void {
-    this.dialog.close(this.form.valid ?? null);
+    this.dialog.close(this.form.value ?? null);
+    this.createWorkplaceMessage();
+  }
+
+  @Dispatch()
+  createWorkplaceMessage(): SetPopUpMessage {
+    return new SetPopUpMessage({
+      title: 'Successfully created',
+      status: 'positive-message',
+    });
   }
 }

@@ -8,6 +8,9 @@ import {ApplicationState} from '../../store/application';
 import {Observable} from 'rxjs';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {Logout} from '../../store/login';
+import {MessageState} from '../../store/message-pop-up';
+import {MessageModel} from '../../models/application-models/message.model';
+import {log} from 'util';
 
 @Component({
   selector: 'app-container',
@@ -21,12 +24,18 @@ export class ContainerComponent implements OnInit {
   @Select(ApplicationState.toolbarState)
   toolbarState$!: Observable<boolean>;
 
-  error = false;
+  @Select(MessageState.isVisible)
+  isMessageVisible$!: Observable<boolean>;
+
+  @Select(MessageState.message)
+  message$!: Observable<MessageModel>;
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.router.navigate(['dashboard'], {relativeTo: this.route});
+
+    this.isMessageVisible$.subscribe(data => console.log(data));
   }
 
   createDialog(type: string): void {
