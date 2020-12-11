@@ -36,18 +36,18 @@ export class ApplicationState {
   }
 
   @Action(SetApplicationLoadingState)
-  setLoadingStatus(ctx: StateContext<ApplicationModel>, payload: boolean): void {
+  setLoadingStatus(ctx: StateContext<ApplicationModel>, action: SetApplicationLoadingState): void {
     ctx.setState({
-      isLoading: payload,
+      isLoading: action.payload,
       changeToolbar: ctx.getState().changeToolbar
     });
   }
 
   @Action(SetApplicationToolbarState)
-  setToolbarState(ctx: StateContext<ApplicationModel>, payload: boolean): void {
+  setToolbarState(ctx: StateContext<ApplicationModel>, action: SetApplicationToolbarState): void {
     ctx.setState({
       isLoading: ctx.getState().isLoading,
-      changeToolbar: payload
+      changeToolbar: action.payload
     });
   }
 }
