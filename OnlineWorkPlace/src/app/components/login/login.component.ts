@@ -3,8 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {RegistrationDialogComponent} from './registration-dialog/registration-dialog.component';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {Store} from '@ngxs/store';
-import {LoginApiService} from './login-api.service';
+import {LoginApiService} from '../../services/login-service/login-api.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +11,7 @@ import {LoginApiService} from './login-api.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private dialog: MatDialog, private router: Router, private store: Store, private loginService: LoginApiService) { }
+  constructor(private dialog: MatDialog, private router: Router, private loginApiService: LoginApiService) { }
 
   ngOnInit(): void {
   }
@@ -22,6 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: NgForm): void {
-    this.loginService.login({email: form.value.email, password: form.value.password});
+    const login = {email: form.value.email, password: form.value.password};
+    this.loginApiService.login(login);
   }
 }

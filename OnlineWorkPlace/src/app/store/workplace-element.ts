@@ -1,11 +1,10 @@
 import {Action, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {WorkplaceElementModel} from '../models/workplacemodels/workplaceelement.model';
-import {WorkplaceElementApiService} from '../services/workplace-element-api/workplace-element-api.service';
 
-export class GetWorkplacesElements {
+export class SaveWorkplacesElements {
   static readonly type = '[WorkPlace Component] GetWorkplaceElements';
-  constructor(public workplaces: number) {}
+  constructor(public workplaces: WorkplaceElementModel[]) {}
 }
 
 export class AddWorkplaceElement {
@@ -24,14 +23,11 @@ export class DeleteWorkplaceElement {
 })
 @Injectable()
 export class WorkplaceElementState {
-  constructor(private workplaceElementService: WorkplaceElementApiService) {}
+  constructor() {}
 
-  @Action(GetWorkplacesElements)
-  getWorkplaces(ctx: StateContext<WorkplaceElementModel[]>, action: number): void {
-    this.workplaceElementService.getWorkPlaceElements(action)
-      .subscribe(response => {
-        ctx.setState(response);
-      });
+  @Action(SaveWorkplacesElements)
+  saveWorkplaces(ctx: StateContext<WorkplaceElementModel[]>, action: SaveWorkplacesElements): void {
+    ctx.setState(action.workplaces);
   }
 
   @Action(AddWorkplaceElement)

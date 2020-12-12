@@ -2,7 +2,7 @@
   <app-workplace
     *ngFor="let workPlace of workPlaces$ | async"
     [workPlace]="workPlace"
-    (click)="getWorkPlace()">
+    (click)="getWorkPlace(workPlace.id)">
   </app-workplace>
  </div>
 <div>

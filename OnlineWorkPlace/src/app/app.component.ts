@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterEvent} from '@angular/router';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {SetApplicationLoadingState} from './store/application';
+import {LoginState} from './store/login';
+import {Select} from '@ngxs/store';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +14,19 @@ import {SetApplicationLoadingState} from './store/application';
 export class AppComponent implements OnInit {
   title = 'OnlineWorkPlace';
 
+  @Select(LoginState.token)
+  isLoggedIn$!: Observable<string>;
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.isUserLoggedIn();
+    this.isLoggedIn$.subscribe(token => {
+      if (token) {
+        this.router.navigate(['main']);
+      } else {
+        this.router.navigate(['login']);
+      }
+    });
 
     this.router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event);
@@ -29,10 +41,6 @@ export class AppComponent implements OnInit {
   @Dispatch()
   loadingEnd(): SetApplicationLoadingState {
     return new SetApplicationLoadingState(false);
-  }
-
-  private isUserLoggedIn(): void {
-    this.router.navigateByUrl('main/workplace');
   }
 
   navigationInterceptor(event: RouterEvent): void {

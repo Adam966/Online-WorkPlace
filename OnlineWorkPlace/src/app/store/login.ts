@@ -1,4 +1,4 @@
-import {Action, State, StateContext, Store} from '@ngxs/store';
+import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
 import {UserModel} from '../models/application-models/user.model';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
@@ -19,8 +19,18 @@ export class Logout {
 })
 @Injectable()
 export class LoginState {
-  constructor(private store: Store, private router: Router) {
+  constructor(private store: Store, private router: Router) {}
+
+  @Selector()
+  static userId(state: UserModel): number {
+    return state.id;
   }
+
+  @Selector()
+  static token(state: UserModel): string {
+    return state.token;
+  }
+
   @Action(Login)
   login(ctx: StateContext<UserModel>, action: Login): void {
     ctx.setState(action.user);

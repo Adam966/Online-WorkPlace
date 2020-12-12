@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CreateWorkplaceDialogComponent} from './create-workplace-dialog/create-workplace-dialog.component';
 import {Router} from '@angular/router';
-import {WorkplaceService} from '../../../services/workplace-api/workplace.service';
-import {AddWorkplace, GetWorkplaces, WorkplaceState} from '../../../store/workplace';
+import {WorkplaceServiceApi} from '../../../services/workplace-api/workplace-service-api.service';
+import {AddWorkplace, WorkplaceState} from '../../../store/workplace';
 import {Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
 import {WorkplaceModel} from '../../../models/workplace.model';
@@ -20,9 +20,13 @@ export class MainScreenComponent implements OnInit {
   @Select(WorkplaceState)
   workPlaces$: Observable<WorkplaceModel[]>;
 
-  dialogRef: MatDialogRef<CreateWorkplaceDialogComponent>;
+  private dialogRef: MatDialogRef<CreateWorkplaceDialogComponent>;
 
-  constructor(public dialog: MatDialog, private router: Router, private workplaceService: WorkplaceService, private store: Store) { }
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private workplaceService: WorkplaceServiceApi,
+    private store: Store) { }
 
   @Dispatch()
   changeToolbar(): SetApplicationToolbarState {
@@ -30,7 +34,7 @@ export class MainScreenComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new GetWorkplaces(1));
+    this.changeToolbar();
   }
 
   addWorkPlace(): void {
@@ -43,7 +47,7 @@ export class MainScreenComponent implements OnInit {
       });
   }
 
-  getWorkPlace(): void {
-    this.router.navigate(['main/workplace']);
+  getWorkPlace(workplaceId: number): void {
+    this.router.navigate(['main/workplace', workplaceId]);
   }
 }
