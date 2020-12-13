@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MessageModel} from '../../../../models/application-models/message.model';
+import {MessageModel} from '../../models/application-models/message.model';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
-import {RemovePopUpMessage} from '../../../../store/message-pop-up';
+import {RemovePopUpMessage} from '../../store/message-pop-up';
 
 @Component({
   selector: 'app-error-message',
