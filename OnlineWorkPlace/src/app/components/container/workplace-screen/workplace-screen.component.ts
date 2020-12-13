@@ -10,7 +10,6 @@ import {NoteThreadDialogComponent} from './create-dialog/note-thread-dialog/note
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ChecklistDialogComponent} from './create-dialog/checklist-dialog/checklist-dialog.component';
 import {ChecklistModel} from '../../../models/workplacemodels/checklist.model';
-import {GetWorkplaceLabels, GetWorkplaceUsers} from '../../../store/workplace-settings';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {SetApplicationToolbarState} from '../../../store/application';
 
@@ -36,9 +35,6 @@ export class WorkplaceScreenComponent implements OnInit {
 
   ngOnInit(): void {
     this.changeToolbarStatus();
-    // remove these and introduce resolvers
-    this.store.dispatch(new GetWorkplaceLabels(1));
-    this.store.dispatch(new GetWorkplaceUsers(1));
   }
 
   openEditDialog(element: WorkplaceElementModel, i: number): void {

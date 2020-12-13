@@ -8,6 +8,7 @@ import {PageNotFoundComponent} from './components/page-not-found/page-not-found.
 import {WorkplaceScreenComponent} from './components/container/workplace-screen/workplace-screen.component';
 import {MainScreenComponent} from './components/container/main-screen/main-screen.component';
 import {ContainerGuard} from './components/container/container-guard/container.guard';
+import {MainScreenResolver} from './resolvers/main-screen/main-screen.resolver';
 import {WorkplaceScreenResolver} from './resolvers/workplace-screen/workplace-screen.resolver';
 
 const appRouting = [
@@ -17,15 +18,18 @@ const appRouting = [
     canActivate: [ContainerGuard],
     children: [
       {
-        path: 'workplace',
-        component: WorkplaceScreenComponent,
+        path: 'dashboard/:userId',
+        component: MainScreenComponent,
         resolve: {
-          workplaceElement: WorkplaceScreenResolver
+          workplaces: MainScreenResolver
         }
       },
       {
-        path: 'dashboard',
-        component: MainScreenComponent
+        path: 'workplace/:workplaceId',
+        component: WorkplaceScreenComponent,
+        resolve: {
+          workplaceElements: WorkplaceScreenResolver
+        }
       }
     ]
   },
@@ -43,6 +47,7 @@ const appRouting = [
   ],
   exports: [
     RouterModule
-  ]
+  ],
+  providers: [MainScreenResolver, WorkplaceScreenResolver]
 })
 export class AppRoutingModule { }

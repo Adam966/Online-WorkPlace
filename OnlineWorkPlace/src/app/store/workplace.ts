@@ -1,11 +1,11 @@
-import {Action, State, StateContext, Store} from '@ngxs/store';
+import {Action, State, StateContext} from '@ngxs/store';
 import {WorkplaceModel} from '../models/workplace.model';
 import {Injectable} from '@angular/core';
-import {WorkplaceService} from '../services/workplace-api/workplace.service';
+import {WorkplaceServiceApi} from '../services/workplace-api/workplace-service-api.service';
 
-export class GetWorkplaces {
-  static readonly type = '[Main Component] GetWorkplaces';
-  constructor(public workplaces: number) {}
+export class SaveWorkplaces {
+  static readonly type = '[Main Component] SaveWorkplaces';
+  constructor(public workplaces: WorkplaceModel[]) {}
 }
 
 export class AddWorkplace {
@@ -19,14 +19,11 @@ export class AddWorkplace {
 })
 @Injectable()
 export class WorkplaceState {
-  constructor(private workplaceService: WorkplaceService) {}
+  constructor(private workplaceService: WorkplaceServiceApi) {}
 
-  @Action(GetWorkplaces)
-  getWorkplaces(ctx: StateContext<WorkplaceModel[]>, action: number): void {
-    this.workplaceService.getAllWorkplaces(action)
-      .subscribe(response => {
-        ctx.setState(response);
-      });
+  @Action(SaveWorkplaces)
+  saveWorkplaces(ctx: StateContext<WorkplaceModel[]>, action: SaveWorkplaces): void {
+    ctx.setState(action.workplaces);
   }
 
   @Action(AddWorkplace)

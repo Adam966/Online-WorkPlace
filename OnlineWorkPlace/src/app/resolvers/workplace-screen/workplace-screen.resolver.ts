@@ -3,18 +3,42 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/rou
 import {Observable} from 'rxjs';
 import {WorkplaceElementModel} from '../../models/workplacemodels/workplaceelement.model';
 import {WorkplaceElementApiService} from '../../services/workplace-element-api/workplace-element-api.service';
-import {Store} from '@ngxs/store';
-import {GetWorkplacesElements} from '../../store/workplace-element';
+import { tap} from 'rxjs/operators';
+import {Dispatch} from '@ngxs-labs/dispatch-decorator';
+import {SaveWorkplacesElements} from '../../store/workplace-element';
+import {GetWorkplaceLabels, GetWorkplaceUsers} from '../../store/workplace-settings';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class WorkplaceScreenResolver implements Resolve<WorkplaceElementModel[]> {
-  constructor(private workplaceElementService: WorkplaceElementApiService, private store: Store) {}
+  constructor(private workplaceElementService: WorkplaceElementApiService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<WorkplaceElementModel[]> | Promise<WorkplaceElementModel[]> | WorkplaceElementModel[] {
-    this.store.dispatch(new GetWorkplacesElements(1));
-    return this.workplaceElementService.getWorkPlaceElements(1);
+    return this.workplaceElementService.getWorkPlaceElements(route.paramMap.get('workplaceId'))
+      .pipe(
+        tap(data => {
+          this.saveWorkplaceElements(data);
+          this.getWorkplaceLabels(+route.paramMap.get('workplaceId').toString());
+          this.getWorkplaceUsers(+route.paramMap.get('workplaceId'));
+        })
+      );
   }
 
+  @Dispatch()
+  saveWorkplaceElements(data: WorkplaceElementModel[]): SaveWorkplacesElements {
+    return new SaveWorkplacesElements(data);
+  }
+
+  @Dispatch()
+  getWorkplaceLabels(workplaceId: number): GetWorkplaceLabels {
+    return new GetWorkplaceLabels(workplaceId);
+  }
+
+  @Dispatch()
+  getWorkplaceUsers(workplaceId: number): GetWorkplaceUsers {
+    return new GetWorkplaceUsers(workplaceId);
+  }
 }
