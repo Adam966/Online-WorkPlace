@@ -4,7 +4,7 @@ import {UserModel} from '../../models/application-models/user.model';
 import {Login} from '../../store/login';
 import {Router} from '@angular/router';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
-import {SetPopUpMessage} from '../../store/message-pop-up';
+import {UtilsMessage} from '../../shared/utils/utils-message';
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +24,7 @@ export class LoginApiService {
 
   @Dispatch()
   saveUser(user: UserModel): Login {
-    this.showMessage();
+    UtilsMessage.showMessage(UtilsMessage.MESSAGE_LOGGED_IN, UtilsMessage.MESSAGE_STATUS_NEUTRAL);
     return new Login(user);
-  }
-
-  @Dispatch()
-  showMessage(): SetPopUpMessage {
-    return new SetPopUpMessage({status: 'neutral-message', title: 'Successfully logged in'});
   }
 }

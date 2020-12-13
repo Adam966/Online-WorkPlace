@@ -11,7 +11,9 @@ import {LoginApiService} from '../../services/login-service/login-api.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private dialog: MatDialog, private router: Router, private loginApiService: LoginApiService) { }
+  constructor(private dialog: MatDialog, private router: Router, private loginApiService: LoginApiService) {}
+
+  isLoading = false;
 
   ngOnInit(): void {
   }
@@ -21,6 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: NgForm): void {
+    this.isLoading = true;
     const login = {email: form.value.email, password: form.value.password};
     this.loginApiService.login(login);
   }
