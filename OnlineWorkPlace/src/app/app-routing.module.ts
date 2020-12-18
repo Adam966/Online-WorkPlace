@@ -1,41 +1,33 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {LoginComponent} from './components/login/login.component';
 import {RouterModule} from '@angular/router';
 import {AppComponent} from './app.component';
 import {ContainerComponent} from './components/container/container.component';
-import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
-import {WorkplaceScreenComponent} from './components/container/workplace-screen/workplace-screen.component';
-import {MainScreenComponent} from './components/container/main-screen/main-screen.component';
 import {ContainerGuard} from './components/container/container-guard/container.guard';
-import {MainScreenResolver} from './resolvers/main-screen/main-screen.resolver';
 import {WorkplaceScreenResolver} from './resolvers/workplace-screen/workplace-screen.resolver';
 
 const appRouting = [
   {path: '', component: AppComponent},
-  {path: 'login', component: LoginComponent},
+  {
+    path: 'login',
+    loadChildren: () => import('./components/login/login.module').then(m => m.LoginModule)
+  },
   {path: 'main', component: ContainerComponent,
     canActivate: [ContainerGuard],
     children: [
       {
         path: 'dashboard/:userId',
-        component: MainScreenComponent,
-        resolve: {
-          workplaces: MainScreenResolver
-        }
+        loadChildren: () => import('./components/container/main-screen/main-screen.module').then(m => m.MainScreenModule),
       },
       {
         path: 'workplace/:workplaceId',
-        component: WorkplaceScreenComponent,
-        resolve: {
-          workplaceElements: WorkplaceScreenResolver
-        }
+        loadChildren: () => import('./components/container/workplace-screen/workplace-screen.module').then(m => m.WorkplaceScreenModule),
       }
     ]
   },
   {
     path: '**',
-    component: PageNotFoundComponent
+    loadChildren: () => import('./components/page-not-found/page-not-found.module').then(m => m.PageNotFoundModule)
   }
 ];
 
@@ -48,6 +40,6 @@ const appRouting = [
   exports: [
     RouterModule
   ],
-  providers: [MainScreenResolver, WorkplaceScreenResolver]
+  providers: [ WorkplaceScreenResolver]
 })
 export class AppRoutingModule { }
