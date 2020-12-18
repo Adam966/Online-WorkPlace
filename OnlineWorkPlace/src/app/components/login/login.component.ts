@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {RegistrationDialogComponent} from './registration-dialog/registration-dialog.component';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {LoginApiService} from '../../services/login-service/login-api.service';
+import {LoginApiService} from '../../services/login-api/login-api.service';
 
 @Component({
   selector: 'app-login',

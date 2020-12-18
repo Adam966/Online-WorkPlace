@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import { Observable } from 'rxjs';
-import {LoginApiService} from '../../../services/login-service/login-api.service';
+import {LoginApiService} from '../../../services/login-api/login-api.service';
 import {Select} from '@ngxs/store';
 import {LoginState} from '../../../store/login';
 import {map} from 'rxjs/operators';
