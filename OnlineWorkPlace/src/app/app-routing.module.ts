@@ -12,16 +12,22 @@ const appRouting = [
     path: 'login',
     loadChildren: () => import('./components/login/login.module').then(m => m.LoginModule)
   },
-  {path: 'main', component: ContainerComponent,
+  {
+    path: 'main',
+    component: ContainerComponent,
     canActivate: [ContainerGuard],
     children: [
       {
-        path: 'dashboard/:userId',
+        path: 'workplace',
         loadChildren: () => import('./components/container/main-screen/main-screen.module').then(m => m.MainScreenModule),
       },
       {
         path: 'workplace/:workplaceId',
         loadChildren: () => import('./components/container/workplace-screen/workplace-screen.module').then(m => m.WorkplaceScreenModule),
+      },
+      {
+        path: 'workplace/:workplaceId/storage',
+        loadChildren: () => import('./components/container/workplace-storage/workplace-storage.module').then(m => m.WorkplaceStorageModule),
       }
     ]
   },

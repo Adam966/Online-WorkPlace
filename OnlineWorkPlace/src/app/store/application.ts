@@ -11,16 +11,23 @@ export class SetApplicationToolbarState {
   constructor(public payload: boolean) {}
 }
 
+export class SetApplicationToolbarTitle {
+  static readonly type = '[Application] ToolbarTitle';
+  constructor(public payload: string) {}
+}
+
 export class ApplicationModel {
   isLoading?: boolean;
   changeToolbar?: boolean;
+  title?: string;
 }
 
 @State<ApplicationModel> ({
   name: 'application',
   defaults: {
     isLoading: null,
-    changeToolbar: null
+    changeToolbar: null,
+    title: ''
   }
 })
 @Injectable()
@@ -35,11 +42,17 @@ export class ApplicationState {
     return state.isLoading;
   }
 
+  @Selector()
+  static toolbarTitle(state: ApplicationModel): string {
+    return state.title;
+  }
+
   @Action(SetApplicationLoadingState)
   setLoadingStatus(ctx: StateContext<ApplicationModel>, action: SetApplicationLoadingState): void {
     ctx.setState({
       isLoading: action.payload,
-      changeToolbar: ctx.getState().changeToolbar
+      changeToolbar: ctx.getState().changeToolbar,
+      title: ctx.getState().title
     });
   }
 
@@ -47,7 +60,17 @@ export class ApplicationState {
   setToolbarState(ctx: StateContext<ApplicationModel>, action: SetApplicationToolbarState): void {
     ctx.setState({
       isLoading: ctx.getState().isLoading,
-      changeToolbar: action.payload
+      changeToolbar: action.payload,
+      title: ctx.getState().title
+    });
+  }
+
+  @Action(SetApplicationToolbarState)
+  setToolbarTitle(ctx: StateContext<ApplicationModel>, action: SetApplicationToolbarTitle): void {
+    ctx.setState({
+      isLoading: ctx.getState().isLoading,
+      changeToolbar: ctx.getState().changeToolbar,
+      title: action.payload
     });
   }
 }

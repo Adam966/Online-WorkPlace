@@ -21,11 +21,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn$.subscribe(token => {
-      if (token) {
         this.router.navigate(['main']);
-      } else {
-        this.router.navigate(['login']);
-      }
     });
 
     this.router.events.subscribe((event: RouterEvent) => {

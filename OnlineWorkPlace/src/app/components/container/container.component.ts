@@ -32,12 +32,22 @@ export class ContainerComponent implements OnInit {
   @Select(LoginState.userId)
   userId$!: Observable<number>;
 
+  @Select(ApplicationState.toolbarTitle)
+  toolbarTitle$!: Observable<string>;
+
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     // TODO check if parameter working properly with different userId
     this.userId$.subscribe(userId => {
-      this.router.navigate(['dashboard', userId], {relativeTo: this.route});
+      this.router.navigate(
+        ['workplace'],
+        {
+          relativeTo: this.route,
+          queryParams: { userId },
+          queryParamsHandling: 'merge'
+        }
+      );
     });
   }
 
@@ -56,5 +66,11 @@ export class ContainerComponent implements OnInit {
   @Dispatch()
   logout(): Logout {
     return new Logout();
+  }
+
+  navigateStorage(): void {
+    this.router.navigate(
+      [this.router.url + '/storage'],
+    );
   }
 }
