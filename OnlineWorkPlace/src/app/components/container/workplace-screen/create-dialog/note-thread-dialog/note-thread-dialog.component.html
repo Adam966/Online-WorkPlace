@@ -94,6 +94,14 @@
           <mat-icon>delete</mat-icon>
           Delete {{type}}
         </p>
+        <ng-template [ngIf]="type === 'Thread'">
+          <p
+            (click)="enterThread()"
+            *ngIf="isUpdateState">
+            <mat-icon>message</mat-icon>
+            Enter Chat {{type}}
+          </p>
+        </ng-template>
       </div>
       <!-- --------------------------------------- Assigned labels and users ------------------------------------------>
       <div class="assigned">

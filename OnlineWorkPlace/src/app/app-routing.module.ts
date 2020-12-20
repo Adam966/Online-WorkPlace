@@ -28,6 +28,10 @@ const appRouting = [
       {
         path: 'workplace/:workplaceId/storage',
         loadChildren: () => import('./components/container/workplace-storage/workplace-storage.module').then(m => m.WorkplaceStorageModule),
+      },
+      {
+        path: 'workplace/:workplaceId/thread/:threadId',
+        loadChildren: () => import('./components/container/thread-chat/thread-chat.module').then(m => m.ThreadChatModule),
       }
     ]
   },
@@ -46,6 +50,6 @@ const appRouting = [
   exports: [
     RouterModule
   ],
-  providers: [ WorkplaceScreenResolver]
+  providers: [ WorkplaceScreenResolver ]
 })
 export class AppRoutingModule { }

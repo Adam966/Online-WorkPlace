@@ -1,0 +1,38 @@
+.chat-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.online-users {
+  width: 350px;
+}
+
+.messages {
+  margin: 25px 10px;
+  overflow-y: scroll;
+  height: 80vh;
+}
+
+.massage-input {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  width: 90%;
+  position: fixed;
+  bottom: 0;
+}
+
+input {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 30px;
+  padding-left: 10px;
+}
+
+mat-icon {
+  margin-left: 10px;
+  cursor: pointer;
+}
