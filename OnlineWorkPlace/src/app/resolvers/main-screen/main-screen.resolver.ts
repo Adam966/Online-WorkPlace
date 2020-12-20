@@ -18,7 +18,7 @@ export class MainScreenResolver implements Resolve<WorkplaceModel[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<WorkplaceModel[]> | Promise<WorkplaceModel[]> | WorkplaceModel[] {
     console.log(route);
-    return this.workplaceService.getAllWorkplaces(route.paramMap.get('userId'))
+    return this.workplaceService.getAllWorkplaces(route.queryParamMap.get('userId'))
       .pipe(
         tap(data => {
           this.saveWorkplaces(data);

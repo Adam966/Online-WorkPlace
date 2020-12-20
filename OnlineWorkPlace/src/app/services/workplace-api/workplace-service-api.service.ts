@@ -16,7 +16,6 @@ export class WorkplaceServiceApi extends AbstractApiService {
   }
 
   getAllWorkplaces(userId: string): Observable<WorkplaceModel[]> {
-    console.log(userId);
     return this.http.get<WorkplaceModel[]>(this.createUrl(GET_ALL_WORKPLACES), {
       params: new HttpParams().append('userId', userId.toString())});
   }
