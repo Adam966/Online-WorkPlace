@@ -4,6 +4,7 @@ import { WorkplaceStorageComponent } from './workplace-storage.component';
 import {RouterModule} from '@angular/router';
 import {MatTableModule} from '@angular/material/table';
 import {MaterialModule} from '../../../material/material.module';
+import { FileComponent } from './file/file.component';
 
 const routes = [
   {
@@ -13,7 +14,7 @@ const routes = [
 ];
 
 @NgModule({
-  declarations: [WorkplaceStorageComponent],
+  declarations: [WorkplaceStorageComponent, FileComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

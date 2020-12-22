@@ -1,19 +1,61 @@
-.table {
-  margin: 15px;
-  padding: 20px;
-  border: 1px solid black;
-  border-radius: 10px;
-  width: 100%;
-}
-
 .table-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  margin: 20px;
 }
 
 .table-buttons {
-  margin: 15px;
+  text-align: center;
+  margin-bottom: 25px;
   display: flex;
   align-content: center;
   justify-content: flex-start;
+}
+
+.table-titles {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.table-content {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+}
+
+.file-container {
+  display: flex;
+}
+
+.file-content {
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+app-file:hover {
+  background-color: #B8B6B6;
+}
+
+span {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+input {
+  margin-right: 15px;
+  text-align: center;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+hr {
+  width: 100%;
 }
