@@ -14,6 +14,21 @@ export class WorkplaceStorageComponent implements OnInit {
     { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
     { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
     { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
+    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
   ];
 
   displayedColumns = ['name', 'owner', 'type', 'size', 'download', 'remove'];

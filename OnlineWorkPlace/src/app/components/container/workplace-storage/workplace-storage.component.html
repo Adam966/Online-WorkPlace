@@ -1,9 +1,10 @@
-<div
-  class="table-buttons">
-  <button mat-raised-button color="primary">
+<div class="table-buttons">
+<!--  <button mat-raised-button color="primary">
     <mat-icon>add</mat-icon>
     Add File
-  </button>
+  </button>-->
+  <input
+    type="file">
 </div>
 <div class="table-container">
   <table
@@ -29,14 +30,16 @@
       <mat-cell *matCellDef="let file"> {{file.size}} </mat-cell>
     </ng-container>
     <!-- TABLE ICONS -->
-    <ng-container matColumnDef="download">
+<!--    <ng-container matColumnDef="download">
       <mat-header-cell *matHeaderCellDef>Download</mat-header-cell>
       <mat-cell *matCellDef="let file"><mat-icon>file_download</mat-icon></mat-cell>
     </ng-container>
     <ng-container matColumnDef="remove">
       <mat-header-cell *matHeaderCellDef>Remove</mat-header-cell>
       <mat-cell *matCellDef="let file"><mat-icon>delete</mat-icon></mat-cell>
-    </ng-container>
+    </ng-container>-->
+    <mat-icon>file_download</mat-icon>
+    <mat-icon>delete</mat-icon>
   </table>
 </div>
 

@@ -18,6 +18,7 @@ export class LoginApiService {
     this.http.post<UserModel>(this.url + 'login', user)
       .subscribe((response) => {
         this.saveUser(response);
+
         this.router.navigate(['main']);
       });
   }
