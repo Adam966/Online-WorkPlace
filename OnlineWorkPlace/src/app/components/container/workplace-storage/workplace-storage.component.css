@@ -23,6 +23,7 @@
   display: flex;
   flex-direction: column;
   align-content: space-between;
+  margin-bottom: 20px;
 }
 
 .file-container {
@@ -36,6 +37,11 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.menu {
+  visibility: hidden;
+  position: fixed;
 }
 
 app-file:hover {

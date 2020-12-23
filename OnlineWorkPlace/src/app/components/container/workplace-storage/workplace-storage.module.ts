@@ -17,9 +17,9 @@ const routes = [
   declarations: [WorkplaceStorageComponent, FileComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
     MatTableModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule.forChild(routes),
   ]
 })
 export class WorkplaceStorageModule { }

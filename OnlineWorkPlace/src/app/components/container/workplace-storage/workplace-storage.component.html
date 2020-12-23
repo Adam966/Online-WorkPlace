@@ -14,19 +14,44 @@
     <span>File name</span>
     <span>File owner</span>
     <span>File size</span>
+    <span>File type</span>
   </div>
   <hr>
   <div class="table-content">
     <div
-      *ngFor="let file of files;"
+      *ngFor="let file of files; let i = index"
       class="file-container">
       <app-file
-        class="file-content">
+        class="file-content"
+        (contextmenu)=showMenu($event,i)
+        (click)="showFile(i)"
+        [file]="file">
       </app-file>
-<!--      <mat-icon>file_download</mat-icon>
-      <mat-icon>delete</mat-icon>-->
+      <!---------------------------- MENU  ---------------------------->
+      <div class="menu"
+           [style.left]="menuPosition.x"
+           [style.top]="menuPosition.y"
+           [matMenuTriggerFor]="rightMenu">
+      </div>
+      <mat-menu #rightMenu="matMenu">
+        <ng-template matMenuContent>
+          <button
+            (click)="downloadFile()"
+            mat-menu-item>
+            Download
+            <mat-icon>file_download</mat-icon>
+          </button>
+          <button
+            (click)="removeFile()"
+            mat-menu-item>
+            Remove
+            <mat-icon>delete</mat-icon>
+          </button>
+        </ng-template>
+      </mat-menu>
     </div>
   </div>
 </div>
+
 
 

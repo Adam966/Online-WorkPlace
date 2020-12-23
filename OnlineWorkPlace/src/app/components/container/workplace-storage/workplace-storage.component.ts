@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Dispatch} from '@ngxs-labs/dispatch-decorator';
-import {SetApplicationToolbarState} from '../../../store/application';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatMenuTrigger} from '@angular/material/menu';
 
 @Component({
   selector: 'app-workplace-storage',
@@ -8,6 +7,9 @@ import {SetApplicationToolbarState} from '../../../store/application';
   styleUrls: ['./workplace-storage.component.css']
 })
 export class WorkplaceStorageComponent implements OnInit {
+  @ViewChild(MatMenuTrigger)
+  menu: MatMenuTrigger;
+
   files = [
     { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
     { name: 'file 2', owner: 'Adam Ivan', type: 'doc', size: 48 },
@@ -31,18 +33,14 @@ export class WorkplaceStorageComponent implements OnInit {
     { name: 'file 20', owner: 'Adam Ivan', type: 'doc', size: 48 },
   ];
 
+  menuPosition: {x: string, y: string} = {x: `0px`, y: `0px`};
   displayedColumns = ['name', 'owner', 'type', 'size', 'download', 'remove'];
   file: File = null;
+  fileIndex = 0;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.changeToolbarStatus();
-  }
-
-  @Dispatch()
-  changeToolbarStatus(): SetApplicationToolbarState {
-    return new SetApplicationToolbarState(true);
   }
 
   chooseFile(file: File): void {
@@ -53,15 +51,25 @@ export class WorkplaceStorageComponent implements OnInit {
     // TODO add storage upload service
   }
 
-  showFile(index: any): void  {
+  showFile(index: number): void  {
+    // TODO show file
     console.log(index);
   }
 
-  downloadFile(file: File): void {
-    console.log(file);
+  downloadFile(): void {
+    // TODO download file
+    console.log('Download file' + this.fileIndex);
   }
 
-  removeFile(file: File): void {
-    console.log(file);
+  removeFile(): void {
+    // TODO remove file
+    this.files.splice(this.fileIndex, 1);
+  }
+
+  showMenu(event: MouseEvent, index: number): void {
+    event.preventDefault();
+    this.fileIndex = index;
+    this.menuPosition = {x: `${event.x}px`, y: `${event.y}px`};
+    this.menu.openMenu();
   }
 }
