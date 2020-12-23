@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatMenuTrigger} from '@angular/material/menu';
+import {StorageApiService} from '../../../services/storage-qpi/storage-api.service';
 
 @Component({
   selector: 'app-workplace-storage',
@@ -38,9 +39,10 @@ export class WorkplaceStorageComponent implements OnInit {
   file: File = null;
   fileIndex = 0;
 
-  constructor() { }
+  constructor(private storageApiService: StorageApiService) { }
 
   ngOnInit(): void {
+    this.storageApiService.getFiles(1);
   }
 
   chooseFile(file: File): void {

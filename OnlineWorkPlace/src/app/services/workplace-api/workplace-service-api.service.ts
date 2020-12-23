@@ -9,8 +9,6 @@ import {AbstractApiService} from '../abstract-api.service';
   providedIn: 'root'
 })
 export class WorkplaceServiceApi extends AbstractApiService {
-  protected urlPrefix = 'workplace';
-
   constructor(private http: HttpClient) {
     super();
   }

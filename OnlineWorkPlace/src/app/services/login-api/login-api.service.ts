@@ -5,17 +5,19 @@ import {Login} from '../../store/login';
 import {Router} from '@angular/router';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {UtilsMessage} from '../../shared/utils/utils-message';
+import {AbstractApiService} from '../abstract-api.service';
+import {LOGIN} from '../url_const';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginApiService {
-  private url = 'http://localhost:3000/';
-
-  constructor(private http: HttpClient, private router: Router) { }
+export class LoginApiService extends AbstractApiService {
+  constructor(private http: HttpClient, private router: Router) {
+    super();
+  }
 
   login(user: {email: string, password: string}): void {
-    this.http.post<UserModel>(this.url + 'login', user)
+    this.http.post<UserModel>(this.createUrl(LOGIN), user)
       .subscribe((response) => {
         this.saveUser(response);
 

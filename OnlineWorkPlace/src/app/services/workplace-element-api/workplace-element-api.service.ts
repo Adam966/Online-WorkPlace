@@ -1,24 +1,28 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {WorkplaceElementModel} from '../../models/workplacemodels/workplaceelement.model';
-import {SERVER_URL} from '../url_const';
+import {AbstractApiService} from '../abstract-api.service';
+import {GET_ELEMENTS} from '../url_const';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WorkplaceElementApiService {
-  private GET_ELEMENTS = 'getElements';
-  private GET_USER_PHOTO = 'getUserPhoto';
-
-  constructor(private http: HttpClient) {}
+export class WorkplaceElementApiService extends AbstractApiService {
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   getWorkPlaceElements(workplaceId: string): Observable<WorkplaceElementModel[]> {
-    return this.http.get<WorkplaceElementModel[]>(SERVER_URL + this.GET_ELEMENTS, {
-      params: new HttpParams().append('workplaceId', workplaceId.toString())});
+    this.urlPrefix = `workplace/${workplaceId}/`;
+    return this.http.get<WorkplaceElementModel[]>(this.createUrl(GET_ELEMENTS));
   }
 
   addWorkPlaceElement(data: WorkplaceElementModel): void {
+
+  }
+
+  removeWorkplaceElement(data: WorkplaceElementModel): void {
 
   }
 }

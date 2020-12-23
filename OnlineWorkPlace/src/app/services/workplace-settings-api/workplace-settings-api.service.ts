@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {UserModel} from '../../models/application-models/user.model';
-import {SERVER_URL} from '../url_const';
+import {GET_WORKPLACE_LABELS, GET_WORKPLACE_USERS} from '../url_const';
 import {LabelModel} from '../../models/label.model';
+import {AbstractApiService} from '../abstract-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WorkplaceSettingsApiService {
-  private GET_WORKPLACE_USERS = 'getWorkplaceUsers';
-  private GET_WORKPLACE_LABELS = 'getWorkplaceLabels';
-
-  constructor(private http: HttpClient) { }
+export class WorkplaceSettingsApiService extends AbstractApiService{
+  constructor(private http: HttpClient) {
+    super();
+  }
 
   getWorkplaceUsers(workplaceId: number): Observable<UserModel[]> {
-    return this.http.get<UserModel[]>(SERVER_URL + this.GET_WORKPLACE_USERS, {
-      params: new HttpParams().append('workplaceId', workplaceId.toString())});
+    this.urlPrefix = `workplace/${workplaceId}/`;
+    return this.http.get<UserModel[]>(this.createUrl(GET_WORKPLACE_USERS));
   }
 
   getWorkplaceLabels(workplaceId: number): Observable<LabelModel[]> {
-    return this.http.get<LabelModel[]>(SERVER_URL + this.GET_WORKPLACE_LABELS, {
-      params: new HttpParams().append('workplaceId', workplaceId.toString())});
+    this.urlPrefix = `workplace/${workplaceId}/`;
+    return this.http.get<LabelModel[]>(this.createUrl(GET_WORKPLACE_LABELS));
   }
 }

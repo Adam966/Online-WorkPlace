@@ -5,10 +5,10 @@ import {SERVER_URL} from './url_const';
   providedIn: 'root'
 })
 export abstract class AbstractApiService {
-  protected urlPrefix: string;
+  protected urlPrefix = '';
 
   createUrl(path: string): string {
-    console.log(`${SERVER_URL}${this.urlPrefix}/${path}`);
-    return `${SERVER_URL}${this.urlPrefix}/${path}`;
+    console.log(`${SERVER_URL}${this.urlPrefix}${path}`);
+    return `${SERVER_URL}${this.urlPrefix}${path}`;
   }
 }
