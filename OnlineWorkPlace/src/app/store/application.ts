@@ -16,10 +16,16 @@ export class SetApplicationToolbarTitle {
   constructor(public payload: string) {}
 }
 
+export class SetApplicationWorkplace {
+  static readonly type = '[Application] WorkplaceId';
+  constructor(public payload: string) {}
+}
+
 export class ApplicationModel {
   isLoading?: boolean;
   changeToolbar?: boolean;
   title?: string;
+  currentWorkplaceId: string;
 }
 
 @State<ApplicationModel> ({
@@ -27,7 +33,8 @@ export class ApplicationModel {
   defaults: {
     isLoading: null,
     changeToolbar: null,
-    title: ''
+    title: null,
+    currentWorkplaceId: null
   }
 })
 @Injectable()
@@ -47,30 +54,41 @@ export class ApplicationState {
     return state.title;
   }
 
+  @Selector()
+  static currentWorkplaceId(state: ApplicationModel): string {
+    return state.currentWorkplaceId;
+  }
+
   @Action(SetApplicationLoadingState)
   setLoadingStatus(ctx: StateContext<ApplicationModel>, action: SetApplicationLoadingState): void {
     ctx.setState({
-      isLoading: action.payload,
-      changeToolbar: ctx.getState().changeToolbar,
-      title: ctx.getState().title
+      ...ctx.getState(),
+      isLoading: action.payload
     });
   }
 
   @Action(SetApplicationToolbarState)
   setToolbarState(ctx: StateContext<ApplicationModel>, action: SetApplicationToolbarState): void {
     ctx.setState({
-      isLoading: ctx.getState().isLoading,
-      changeToolbar: action.payload,
-      title: ctx.getState().title
+      ...ctx.getState(),
+      changeToolbar: action.payload
     });
   }
 
-  @Action(SetApplicationToolbarState)
+  @Action(SetApplicationToolbarTitle)
   setToolbarTitle(ctx: StateContext<ApplicationModel>, action: SetApplicationToolbarTitle): void {
     ctx.setState({
-      isLoading: ctx.getState().isLoading,
-      changeToolbar: ctx.getState().changeToolbar,
+      ...ctx.getState(),
       title: action.payload
+    });
+  }
+
+  @Action(SetApplicationWorkplace)
+  setApplicationWorkplaceId(ctx: StateContext<ApplicationModel>, action: SetApplicationWorkplace): void {
+    console.log(action);
+    ctx.setState({
+      ...ctx.getState(),
+      currentWorkplaceId: action.payload
     });
   }
 }

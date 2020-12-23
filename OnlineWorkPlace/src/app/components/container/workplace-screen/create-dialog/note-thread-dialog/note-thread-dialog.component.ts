@@ -11,6 +11,7 @@ import {WorkplaceSettingsState} from '../../../../../store/workplace-settings';
 import {Observable} from 'rxjs';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ApplicationState} from '../../../../../store/application';
 
 @Component({
   selector: 'app-note-thread-dialog',
@@ -29,12 +30,20 @@ export class NoteThreadDialogComponent implements OnInit {
   @Select(WorkplaceSettingsState.labels)
   labels$: Observable<LabelModel[]>;
 
+  @Select(ApplicationState.currentWorkplaceId)
+  currentWorkplaceId$!: Observable<string>;
+  currentWorkplaceId: string;
+
   users: User[];
   labels: LabelModel[];
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any, private router: Router) {}
 
   ngOnInit(): void {
+    this.currentWorkplaceId$.subscribe(data => {
+      this.currentWorkplaceId = data;
+    });
+
     this.element = this.data?.object;
     this.isUpdateState = this.element !== undefined;
     this.type = this.data.type;
@@ -89,6 +98,6 @@ export class NoteThreadDialogComponent implements OnInit {
   }
 
   enterThread(): void  {
-    this.router.navigate([this.router.url + '/thread/' + this.element.id.toString()]);
+    this.router.navigate(['main/workplace/' + this.currentWorkplaceId + '/thread/' + this.element.id.toString()]);
   }
 }

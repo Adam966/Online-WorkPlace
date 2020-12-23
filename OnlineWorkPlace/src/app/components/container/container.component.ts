@@ -35,9 +35,18 @@ export class ContainerComponent implements OnInit {
   @Select(ApplicationState.toolbarTitle)
   toolbarTitle$!: Observable<string>;
 
+  @Select(ApplicationState.currentWorkplaceId)
+  currentWorkplaceId$!: Observable<string>;
+  currentWorkplaceId: string;
+
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.currentWorkplaceId$.subscribe(data => {
+      console.log(data);
+      this.currentWorkplaceId = data;
+    });
+
     // TODO check if parameter working properly with different userId
     this.userId$.subscribe(userId => {
       this.router.navigate(
@@ -70,7 +79,7 @@ export class ContainerComponent implements OnInit {
 
   navigateStorage(): void {
     this.router.navigate(
-      [this.router.url + '/storage'],
+      ['workplace/' + this.currentWorkplaceId + '/storage'],
     );
   }
 }
