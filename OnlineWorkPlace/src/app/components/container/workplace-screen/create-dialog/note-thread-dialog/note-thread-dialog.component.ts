@@ -3,13 +3,15 @@ import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {NoteModel} from '../../../../../models/workplacemodels/note.model';
 import {ThreadModel} from '../../../../../models/workplacemodels/thread.model';
-import {Select, Store} from '@ngxs/store';
+import {Select} from '@ngxs/store';
 import {AddWorkplaceElement, DeleteWorkplaceElement} from '../../../../../store/workplace-element';
 import {User} from '../../../../../models/application-models/user.model';
 import {LabelModel} from '../../../../../models/label.model';
 import {WorkplaceSettingsState} from '../../../../../store/workplace-settings';
 import {Observable} from 'rxjs';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ApplicationState} from '../../../../../store/application';
 
 @Component({
   selector: 'app-note-thread-dialog',
@@ -28,12 +30,20 @@ export class NoteThreadDialogComponent implements OnInit {
   @Select(WorkplaceSettingsState.labels)
   labels$: Observable<LabelModel[]>;
 
+  @Select(ApplicationState.currentWorkplaceId)
+  currentWorkplaceId$!: Observable<string>;
+  currentWorkplaceId: string;
+
   users: User[];
   labels: LabelModel[];
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any) {}
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private router: Router) {}
 
   ngOnInit(): void {
+    this.currentWorkplaceId$.subscribe(data => {
+      this.currentWorkplaceId = data;
+    });
+
     this.element = this.data?.object;
     this.isUpdateState = this.element !== undefined;
     this.type = this.data.type;
@@ -85,5 +95,9 @@ export class NoteThreadDialogComponent implements OnInit {
     } else {
       this.users.splice(i, 1);
     }
+  }
+
+  enterThread(): void  {
+    this.router.navigate(['main/workplace/' + this.currentWorkplaceId + '/thread/' + this.element.id.toString()]);
   }
 }

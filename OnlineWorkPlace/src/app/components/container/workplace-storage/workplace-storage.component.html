@@ -1,42 +1,57 @@
-<div
-  class="table-buttons">
-  <button mat-raised-button color="primary">
-    <mat-icon>add</mat-icon>
-    Add File
-  </button>
-</div>
 <div class="table-container">
-  <table
-    mat-table
-    [dataSource]="files"
-    class="table">
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-      <mat-cell *matCellDef="let file"> {{file.name}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="owner">
-      <mat-header-cell *matHeaderCellDef>Owner</mat-header-cell>
-      <mat-cell *matCellDef="let file"> {{file.owner}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="type">
-      <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
-      <mat-cell *matCellDef="let file"> {{file.type}} </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="size">
-      <mat-header-cell *matHeaderCellDef>Size</mat-header-cell>
-      <mat-cell *matCellDef="let file"> {{file.size}} </mat-cell>
-    </ng-container>
-    <!-- TABLE ICONS -->
-    <ng-container matColumnDef="download">
-      <mat-header-cell *matHeaderCellDef>Download</mat-header-cell>
-      <mat-cell *matCellDef="let file"><mat-icon>file_download</mat-icon></mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="remove">
-      <mat-header-cell *matHeaderCellDef>Remove</mat-header-cell>
-      <mat-cell *matCellDef="let file"><mat-icon>delete</mat-icon></mat-cell>
-    </ng-container>
-  </table>
+  <div class="table-buttons">
+    <input
+      type="file" (change)="chooseFile($event.target.files[0])">
+    <button mat-raised-button
+            color="primary"
+            [disabled]="file === null"
+            (click)="uploadFile()">
+      <mat-icon>add</mat-icon>
+      Upload File
+    </button>
+  </div>
+  <div class="table-titles">
+    <span>File name</span>
+    <span>File owner</span>
+    <span>File size</span>
+    <span>File type</span>
+  </div>
+  <hr>
+  <div class="table-content">
+    <div
+      *ngFor="let file of files; let i = index"
+      class="file-container">
+      <app-file
+        class="file-content"
+        (contextmenu)=showMenu($event,i)
+        (click)="showFile(i)"
+        [file]="file">
+      </app-file>
+      <!---------------------------- MENU  ---------------------------->
+      <div class="menu"
+           [style.left]="menuPosition.x"
+           [style.top]="menuPosition.y"
+           [matMenuTriggerFor]="rightMenu">
+      </div>
+      <mat-menu #rightMenu="matMenu">
+        <ng-template matMenuContent>
+          <button
+            (click)="downloadFile()"
+            mat-menu-item>
+            Download
+            <mat-icon>file_download</mat-icon>
+          </button>
+          <button
+            (click)="removeFile()"
+            mat-menu-item>
+            Remove
+            <mat-icon>delete</mat-icon>
+          </button>
+        </ng-template>
+      </mat-menu>
+    </div>
+  </div>
 </div>
+
+
 

@@ -1,0 +1,12 @@
+<div class="chat-container">
+  <div class="online-users">
+
+  </div>
+  <div class="messages">
+    <app-message *ngFor="let message of messages"></app-message>
+  </div>
+  <div class="massage-input">
+    <input matInput type="text" placeholder="Type message">
+    <mat-icon>send</mat-icon>
+  </div>
+</div>

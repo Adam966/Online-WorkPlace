@@ -11,7 +11,8 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ChecklistDialogComponent} from './create-dialog/checklist-dialog/checklist-dialog.component';
 import {ChecklistModel} from '../../../models/workplacemodels/checklist.model';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
-import {SetApplicationToolbarState} from '../../../store/application';
+import {SetApplicationToolbarState, SetApplicationWorkplace} from '../../../store/application';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-workplace-screen',
@@ -26,14 +27,21 @@ export class WorkplaceScreenComponent implements OnInit {
     private elementApiService: WorkplaceElementApiService,
     private store: Store,
     private dialog: MatDialog,
-  ) { }
+    private activeRoute: ActivatedRoute
+  ) {}
 
   @Dispatch()
   changeToolbarStatus(): SetApplicationToolbarState {
     return new SetApplicationToolbarState(true);
   }
 
+  @Dispatch()
+  setApplicationWorkplace(): SetApplicationWorkplace {
+    return new SetApplicationWorkplace(this.activeRoute.snapshot.paramMap.get('workplaceId'));
+  }
+
   ngOnInit(): void {
+    this.setApplicationWorkplace();
     this.changeToolbarStatus();
   }
 

@@ -9,8 +9,6 @@ import {AbstractApiService} from '../abstract-api.service';
   providedIn: 'root'
 })
 export class WorkplaceServiceApi extends AbstractApiService {
-  protected urlPrefix = 'workplace';
-
   constructor(private http: HttpClient) {
     super();
   }
@@ -21,6 +19,6 @@ export class WorkplaceServiceApi extends AbstractApiService {
   }
 
   addWorkplace(data: WorkplaceModel): void {
-    this.http.put(ADD_WORKPLACE, data);
+    this.http.put(this.createUrl(ADD_WORKPLACE), data);
   }
 }
