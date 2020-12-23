@@ -31,13 +31,14 @@ export class ContainerComponent implements OnInit {
 
   @Select(LoginState.userId)
   userId$!: Observable<number>;
+  userId: number;
 
   @Select(ApplicationState.toolbarTitle)
   toolbarTitle$!: Observable<string>;
 
   @Select(ApplicationState.currentWorkplaceId)
   currentWorkplaceId$!: Observable<string>;
-  currentWorkplaceId: string;
+  private currentWorkplaceId: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
 
@@ -49,6 +50,7 @@ export class ContainerComponent implements OnInit {
 
     // TODO check if parameter working properly with different userId
     this.userId$.subscribe(userId => {
+      this.userId = userId;
       this.router.navigate(
         ['workplace'],
         {
@@ -79,7 +81,13 @@ export class ContainerComponent implements OnInit {
 
   navigateStorage(): void {
     this.router.navigate(
-      ['workplace/' + this.currentWorkplaceId + '/storage'],
+      ['main/workplace/' + this.currentWorkplaceId + '/storage'],
+    );
+  }
+
+  navigateSettings(): void {
+    this.router.navigate(
+      ['main/workplace/' + this.currentWorkplaceId + '/settings']
     );
   }
 }

@@ -1,0 +1,10 @@
+.settings-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+mat-tab-group {
+  width: 100%;
+}
