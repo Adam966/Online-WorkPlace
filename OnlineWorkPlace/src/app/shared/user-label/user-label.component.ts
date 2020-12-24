@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../../../../../models/application-models/user.model';
+import {User} from '../../models/application-models/user.model';
 
 @Component({
   selector: 'app-user-label',

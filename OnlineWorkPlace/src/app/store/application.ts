@@ -85,7 +85,6 @@ export class ApplicationState {
 
   @Action(SetApplicationWorkplace)
   setApplicationWorkplaceId(ctx: StateContext<ApplicationModel>, action: SetApplicationWorkplace): void {
-    console.log(action);
     ctx.setState({
       ...ctx.getState(),
       currentWorkplaceId: action.payload

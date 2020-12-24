@@ -8,7 +8,6 @@ export abstract class AbstractApiService {
   protected urlPrefix = '';
 
   createUrl(path: string): string {
-    console.log(`${SERVER_URL}${this.urlPrefix}${path}`);
     return `${SERVER_URL}${this.urlPrefix}${path}`;
   }
 }

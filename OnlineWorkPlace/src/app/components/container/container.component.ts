@@ -44,7 +44,6 @@ export class ContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentWorkplaceId$.subscribe(data => {
-      console.log(data);
       this.currentWorkplaceId = data;
     });
 
