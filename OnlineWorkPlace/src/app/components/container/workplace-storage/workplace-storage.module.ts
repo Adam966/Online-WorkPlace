@@ -5,11 +5,15 @@ import {RouterModule} from '@angular/router';
 import {MatTableModule} from '@angular/material/table';
 import {MaterialModule} from '../../../material/material.module';
 import { FileComponent } from './file/file.component';
+import {WorkplaceScreenStorageResolver} from '../../../resolvers/workplace-storage/workplace-storage.resolver';
 
 const routes = [
   {
     path: '',
-    component: WorkplaceStorageComponent
+    component: WorkplaceStorageComponent,
+    resolve: {
+      storageFiles: WorkplaceScreenStorageResolver
+    }
   }
 ];
 
@@ -20,6 +24,7 @@ const routes = [
     MatTableModule,
     MaterialModule,
     RouterModule.forChild(routes),
-  ]
+  ],
+  providers: [ WorkplaceScreenStorageResolver ]
 })
 export class WorkplaceStorageModule { }

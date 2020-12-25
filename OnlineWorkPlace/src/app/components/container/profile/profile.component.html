@@ -3,7 +3,7 @@
     <img [src]="image ? image : 'http://localhost:3000/user-photo?userId=1'" alt="">
     <p>
       <input type="file" id="photo-input" (change)="choosePhoto($event.target.files[0])" hidden>
-      <label for="photo-input" class="choose-file">Choose photo</label>
+      <label for="photo-input" class="choose-img">Choose photo</label>
     </p>
     <button mat-raised-button color="primary" (click)="changeUserPhoto(image)" *ngIf="image">Change photo</button>
     <p class="name-title">{{'Adam Ivan'}}</p>

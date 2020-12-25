@@ -12,7 +12,7 @@ export class StorageApiService extends AbstractApiService{
     super();
   }
 
-  getFiles(workplaceId: number): Observable<any> {
+  getFiles(workplaceId: string): Observable<any> {
     this.urlPrefix = `workplace/${workplaceId}/`;
     return this.http.get<{ name: string, owner: string, type: string, size: number }>(this.createUrl(GET_ALL_FILES));
   }

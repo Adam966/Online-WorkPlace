@@ -1,6 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {StorageApiService} from '../../../services/storage-qpi/storage-api.service';
+import {Select} from '@ngxs/store';
+import {Observable} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-workplace-storage',
@@ -10,6 +13,10 @@ import {StorageApiService} from '../../../services/storage-qpi/storage-api.servi
 export class WorkplaceStorageComponent implements OnInit {
   @ViewChild(MatMenuTrigger)
   menu: MatMenuTrigger;
+
+  @Select()
+  workplaceId$: Observable<string>;
+  workplaceId: string;
 
   files = [
     { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
@@ -39,10 +46,10 @@ export class WorkplaceStorageComponent implements OnInit {
   file: File = null;
   fileIndex = 0;
 
-  constructor(private storageApiService: StorageApiService) { }
+  constructor(private storageApiService: StorageApiService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.storageApiService.getFiles(1);
+    this.files = this.activeRoute.snapshot.data.storageFiles;
   }
 
   chooseFile(file: File): void {

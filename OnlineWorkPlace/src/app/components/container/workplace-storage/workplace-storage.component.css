@@ -44,6 +44,23 @@
   position: fixed;
 }
 
+.choose-file {
+  border-radius: 7px;
+  font-family: sans-serif;
+  color: white;
+  font-size: 20px;
+  background: #36497A;
+  padding: 10px 20px 10px 20px;
+  margin-right: 15px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.file-name {
+  vertical-align: center;
+  margin-right: 10px;
+}
+
 app-file:hover {
   background-color: #B8B6B6;
 }

@@ -1,7 +1,8 @@
 <div class="table-container">
   <div class="table-buttons">
-    <input
-      type="file" (change)="chooseFile($event.target.files[0])">
+    <input type="file" id="file-input" (change)="chooseFile($event.target.files[0])" hidden>
+    <label for="file-input" class="choose-file">Choose file</label>
+    <span class="file-name" *ngIf="file">{{ file.name }}</span>
     <button mat-raised-button
             color="primary"
             [disabled]="file === null"
@@ -27,7 +28,7 @@
         (click)="showFile(i)"
         [file]="file">
       </app-file>
-      <!---------------------------- MENU  ---------------------------->
+      <!---------------------------- MENU ---------------------------->
       <div class="menu"
            [style.left]="menuPosition.x"
            [style.top]="menuPosition.y"
