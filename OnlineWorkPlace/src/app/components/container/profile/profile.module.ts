@@ -19,6 +19,9 @@ const routes = [
     MaterialModule,
     MatExpansionModule,
     RouterModule.forChild(routes)
+  ],
+  exports: [
+    RouterModule
   ]
 })
 export class ProfileModule { }

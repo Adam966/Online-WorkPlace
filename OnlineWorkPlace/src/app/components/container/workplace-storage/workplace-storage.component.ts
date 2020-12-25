@@ -18,28 +18,7 @@ export class WorkplaceStorageComponent implements OnInit {
   workplaceId$: Observable<string>;
   workplaceId: string;
 
-  files = [
-    { name: 'file 1', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 2', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 3', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 4', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 5', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 6', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 7', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 8', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 9', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 10', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 11', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 12', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 13', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 14', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 15', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 16', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 17', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 18', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 19', owner: 'Adam Ivan', type: 'doc', size: 48 },
-    { name: 'file 20', owner: 'Adam Ivan', type: 'doc', size: 48 },
-  ];
+  files = [];
 
   menuPosition: {x: string, y: string} = {x: `0px`, y: `0px`};
   displayedColumns = ['name', 'owner', 'type', 'size', 'download', 'remove'];
@@ -61,8 +40,7 @@ export class WorkplaceStorageComponent implements OnInit {
   }
 
   showFile(index: number): void  {
-    // TODO show file
-    console.log(index);
+    window.open('http://localhost:4200/document', '_blank');
   }
 
   downloadFile(): void {
