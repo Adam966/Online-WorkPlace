@@ -8,7 +8,7 @@
       <ng-container *ngIf="toolbarState$ | async">
         <mat-icon [matMenuTriggerFor]="add">add</mat-icon>
         <mat-icon
-          (click)="navigateStorage()"
+          (click)="navigate('storage')"
           >storage</mat-icon>
         <mat-icon
           matBadgeOverlap="true"
@@ -24,8 +24,8 @@
   <mat-menu class="my-menu" #menu="matMenu">
     <p mat-menu-item><img src="" alt="">Adam Ivan</p>
     <hr>
-    <button mat-menu-item><mat-icon>person</mat-icon>Profile</button>
-    <button mat-menu-item (click)="navigateSettings()"><mat-icon>settings</mat-icon>Settings</button>
+    <button mat-menu-item (click)="navigateProfile()"><mat-icon>person</mat-icon>Profile</button>
+    <button mat-menu-item (click)="navigate('settings')"><mat-icon>settings</mat-icon>Settings</button>
     <button mat-raised-button
             color="primary"
             style="margin-left: 65px; margin-top: 15px"
