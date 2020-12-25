@@ -32,6 +32,10 @@ const appRouting = [
       {
         path: 'workplace/:workplaceId/thread/:threadId',
         loadChildren: () => import('./components/container/thread-chat/thread-chat.module').then(m => m.ThreadChatModule),
+      },
+      {
+        path: 'workplace/:workplaceId/settings',
+        loadChildren: () => import('./components/container/workplace-settings/workplace-settings.module').then(m => m.WorkplaceSettingsModule),
       }
     ]
   },

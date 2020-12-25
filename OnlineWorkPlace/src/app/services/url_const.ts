@@ -2,6 +2,7 @@ export const SERVER_URL = 'http://localhost:3000/';
 
 ////////////////////// WORKPLACE API //////////////////////
 export const LOGIN = 'login';
+export const REGISTER = 'register';
 
 ////////////////////// WORKPLACE API //////////////////////
 export const GET_ALL_WORKPLACES = 'workplaces';

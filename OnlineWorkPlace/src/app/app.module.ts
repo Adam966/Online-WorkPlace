@@ -18,12 +18,13 @@ import {MaterialModule} from './material/material.module';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {WorkplaceSettingsState} from './store/workplace-settings';
 import {NgxsDispatchPluginModule} from '@ngxs-labs/dispatch-decorator';
-import { MessageComponent } from './shared/message/message.component';
 import {MessageState} from './store/message-pop-up';
 import {PageNotFoundModule} from './components/page-not-found/page-not-found.module';
 import {LoginModule} from './components/login/login.module';
 import {MainScreenModule} from './components/container/main-screen/main-screen.module';
 import {WorkplaceScreenModule} from './components/container/workplace-screen/workplace-screen.module';
+import {WorkplaceSettingsModule} from './components/container/workplace-settings/workplace-settings.module';
+import {SharedModule} from './shared/shared.module';
 
 const states = [
     LoginState,
@@ -38,17 +39,18 @@ const states = [
   declarations: [
     AppComponent,
     ContainerComponent,
-    MessageComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     LoginModule,
+    SharedModule,
     MainScreenModule,
     AppRoutingModule,
     HttpClientModule,
     WorkplaceScreenModule,
+    WorkplaceSettingsModule,
     MaterialModule,
     PageNotFoundModule,
     NgxsModule.forRoot(states, {developmentMode: true}),

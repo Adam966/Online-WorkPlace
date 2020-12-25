@@ -1,0 +1,45 @@
+<div class="settings-container">
+  <mat-tab-group>
+    <mat-tab label="Notification">
+      <div class="checkbox-content">
+        <mat-checkbox>Get message notification</mat-checkbox>
+        <mat-checkbox>Assigned to element notification</mat-checkbox>
+        <mat-checkbox>Due date notification</mat-checkbox>
+      </div>
+    </mat-tab>
+    <mat-tab label="Workplace Users">
+      <div class="settings-content"
+        *ngFor="let user of users$ | async">
+        <app-user-label [user]="user"></app-user-label>
+        <span>{{ user.username + ' ' + user.usersurname }}</span>
+        <span><mat-icon>cancel</mat-icon></span>
+      </div>
+    </mat-tab>
+    <mat-tab label="Workplace Labels">
+      <div class="label-container">
+        <div class="label-content">
+          <div class="settings-content"
+               *ngFor="let label of labels$ | async">
+            <app-color-label [label]="label"></app-color-label>
+            <span><mat-icon>cancel</mat-icon></span>
+          </div>
+        </div>
+        <div class="create-label">
+          <mat-form-field>
+            <mat-label>Label name</mat-label>
+            <input matInput type="text" placeholder="Type label name">
+          </mat-form-field>
+          <input matInput type="color">
+          <button mat-raised-button color="primary">Create label</button>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="User rights">
+      <div class="checkbox-content">
+        <mat-checkbox>Get message notification</mat-checkbox>
+        <mat-checkbox>Assigned to element notification</mat-checkbox>
+        <mat-checkbox>Due date notification</mat-checkbox>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

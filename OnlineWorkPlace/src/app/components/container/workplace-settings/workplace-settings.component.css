@@ -1,0 +1,53 @@
+.settings-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.settings-content {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.checkbox-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.label-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.label-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.create-label {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+}
+
+span {
+  vertical-align: middle;
+  margin: 5px;
+}
+
+mat-tab-group {
+  width: 100%;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+mat-checkbox {
+  margin-top: 5px;
+}

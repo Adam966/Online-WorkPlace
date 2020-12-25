@@ -1,5 +1,12 @@
-.mat-form-field {
-  width: 100%;
+.registration-container {
+  width: 350px;
+}
+
+.registration-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
 
 .title {
@@ -7,31 +14,18 @@
   font-size: 36px;
 }
 
-.form {
-  margin-left: 55px;
+.successful_message {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 }
 
-.button {
-  background-color: #36497A;
-  color: white;
-  display: block;
-  left: 50%;
+mat-icon {
+  margin: auto;
+  padding-top: 10px;
 }
 
-.img {
-  border: 1px solid black;
-  border-radius: 50%;
-  width: 125px;
-  height: 125px;
-  margin: 0 auto;
-}
-
-.right {
-  float: right;
-  width: 270px;
-}
-
-.left {
-  float: left;
-  width: 460px;
+mat-spinner, p {
+  margin: auto;
 }

@@ -6,7 +6,8 @@ import {Router} from '@angular/router';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {UtilsMessage} from '../../shared/utils/utils-message';
 import {AbstractApiService} from '../abstract-api.service';
-import {LOGIN} from '../url_const';
+import {LOGIN, REGISTER} from '../url_const';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,12 @@ export class LoginApiService extends AbstractApiService {
     this.http.post<UserModel>(this.createUrl(LOGIN), user)
       .subscribe((response) => {
         this.saveUser(response);
-
         this.router.navigate(['main']);
       });
+  }
+
+  register(user: any): Observable<any> {
+    return this.http.put(this.createUrl(REGISTER), user);
   }
 
   @Dispatch()

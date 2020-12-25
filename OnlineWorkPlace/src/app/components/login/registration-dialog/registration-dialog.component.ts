@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {MatDialogRef} from '@angular/material/dialog';
+import {LoginApiService} from '../../../services/login-api/login-api.service';
 
 @Component({
   selector: 'app-registration-dialog',
@@ -7,12 +9,23 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./registration-dialog.component.css']
 })
 export class RegistrationDialogComponent implements OnInit {
-  constructor() { }
+  constructor(private dialogRef: MatDialogRef<RegistrationDialogComponent>,
+              private loginService: LoginApiService) {}
+
+  registrationStart = true;
+  registrationInProgress = false;
+  registrationDone = false;
 
   ngOnInit(): void {
   }
 
   register(form: NgForm): void {
-    console.log(form);
+    this.registrationInProgress = true;
+    this.registrationStart = false;
+    this.loginService.register(form.value)
+      .subscribe(_ => {
+        this.registrationDone = true;
+        this.registrationInProgress = false;
+      });
   }
 }

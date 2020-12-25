@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LabelModel} from '../../../../../models/label.model';
+import {LabelModel} from '../../models/label.model';
 
 @Component({
   selector: 'app-color-label',
