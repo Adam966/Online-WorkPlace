@@ -12,6 +12,7 @@ export class RegistrationDialogComponent implements OnInit {
   constructor(private dialogRef: MatDialogRef<RegistrationDialogComponent>,
               private loginService: LoginApiService) {}
 
+  registrationStart = true;
   registrationInProgress = false;
   registrationDone = false;
 
@@ -20,10 +21,11 @@ export class RegistrationDialogComponent implements OnInit {
 
   register(form: NgForm): void {
     this.registrationInProgress = true;
+    this.registrationStart = false;
     this.loginService.register(form.value)
       .subscribe(_ => {
-        this.registrationInProgress = false;
         this.registrationDone = true;
+        this.registrationInProgress = false;
       });
   }
 }

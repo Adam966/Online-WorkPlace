@@ -26,6 +26,6 @@ mat-icon {
   padding-top: 10px;
 }
 
-mat-spinner {
+mat-spinner, p {
   margin: auto;
 }

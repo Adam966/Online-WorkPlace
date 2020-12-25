@@ -21,7 +21,6 @@ export class LoginApiService extends AbstractApiService {
     this.http.post<UserModel>(this.createUrl(LOGIN), user)
       .subscribe((response) => {
         this.saveUser(response);
-
         this.router.navigate(['main']);
       });
   }
