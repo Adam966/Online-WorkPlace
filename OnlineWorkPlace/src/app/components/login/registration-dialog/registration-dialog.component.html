@@ -1,6 +1,9 @@
-<div class="left">
+<div class="registration-container" *ngIf="!registrationInProgress">
   <h1 class="title">Registration</h1>
-  <form class="form" #registrationForm="ngForm" (ngSubmit)="register(registrationForm)">
+  <form
+    class="registration-content"
+    #registrationForm="ngForm"
+    (ngSubmit)="register(registrationForm)">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
       <input
@@ -11,7 +14,7 @@
         email
         name="email"
         #email="ngModel">
-      <mat-error *ngIf="email.invalid">"Please enter valid email!"</mat-error>
+      <mat-error *ngIf="email.invalid">Please enter valid email!</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
@@ -22,7 +25,7 @@
         required
         name="name"
         #name="ngModel">
-      <mat-error *ngIf="name.invalid">"Please enter value!"</mat-error>
+      <mat-error *ngIf="name.invalid">Please enter value!</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Surname</mat-label>
@@ -33,7 +36,7 @@
         required
         name="surname"
         #surname="ngModel">
-      <mat-error *ngIf="surname.invalid">"Please enter value!"</mat-error>
+      <mat-error *ngIf="surname.invalid">Please enter value!</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
@@ -44,9 +47,9 @@
         required
         name="password"
         #password="ngModel">
-      <mat-error *ngIf="password.invalid">"Please enter value!"</mat-error>
+      <mat-error *ngIf="password.invalid">Please enter value!</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+<!--    <mat-form-field appearance="outline">
       <mat-label>Repeat password</mat-label>
       <input
         matInput
@@ -56,13 +59,21 @@
         name="repeatPassword"
         #repeatPassword="ngModel"
         autocomplete="new-password">
-      <mat-error *ngIf="repeatPassword.invalid">"Passwords dont match!"</mat-error>
-    </mat-form-field>
+      <mat-error *ngIf="repeatPasswordVar != passwordVar">Passwords dont match!</mat-error>
+      <mat-error *ngIf="repeatPassword.invalid">Please enter value!!</mat-error>
+    </mat-form-field>-->
     <button
-      mat-button
-      class="button"
+      color="primary"
+      mat-raised-button
       type="submit"
       [disabled]="registrationForm.invalid"
     >Register</button>
   </form>
+</div>
+<mat-spinner *ngIf="registrationInProgress"></mat-spinner>
+<div
+  class="successful_message"
+  *ngIf="registrationDone">
+  <mat-icon color="primary">verified_user</mat-icon>
+  <p>Successfully registered</p>
 </div>

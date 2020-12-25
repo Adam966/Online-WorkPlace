@@ -24,6 +24,7 @@ import {LoginModule} from './components/login/login.module';
 import {MainScreenModule} from './components/container/main-screen/main-screen.module';
 import {WorkplaceScreenModule} from './components/container/workplace-screen/workplace-screen.module';
 import {WorkplaceSettingsModule} from './components/container/workplace-settings/workplace-settings.module';
+import {SharedModule} from './shared/shared.module';
 
 const states = [
     LoginState,
@@ -44,6 +45,7 @@ const states = [
     BrowserAnimationsModule,
     FormsModule,
     LoginModule,
+    SharedModule,
     MainScreenModule,
     AppRoutingModule,
     HttpClientModule,

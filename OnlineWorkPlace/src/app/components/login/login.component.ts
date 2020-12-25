@@ -11,7 +11,9 @@ import {LoginApiService} from '../../services/login-api/login-api.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  constructor(private dialog: MatDialog, private router: Router, private loginApiService: LoginApiService) {}
+  constructor(private dialog: MatDialog,
+              private router: Router,
+              private loginApiService: LoginApiService) {}
 
   isLoading = false;
 

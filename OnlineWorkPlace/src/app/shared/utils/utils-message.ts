@@ -7,6 +7,7 @@ export class UtilsMessage {
   static MESSAGE_STATUS_POSITIVE = 'positive-message';
 
   static MESSAGE_LOGGED_IN = 'Successfully logged in';
+  static MESSAGE_REGISTERED_IN = 'Successfully registered';
   private static MESSAGE_SUCCESSFULLY = 'was successfully created';
   static MESSAGE_WORKPLACE_CREATED = `Workplace ${UtilsMessage.MESSAGE_SUCCESSFULLY}`;
 
