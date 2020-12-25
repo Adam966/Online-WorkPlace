@@ -1,0 +1,36 @@
+.profile-container {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  margin: 35px;
+}
+
+.user-photo-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.profile-edit-content {
+  flex-grow: 0.75;
+}
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+img {
+  height: 150px;
+  border-radius: 50%;
+}
+
+p {
+  text-align: center;
+}
+
+mat-form-field, mat-expansion-panel {
+  margin-top: 5px;
+}

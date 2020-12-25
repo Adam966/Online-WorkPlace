@@ -78,15 +78,15 @@ export class ContainerComponent implements OnInit {
     return new Logout();
   }
 
-  navigateStorage(): void {
+  navigate(path: string): void {
     this.router.navigate(
-      ['main/workplace/' + this.currentWorkplaceId + '/storage'],
+      [`main/workplace/${this.currentWorkplaceId}/${path}`]
     );
   }
 
-  navigateSettings(): void {
+  navigateProfile(): void {
     this.router.navigate(
-      ['main/workplace/' + this.currentWorkplaceId + '/settings']
+      [`main/profile`]
     );
   }
 }

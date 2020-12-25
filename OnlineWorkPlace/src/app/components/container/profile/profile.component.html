@@ -1,0 +1,49 @@
+<div class="profile-container">
+  <div class="user-photo-content">
+    <img src="http://localhost:3000/user-photo?userId=1" alt="">
+    <p><u>Choose photo</u></p>
+    <p>{{'Adam Ivan'}}</p>
+  </div>
+  <div class="profile-edit-content">
+    <mat-accordion>
+      <!------------ UPDATE PASSWORD ------------>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Change password
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="password-form">
+          <mat-form-field appearance="outline">
+            <mat-label>New Password</mat-label>
+            <input matInput type="password">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Repeat Password</mat-label>
+            <input matInput type="password">
+          </mat-form-field>
+          <button mat-raised-button color="primary">Update Password</button>
+        </div>
+      </mat-expansion-panel>
+      <!------------ UPDATE EMAIL ------------>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Change Email
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="password-form">
+          <mat-form-field appearance="outline">
+            <mat-label>Old Email</mat-label>
+            <input matInput type="email" [value]="'adam.ivan@kosickaakademia.sk'" [disabled]="true">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>New Email</mat-label>
+            <input matInput type="email">
+          </mat-form-field>
+          <button mat-raised-button color="primary">Update Email</button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
