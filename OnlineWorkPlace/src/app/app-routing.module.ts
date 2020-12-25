@@ -36,6 +36,10 @@ const appRouting = [
       {
         path: 'workplace/:workplaceId/settings',
         loadChildren: () => import('./components/container/workplace-settings/workplace-settings.module').then(m => m.WorkplaceSettingsModule),
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./components/container/profile/profile.module').then(m => m.ProfileModule),
       }
     ]
   },

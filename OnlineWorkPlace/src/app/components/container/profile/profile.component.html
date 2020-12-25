@@ -1,8 +1,12 @@
 <div class="profile-container">
   <div class="user-photo-content">
-    <img src="http://localhost:3000/user-photo?userId=1" alt="">
-    <p><u>Choose photo</u></p>
-    <p>{{'Adam Ivan'}}</p>
+    <img [src]="image ? image : 'http://localhost:3000/user-photo?userId=1'" alt="">
+    <p>
+      <input type="file" id="photo-input" (change)="choosePhoto($event.target.files[0])" hidden>
+      <label for="photo-input" class="choose-file">Choose photo</label>
+    </p>
+    <button mat-raised-button color="primary" (click)="changeUserPhoto(image)" *ngIf="image">Change photo</button>
+    <p class="name-title">{{'Adam Ivan'}}</p>
   </div>
   <div class="profile-edit-content">
     <mat-accordion>
