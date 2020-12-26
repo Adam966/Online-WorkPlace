@@ -10,6 +10,8 @@ import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {LoginState, Logout} from '../../store/login';
 import {MessageState} from '../../store/message-pop-up';
 import {MessageModel} from '../../models/application-models/message.model';
+import {LabelModel} from '../../models/label.model';
+import {WorkplaceSettingsState} from '../../store/workplace-settings';
 
 @Component({
   selector: 'app-container',
@@ -39,6 +41,11 @@ export class ContainerComponent implements OnInit {
   @Select(ApplicationState.currentWorkplaceId)
   currentWorkplaceId$!: Observable<string>;
   private currentWorkplaceId: string;
+
+  @Select(WorkplaceSettingsState.labels)
+  labels$: Observable<LabelModel[]>;
+
+  chosenLabels: LabelModel[] = [];
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
 
@@ -88,5 +95,9 @@ export class ContainerComponent implements OnInit {
     this.router.navigate(
       [`main/profile`]
     );
+  }
+
+  removeLabel(index: number): void {
+    this.chosenLabels.splice(index, 1);
   }
 }

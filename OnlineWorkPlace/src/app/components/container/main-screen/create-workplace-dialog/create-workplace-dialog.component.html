@@ -1,35 +1,66 @@
-<mat-card class="centered">
-  <mat-card-title class="title">Create Workplace</mat-card-title>
-  <mat-card-content>
-    <form ngForm #workplaceForm="ngForm" (ngSubmit)="createWorkplace()">
-      <mat-form-field class="max-width">
-        <mat-label>Workplace name</mat-label>
-        <input
-          matInput
-          ngModel
-          type="text"
-          name="name"
-          required
-          #name="ngModel">
-        <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
-      </mat-form-field>
-      <mat-form-field class="max-width">
-        <mat-label>Workplace description</mat-label>
-        <textarea
-          matInput
-          ngModel
-          type="text"
-          name="description"
-          required
-          #description="ngModel">
+<div class="dialog-container">
+  <p class="title">Create Workplace</p>
+  <form
+    #workplaceForm="ngForm"
+    (ngSubmit)="createWorkplace()"
+    class="dialog-content"
+    ngForm>
+    <mat-form-field>
+      <mat-label>Workplace name</mat-label>
+      <input
+        #name="ngModel"
+        matInput
+        name="name"
+        ngModel
+        required
+        type="text">
+      <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Workplace description</mat-label>
+      <textarea
+        #description="ngModel"
+        matInput
+        name="description"
+        ngModel
+        required
+        type="text">
         </textarea>
-        <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
-      </mat-form-field>
-        <button mat-raised-button
-                color="primary"
-                type="submit"
-                [disabled]="workplaceForm.invalid">
-          Create</button>
-    </form>
-  </mat-card-content>
-</mat-card>
+      <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Workplace element color</mat-label>
+      <input
+        #elementColor="ngModel"
+        matInput
+        name="elementColor"
+        ngModel
+        required
+        type="color">
+      <mat-error *ngIf="elementColor.invalid">"Please enter value"</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Workplace background color</mat-label>
+      <input
+        #backgroundColor="ngModel"
+        matInput
+        name="backgroundColor"
+        ngModel
+        required
+        type="color">
+      <mat-error *ngIf="backgroundColor.invalid">"Please enter value"</mat-error>
+    </mat-form-field>
+      <input
+        #backgroundImage="ngModel"
+        name="backgroundImage"
+        ngModel
+        required
+        type="file">
+    <button [disabled]="workplaceForm.invalid"
+            color="primary"
+            mat-raised-button
+            type="submit">
+      Create
+    </button>
+  </form>
+</div>

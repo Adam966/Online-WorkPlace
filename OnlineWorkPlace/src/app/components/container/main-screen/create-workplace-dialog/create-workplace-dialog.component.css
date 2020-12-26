@@ -1,17 +1,27 @@
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  max-height: 430px;
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  max-height: 500px;
   overflow-y: scroll;
 }
 
-.max-width {
-  width: 90%;
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .title {
-  margin: 15px 15px 35px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+mat-form-field {
+  width: 100%;
+  margin: 10px;
 }
