@@ -25,6 +25,7 @@
     "@ngxs/logger-plugin": "^3.7.0",
     "@ngxs/store": "^3.7.0",
     "masonry-layout": "^4.2.2",
+    "ngx-doc-viewer": "^1.4.0",
     "ngx-masonry": "^10.0.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
