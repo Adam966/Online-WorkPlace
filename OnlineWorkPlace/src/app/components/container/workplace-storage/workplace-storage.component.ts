@@ -3,7 +3,7 @@ import {MatMenuTrigger} from '@angular/material/menu';
 import {StorageApiService} from '../../../services/storage-qpi/storage-api.service';
 import {Select} from '@ngxs/store';
 import {Observable} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-workplace-storage',
@@ -25,7 +25,9 @@ export class WorkplaceStorageComponent implements OnInit {
   file: File = null;
   fileIndex = 0;
 
-  constructor(private storageApiService: StorageApiService, private activeRoute: ActivatedRoute) { }
+  constructor(private storageApiService: StorageApiService,
+              private activeRoute: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.files = this.activeRoute.snapshot.data.storageFiles;
@@ -40,7 +42,7 @@ export class WorkplaceStorageComponent implements OnInit {
   }
 
   showFile(index: number): void  {
-    window.open('http://localhost:4200/document', '_blank');
+    this.router.navigate(['document'], { relativeTo: this.activeRoute });
   }
 
   downloadFile(): void {

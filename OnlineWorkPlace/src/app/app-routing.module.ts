@@ -42,7 +42,7 @@ const appRouting = [
         loadChildren: () => import('./components/container/profile/profile.module').then(m => m.ProfileModule),
       },
       {
-        path: 'document',
+        path: 'workplace/:workplaceId/storage/document',
         loadChildren: () => import('./components/container/document/document.module').then(m => m.DocumentModule),
       },
     ]
