@@ -18,9 +18,13 @@ export class LoginApiService extends AbstractApiService {
   }
 
   login(user: {email: string, password: string}): void {
-    this.http.post<UserModel>(this.createUrl(LOGIN), user)
+    this.http.post<UserModel>(this.createUrl(LOGIN), user, {observe: 'response'})
       .subscribe((response) => {
-        this.saveUser(response);
+        console.log(response);
+        const token = response.headers.get('Authorization');
+        const userResponse = { ...response.body, token };
+
+        this.saveUser(userResponse);
         this.router.navigate(['main']);
       });
   }

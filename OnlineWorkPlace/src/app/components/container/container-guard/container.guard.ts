@@ -23,8 +23,7 @@ export class ContainerGuard implements CanActivate {
         if (isUserLogged) {
           return true;
         } else {
-          const loginUrl = '/login';
-          return this.router.parseUrl(loginUrl);
+          return this.router.parseUrl('/login');
         }
       })
     );

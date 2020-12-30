@@ -15,7 +15,7 @@ export class Logout {
 
 @State<UserModel> ({
   name: 'user',
-  defaults: { id: null, username: null, usersurname: null, email: null, photo: null, token: null}
+  defaults: { id: null, username: null, usersurname: null, email: null, token: null }
 })
 @Injectable()
 export class LoginState {
