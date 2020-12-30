@@ -6,17 +6,23 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {Select} from '@ngxs/store';
+import {LoginState} from '../../store/login';
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
+  @Select(LoginState.token)
+  token$!: Observable<string>;
+  private token: string;
 
-  constructor() {}
+  constructor() {
+    this.token$.subscribe(token => this.token = token);
+  }
   /*TODO() rewrite if statement*/
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (!request.url.includes('login')) {
       const changedReq = request.clone({
-        // get token from cookies
-        headers: request.headers.set('Authorization', 'Bearer ahgf456jgaô36875dfj77687kgá64567rgaouriga527')
+        headers: request.headers.set('Authorization', this.token)
       });
       return next.handle(changedReq);
     }
