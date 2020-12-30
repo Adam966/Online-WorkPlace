@@ -26,6 +26,7 @@ import {WorkplaceScreenModule} from './components/container/workplace-screen/wor
 import {WorkplaceSettingsModule} from './components/container/workplace-settings/workplace-settings.module';
 import {SharedModule} from './shared/shared.module';
 import {DocumentModule} from './components/container/document/document.module';
+import {MatOptionModule} from '@angular/material/core';
 
 const states = [
     LoginState,
@@ -48,6 +49,7 @@ const states = [
     LoginModule,
     SharedModule,
     DocumentModule,
+    MatOptionModule,
     MainScreenModule,
     AppRoutingModule,
     HttpClientModule,
