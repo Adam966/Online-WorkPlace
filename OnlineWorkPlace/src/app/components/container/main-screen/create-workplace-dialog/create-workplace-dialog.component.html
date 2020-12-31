@@ -1,66 +1,71 @@
 <div class="dialog-container">
-  <p class="title">Create Workplace</p>
-  <form
-    #workplaceForm="ngForm"
-    (ngSubmit)="createWorkplace()"
-    class="dialog-content"
-    ngForm>
-    <mat-form-field>
-      <mat-label>Workplace name</mat-label>
-      <input
-        #name="ngModel"
-        matInput
-        name="name"
-        ngModel
-        required
-        type="text">
-      <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Workplace description</mat-label>
-      <textarea
-        #description="ngModel"
-        matInput
-        name="description"
-        ngModel
-        required
-        type="text">
+  <h1 class="title">Create Workplace</h1>
+  <form #workplaceForm="ngForm"
+        (ngSubmit)="createWorkplace()"
+        ngForm>
+    <div class="dialog-content">
+      <div class="dialog-form">
+        <mat-form-field>
+          <mat-label>Workplace name</mat-label>
+          <input
+            #name="ngModel"
+            matInput
+            name="name"
+            ngModel
+            required
+            type="text">
+          <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Workplace description</mat-label>
+          <textarea
+            #description="ngModel"
+            matInput
+            name="description"
+            ngModel
+            required
+            type="text">
         </textarea>
-      <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Workplace element color</mat-label>
-      <input
-        #elementColor="ngModel"
-        matInput
-        name="elementColor"
-        ngModel
-        required
-        type="color">
-      <mat-error *ngIf="elementColor.invalid">"Please enter value"</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Workplace background color</mat-label>
-      <input
-        #backgroundColor="ngModel"
-        matInput
-        name="backgroundColor"
-        ngModel
-        required
-        type="color">
-      <mat-error *ngIf="backgroundColor.invalid">"Please enter value"</mat-error>
-    </mat-form-field>
-      <input
-        #backgroundImage="ngModel"
-        name="backgroundImage"
-        ngModel
-        required
-        type="file">
-    <button [disabled]="workplaceForm.invalid"
-            color="primary"
-            mat-raised-button
-            type="submit">
-      Create
-    </button>
+          <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
+        </mat-form-field>
+      </div>
+      <!------------- ASIDE CONTENT -------------->
+      <div class="aside-content">
+        <mat-form-field>
+          <mat-label>Workplace element color</mat-label>
+          <input
+            #elementColor="ngModel"
+            matInput
+            name="elementColor"
+            ngModel
+            required
+            type="color">
+          <mat-error *ngIf="elementColor.invalid">"Please enter value"</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Workplace background color</mat-label>
+          <input
+            #backgroundColor="ngModel"
+            matInput
+            name="backgroundColor"
+            ngModel
+            required
+            [disabled]="file"
+            type="color">
+          <mat-error *ngIf="backgroundColor.invalid">"Please enter value"</mat-error>
+        </mat-form-field>
+        <input type="file" id="file-input" (change)="chooseFile($event.target.files[0])" hidden>
+        <label for="file-input" class="styled-file-input">Choose file</label>
+        <span class="file-name" *ngIf="file">{{ file.name }}</span>
+      </div>
+    </div>
+    <div class="center-button">
+      <button [disabled]="workplaceForm.invalid"
+              color="primary"
+              mat-raised-button
+              type="submit">
+        Create
+      </button>
+    </div>
   </form>
 </div>
