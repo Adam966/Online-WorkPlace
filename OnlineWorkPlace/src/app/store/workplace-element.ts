@@ -77,7 +77,7 @@ export class WorkplaceElementState {
         temp.filter((ele) => {
           let users = '';
           ele.assignedUsers.map(user => users = users + (user.username + ' ' + user.usersurname + ', '));
-            return users.includes(action.value.substr(3 , action.value.length - 1));
+           return users.includes(action.value.substr(3 , action.value.length - 1));
         })
       );
     } else {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
+import {Dispatch} from '@ngxs-labs/dispatch-decorator';
+import {SetApplicationToolbarState, SetApplicationToolbarTitle} from '../../../store/application';
 
 @Component({
   selector: 'app-profile',
@@ -28,5 +30,10 @@ export class ProfileComponent implements OnInit {
 
   changeUserPhoto(image: string): void {
     // TODO change user image
+  }
+
+  @Dispatch()
+  setApplicationTitle(): SetApplicationToolbarTitle {
+    return new SetApplicationToolbarTitle('Profile Settings');
   }
 }

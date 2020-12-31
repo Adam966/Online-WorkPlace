@@ -38,13 +38,13 @@ const appRouting = [
         loadChildren: () => import('./components/container/workplace-settings/workplace-settings.module').then(m => m.WorkplaceSettingsModule),
       },
       {
-        path: 'profile',
-        loadChildren: () => import('./components/container/profile/profile.module').then(m => m.ProfileModule),
-      },
-      {
         path: 'workplace/:workplaceId/storage/document',
         loadChildren: () => import('./components/container/document/document.module').then(m => m.DocumentModule),
       },
+      {
+        path: 'profile',
+        loadChildren: () => import('./components/container/profile/profile.module').then(m => m.ProfileModule),
+      }
     ]
   },
   {

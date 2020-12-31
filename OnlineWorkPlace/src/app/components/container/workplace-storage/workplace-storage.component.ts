@@ -4,6 +4,8 @@ import {StorageApiService} from '../../../services/storage-qpi/storage-api.servi
 import {Select} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Dispatch} from '@ngxs-labs/dispatch-decorator';
+import {SetApplicationToolbarTitle} from '../../../store/application';
 
 @Component({
   selector: 'app-workplace-storage',
@@ -60,5 +62,10 @@ export class WorkplaceStorageComponent implements OnInit {
     this.fileIndex = index;
     this.menuPosition = {x: `${event.x}px`, y: `${event.y}px`};
     this.menu.openMenu();
+  }
+
+  @Dispatch()
+  setApplicationTitle(): SetApplicationToolbarTitle {
+    return new SetApplicationToolbarTitle('Workplace Storage');
   }
 }
