@@ -1,7 +1,7 @@
 <div>
   <img
     class="img"
-    src="http://localhost:3000/user-photo?userId=1"
+    [src]="'http://localhost:3000/user-photo?userId=' + user.photo"
     [alt]="user?.username"
     [title]="user?.username + ' ' + user?.usersurname">
 </div>

@@ -10,7 +10,7 @@ export class UserLabelComponent implements OnInit {
   @Input()
   user: User;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
   }
