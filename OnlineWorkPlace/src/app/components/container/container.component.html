@@ -2,7 +2,7 @@
   <!-- APPLICATION TOOLBAR -->
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <div>
+      <div (click)="navigateToHome(userId)" class="link-cursor">
         <svg class="icon" enable-background="new 0 0 52 512" height="40" viewBox="0 0 512 512" width="40"
              xmlns="http://www.w3.org/2000/svg">
           <g>
@@ -26,7 +26,7 @@
           <input
             matInput
             #searchInput
-            placeholder="Sort by name, u: user or #tag"
+            placeholder="Sort by name, u: user or # tag"
             [(ngModel)]="input">
           <button
             mat-button

@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
 import {WorkplaceModel} from '../../../models/workplace.model';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
-import { SetApplicationToolbarState} from '../../../store/application';
+import {SetApplicationToolbarState, SetApplicationToolbarTitle} from '../../../store/application';
 import {UtilsMessage} from '../../../shared/utils/utils-message';
 
 
@@ -29,13 +29,9 @@ export class MainScreenComponent implements OnInit {
     private workplaceService: WorkplaceServiceApi,
     private store: Store) { }
 
-  @Dispatch()
-  changeToolbar(): SetApplicationToolbarState {
-    return new SetApplicationToolbarState(false);
-  }
-
   ngOnInit(): void {
     this.changeToolbar();
+    this.setApplicationTitle();
   }
 
   addWorkPlace(): void {
@@ -52,5 +48,15 @@ export class MainScreenComponent implements OnInit {
 
   getWorkPlace(workplaceId: number): void {
     this.router.navigate(['main/workplace', workplaceId]);
+  }
+
+  @Dispatch()
+  setApplicationTitle(): SetApplicationToolbarTitle {
+    return new SetApplicationToolbarTitle('Online workplace');
+  }
+
+  @Dispatch()
+  changeToolbar(): SetApplicationToolbarState {
+    return new SetApplicationToolbarState(false);
   }
 }

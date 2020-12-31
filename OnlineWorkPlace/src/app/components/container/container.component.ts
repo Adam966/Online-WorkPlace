@@ -58,15 +58,19 @@ export class ContainerComponent implements OnInit {
     // TODO check if parameter working properly with different userId
     this.userId$.subscribe(userId => {
       this.userId = userId;
-      this.router.navigate(
-        ['workplace'],
-        {
-          relativeTo: this.route,
-          queryParams: { userId },
-          queryParamsHandling: 'merge'
-        }
-      );
+      this.navigateToHome(userId);
     });
+  }
+
+  navigateToHome(userId: number): void {
+    this.router.navigate(
+      ['workplace'],
+      {
+        relativeTo: this.route,
+        queryParams: { userId },
+        queryParamsHandling: 'merge'
+      }
+    );
   }
 
   createDialog(type: string): void {

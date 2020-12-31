@@ -37,6 +37,10 @@
   align-items: center;
 }
 
+.link-cursor {
+  cursor: pointer;
+}
+
 input {
   background-color: white;
   border-radius: 5px;
