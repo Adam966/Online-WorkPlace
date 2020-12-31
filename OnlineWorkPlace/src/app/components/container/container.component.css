@@ -32,11 +32,9 @@
   right: 50px;
 }
 
-.find-input {
-  display: flex;
-  justify-content: center;
+.input-content {
+  display: inline-flex;
   align-items: center;
-  font-size: 14px;
 }
 
 input {
@@ -45,4 +43,5 @@ input {
   width: 400px;
   padding-left: 10px;
   color: black;
+  font-size: 14px;
 }
