@@ -6,25 +6,6 @@
       <span>{{ toolbarTitle$ | async }}</span>
       <span class="example-spacer"></span>
       <ng-container *ngIf="toolbarState$ | async">
-<!--         <mat-form-field>
-           <mat-chip-list #chipList>
-             <mat-chip
-               *ngFor="let label of chosenLabels; let i = index"
-               [removable]="true"
-               (removed)="removeLabel(i)">
-               {{ label.name }}
-               <mat-icon matChipRemove>cancel</mat-icon>
-             </mat-chip>
-             <input
-               type="text"
-                [matChipInputFor]="chipList">
-           </mat-chip-list>
-           <mat-auto-complete>
-             <mat-option *ngFor="let label of labels$ | async">
-               {{ label.name }}
-             </mat-option>
-           </mat-auto-complete>
-         </mat-form-field>-->
         <mat-icon [matMenuTriggerFor]="add">add</mat-icon>
         <mat-icon
           (click)="navigate('storage')">

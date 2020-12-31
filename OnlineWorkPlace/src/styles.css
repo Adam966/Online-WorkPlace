@@ -26,6 +26,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
   background: #373737;
 }
 
-.dialogStyle {
-  background-color: #f7efda;
+.styled-file-input {
+  border-radius: 3px;
+  color: white;
+  padding: 7px;
+  background-color: #3f51b5;
+  cursor: pointer;
+  text-align: center;
 }

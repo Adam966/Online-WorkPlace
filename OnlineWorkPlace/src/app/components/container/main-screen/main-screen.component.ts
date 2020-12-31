@@ -9,6 +9,7 @@ import {Select, Store} from '@ngxs/store';
 import {WorkplaceModel} from '../../../models/workplace.model';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import { SetApplicationToolbarState} from '../../../store/application';
+import {UtilsMessage} from '../../../shared/utils/utils-message';
 
 
 @Component({
@@ -43,6 +44,8 @@ export class MainScreenComponent implements OnInit {
       .subscribe(workplace => {
         if (workplace) {
           this.store.dispatch(new AddWorkplace(workplace));
+          this.workplaceService.addWorkplace(workplace);
+          UtilsMessage.showMessage(UtilsMessage.MESSAGE_WORKPLACE_CREATED, UtilsMessage.MESSAGE_STATUS_POSITIVE);
         }
       });
   }

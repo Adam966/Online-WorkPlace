@@ -1,19 +1,40 @@
 .dialog-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 50vw;
   max-height: 500px;
-  overflow-y: scroll;
 }
 
 .dialog-content {
   display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+}
+
+.aside-content {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 30%;
+}
+
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 25px;
+  width: 70%;
+}
+
+.center-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .title {
