@@ -12,6 +12,7 @@ import {MessageState} from '../../store/message-pop-up';
 import {MessageModel} from '../../models/application-models/message.model';
 import {LabelModel} from '../../models/label.model';
 import {WorkplaceSettingsState} from '../../store/workplace-settings';
+import {DefaultElements, SortElements} from '../../store/workplace-element';
 
 @Component({
   selector: 'app-container',
@@ -45,7 +46,7 @@ export class ContainerComponent implements OnInit {
   @Select(WorkplaceSettingsState.labels)
   labels$: Observable<LabelModel[]>;
 
-  chosenLabels: LabelModel[] = [];
+  input: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
 
@@ -80,11 +81,6 @@ export class ContainerComponent implements OnInit {
     this.dialog.open(ChecklistDialogComponent);
   }
 
-  @Dispatch()
-  logout(): Logout {
-    return new Logout();
-  }
-
   navigate(path: string): void {
     this.router.navigate(
       [`main/workplace/${this.currentWorkplaceId}/${path}`]
@@ -97,7 +93,19 @@ export class ContainerComponent implements OnInit {
     );
   }
 
-  removeLabel(index: number): void {
-    this.chosenLabels.splice(index, 1);
+  @Dispatch()
+  logout(): Logout {
+    return new Logout();
+  }
+
+  @Dispatch()
+  sortElements(value: string): SortElements {
+    return new SortElements(value);
+  }
+
+  @Dispatch()
+  removeSort(): DefaultElements {
+    this.input = '';
+    return new DefaultElements();
   }
 }
