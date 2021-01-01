@@ -4,3 +4,19 @@
   margin-right: 5px;
   border-radius: 50%;
 }
+
+.avatar-content {
+  background-color: #36497A;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px ;
+}
+
+.image-container {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
