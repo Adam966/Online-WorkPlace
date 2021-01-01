@@ -1,6 +1,6 @@
 <div class="image-container">
   <img
-    *ngIf="showImage"
+    [ngStyle]="{'display': photo ? 'initial' : 'none' }"
     class="img"
     [src]="photo"
     [title]="user?.username + ' ' + user?.usersurname">
