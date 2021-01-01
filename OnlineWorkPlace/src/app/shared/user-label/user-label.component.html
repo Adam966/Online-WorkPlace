@@ -1,7 +1,13 @@
-<div>
+<div class="image-container">
   <img
+    *ngIf="showImage"
     class="img"
-    [src]="'http://localhost:3000/user-photo?userId=' + user.photo"
-    [alt]="user?.username"
+    [src]="photo"
     [title]="user?.username + ' ' + user?.usersurname">
+  <div
+    *ngIf="!showImage"
+    class="img avatar-content">
+    {{ initials }}
+  </div>
 </div>
+
