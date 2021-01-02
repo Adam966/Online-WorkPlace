@@ -27,6 +27,7 @@ import {WorkplaceSettingsModule} from './components/container/workplace-settings
 import {SharedModule} from './shared/shared.module';
 import {DocumentModule} from './components/container/document/document.module';
 import {MatOptionModule} from '@angular/material/core';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 const states = [
     LoginState,
@@ -59,7 +60,7 @@ const states = [
     PageNotFoundModule,
     NgxsModule.forRoot(states, {developmentMode: true}),
     NgxsDispatchPluginModule.forRoot(),
-    NgxsReduxDevtoolsPluginModule.forRoot()
+    NgxsReduxDevtoolsPluginModule.forRoot(),
   ],
   providers: [
     MatDatepickerModule,

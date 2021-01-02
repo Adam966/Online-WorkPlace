@@ -25,6 +25,7 @@
       class="file-container">
       <app-file
         class="file-content"
+        matTooltip="Show file preview"
         (contextmenu)=showMenu($event,i)
         (click)="showFile(i)"
         [file]="file">
