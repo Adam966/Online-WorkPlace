@@ -18,7 +18,8 @@
           *ngFor="let task of tasks; index as i"
           [index]="i"
           [task]="task" class="task"
-          (removeTaskEmitter)="removeTask($event)">
+          (removeTaskEmitter)="removeTask($event)"
+          (taskChangedEmitter)="changeTask($event)">
         </app-task>
       </div>
       <!-- --------------------------------------- Aside bar icons ------------------------------------------------------>
@@ -34,7 +35,7 @@
         <mat-menu #labelList="matMenu">
           <ul>
             <li
-              (click)="addElement(label)"
+              (click)="addLabel(label)"
               *ngFor="let label of labels$ | async">
               <app-color-label
                 [label]="label">
@@ -64,7 +65,7 @@
           <h3>Assigned labels</h3>
           <div class="labels-content">
             <app-color-label
-              (click)="removeElement(label, i)"
+              (click)="removeLabel(i)"
               *ngFor="let label of labels; let i = index"
               [label]="label">
             </app-color-label>

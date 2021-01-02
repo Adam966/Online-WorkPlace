@@ -42,6 +42,10 @@
   width: 30%;
 }
 
+.done-icon {
+  color: darkgreen;
+}
+
 mat-checkbox {
   margin-right: 10px;
 }
@@ -52,4 +56,16 @@ mat-form-field {
 
 mat-icon {
   cursor: pointer;
+}
+
+app-user-label {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+form {
+  width: 100%;
 }
