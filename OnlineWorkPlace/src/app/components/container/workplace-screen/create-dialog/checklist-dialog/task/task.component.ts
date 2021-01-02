@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TaskModel} from '../../../../../../models/workplacemodels/task.model';
 import {User} from '../../../../../../models/application-models/user.model';
 import {Select} from '@ngxs/store';
@@ -17,6 +17,9 @@ export class TaskComponent implements OnInit {
   @Input()
   task: TaskModel;
 
+  @Output()
+  removeTaskEmitter = new EventEmitter<number>();
+
   users: User[] = [];
 
   @Select(WorkplaceSettingsState.users)
@@ -25,11 +28,11 @@ export class TaskComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.users = [...this.task.assignedUsers];
+    this.users = [...this.task?.assignedUsers];
   }
 
   removeTask(): void {
-    // push event remove from array i
+    this.removeTaskEmitter.emit(this.index);
   }
 
   addUser(user: User): void {

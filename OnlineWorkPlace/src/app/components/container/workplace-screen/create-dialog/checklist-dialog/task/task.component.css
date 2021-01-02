@@ -6,6 +6,7 @@
   border: 1px solid black;
   border-radius: 10px;
   padding: 10px;
+  margin-bottom: 10px;
 }
 
 .task-content {
@@ -15,17 +16,30 @@
 
 .bottom-content {
   display: flex;
-  justify-content: space-between;
   width: 100%;
 }
 
 .user-content {
   display: flex;
+  overflow-x: auto;
+  justify-content: flex-start;
+  width: 50%;
 }
 
 .icons-content {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
+  width: 20%;
+}
+
+.labels-content {
+  display: flex;
+  overflow-x: auto;
+}
+
+.free-space {
+  width: 30%;
 }
 
 mat-checkbox {
@@ -34,4 +48,8 @@ mat-checkbox {
 
 mat-form-field {
   width: 100%;
+}
+
+mat-icon {
+  cursor: pointer;
 }

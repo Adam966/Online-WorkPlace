@@ -27,12 +27,19 @@ export class ChecklistDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data?.object) {
       this.element = this.data.object;
-      this.tasks = this.element.tasks;
+      this.tasks = [...this.element?.tasks];
+      this.labels = [...this.element.assignedLabels];
     }
   }
 
+  ////////////////////////////////// TASKS ACTIONS ///////////////////////////////////////
   addTask(): void {
     this.tasks.push(new TaskModel());
+  }
+
+
+  removeTask(index: number): void {
+    this.tasks.splice(index, 1);
   }
 
   createCheckList(form: NgForm): void {

@@ -17,7 +17,8 @@
         <app-task
           *ngFor="let task of tasks; index as i"
           [index]="i"
-          [task]="task" class="task">
+          [task]="task" class="task"
+          (removeTaskEmitter)="removeTask($event)">
         </app-task>
       </div>
       <!-- --------------------------------------- Aside bar icons ------------------------------------------------------>
@@ -61,7 +62,7 @@
         </mat-form-field>
         <div>
           <h3>Assigned labels</h3>
-          <div>
+          <div class="labels-content">
             <app-color-label
               (click)="removeElement(label, i)"
               *ngFor="let label of labels; let i = index"
