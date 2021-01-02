@@ -2,7 +2,9 @@
   <!-- APPLICATION TOOLBAR -->
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <div (click)="navigateToHome(userId)" class="link-cursor">
+      <div (click)="navigateToHome(userId)"
+           class="link-cursor"
+           matTooltip="Home">
         <svg class="icon" enable-background="new 0 0 52 512" height="40" viewBox="0 0 512 512" width="40"
              xmlns="http://www.w3.org/2000/svg">
           <g>
@@ -32,7 +34,8 @@
             mat-button
             mat-icon-button
             aria-label="Search"
-            (click)="sortElements(searchInput.value)">
+            (click)="sortElements(searchInput.value)"
+            matTooltip="Search">
             <mat-icon>search</mat-icon>
           </button>
           <button
@@ -40,24 +43,32 @@
             mat-icon-button
             aria-label="Cancel"
             *ngIf="searchInput.value"
-            (click)="removeSort()">
+            (click)="removeSort()"
+            matTooltip="Cancel search">
             <mat-icon>cancel_outlined</mat-icon>
           </button>
         </span>
       </ng-container>
       <span class="example-spacer"></span>
       <ng-container *ngIf="toolbarState$ | async">
-        <mat-icon [matMenuTriggerFor]="add">add</mat-icon>
         <mat-icon
+          [matMenuTriggerFor]="add"
+          matTooltip="Add element">
+          add
+        </mat-icon>
+        <mat-icon
+          matTooltip="Storage workplace"
           (click)="navigate('storage')">
           storage
         </mat-icon>
         <mat-icon
+          matTooltip="Notifications"
           matBadgeOverlap="true"
           matBadgeSize="small"
           matBadge="15"
           matBadgeColor="warn"
-          [matMenuTriggerFor]="notifications">notifications
+          [matMenuTriggerFor]="notifications">
+          notifications
         </mat-icon>
       </ng-container>
       <mat-icon [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>

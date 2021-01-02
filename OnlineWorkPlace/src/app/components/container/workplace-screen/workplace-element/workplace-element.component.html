@@ -13,7 +13,11 @@
     <p>{{element.description}}</p>
   </div>
   <ng-template #taskTemplate>
-    <p class="text clearFloat"><mat-icon>check_box_outline_blank</mat-icon>{{taskInfo}}</p>
+    <p class="text clearFloat">
+      <mat-icon *ngIf="!isCompleted">check_box_outline_blank</mat-icon>
+      <mat-icon *ngIf="isCompleted">check_box</mat-icon>
+      {{taskInfo}}
+    </p>
   </ng-template>
   <div class="scrollbar images">
     <app-user-label

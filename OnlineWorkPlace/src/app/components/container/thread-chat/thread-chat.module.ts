@@ -4,6 +4,7 @@ import { ThreadChatComponent } from './thread-chat.component';
 import {MaterialModule} from '../../../material/material.module';
 import {RouterModule} from '@angular/router';
 import { MessageComponent } from './message/message.component';
+import {SharedModule} from '../../../shared/shared.module';
 
 const routes = [
   {
@@ -17,6 +18,7 @@ const routes = [
   imports: [
     CommonModule,
     MaterialModule,
+    SharedModule,
     RouterModule.forChild(routes)
   ]
 })
