@@ -32,7 +32,7 @@ export class ChecklistDialogComponent implements OnInit {
   }
 
   addTask(): void {
-    this.tasks.push();
+    this.tasks.push(new TaskModel());
   }
 
   createCheckList(form: NgForm): void {

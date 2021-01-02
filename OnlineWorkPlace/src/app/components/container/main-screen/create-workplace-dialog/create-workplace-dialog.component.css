@@ -31,12 +31,6 @@
   width: 70%;
 }
 
-.center-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .title {
   font-size: 24px;
   font-weight: 600;
