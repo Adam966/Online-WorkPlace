@@ -2,7 +2,8 @@
   <app-workplace
     *ngFor="let workPlace of workPlaces$ | async"
     [workPlace]="workPlace"
-    (click)="getWorkPlace(workPlace.id)">
+    (click)="getWorkPlace(workPlace.id)"
+    matTooltip="Open workplace">
   </app-workplace>
  </div>
 <div>

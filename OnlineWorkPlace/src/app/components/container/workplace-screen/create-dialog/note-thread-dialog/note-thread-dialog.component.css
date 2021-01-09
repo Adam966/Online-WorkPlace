@@ -1,10 +1,10 @@
 .container {
-  width: 700px;
+  width: 50vw;
   max-height: 500px;
 }
 
 .content {
-  width: 60%;
+  width: 55%;
   float: left;
   padding: 15px;
 }
@@ -61,7 +61,7 @@ li {
 
 .assigned div div {
   display: flex;
-  overflow-x: scroll;
+  overflow-x: auto;
   margin-top: -15px;
 }
 
