@@ -1,54 +1,50 @@
-.container {
-  max-height: 550px;
-  width: 700px;
-  overflow-y: scroll;
+.checklist-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50vw;
 }
 
-.content {
-  margin-top: 5px;
+.checklist-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.aside-content {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: flex-start;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-right: 25px;
+  margin-bottom: 10px;
   width: 60%;
-  float: left;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 15px;
 }
 
-.aside {
-  margin-left: 15px;
-  width: 35%;
-  float: left;
-}
-
-.aside p mat-icon {
-  margin-right: 10px;
-  vertical-align: middle;
-}
-
-.aside p {
-  margin-right: 10px;
-  vertical-align: middle;
+p {
+  display: inline-flex;
+  align-items: flex-end;
   cursor: pointer;
 }
 
-mat-form-field {
-  display: block;
-  width: 95%;
+ul {
+  list-style: none;
 }
 
-button {
-  clear: left;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+mat-icon {
+  margin-right: 5px;
 }
 
-p input {
-  width: 30px;
-}
-
-.assigned div div {
-  display: flex;
-  overflow-x: scroll;
-  margin-top: -15px;
-}
-
-.assigned div h3 {
-  margin-top: 20px;
+.mat-form-field {
+  width: 100%;
 }

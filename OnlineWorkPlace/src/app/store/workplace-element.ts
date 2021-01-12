@@ -48,7 +48,9 @@ export class WorkplaceElementState {
       temp.splice(action.index, 1, action.workplaceElement);
       ctx.setState(temp);
     } else {
-      ctx.setState([...ctx.getState(), action.workplaceElement]);
+      const temp = [...ctx.getState()];
+      temp.push(action.workplaceElement);
+      ctx.setState(temp);
     }
   }
 
@@ -77,7 +79,7 @@ export class WorkplaceElementState {
         temp.filter((ele) => {
           let users = '';
           ele.assignedUsers.map(user => users = users + (user.username + ' ' + user.usersurname + ', '));
-           return users.includes(action.value.substr(3 , action.value.length - 1));
+          return users.includes(action.value.substr(3 , action.value.length - 1));
         })
       );
     } else {

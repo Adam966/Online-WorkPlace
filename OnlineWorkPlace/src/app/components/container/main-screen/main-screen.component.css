@@ -3,7 +3,7 @@
   grid-template-columns: auto auto auto;
   grid-column-gap: 25px;
   grid-row-gap: 25px;
-  margin: 40px;
+  padding: 40px;
 }
 
 .addBtn {

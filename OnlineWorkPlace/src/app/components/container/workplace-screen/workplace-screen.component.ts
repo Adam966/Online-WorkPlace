@@ -12,7 +12,6 @@ import {ChecklistDialogComponent} from './create-dialog/checklist-dialog/checkli
 import {ChecklistModel} from '../../../models/workplacemodels/checklist.model';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {
-  ApplicationState,
   SetApplicationToolbarState,
   SetApplicationToolbarTitle,
   SetApplicationWorkplace

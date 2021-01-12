@@ -3,7 +3,7 @@
   <div>
     <app-color-label
       class="labels"
-      *ngFor="let label of element.assignedLabels"
+      *ngFor="let label of assignedLabels"
       [label]="label"
     ></app-color-label>
   </div>
@@ -21,7 +21,7 @@
   </ng-template>
   <div class="scrollbar images">
     <app-user-label
-      *ngFor="let user of element.assignedUsers"
+      *ngFor="let user of assignedUsers"
       [user]="user">
     </app-user-label>
   </div>

@@ -1,45 +1,63 @@
-<div class="container">
+<div class="task-container">
+  <div class="task-content">
+    <form #form=ngForm>
       <mat-checkbox
-        class="checkbox"
         color="primary"
-        [(ngModel)]="task.isCompleted">
+        name="isCompleted"
+        [(ngModel)]="task.isCompleted"
+        #checkbox>
       </mat-checkbox>
-    <mat-form-field class="input">
-      <mat-label>Description</mat-label>
-      <textarea
-        rows="4"
-        cdkTextareaAutosize="false"
-        matInput
-        ngModel
-        type="text"
-        name="name"
-        required
-        [ngModel]="task.description"
-        #description="ngModel">
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea
+          rows="4"
+          cdkTextareaAutosize="false"
+          matInput
+          ngModel
+          type="text"
+          name="description"
+          required
+          [ngModel]="task.description"
+          (ngModelChange)="inputChanged()"
+          #description="ngModel">
       </textarea>
-      <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
-    </mat-form-field>
-  <div class="images">
-    <app-user-label
-      *ngFor="let user of users"
-      [user]="user"
-    ></app-user-label>
+        <mat-error *ngIf="description.invalid">"Please enter value"</mat-error>
+      </mat-form-field>
+    </form>
   </div>
-  <div class="right">
-    <mat-icon [mat-menu-trigger-for]="userList">person_add</mat-icon>
-    <mat-icon (click)="removeTask()">delete</mat-icon>
+  <div class="bottom-content">
+    <div class="user-content">
+      <app-user-label
+        matTooltip="Click to remove user"
+        *ngFor="let user of users; let i = index"
+        (click)="removeUser(i)"
+        [user]="user"
+      ></app-user-label>
+    </div>
+    <div class="free-space">
+    </div>
+    <div class="icons-content">
+      <mat-icon [mat-menu-trigger-for]="userList" matTooltip="Add user">person_add</mat-icon>
+      <mat-icon (click)="removeTask()" matTooltip="Remove task">delete</mat-icon>
+      <mat-icon
+        class="done-icon"
+        *ngIf="descriptionChanged || users.length != userLength"
+        (click)="changeTask()"
+        matTooltip="Save task">
+        done
+      </mat-icon>
+    </div>
+    <mat-menu #userList="matMenu">
+      <ul>
+        <li
+          (click)="addUser(user)"
+          *ngFor="let user of users$ | async">
+          <app-user-label
+            [user]="user">
+          </app-user-label>
+          <span>{{user.username + ' ' + user.usersurname}}</span>
+        </li>
+      </ul>
+    </mat-menu>
   </div>
-  <mat-menu #userList="matMenu" class="pop-up-menu">
-    <ul>
-      <li
-        (click)="addUser(user)"
-        *ngFor="let user of users$ | async">
-        <app-user-label
-          [user]="user"
-          class="users-inline"
-        ></app-user-label>
-        <span class="users-inline">{{user.username + ' ' + user.usersurname}}</span>
-      </li>
-    </ul>
-  </mat-menu>
 </div>

@@ -12,6 +12,7 @@
 .title {
   margin: 15px 15px 35px;
   font-size: 36px;
+  text-align: center;
 }
 
 .successful_message {

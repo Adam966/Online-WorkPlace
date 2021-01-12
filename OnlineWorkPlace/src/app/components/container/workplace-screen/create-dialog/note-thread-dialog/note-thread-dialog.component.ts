@@ -34,8 +34,8 @@ export class NoteThreadDialogComponent implements OnInit {
   currentWorkplaceId$!: Observable<string>;
   currentWorkplaceId: string;
 
-  users: User[];
-  labels: LabelModel[];
+  users: User[] = [];
+  labels: LabelModel[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any, private router: Router) {}
 
@@ -65,6 +65,7 @@ export class NoteThreadDialogComponent implements OnInit {
       assignedLabels: this.labels,
     };
     this.setDueDate(data, form);
+    console.log(data);
     return new AddWorkplaceElement(data, this?.index);
   }
 
@@ -83,9 +84,11 @@ export class NoteThreadDialogComponent implements OnInit {
   ////////////////////////////////// ELEMENT ACTIONS ///////////////////////////////////////
   addElement(element: User | LabelModel): void {
     if ('color' in element) {
-      this.labels.push(element);
+      if (!this.labels.includes(element))
+        this.labels.push(element);
     } else {
-      this.users.push(element);
+      if(!this.users.includes(element))
+        this.users.push(element);
     }
   }
 

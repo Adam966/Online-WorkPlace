@@ -19,7 +19,9 @@
         <mat-label>{{type}} description</mat-label>
         <textarea
           #description="ngModel"
-          [mat-autosize]="true"
+          matTextareaAutosize
+          matAutosizeMinRows="7"
+          matAutosizeMaxRows="15"
           [ngModel]="element ? element.description : ''"
           matInput
           name="description"

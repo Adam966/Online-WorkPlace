@@ -1,4 +1,4 @@
-<div class="container">
+<div class="checklist-container">
   <form ngForm #form="ngForm" (ngSubmit)="createCheckList(form)">
     <mat-form-field>
       <mat-label>Task name</mat-label>
@@ -12,56 +12,60 @@
         [ngModel]="element?.name">
       <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
     </mat-form-field>
-    <div class="content">
-      <app-task
-        *ngFor="let task of tasks; index as i"
-        [index]="i"
-        [task]="task" class="task">
-      </app-task>
-    </div>
-    <!-- --------------------------------------- Aside bar icons ------------------------------------------------------>
-    <div class="aside">
-      <p (click)="addTask()"><mat-icon>add</mat-icon>Add task</p>
-      <p [mat-menu-trigger-for]="labelList">
-        <mat-icon>label</mat-icon>
-        Choose Label
-      </p>
-      <mat-menu #labelList="matMenu" class="pop-up-menu">
-        <ul>
-          <li
-            (click)="addElement(label)"
-            *ngFor="let label of labels$ | async">
-            <app-color-label
-              [label]="label"
-              class="element">
-            </app-color-label>
-          </li>
-        </ul>
-      </mat-menu>
-      <p (click)="datePicker.open()">
-        <mat-datepicker
-          #datePicker
-          touchUi>
-        </mat-datepicker>
-        <mat-icon>schedule</mat-icon>
-        Set Notification
-      </p>
-      <mat-form-field>
-        <mat-label>Due Date</mat-label>
-        <input
-          [matDatepickerFilter]="notificationDateFilter"
-          [matDatepicker]="datePicker"
-          [ngModel]="element ? element?.dueDate : ''"
-          matInput
-          name="notificationDate"
-          ngModel>
-      </mat-form-field>
-      <div class="assigned">
+    <div class="checklist-content">
+      <div class="main-content">
+        <app-task
+          *ngFor="let task of tasks; index as i"
+          [index]="i"
+          [task]="task" class="task"
+          (removeTaskEmitter)="removeTask($event)"
+          (taskChangedEmitter)="changeTask($event)">
+        </app-task>
+      </div>
+      <!-- --------------------------------------- Aside bar icons ------------------------------------------------------>
+      <div class="aside-content">
+        <p (click)="addTask()">
+          <mat-icon>add</mat-icon>
+          Add task
+        </p>
+        <p [mat-menu-trigger-for]="labelList">
+          <mat-icon>label</mat-icon>
+          Choose Label
+        </p>
+        <mat-menu #labelList="matMenu">
+          <ul>
+            <li
+              (click)="addLabel(label)"
+              *ngFor="let label of labels$ | async">
+              <app-color-label
+                [label]="label">
+              </app-color-label>
+            </li>
+          </ul>
+        </mat-menu>
+        <p (click)="datePicker.open()">
+          <mat-datepicker
+            #datePicker
+            touchUi>
+          </mat-datepicker>
+          <mat-icon>schedule</mat-icon>
+          Set Notification
+        </p>
+        <mat-form-field>
+          <mat-label>Due Date</mat-label>
+          <input
+            [matDatepickerFilter]="notificationDateFilter"
+            [matDatepicker]="datePicker"
+            [ngModel]="element ? element?.dueDate : ''"
+            matInput
+            name="notificationDate"
+            ngModel>
+        </mat-form-field>
         <div>
           <h3>Assigned labels</h3>
-          <div>
+          <div class="labels-content">
             <app-color-label
-              (click)="removeElement(label, i)"
+              (click)="removeLabel(i)"
               *ngFor="let label of labels; let i = index"
               [label]="label">
             </app-color-label>
@@ -69,10 +73,12 @@
         </div>
       </div>
     </div>
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      [disabled]="form.invalid">{{element ? 'Update' : 'Create'}}</button>
+    <div class="center-button">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid">{{element ? 'Update' : 'Create'}}</button>
+    </div>
   </form>
 </div>

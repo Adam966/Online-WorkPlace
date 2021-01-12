@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items: center;
   width: 50vw;
   max-height: 500px;
 }
@@ -31,15 +30,10 @@
   width: 70%;
 }
 
-.center-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .title {
   font-size: 24px;
   font-weight: 600;
+  text-align: center;
 }
 
 mat-form-field {
