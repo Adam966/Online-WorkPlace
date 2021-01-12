@@ -1,4 +1,4 @@
-<mat-card class="card">
+<mat-card class="card" [ngStyle]="{'background-image': 'url(http://localhost:3000/workplace-photo?workplaceId=' + workPlace.photo + ')'}">
   <mat-card-title>{{workPlace.name}}</mat-card-title>
   <mat-card-content>{{workPlace.description.length > 250 ? workPlace.description.slice(0, 250) : workPlace.description}}</mat-card-content>
 </mat-card>

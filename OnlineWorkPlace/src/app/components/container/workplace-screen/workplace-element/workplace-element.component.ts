@@ -13,12 +13,16 @@ export class WorkplaceElementComponent implements OnInit {
   @Input()
   element: WorkplaceElementModel;
 
+  @Input()
+  colorOfElement: string;
+
   task = false;
   taskInfo: string;
   isCompleted: boolean;
 
   assignedLabels: LabelModel[];
   assignedUsers: User[];
+
 
   constructor() { }
 
@@ -36,11 +40,7 @@ export class WorkplaceElementComponent implements OnInit {
     const completed = checklistModel.tasks.filter(item => item.isCompleted).length;
     const allTasks = checklistModel.tasks.length;
 
-    if (completed === allTasks) {
-      this.isCompleted = true;
-    } else {
-      this.isCompleted = false;
-    }
+    this.isCompleted = completed === allTasks;
     this.taskInfo = `${completed}\\${allTasks}`;
   }
 }
