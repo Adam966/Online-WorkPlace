@@ -1,9 +1,9 @@
 export interface WorkplaceModel {
   id?: number;
   name: string;
-  backgroundColor: string;
-  file: File;
-  elementColor: string;
+  backgroundColor?: string;
+  photo?: number;
+  colorOfElement?: string;
   description: string;
   AdminUserId?: number;
 }

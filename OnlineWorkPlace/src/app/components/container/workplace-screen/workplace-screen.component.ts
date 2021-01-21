@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WorkplaceElementModel} from '../../../models/workplacemodels/workplaceelement.model';
 import {WorkplaceElementApiService} from '../../../services/workplace-element-api/workplace-element-api.service';
-import {Select, Store} from '@ngxs/store';
+import {Select} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import { WorkplaceElementState} from '../../../store/workplace-element';
 import {NoteModel} from '../../../models/workplacemodels/note.model';
@@ -27,16 +27,19 @@ export class WorkplaceScreenComponent implements OnInit {
   @Select(WorkplaceElementState)
   workPlaceElements$: Observable<WorkplaceElementModel[]>;
 
+  workplaceConfig: {workplacePhoto: number, colorOfElement: string};
   constructor(
     private elementApiService: WorkplaceElementApiService,
     private dialog: MatDialog,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
     this.setApplicationWorkplace();
     this.changeToolbarStatus();
     this.setApplicationTitle();
+
+    this.workplaceConfig = window.history.state as {workplacePhoto: number, colorOfElement: string};
   }
 
   openEditDialog(element: WorkplaceElementModel, i: number): void {

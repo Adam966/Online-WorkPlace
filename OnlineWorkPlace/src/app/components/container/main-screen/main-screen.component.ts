@@ -38,6 +38,7 @@ export class MainScreenComponent implements OnInit {
     this.dialogRef = this.dialog.open(CreateWorkplaceDialogComponent);
     this.dialogRef.afterClosed()
       .subscribe(workplace => {
+        console.log(workplace);
         if (workplace) {
           this.store.dispatch(new AddWorkplace(workplace));
           this.workplaceService.addWorkplace(workplace);
@@ -46,8 +47,10 @@ export class MainScreenComponent implements OnInit {
       });
   }
 
-  getWorkPlace(workplaceId: number): void {
-    this.router.navigate(['main/workplace', workplaceId]);
+  getWorkPlace(workplace: WorkplaceModel): void {
+    this.router.navigate(['main/workplace', workplace.id], {
+      state: { workplacePhoto: workplace.photo, colorOfElement: workplace.colorOfElement }
+    });
   }
 
   @Dispatch()
