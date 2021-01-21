@@ -22,7 +22,7 @@ const routes = [
     MaterialModule,
     MatTabsModule,
     MatCheckboxModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class WorkplaceSettingsModule { }

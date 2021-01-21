@@ -1,53 +1,16 @@
 .settings-container {
   display: flex;
-  justify-content: center;
-  margin-top: 5px;
-  margin-left: 5px;
-}
-
-.settings-content {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.checkbox-content {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.label-container {
-  display: flex;
   justify-content: space-around;
+  margin: 25px;
 }
 
-.label-content {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.create-label {
+.column-container {
   display: flex;
   flex-direction: column;
-  width: 150px;
+  margin-left: 50px;
 }
 
-span {
-  vertical-align: middle;
-  margin: 5px;
-}
-
-mat-tab-group {
-  width: 100%;
-}
-
-mat-icon {
-  cursor: pointer;
-}
-
-mat-checkbox {
-  margin-top: 5px;
+mat-expansion-panel {
+  margin-top: 15px;
 }

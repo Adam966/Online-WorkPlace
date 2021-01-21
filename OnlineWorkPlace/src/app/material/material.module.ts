@@ -18,6 +18,7 @@ import {MatNativeDateModule, MatOptionModule} from '@angular/material/core';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
   declarations: [],
@@ -63,7 +64,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatChipsModule,
     MatOptionModule,
     MatAutocompleteModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }
