@@ -1,15 +1,20 @@
 <div class="settings-container">
-<!------------  Workplace label settings ------------>
+  <!------------  Workplace label settings ------------>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
         Workplace label settings
       </mat-panel-title>
-      <div>
-        <app-color-label>
-        </app-color-label>
-      </div>
     </mat-expansion-panel-header>
+    <div class="label-container">
+      <div class="label-content" *ngFor="let label of labels$ | async">
+        <app-color-label
+          [label]="label">
+        </app-color-label>
+        <span>{{ label.name }}</span>
+        <mat-icon matTooltip="Delete label" (click)="deleteLabel(label)">delete</mat-icon>
+      </div>
+    </div>
   </mat-expansion-panel>
   <!------------  Workplace users settings ------------>
   <mat-expansion-panel>
@@ -17,11 +22,20 @@
       <mat-panel-title>
         Workplace users settings
       </mat-panel-title>
-      <div>
-        <app-user-label>
-        </app-user-label>
-      </div>
     </mat-expansion-panel-header>
+    <div class="label-container">
+      <div class="label-content" *ngFor="let user of users$ | async">
+        <app-user-label
+          [user]="user">
+        </app-user-label>
+        <div>
+          <span>{{ user.username }}</span>
+          <span>&nbsp;</span>
+          <span>{{ user.usersurname }}</span>
+        </div>
+        <mat-icon matTooltip="Delete user" (click)="deleteUser(user)">delete</mat-icon>
+      </div>
+    </div>
   </mat-expansion-panel>
   <!------------  Workplace notifications settings ------------>
   <mat-expansion-panel>
@@ -31,10 +45,10 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="column-container">
-      <mat-checkbox>receipt of the message</mat-checkbox>
-      <mat-checkbox>added to element</mat-checkbox>
-      <mat-checkbox>due date</mat-checkbox>
-      <mat-checkbox>removed from element</mat-checkbox>
+      <mat-checkbox color="primary">receipt of the message</mat-checkbox>
+      <mat-checkbox color="primary">added to element</mat-checkbox>
+      <mat-checkbox color="primary">due date</mat-checkbox>
+      <mat-checkbox color="primary">removed from element</mat-checkbox>
     </div>
   </mat-expansion-panel>
   <!------------  Workplace rights settings ------------>
@@ -44,5 +58,21 @@
         Workplace rights settings
       </mat-panel-title>
     </mat-expansion-panel-header>
+    <div class="user-rights-container">
+      <div class="user-rights-content" *ngFor="let user of users$ | async">
+        <div class="user-rights-label">
+          <app-user-label
+            [user]="user">
+          </app-user-label>
+          <span>{{ user.username }}</span>
+          <span>&nbsp;</span>
+          <span>{{ user.usersurname }}</span>
+        </div>
+        <mat-checkbox color="primary">add user</mat-checkbox>
+        <mat-checkbox color="primary">delete user</mat-checkbox>
+        <mat-checkbox color="primary">delete element</mat-checkbox>
+        <mat-checkbox color="primary">change rights</mat-checkbox>
+      </div>
+    </div>
   </mat-expansion-panel>
 </div>

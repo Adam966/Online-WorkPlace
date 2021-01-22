@@ -28,4 +28,12 @@ export class WorkplaceSettingsComponent implements OnInit {
   setApplicationTitle(): SetApplicationToolbarTitle {
     return new SetApplicationToolbarTitle('Workplace Settings');
   }
+
+  deleteLabel(label: LabelModel): void {
+
+  }
+
+  deleteUser(user: User): void {
+
+  }
 }
