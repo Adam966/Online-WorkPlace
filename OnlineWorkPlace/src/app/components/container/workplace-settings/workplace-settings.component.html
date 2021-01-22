@@ -1,45 +1,78 @@
-N<div class="settings-container">
-  <mat-tab-group>
-    <mat-tab label="Notification">
-      <div class="checkbox-content">
-        <mat-checkbox>Get message notification</mat-checkbox>
-        <mat-checkbox>Assigned to element notification</mat-checkbox>
-        <mat-checkbox>Due date notification</mat-checkbox>
+<div class="settings-container">
+  <!------------  Workplace label settings ------------>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Workplace label settings
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="label-container">
+      <div class="label-content" *ngFor="let label of labels$ | async">
+        <app-color-label
+          [label]="label">
+        </app-color-label>
+        <span>{{ label.name }}</span>
+        <mat-icon matTooltip="Delete label" (click)="deleteLabel(label)">delete</mat-icon>
       </div>
-    </mat-tab>
-    <mat-tab label="Workplace Users">
-      <div class="settings-content"
-        *ngFor="let user of users$ | async">
-        <app-user-label [user]="user"></app-user-label>
-        <span>{{ user.username + ' ' + user.usersurname }}</span>
-        <span><mat-icon>cancel</mat-icon></span>
-      </div>
-    </mat-tab>
-    <mat-tab label="Workplace Labels">
-      <div class="label-container">
-        <div class="label-content">
-          <div class="settings-content"
-               *ngFor="let label of labels$ | async">
-            <app-color-label [label]="label"></app-color-label>
-            <span><mat-icon>cancel</mat-icon></span>
-          </div>
+    </div>
+  </mat-expansion-panel>
+  <!------------  Workplace users settings ------------>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Workplace users settings
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="label-container">
+      <div class="label-content" *ngFor="let user of users$ | async">
+        <app-user-label
+          [user]="user">
+        </app-user-label>
+        <div>
+          <span>{{ user.username }}</span>
+          <span>&nbsp;</span>
+          <span>{{ user.usersurname }}</span>
         </div>
-        <div class="create-label">
-          <mat-form-field>
-            <mat-label>Label name</mat-label>
-            <input matInput type="text" placeholder="Type label name">
-          </mat-form-field>
-          <input matInput type="color">
-          <button mat-raised-button color="primary">Create label</button>
+        <mat-icon matTooltip="Delete user" (click)="deleteUser(user)">delete</mat-icon>
+      </div>
+    </div>
+  </mat-expansion-panel>
+  <!------------  Workplace notifications settings ------------>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Workplace notifications settings
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="column-container">
+      <mat-checkbox color="primary">receipt of the message</mat-checkbox>
+      <mat-checkbox color="primary">added to element</mat-checkbox>
+      <mat-checkbox color="primary">due date</mat-checkbox>
+      <mat-checkbox color="primary">removed from element</mat-checkbox>
+    </div>
+  </mat-expansion-panel>
+  <!------------  Workplace rights settings ------------>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Workplace rights settings
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="user-rights-container">
+      <div class="user-rights-content" *ngFor="let user of users$ | async">
+        <div class="user-rights-label">
+          <app-user-label
+            [user]="user">
+          </app-user-label>
+          <span>{{ user.username }}</span>
+          <span>&nbsp;</span>
+          <span>{{ user.usersurname }}</span>
         </div>
+        <mat-checkbox color="primary">add user</mat-checkbox>
+        <mat-checkbox color="primary">delete user</mat-checkbox>
+        <mat-checkbox color="primary">delete element</mat-checkbox>
+        <mat-checkbox color="primary">change rights</mat-checkbox>
       </div>
-    </mat-tab>
-    <mat-tab label="User rights">
-      <div class="checkbox-content">
-        <mat-checkbox>Get message notification</mat-checkbox>
-        <mat-checkbox>Assigned to element notification</mat-checkbox>
-        <mat-checkbox>Due date notification</mat-checkbox>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+    </div>
+  </mat-expansion-panel>
 </div>

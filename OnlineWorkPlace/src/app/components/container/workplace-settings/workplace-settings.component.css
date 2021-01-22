@@ -1,53 +1,62 @@
 .settings-container {
   display: flex;
-  justify-content: center;
-  margin-top: 5px;
-  margin-left: 5px;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 25px;
 }
 
-.settings-content {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.checkbox-content {
+.column-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
+  margin-left: 50px;
 }
 
 .label-container {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-content: center;
 }
 
 .label-content {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  display: inline-flex;
+  margin-top: 15px;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.create-label {
+.user-rights-container {
   display: flex;
   flex-direction: column;
-  width: 150px;
+  padding: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.user-rights-content {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-rights-label {
+  display: inline-flex;
+  align-items: center;
+}
+
+mat-expansion-panel {
+  margin-top: 15px;
 }
 
 span {
-  vertical-align: middle;
-  margin: 5px;
-}
+  font-size: 18px;
+  font-weight: bold;
 
-mat-tab-group {
-  width: 100%;
 }
 
 mat-icon {
   cursor: pointer;
-}
-
-mat-checkbox {
-  margin-top: 5px;
 }
