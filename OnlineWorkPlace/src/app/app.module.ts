@@ -27,7 +27,7 @@ import {WorkplaceSettingsModule} from './components/container/workplace-settings
 import {SharedModule} from './shared/shared.module';
 import {DocumentModule} from './components/container/document/document.module';
 import {MatOptionModule} from '@angular/material/core';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
 
 const states = [
     LoginState,
@@ -60,6 +60,9 @@ const states = [
     PageNotFoundModule,
     NgxsModule.forRoot(states, {developmentMode: true}),
     NgxsDispatchPluginModule.forRoot(),
+    NgxsStoragePluginModule.forRoot({
+      key: [LoginState]
+    }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
   ],
   providers: [
