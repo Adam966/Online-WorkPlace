@@ -17,6 +17,7 @@ import {
   SetApplicationWorkplace
 } from '../../../store/application';
 import {ActivatedRoute} from '@angular/router';
+import {WORKPLACE_PHOTO} from '../../../services/url_const';
 
 @Component({
   selector: 'app-workplace-screen',
@@ -28,6 +29,7 @@ export class WorkplaceScreenComponent implements OnInit {
   workPlaceElements$: Observable<WorkplaceElementModel[]>;
 
   workplaceConfig: {workplacePhoto: number, colorOfElement: string};
+  url = WORKPLACE_PHOTO;
   constructor(
     private elementApiService: WorkplaceElementApiService,
     private dialog: MatDialog,

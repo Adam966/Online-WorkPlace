@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../../models/application-models/user.model';
+import {USER_PHOTO} from '../../services/url_const';
 
 @Component({
   selector: 'app-user-label',
@@ -19,7 +20,7 @@ export class UserLabelComponent implements OnInit {
   ngOnInit(): void {
     if (this.user.photo !== 0) {
       this.showImage = true;
-      this.photo = 'http://localhost:3000/user-photo?userId=' + this.user.photo.toString();
+      this.photo = USER_PHOTO + this.user.photo.toString();
     } else {
       this.showImage = false;
       this.initials = this.user.username.charAt(0) + this.user.usersurname.charAt(0);
