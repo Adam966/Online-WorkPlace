@@ -29,7 +29,7 @@ export class LoginApiService extends AbstractApiService {
   }
 
   register(user: any): Observable<any> {
-    return this.http.put(this.createUrl(REGISTER), user);
+    return this.http.post<any>(this.createUrl(REGISTER), user);
   }
 
   @Dispatch()
