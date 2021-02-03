@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {WorkplaceModel} from '../../../../models/workplace.model';
+import {WORKPLACE_PHOTO} from '../../../../services/url_const';
+
 
 @Component({
   selector: 'app-workplace',
@@ -9,6 +11,7 @@ import {WorkplaceModel} from '../../../../models/workplace.model';
 export class WorkplaceComponent implements OnInit {
   @Input()
   workPlace: WorkplaceModel;
+  url = WORKPLACE_PHOTO;
 
   constructor() { }
 
