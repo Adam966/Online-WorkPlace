@@ -18,9 +18,9 @@ export class AuthenticationInterceptor implements HttpInterceptor {
   constructor() {
     this.token$.subscribe(token => this.token = token);
   }
-  /*TODO() rewrite if statement*/
+
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (!request.url.includes('login')) {
+    if (!request.url.includes('login') && !request.url.includes('register')) {
       const changedReq = request.clone({
         headers: request.headers.set('Authorization', this.token)
       });
