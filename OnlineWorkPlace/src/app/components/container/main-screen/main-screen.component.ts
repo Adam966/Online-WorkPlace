@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {WorkplaceServiceApi} from '../../../services/workplace-api/workplace-service-api.service';
 import {WorkplaceState} from '../../../store/workplace';
 import {Observable} from 'rxjs';
-import {Select, Store} from '@ngxs/store';
+import {Select} from '@ngxs/store';
 import {WorkplaceModel} from '../../../models/workplace.model';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {SetApplicationToolbarState, SetApplicationToolbarTitle} from '../../../store/application';
@@ -58,7 +58,7 @@ export class MainScreenComponent implements OnInit {
 
   getWorkPlace(workplace: WorkplaceModel): void {
     this.router.navigate(['main/workplace', workplace.id], {
-      state: { workplacePhoto: workplace.photo, colorOfElement: workplace.colorOfElement }
+      state: { workplacePhoto: workplace.photo, colorOfElement: workplace.colorOfElement, workplaceBackground: workplace.backgroundColor }
     });
   }
 
