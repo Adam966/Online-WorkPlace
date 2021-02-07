@@ -8,8 +8,6 @@ import {ApplicationState} from '../../store/application';
 import {Observable} from 'rxjs';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {LoginState, Logout} from '../../store/login';
-import {MessageState} from '../../store/message-pop-up';
-import {MessageModel} from '../../models/application-models/message.model';
 import {LabelModel} from '../../models/label.model';
 import {WorkplaceSettingsState} from '../../store/workplace-settings';
 import {DefaultElements, SortElements} from '../../store/workplace-element';
@@ -25,12 +23,6 @@ export class ContainerComponent implements OnInit {
 
   @Select(ApplicationState.toolbarState)
   toolbarState$!: Observable<boolean>;
-
-  @Select(MessageState.isVisible)
-  isMessageVisible$!: Observable<boolean>;
-
-  @Select(MessageState.message)
-  message$!: Observable<MessageModel>;
 
   @Select(LoginState.userId)
   userId$!: Observable<number>;

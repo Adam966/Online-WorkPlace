@@ -2,6 +2,7 @@ import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
 import {UserModel} from '../models/application-models/user.model';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
+import {Navigate} from '@ngxs/router-plugin';
 
 export class Login {
   static readonly type = '[Login User] Login';
@@ -19,7 +20,7 @@ export class Logout {
 })
 @Injectable()
 export class LoginState {
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store) {}
 
   @Selector()
   static userId(state: UserModel): number {
@@ -40,6 +41,6 @@ export class LoginState {
   logout(): void {
     this.store.reset(LoginState);
     localStorage.clear();
-    this.router.navigate(['login']);
+    this.store.dispatch(new Navigate(['/login']));
   }
 }
