@@ -5,6 +5,8 @@ import {SetApplicationLoadingState} from './store/application';
 import {LoginState} from './store/login';
 import {Select} from '@ngxs/store';
 import {Observable} from 'rxjs';
+import {MessageState} from './store/message-pop-up';
+import {MessageModel} from './models/application-models/message.model';
 
 @Component({
   selector: 'app-root',
@@ -17,11 +19,19 @@ export class AppComponent implements OnInit {
   @Select(LoginState.token)
   isLoggedIn$!: Observable<string>;
 
+  @Select(MessageState.isVisible)
+  isMessageVisible$!: Observable<boolean>;
+
+  @Select(MessageState.message)
+  message$!: Observable<MessageModel>;
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.isLoggedIn$.subscribe(token => {
+      if (token) {
         this.router.navigate(['main']);
+      }
     });
 
     this.router.events.subscribe((event: RouterEvent) => {

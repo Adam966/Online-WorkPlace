@@ -124,11 +124,5 @@
   <div [ngClass]="{ 'content' : isLoading$ | async }">
     <router-outlet></router-outlet>
   </div>
-  <!-- APPLICATION MESSAGE -->
-  <ng-template [ngIf]="isMessageVisible$ | async">
-    <div class="error-message">
-      <app-error-message [message]="message$ | async"></app-error-message>
-    </div>
-  </ng-template>
 </div>
 

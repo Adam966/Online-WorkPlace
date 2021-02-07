@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse} from '@angular/common/http';
-import {EMPTY, Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {UtilsMessage} from '../../shared/utils/utils-message';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
@@ -23,8 +23,14 @@ export class HandleResponseInterceptor implements HttpInterceptor {
     }
     else if (error.status >= 400 && error.status < 500) {
       if (error.status === 401) {
-        this.logoutUser();
-        UtilsMessage.showMessage('Session is expired', UtilsMessage.MESSAGE_STATUS_ERROR);
+        if (error.error.path === '/api/login') {
+          UtilsMessage.showMessage('Wrong User Credentials', UtilsMessage.MESSAGE_STATUS_ERROR);
+        } else {
+          this.logoutUser();
+          UtilsMessage.showMessage('Session is expired', UtilsMessage.MESSAGE_STATUS_ERROR);
+        }
+      } else if (error.status === 409) {
+        UtilsMessage.showMessage(error.error.message, UtilsMessage.MESSAGE_STATUS_ERROR);
       }
     } else if (error.status > 500) {
 
@@ -32,7 +38,7 @@ export class HandleResponseInterceptor implements HttpInterceptor {
 
     }
     console.log(error);
-    return EMPTY;
+    return throwError(error);
   }
 
   @Dispatch()

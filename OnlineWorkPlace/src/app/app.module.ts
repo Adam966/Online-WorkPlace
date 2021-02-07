@@ -28,6 +28,7 @@ import {SharedModule} from './shared/shared.module';
 import {DocumentModule} from './components/container/document/document.module';
 import {MatOptionModule} from '@angular/material/core';
 import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
+import {NgxsRouterPluginModule} from '@ngxs/router-plugin';
 
 const states = [
     LoginState,
@@ -59,6 +60,7 @@ const states = [
     MaterialModule,
     PageNotFoundModule,
     NgxsModule.forRoot(states, {developmentMode: true}),
+    NgxsRouterPluginModule.forRoot(),
     NgxsDispatchPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({
       key: [LoginState]
