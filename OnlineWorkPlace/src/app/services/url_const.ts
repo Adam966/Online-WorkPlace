@@ -11,9 +11,9 @@ export const ADD_WORKPLACE = 'workplace';
 export const WORKPLACE_PHOTO = 'http://localhost:3000/api/workplace-photo?workplaceId=';
 
 ////////////////////// WORKPLACE ELEMENTS API //////////////////////
-export const GET_ELEMENTS = 'workplace-elements';
-export const GET_WORKPLACE_USERS = 'workplace-users';
-export const GET_WORKPLACE_LABELS = 'workplace-labels';
+export const GET_ELEMENTS = 'elements';
+export const GET_WORKPLACE_USERS = 'users';
+export const GET_WORKPLACE_LABELS = 'labels';
 
 ////////////////////// STORAGE API //////////////////////
 export const GET_ALL_FILES = 'workplace-storage';

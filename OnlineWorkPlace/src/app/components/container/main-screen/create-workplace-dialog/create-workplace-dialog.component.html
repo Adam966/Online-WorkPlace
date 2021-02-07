@@ -36,7 +36,7 @@
           <input
             #elementColor="ngModel"
             matInput
-            name="elementColor"
+            name="colorOfElement"
             ngModel
             required
             type="color">
@@ -49,8 +49,7 @@
             matInput
             name="backgroundColor"
             ngModel
-            required
-            [disabled]="file"
+            [disabled]="file !== null"
             type="color">
           <mat-error *ngIf="backgroundColor.invalid">"Please enter value"</mat-error>
         </mat-form-field>

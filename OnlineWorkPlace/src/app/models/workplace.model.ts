@@ -5,5 +5,5 @@ export interface WorkplaceModel {
   photo?: number;
   colorOfElement?: string;
   description: string;
-  AdminUserId?: number;
+  adminId?: number;
 }

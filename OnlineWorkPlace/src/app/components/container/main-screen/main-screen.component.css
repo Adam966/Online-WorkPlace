@@ -1,6 +1,6 @@
 .workplace-container {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 30% 30% 30%;
   grid-column-gap: 25px;
   grid-row-gap: 25px;
   padding: 40px;

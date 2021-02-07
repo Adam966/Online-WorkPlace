@@ -19,8 +19,6 @@ export class AddWorkplace {
 })
 @Injectable()
 export class WorkplaceState {
-  constructor(private workplaceService: WorkplaceServiceApi) {}
-
   @Action(SaveWorkplaces)
   saveWorkplaces(ctx: StateContext<WorkplaceModel[]>, action: SaveWorkplaces): void {
     ctx.setState(action.workplaces);
@@ -28,7 +26,6 @@ export class WorkplaceState {
 
   @Action(AddWorkplace)
   addWorkplace(ctx: StateContext<WorkplaceModel[]>, action: AddWorkplace): void {
-    this.workplaceService.addWorkplace(action.workplace);
     ctx.setState([...ctx.getState(), action.workplace]);
   }
 }
