@@ -10,6 +10,7 @@ export class UtilsMessage {
   static MESSAGE_REGISTERED_IN = 'Successfully registered';
   private static MESSAGE_SUCCESSFULLY = 'was successfully created';
   static MESSAGE_WORKPLACE_CREATED = `Workplace ${UtilsMessage.MESSAGE_SUCCESSFULLY}`;
+  static MESSAGE_UNEXPECTED_ERROR = `Something weird going on here.`;
 
   @Dispatch()
   static showMessage(message: string, status: string, description?: string): SetPopUpMessage {

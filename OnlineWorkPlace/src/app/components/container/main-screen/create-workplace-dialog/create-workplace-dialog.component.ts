@@ -20,13 +20,13 @@ export class CreateWorkplaceDialogComponent implements OnInit {
 
   createWorkplace(): void {
     const workplace: WorkplaceModel = {
-      ...this.form.value, photo: this.file ?? null,
+      ...this.form.value,
     };
 
-    if (workplace.photo) {
+    if (this.file) {
       workplace.backgroundColor = null;
     }
-    this.dialog.close(workplace);
+    this.dialog.close({workplace, file: this.file});
   }
 
   chooseFile(file: File): void {

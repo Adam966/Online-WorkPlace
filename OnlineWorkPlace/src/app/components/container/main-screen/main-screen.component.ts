@@ -46,12 +46,12 @@ export class MainScreenComponent implements OnInit {
     this.dialogRef = this.dialog.open(CreateWorkplaceDialogComponent);
     this.dialogRef.afterClosed()
       .subscribe(workplace => {
-        if (workplace) {
+        if (workplace.workplace) {
+          const file = workplace.file;
           workplace = {
-            ...workplace, adminId: this.userId.toString(),
+            ...workplace.workplace, adminId: this.userId.toString(),
           };
-          this.workplaceService.addWorkplace(workplace);
-          UtilsMessage.showMessage(UtilsMessage.MESSAGE_WORKPLACE_CREATED, UtilsMessage.MESSAGE_STATUS_POSITIVE);
+          this.workplaceService.addWorkplace(workplace, file);
         }
       });
   }

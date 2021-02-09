@@ -3,6 +3,7 @@ import {NgForm} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
 import {LoginApiService} from '../../../services/login-api/login-api.service';
 import {catchError} from 'rxjs/operators';
+import {UtilsMessage} from '../../../shared/utils/utils-message';
 
 @Component({
   selector: 'app-registration-dialog',
@@ -32,6 +33,7 @@ export class RegistrationDialogComponent implements OnInit {
       .subscribe(_ => {
         this.registrationDone = true;
         this.registrationInProgress = false;
+        UtilsMessage.showMessage(UtilsMessage.MESSAGE_REGISTERED_IN, UtilsMessage.MESSAGE_STATUS_POSITIVE);
       });
   }
 }
