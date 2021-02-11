@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {MatDialogRef} from '@angular/material/dialog';
+import {WorkplaceModel} from '../../../../models/workplace.model';
 
 @Component({
   selector: 'app-create-workplace-dialog',
@@ -11,17 +12,21 @@ export class CreateWorkplaceDialogComponent implements OnInit {
   @ViewChild('workplaceForm')
   form: NgForm;
 
-  file: File;
+  file: File = null;
   constructor(private dialog: MatDialogRef<CreateWorkplaceDialogComponent>) { }
 
   ngOnInit(): void {
   }
 
   createWorkplace(): void {
-    const workplace = {
-      ...this.form.value, file: this.file ?? null
+    const workplace: WorkplaceModel = {
+      ...this.form.value,
     };
-    this.dialog.close(workplace);
+
+    if (this.file) {
+      workplace.backgroundColor = null;
+    }
+    this.dialog.close({workplace, file: this.file});
   }
 
   chooseFile(file: File): void {

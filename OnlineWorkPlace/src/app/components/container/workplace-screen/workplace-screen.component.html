@@ -1,4 +1,4 @@
-<div class="elements-container" [style]="{'background-image': 'url(' + url + workplaceConfig.workplacePhoto + ')'}">
+<div class="elements-container" [style]="{'background-image': 'url(' + url + workplaceConfig?.workplacePhoto + ')', 'background-color': workplaceConfig.workplaceBackground}">
   <ngx-masonry
     [ordered]=true>
     <app-workplace-element

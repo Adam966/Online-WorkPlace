@@ -28,7 +28,7 @@ export class WorkplaceScreenComponent implements OnInit {
   @Select(WorkplaceElementState)
   workPlaceElements$: Observable<WorkplaceElementModel[]>;
 
-  workplaceConfig: {workplacePhoto: number, colorOfElement: string};
+  workplaceConfig: {workplacePhoto: number, colorOfElement: string, workplaceBackground: string};
   url = WORKPLACE_PHOTO;
   constructor(
     private elementApiService: WorkplaceElementApiService,
@@ -41,7 +41,7 @@ export class WorkplaceScreenComponent implements OnInit {
     this.changeToolbarStatus();
     this.setApplicationTitle();
 
-    this.workplaceConfig = window.history.state as {workplacePhoto: number, colorOfElement: string};
+    this.workplaceConfig = window.history.state as {workplacePhoto: number, colorOfElement: string, workplaceBackground: string};
   }
 
   openEditDialog(element: WorkplaceElementModel, i: number): void {
