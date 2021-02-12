@@ -94,9 +94,13 @@
   </mat-menu>
   <!-- APPLICATION CREATE ELEMENTS MENU -->
   <mat-menu #add class="my-menu">
-    <button mat-menu-item>
+    <button mat-menu-item (click)="openUserDialog()">
       <mat-icon>add</mat-icon>
       Add User
+    </button>
+    <button mat-menu-item (click)="openLabelDialog()">
+      <mat-icon>add</mat-icon>
+      Add Label
     </button>
     <button mat-menu-item (click)="createTaskDialog()">
       <mat-icon>add</mat-icon>

@@ -11,6 +11,8 @@ import {LoginState, Logout} from '../../store/login';
 import {LabelModel} from '../../models/label.model';
 import {WorkplaceSettingsState} from '../../store/workplace-settings';
 import {DefaultElements, SortElements} from '../../store/workplace-element';
+import {AddLabelComponent} from './workplace-settings/add-label/add-label/add-label.component';
+import {AddUserComponent} from './workplace-settings/add-user/add-user/add-user.component';
 
 @Component({
   selector: 'app-container',
@@ -103,5 +105,13 @@ export class ContainerComponent implements OnInit {
   removeSort(): DefaultElements {
     this.input = '';
     return new DefaultElements();
+  }
+
+  openUserDialog(): void {
+    this.dialog.open(AddUserComponent);
+  }
+
+  openLabelDialog(): void {
+    this.dialog.open(AddLabelComponent);
   }
 }

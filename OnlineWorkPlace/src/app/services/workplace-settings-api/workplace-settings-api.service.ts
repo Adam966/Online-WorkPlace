@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {UserModel} from '../../models/application-models/user.model';
-import {GET_WORKPLACE_LABELS, GET_WORKPLACE_USERS} from '../url_const';
+import {ADD_WORKPLACE_LABEL, ADD_WORKPLACE_USER, GET_WORKPLACE_LABELS, GET_WORKPLACE_USERS} from '../url_const';
 import {LabelModel} from '../../models/label.model';
 import {AbstractApiService} from '../abstract-api.service';
 
@@ -22,5 +22,15 @@ export class WorkplaceSettingsApiService extends AbstractApiService{
   getWorkplaceLabels(workplaceId: number): Observable<LabelModel[]> {
     this.urlPrefix = `workplace/${workplaceId}/`;
     return this.http.get<LabelModel[]>(this.createUrl(GET_WORKPLACE_LABELS));
+  }
+
+  addWorkplaceUser(workplaceId: number, userId: number): Observable<UserModel> {
+    this.urlPrefix = `workplace/${workplaceId}`;
+    return this.http.post<null>(this.createUrl(ADD_WORKPLACE_USER + `/${userId}`), null);
+  }
+
+  addWorkplaceLabel(workplaceId: number, data: LabelModel): Observable<LabelModel> {
+    this.urlPrefix = `workplace/${workplaceId}/`;
+    return this.http.post<LabelModel>(this.createUrl(ADD_WORKPLACE_LABEL), data);
   }
 }

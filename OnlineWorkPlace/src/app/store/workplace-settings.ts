@@ -3,19 +3,37 @@ import {Injectable} from '@angular/core';
 import {WorkplaceSettingsApiService} from '../services/workplace-settings-api/workplace-settings-api.service';
 import {UserModel} from '../models/application-models/user.model';
 import {LabelModel} from '../models/label.model';
-import {WorkplaceElementApiService} from '../services/workplace-element-api/workplace-element-api.service';
 
 export class GetWorkplaceUsers {
   static readonly type = '[WorkPlace Settings] GetWorkplaceUsers';
-  constructor(public workplaceId: number) {}
+
+  constructor(public workplaceId: number) {
+  }
 }
 
 export class GetWorkplaceLabels {
   static readonly type = '[WorkPlace Settings] GetWorkplaceLabels';
-  constructor(public workplaceId: number) {}
+
+  constructor(public workplaceId: number) {
+  }
 }
 
-@State<{ users: UserModel[], labels: LabelModel[] }> ({
+export class AddWorkplaceUser {
+  static readonly type = '[WorkPlace Settings] AddWorkplaceUser';
+
+  constructor(public workplaceId: number) {
+  }
+}
+
+export class AddWorkplaceLabel {
+  static readonly type = '[WorkPlace Settings] AddWorkplaceLabel';
+
+  constructor(public workplaceId: number) {
+  }
+}
+
+
+@State<{ users: UserModel[], labels: LabelModel[] }>({
   name: 'workplaceSettings',
   defaults: {
     users: [],
@@ -24,7 +42,8 @@ export class GetWorkplaceLabels {
 })
 @Injectable()
 export class WorkplaceSettingsState {
-  constructor(private workplaceSettingsService: WorkplaceSettingsApiService, private workplaceElementService: WorkplaceElementApiService) {}
+  constructor(private workplaceSettingsService: WorkplaceSettingsApiService) {
+  }
 
   @Selector()
   static users(currentState: { users: UserModel[], labels: LabelModel[] }): UserModel[] {
@@ -52,5 +71,15 @@ export class WorkplaceSettingsState {
         const state = ctx.getState();
         ctx.setState({users: state.users, labels: data});
       });
+  }
+
+  @Action(AddWorkplaceLabel)
+  addWorkplaceLabel(ctx: StateContext<{ users: UserModel[], labels: LabelModel[] }>, action: AddWorkplaceLabel): void {
+
+  }
+
+  @Action(AddWorkplaceUser)
+  addWorkplaceUser(ctx: StateContext<{ users: UserModel[], labels: LabelModel[] }>, action: AddWorkplaceUser): void {
+
   }
 }
