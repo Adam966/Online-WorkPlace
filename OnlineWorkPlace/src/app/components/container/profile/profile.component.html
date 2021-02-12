@@ -1,6 +1,6 @@
 <div class="profile-container">
   <div class="user-photo-content">
-    <img [src]="image ? image : 'http://localhost:3000/user-photo?userId=1'" alt="">
+    <img [src]="image ? image : photoUrl" alt="">
     <p>
       <input type="file" id="photo-input" (change)="choosePhoto($event.target.files[0])" hidden>
       <label for="photo-input" class="choose-img">Choose photo</label>

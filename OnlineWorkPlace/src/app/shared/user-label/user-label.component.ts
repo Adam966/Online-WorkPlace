@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../../models/application-models/user.model';
+import { UserModel} from '../../models/application-models/user.model';
 import {USER_PHOTO} from '../../services/url_const';
 
 @Component({
@@ -9,7 +9,7 @@ import {USER_PHOTO} from '../../services/url_const';
 })
 export class UserLabelComponent implements OnInit {
   @Input()
-  user: User;
+  user: UserModel;
 
   showImage = true;
   initials: string;
@@ -20,10 +20,10 @@ export class UserLabelComponent implements OnInit {
   ngOnInit(): void {
     if (this.user.photo) {
       this.showImage = true;
-      this.photo = USER_PHOTO + this.user.photo.toString();
+      this.photo = USER_PHOTO + this.user.id.toString();
     } else {
       this.showImage = false;
-      this.initials = this.user.username.charAt(0) + this.user.usersurname.charAt(0);
+      this.initials = this.user.userName.charAt(0) + this.user.userSurname.charAt(0);
       this.photo = '';
     }
   }

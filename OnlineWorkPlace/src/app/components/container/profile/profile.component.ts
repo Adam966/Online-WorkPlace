@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
-import {SetApplicationToolbarState, SetApplicationToolbarTitle} from '../../../store/application';
+import {SetApplicationToolbarTitle} from '../../../store/application';
+import {USER_PHOTO} from '../../../services/url_const';
+import {Select} from '@ngxs/store';
+import {LoginState} from '../../../store/login';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -10,10 +14,17 @@ import {SetApplicationToolbarState, SetApplicationToolbarTitle} from '../../../s
 })
 export class ProfileComponent implements OnInit {
   image = '';
+  photoUrl: string;
 
-  constructor(private sanitizer: DomSanitizer) { }
+  @Select(LoginState.userId)
+  userId$: Observable<number>;
+  userId: number;
+
+  constructor(private sanitizer: DomSanitizer) {
+  }
 
   ngOnInit(): void {
+   this.userId$.subscribe(data => this.photoUrl = USER_PHOTO + data);
   }
 
   choosePhoto(file: File): void {

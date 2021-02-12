@@ -3,10 +3,10 @@
     [ngStyle]="{'display': photo ? 'initial' : 'none' }"
     class="img"
     [src]="photo"
-    [title]="user?.username + ' ' + user?.usersurname">
+    [title]="user?.userName + ' ' + user?.userSurname">
   <div
     *ngIf="!showImage"
-    [title]="user?.username + ' ' + user?.usersurname"
+    [title]="user?.userName + ' ' + user?.userSurname"
     class="img avatar-content">
     {{ initials }}
   </div>

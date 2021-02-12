@@ -33,9 +33,9 @@ export class HandleResponseInterceptor implements HttpInterceptor {
         UtilsMessage.showMessage(error.error.message, UtilsMessage.MESSAGE_STATUS_ERROR);
       }
     } else if (error.status > 500) {
-
+      UtilsMessage.showMessage(UtilsMessage.MESSAGE_UNEXPECTED_ERROR, UtilsMessage.MESSAGE_STATUS_ERROR);
     } else {
-
+      UtilsMessage.showMessage(UtilsMessage.MESSAGE_UNEXPECTED_ERROR, UtilsMessage.MESSAGE_STATUS_ERROR);
     }
     console.log(error);
     return throwError(error);

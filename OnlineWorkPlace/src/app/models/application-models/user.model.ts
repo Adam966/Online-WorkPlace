@@ -1,9 +1,10 @@
 export interface UserModel {
   id: number;
-  username: string;
-  usersurname: string;
+  userName: string;
+  userSurname: string;
   email: string;
   token: string;
+  photo: number;
 }
 
 export interface User {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {WorkplaceSettingsState} from '../../../store/workplace-settings';
 import {Select} from '@ngxs/store';
-import {User} from '../../../models/application-models/user.model';
+import {UserModel} from '../../../models/application-models/user.model';
 import {LabelModel} from '../../../models/label.model';
 import {Observable} from 'rxjs';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
@@ -14,14 +14,21 @@ import {SetApplicationToolbarTitle} from '../../../store/application';
 })
 export class WorkplaceSettingsComponent implements OnInit {
   @Select(WorkplaceSettingsState.users)
-  users$!: Observable<User[]>;
+  users$!: Observable<UserModel[]>;
 
   @Select(WorkplaceSettingsState.labels)
   labels$!: Observable<LabelModel[]>;
 
+/*
+  @Select(LoginState.userId)
+  userId$: Observable<number>;
+  userId: number;
+*/
+
   constructor() { }
 
   ngOnInit(): void {
+    // this.userId$.subscribe(data => this.userId = data);
   }
 
   @Dispatch()
@@ -33,7 +40,7 @@ export class WorkplaceSettingsComponent implements OnInit {
 
   }
 
-  deleteUser(user: User): void {
+  deleteUser(user: UserModel): void {
 
   }
 }
