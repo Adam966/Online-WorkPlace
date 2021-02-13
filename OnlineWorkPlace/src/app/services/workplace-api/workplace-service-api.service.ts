@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {WorkplaceModel} from '../../models/workplace.model';
@@ -20,23 +20,28 @@ export class WorkplaceServiceApi extends AbstractApiService {
 
   getAllWorkplaces(userId: string): Observable<WorkplaceModel[]> {
     return this.http.get<WorkplaceModel[]>(this.createUrl(GET_ALL_WORKPLACES), {
-      params: new HttpParams().append('userId', userId.toString())});
+      params: new HttpParams().append('userId', userId.toString())
+    });
   }
 
   addWorkplace(data: WorkplaceModel, file: File): void {
     this.http.post(this.createUrl(ADD_WORKPLACE), data)
       .subscribe((element: WorkplaceModel) => {
-        this.photoService.addWorkplacePhoto(file, element.id)
-          .pipe(
-            catchError(_ => {
-              UtilsMessage.showMessage(UtilsMessage.MESSAGE_UNEXPECTED_ERROR, UtilsMessage.MESSAGE_STATUS_ERROR);
-              return null;
-            })
-          )
-          .subscribe(_ => {
-            this.storeWorkplace(element);
-            UtilsMessage.showMessage(UtilsMessage.MESSAGE_WORKPLACE_CREATED, UtilsMessage.MESSAGE_STATUS_POSITIVE);
-          });
+        if (element.photo) {
+          this.photoService.addWorkplacePhoto(file, element.id)
+            .pipe(
+              catchError(_ => {
+                UtilsMessage.showMessage(UtilsMessage.MESSAGE_UNEXPECTED_ERROR, UtilsMessage.MESSAGE_STATUS_ERROR);
+                return null;
+              })
+            )
+            .subscribe(_ => {
+              this.storeWorkplace(element);
+              UtilsMessage.showMessage(UtilsMessage.MESSAGE_WORKPLACE_CREATED, UtilsMessage.MESSAGE_STATUS_POSITIVE);
+            });
+          return;
+        }
+        this.storeWorkplace(element);
       });
   }
 

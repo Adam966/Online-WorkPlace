@@ -30,6 +30,10 @@ export class ContainerComponent implements OnInit {
   userId$!: Observable<number>;
   userId: number;
 
+  @Select(ApplicationState.currentWorkplaceId)
+  workplaceId$: Observable<string>;
+  workplaceId: string;
+
   @Select(ApplicationState.toolbarTitle)
   toolbarTitle$!: Observable<string>;
 
@@ -42,7 +46,8 @@ export class ContainerComponent implements OnInit {
 
   input: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.currentWorkplaceId$.subscribe(data => {
@@ -54,6 +59,8 @@ export class ContainerComponent implements OnInit {
       this.userId = userId;
       this.navigateToHome(userId);
     });
+
+    this.workplaceId$.subscribe(id => this.workplaceId = id);
   }
 
   navigateToHome(userId: number): void {
@@ -61,7 +68,7 @@ export class ContainerComponent implements OnInit {
       ['workplace'],
       {
         relativeTo: this.route,
-        queryParams: { userId },
+        queryParams: {userId},
         queryParamsHandling: 'merge'
       }
     );

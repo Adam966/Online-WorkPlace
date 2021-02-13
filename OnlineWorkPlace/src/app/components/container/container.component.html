@@ -82,7 +82,7 @@
       <mat-icon>person</mat-icon>
       Profile
     </button>
-    <button mat-menu-item (click)="navigate('settings')">
+    <button mat-menu-item *ngIf="workplaceId" (click)="navigate('settings')">
       <mat-icon>settings</mat-icon>
       Settings
     </button>
