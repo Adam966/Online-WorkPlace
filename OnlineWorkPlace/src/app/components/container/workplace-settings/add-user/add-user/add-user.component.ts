@@ -6,6 +6,7 @@ import {ApplicationState} from '../../../../../store/application';
 import {Observable} from 'rxjs';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {AddWorkplaceUser} from '../../../../../store/workplace-settings';
+import {UtilsMessage} from '../../../../../shared/utils/utils-message';
 
 @Component({
   selector: 'app-add-user',
@@ -30,6 +31,7 @@ export class AddUserComponent implements OnInit {
     this.workplaceSettingsService.addWorkplaceUser(this.chosenUser.id.toString(), this.workplaceId)
       .subscribe(_ => {
         this.addUserToWorkplace();
+        UtilsMessage.showMessage(UtilsMessage.MESSAGE_USER_ADDED, UtilsMessage.MESSAGE_STATUS_POSITIVE);
       });
   }
 

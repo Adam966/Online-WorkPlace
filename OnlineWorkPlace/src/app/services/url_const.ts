@@ -15,6 +15,8 @@ export const GET_WORKPLACE_LABELS = 'labels';
 export const ADD_WORKPLACE_USER = 'user';
 export const ADD_WORKPLACE_LABEL = 'label';
 export const FIND_USERS_BY_EMAIL = 'users';
+export const DELETE_WORKPLACE_USER = 'user/';
+export const DELETE_WORKPLACE_LABEL = 'label/';
 
 ////////////////////// WORKPLACE ELEMENTS API //////////////////////
 export const GET_ELEMENTS = 'elements';

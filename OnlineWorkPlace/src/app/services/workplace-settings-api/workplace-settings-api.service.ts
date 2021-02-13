@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {UserModel} from '../../models/application-models/user.model';
 import {
   ADD_WORKPLACE_LABEL,
-  ADD_WORKPLACE_USER,
+  ADD_WORKPLACE_USER, DELETE_WORKPLACE_LABEL, DELETE_WORKPLACE_USER,
   FIND_USERS_BY_EMAIL,
   GET_WORKPLACE_LABELS,
   GET_WORKPLACE_USERS
@@ -47,5 +47,15 @@ export class WorkplaceSettingsApiService extends AbstractApiService {
         email
       }
     });
+  }
+
+  deleteWorkplaceUser(workplaceId: number, userId: number): Observable<any> {
+    this.urlPrefix = `workplace/${workplaceId}/`;
+    return this.http.delete(this.createUrl(DELETE_WORKPLACE_USER, userId.toString()));
+  }
+
+  deleteWorkplaceLabel(workplaceId: number, labelId: number): Observable<any> {
+    this.urlPrefix = `workplace/${workplaceId}/`;
+    return this.http.delete(this.createUrl(DELETE_WORKPLACE_LABEL, labelId.toString()));
   }
 }
