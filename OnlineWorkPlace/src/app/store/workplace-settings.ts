@@ -6,32 +6,27 @@ import {LabelModel} from '../models/label.model';
 
 export class GetWorkplaceUsers {
   static readonly type = '[WorkPlace Settings] GetWorkplaceUsers';
-
   constructor(public workplaceId: number) {
   }
 }
 
 export class GetWorkplaceLabels {
   static readonly type = '[WorkPlace Settings] GetWorkplaceLabels';
-
   constructor(public workplaceId: number) {
   }
 }
 
 export class AddWorkplaceUser {
   static readonly type = '[WorkPlace Settings] AddWorkplaceUser';
-
-  constructor(public workplaceId: number) {
+  constructor(public user: UserModel) {
   }
 }
 
 export class AddWorkplaceLabel {
   static readonly type = '[WorkPlace Settings] AddWorkplaceLabel';
-
-  constructor(public workplaceId: number) {
+  constructor(public label: LabelModel) {
   }
 }
-
 
 @State<{ users: UserModel[], labels: LabelModel[] }>({
   name: 'workplaceSettings',
@@ -75,11 +70,13 @@ export class WorkplaceSettingsState {
 
   @Action(AddWorkplaceLabel)
   addWorkplaceLabel(ctx: StateContext<{ users: UserModel[], labels: LabelModel[] }>, action: AddWorkplaceLabel): void {
-
+    const state = ctx.getState();
+    ctx.setState({ users: state.users, labels: [...state.labels, action.label]});
   }
 
   @Action(AddWorkplaceUser)
   addWorkplaceUser(ctx: StateContext<{ users: UserModel[], labels: LabelModel[] }>, action: AddWorkplaceUser): void {
-
+    const state = ctx.getState();
+    ctx.setState({ labels: state.labels, users: [...state.users, action.user]});
   }
 }

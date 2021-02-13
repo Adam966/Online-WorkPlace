@@ -9,10 +9,12 @@ import {AbstractApiService} from '../abstract-api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class WorkplaceSettingsApiService extends AbstractApiService{
+export class WorkplaceSettingsApiService extends AbstractApiService {
   constructor(private http: HttpClient) {
     super();
   }
+
+
 
   getWorkplaceUsers(workplaceId: number): Observable<UserModel[]> {
     this.urlPrefix = `workplace/${workplaceId}/`;
@@ -24,12 +26,12 @@ export class WorkplaceSettingsApiService extends AbstractApiService{
     return this.http.get<LabelModel[]>(this.createUrl(GET_WORKPLACE_LABELS));
   }
 
-  addWorkplaceUser(workplaceId: number, userId: number): Observable<UserModel> {
+  addWorkplaceUser(userId: string, workplaceId: string): Observable<UserModel> {
     this.urlPrefix = `workplace/${workplaceId}`;
     return this.http.post<null>(this.createUrl(ADD_WORKPLACE_USER + `/${userId}`), null);
   }
 
-  addWorkplaceLabel(workplaceId: number, data: LabelModel): Observable<LabelModel> {
+  addWorkplaceLabel(data: LabelModel, workplaceId: string): Observable<LabelModel> {
     this.urlPrefix = `workplace/${workplaceId}/`;
     return this.http.post<LabelModel>(this.createUrl(ADD_WORKPLACE_LABEL), data);
   }

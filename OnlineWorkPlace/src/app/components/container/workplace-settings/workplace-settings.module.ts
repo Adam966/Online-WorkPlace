@@ -27,6 +27,6 @@ const routes = [
         MatCheckboxModule,
         SharedModule,
         FormsModule,
-    ]
+    ],
 })
 export class WorkplaceSettingsModule { }

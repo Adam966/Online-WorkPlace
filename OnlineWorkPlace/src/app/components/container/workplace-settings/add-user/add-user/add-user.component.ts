@@ -16,6 +16,6 @@ export class AddUserComponent implements OnInit {
   }
 
   create(user: UserModel): void {
-    this.workplaceSettingsService.addWorkplaceUser(1, user.id);
+    this.workplaceSettingsService.addWorkplaceUser(user.id.toString());
   }
 }
