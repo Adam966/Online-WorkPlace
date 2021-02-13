@@ -1,24 +1,31 @@
 <div class="add-user-container">
   <h1>Add workplace user</h1>
-  <mat-form-field appearance="outline">
-    <mat-label>Find new user</mat-label>
-    <input type="text"
-           placeholder="Find User"
-           matInput
-           ngModel
-           #user="ngModel"
-           [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let user of foundUsers">
-        <app-user-label [user]="user"></app-user-label>
-        <span>{{ user.userName + '' + user.userSurname }}</span>
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+  <div class="choose-user">
+    <mat-form-field appearance="outline">
+      <mat-label>Find new user</mat-label>
+      <input type="text"
+             placeholder="Find User"
+             matInput
+             ngModel
+             required
+             #user="ngModel"
+             [matAutocomplete]="auto"
+             (change)="getUsersByEmail(user.value)">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let userModel of foundUsers" [value]="userModel.userName + ' ' + userModel.userSurname">
+          <div class="user" (click)="chooseUser(userModel)">
+            <app-user-label [user]="userModel"></app-user-label>
+            <span>{{ userModel.userName + ' ' + userModel.userSurname }}</span>
+          </div>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-spinner [diameter]="35" *ngIf="isLoading"></mat-spinner>
+  </div>
   <button mat-raised-button
           color="primary"
           [disabled]="user.invalid"
-          (click)="create(user.value)">
+          (click)="create()">
     Add
   </button>
 </div>
