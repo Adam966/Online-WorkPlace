@@ -10,11 +10,16 @@ export const GET_ALL_WORKPLACES = 'workplaces';
 export const ADD_WORKPLACE = 'workplace';
 export const WORKPLACE_PHOTO = 'http://localhost:8080/api/workplace-photo?workplaceId=';
 export const ADD_WORKPLACE_PHOTO = 'workplace-photo';
+export const GET_WORKPLACE_USERS = 'users';
+export const GET_WORKPLACE_LABELS = 'labels';
+export const ADD_WORKPLACE_USER = 'user';
+export const ADD_WORKPLACE_LABEL = 'label';
+export const FIND_USERS_BY_EMAIL = 'users';
+export const DELETE_WORKPLACE_USER = 'user/';
+export const DELETE_WORKPLACE_LABEL = 'label/';
 
 ////////////////////// WORKPLACE ELEMENTS API //////////////////////
 export const GET_ELEMENTS = 'elements';
-export const GET_WORKPLACE_USERS = 'users';
-export const GET_WORKPLACE_LABELS = 'labels';
 
 ////////////////////// STORAGE API //////////////////////
 export const GET_ALL_FILES = 'workplace-storage';

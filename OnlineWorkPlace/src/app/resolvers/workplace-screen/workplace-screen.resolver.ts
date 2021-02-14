@@ -21,8 +21,8 @@ export class WorkplaceScreenResolver implements Resolve<WorkplaceElementModel[]>
       .pipe(
         tap(data => {
           this.saveWorkplaceElements(data);
-          this.getWorkplaceLabels(+route.paramMap.get('workplaceId').toString());
-          this.getWorkplaceUsers(+route.paramMap.get('workplaceId'));
+          this.getWorkplaceLabels(Number(+route.paramMap.get('workplaceId')));
+          this.getWorkplaceUsers(Number(+route.paramMap.get('workplaceId')));
         })
       );
   }

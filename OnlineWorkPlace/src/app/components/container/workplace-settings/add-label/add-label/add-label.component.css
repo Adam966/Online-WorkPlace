@@ -1,0 +1,15 @@
+.add-label-container {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  min-width: 350px;
+}
+
+h1 {
+  align-self: flex-start;
+}
+
+mat-form-field {
+  width: 100%;
+}

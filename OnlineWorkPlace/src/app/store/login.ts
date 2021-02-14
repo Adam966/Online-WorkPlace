@@ -1,7 +1,6 @@
 import {Action, Selector, State, StateContext, Store} from '@ngxs/store';
 import {UserModel} from '../models/application-models/user.model';
 import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
 import {Navigate} from '@ngxs/router-plugin';
 
 export class Login {
@@ -16,7 +15,7 @@ export class Logout {
 
 @State<UserModel> ({
   name: 'user',
-  defaults: { id: null, username: null, usersurname: null, email: null, token: null }
+  defaults: { id: null, userName: null, userSurname: null, email: null, token: null, photo: null }
 })
 @Injectable()
 export class LoginState {

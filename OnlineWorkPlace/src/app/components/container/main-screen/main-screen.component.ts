@@ -9,7 +9,6 @@ import {Select} from '@ngxs/store';
 import {WorkplaceModel} from '../../../models/workplace.model';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {SetApplicationToolbarState, SetApplicationToolbarTitle} from '../../../store/application';
-import {UtilsMessage} from '../../../shared/utils/utils-message';
 import {LoginState} from '../../../store/login';
 
 
@@ -46,7 +45,7 @@ export class MainScreenComponent implements OnInit {
     this.dialogRef = this.dialog.open(CreateWorkplaceDialogComponent);
     this.dialogRef.afterClosed()
       .subscribe(workplace => {
-        if (workplace.workplace) {
+        if (workplace?.workplace) {
           const file = workplace.file;
           workplace = {
             ...workplace.workplace, adminId: this.userId.toString(),

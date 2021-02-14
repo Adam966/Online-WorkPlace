@@ -29,9 +29,9 @@
           [user]="user">
         </app-user-label>
         <div>
-          <span>{{ user.username }}</span>
+          <span>{{ user.userName }}</span>
           <span>&nbsp;</span>
-          <span>{{ user.usersurname }}</span>
+          <span>{{ user.userSurname }}</span>
         </div>
         <mat-icon matTooltip="Delete user" (click)="deleteUser(user)">delete</mat-icon>
       </div>
@@ -64,9 +64,9 @@
           <app-user-label
             [user]="user">
           </app-user-label>
-          <span>{{ user.username }}</span>
+          <span>{{ user.userName }}</span>
           <span>&nbsp;</span>
-          <span>{{ user.usersurname }}</span>
+          <span>{{ user.userSurname }}</span>
         </div>
         <mat-checkbox color="primary">add user</mat-checkbox>
         <mat-checkbox color="primary">delete user</mat-checkbox>

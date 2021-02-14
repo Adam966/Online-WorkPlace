@@ -1,0 +1,19 @@
+<div class="add-label-container">
+  <h1>Add Workplace label</h1>
+  <mat-form-field appearance="outline">
+    <mat-label>Add label</mat-label>
+    <input ngModel matInput type="text" required #name="ngModel">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Add label</mat-label>
+    <input ngModel="" matInput type="color" required #color="ngModel">
+  </mat-form-field>
+  <button
+    (click)="create(name.value, color.value)"
+    color="primary"
+    mat-raised-button
+    [disabled]="name.invalid || color.invalid"
+    mat-dialog-close>
+    Add
+  </button>
+</div>

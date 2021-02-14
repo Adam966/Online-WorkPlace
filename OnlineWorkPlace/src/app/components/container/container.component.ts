@@ -11,6 +11,8 @@ import {LoginState, Logout} from '../../store/login';
 import {LabelModel} from '../../models/label.model';
 import {WorkplaceSettingsState} from '../../store/workplace-settings';
 import {DefaultElements, SortElements} from '../../store/workplace-element';
+import {AddLabelComponent} from './workplace-settings/add-label/add-label/add-label.component';
+import {AddUserComponent} from './workplace-settings/add-user/add-user/add-user.component';
 
 @Component({
   selector: 'app-container',
@@ -28,6 +30,10 @@ export class ContainerComponent implements OnInit {
   userId$!: Observable<number>;
   userId: number;
 
+  @Select(ApplicationState.currentWorkplaceId)
+  workplaceId$: Observable<string>;
+  workplaceId: string;
+
   @Select(ApplicationState.toolbarTitle)
   toolbarTitle$!: Observable<string>;
 
@@ -40,7 +46,8 @@ export class ContainerComponent implements OnInit {
 
   input: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.currentWorkplaceId$.subscribe(data => {
@@ -52,6 +59,8 @@ export class ContainerComponent implements OnInit {
       this.userId = userId;
       this.navigateToHome(userId);
     });
+
+    this.workplaceId$.subscribe(id => this.workplaceId = id);
   }
 
   navigateToHome(userId: number): void {
@@ -59,7 +68,7 @@ export class ContainerComponent implements OnInit {
       ['workplace'],
       {
         relativeTo: this.route,
-        queryParams: { userId },
+        queryParams: {userId},
         queryParamsHandling: 'merge'
       }
     );
@@ -103,5 +112,13 @@ export class ContainerComponent implements OnInit {
   removeSort(): DefaultElements {
     this.input = '';
     return new DefaultElements();
+  }
+
+  openUserDialog(): void {
+    this.dialog.open(AddUserComponent);
+  }
+
+  openLabelDialog(): void {
+    this.dialog.open(AddLabelComponent);
   }
 }
