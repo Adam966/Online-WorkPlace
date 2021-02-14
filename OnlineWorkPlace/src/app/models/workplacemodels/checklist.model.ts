@@ -1,7 +1,7 @@
 import {WorkplaceElementModel} from './workplaceelement.model';
 import {TaskModel} from './task.model';
 import {User} from '../application-models/user.model';
-import {LabelModel} from '../label.model';
+import {LabelModel} from '../application-models/label.model';
 
 export class ChecklistModel implements WorkplaceElementModel{
   constructor(name: string,

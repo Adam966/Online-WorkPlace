@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DeleteWorkplaceLabel, DeleteWorkplaceUser, WorkplaceSettingsState} from '../../../store/workplace-settings';
 import {Select} from '@ngxs/store';
 import {UserModel} from '../../../models/application-models/user.model';
-import {LabelModel} from '../../../models/label.model';
+import {LabelModel} from '../../../models/application-models/label.model';
 import {Observable} from 'rxjs';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {ApplicationState, SetApplicationToolbarTitle} from '../../../store/application';

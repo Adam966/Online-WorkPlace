@@ -42,13 +42,14 @@
         <mat-menu #userList="matMenu" class="pop-up-menu">
           <ul>
             <li
+              matTooltip="Add user."
               (click)="addElement(user)"
               *ngFor="let user of users$ | async">
               <app-user-label
                 [user]="user"
                 class="users-inline"
               ></app-user-label>
-              <span class="users-inline">{{user.username + ' ' + user.usersurname}}</span>
+              <span class="users-inline">{{user.userName + ' ' + user.userSurname}}</span>
             </li>
           </ul>
         </mat-menu>
@@ -62,6 +63,7 @@
               (click)="addElement(label)"
               *ngFor="let label of labels$ | async">
               <app-color-label
+                matTooltip="Add label."
                 [label]="label"
                 class="element">
               </app-color-label>
@@ -111,6 +113,7 @@
           <h3>Assigned labels</h3>
           <div>
             <app-color-label
+              matTooltip="Remove label."
               (click)="removeElement(label, i)"
               *ngFor="let label of labels; let i = index"
               [label]="label">
@@ -121,6 +124,7 @@
           <h3>Assigned user</h3>
           <div>
             <app-user-label
+              matTooltip="Remove user."
               (click)="removeElement(user, i)"
               *ngFor="let user of users; let i = index"
               [user]="user">
@@ -130,6 +134,7 @@
       </div>
     </div>
     <button
+      mat-dialog-close
       [disabled]="form.invalid"
       color="primary"
       mat-raised-button

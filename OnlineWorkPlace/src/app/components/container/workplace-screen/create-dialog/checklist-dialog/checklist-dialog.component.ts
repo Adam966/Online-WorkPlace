@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {ChecklistModel} from '../../../../../models/workplacemodels/checklist.model';
 import {Select} from '@ngxs/store';
 import {NgForm} from '@angular/forms';
-import {LabelModel} from '../../../../../models/label.model';
+import {LabelModel} from '../../../../../models/application-models/label.model';
 import {WorkplaceSettingsState} from '../../../../../store/workplace-settings';
 import {Observable} from 'rxjs';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';

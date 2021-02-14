@@ -1,4 +1,4 @@
-<div class="element-container" [style]="{'background-color': colorOfElement}">
+<div class="element-container" [style]="{'background-color': colorOfElement ? colorOfElement : 'white'}">
   <p class="title">{{element.name}}</p>
   <div>
     <app-color-label
