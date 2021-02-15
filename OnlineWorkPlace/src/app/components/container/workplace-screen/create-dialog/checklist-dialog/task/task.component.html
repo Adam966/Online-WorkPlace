@@ -4,7 +4,7 @@
       <mat-checkbox
         color="primary"
         name="isCompleted"
-        [(ngModel)]="task.isCompleted"
+        [(ngModel)]="task.completed"
         #checkbox>
       </mat-checkbox>
       <mat-form-field>
@@ -55,7 +55,7 @@
           <app-user-label
             [user]="user">
           </app-user-label>
-          <span>{{user.username + ' ' + user.usersurname}}</span>
+          <span>{{user.userName + ' ' + user.userSurname}}</span>
         </li>
       </ul>
     </mat-menu>

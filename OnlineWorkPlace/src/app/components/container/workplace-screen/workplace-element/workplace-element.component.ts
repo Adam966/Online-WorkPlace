@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {WorkplaceElementModel} from '../../../../models/workplacemodels/workplaceelement.model';
 import {ChecklistModel} from '../../../../models/workplacemodels/checklist.model';
 import {LabelModel} from '../../../../models/application-models/label.model';
@@ -9,7 +9,7 @@ import {UserModel} from '../../../../models/application-models/user.model';
   templateUrl: './workplace-element.component.html',
   styleUrls: ['./workplace-element.component.css']
 })
-export class WorkplaceElementComponent implements OnInit {
+export class WorkplaceElementComponent implements OnInit, AfterViewInit {
   @Input()
   element: WorkplaceElementModel;
 
@@ -23,24 +23,27 @@ export class WorkplaceElementComponent implements OnInit {
   assignedLabels: LabelModel[];
   assignedUsers: UserModel[];
 
-
-  constructor() { }
+  constructor(private changes: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.assignedUsers = this.element.assignedUsers ?? [];
-    this.assignedLabels = this.element.assignedLabels ?? [];
+    this.assignedUsers = this.element.assignedUsers;
+    this.assignedLabels = this.element.assignedLabels;
 
-    if (this.element.hasOwnProperty('tasks')) {
+    if (this.element.type === 'checklist') {
       this.task = true;
       this.checkTask(this.element as ChecklistModel);
     }
   }
 
   checkTask(checklistModel: ChecklistModel): void {
-    const completed = checklistModel.tasks.filter(item => item.isCompleted).length;
-    const allTasks = checklistModel.tasks.length;
+    const completed = checklistModel.taskEntities.filter(item => item.completed).length;
+    const allTasks = checklistModel.taskEntities.length;
 
     this.isCompleted = completed === allTasks;
     this.taskInfo = `${completed}\\${allTasks}`;
+  }
+
+  ngAfterViewInit(): void {
+    this.changes.detectChanges();
   }
 }

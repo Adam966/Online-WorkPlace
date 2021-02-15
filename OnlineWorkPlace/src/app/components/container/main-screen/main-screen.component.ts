@@ -57,7 +57,7 @@ export class MainScreenComponent implements OnInit {
 
   getWorkPlace(workplace: WorkplaceModel): void {
     this.router.navigate(['main/workplace', workplace.id], {
-      state: { workplacePhoto: workplace.photo, colorOfElement: workplace.colorOfElement, workplaceBackground: workplace.backgroundColor }
+      state: { workplacePhoto: workplace.id, colorOfElement: workplace.colorOfElement, workplaceBackground: workplace.backgroundColor }
     });
   }
 

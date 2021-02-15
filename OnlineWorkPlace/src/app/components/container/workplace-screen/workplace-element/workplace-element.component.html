@@ -1,29 +1,26 @@
 <div class="element-container" [style]="{'background-color': colorOfElement ? colorOfElement : 'white'}">
   <p class="title">{{element.name}}</p>
-  <div>
+  <div class="labels-container">
     <app-color-label
-      class="labels"
       *ngFor="let label of assignedLabels"
       [label]="label"
     ></app-color-label>
   </div>
   <div
-    class="clearFloat"
     *ngIf="!task; else taskTemplate">
-    <p>{{element.description}}</p>
+    <p>{{element?.description}}</p>
   </div>
   <ng-template #taskTemplate>
-    <p class="text clearFloat">
+    <p class="text">
       <mat-icon *ngIf="!isCompleted">check_box_outline_blank</mat-icon>
       <mat-icon *ngIf="isCompleted">check_box</mat-icon>
       {{taskInfo}}
     </p>
   </ng-template>
-  <div class="scrollbar images">
+  <div class="scrollbar users-container" *ngIf="element.assignedUsers.length">
     <app-user-label
       *ngFor="let user of assignedUsers"
       [user]="user">
     </app-user-label>
   </div>
-  <div></div>
 </div>

@@ -29,7 +29,7 @@ export class ChecklistDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.data?.object) {
       this.element = this.data.object;
-      this.tasks = [...this.element?.tasks];
+      this.tasks = [...this.element?.taskEntities];
       this.labels = [...this.element.assignedLabels];
     }
   }
@@ -45,7 +45,7 @@ export class ChecklistDialogComponent implements OnInit {
 
   ////////////////////////////////// TASKS ACTIONS ///////////////////////////////////////
   addTask(): void {
-    this.tasks.push(new TaskModel('', [], false));
+    this.tasks.push({description: '', assignedUsers: [], completed: false});
   }
 
   removeTask(index: number): void {

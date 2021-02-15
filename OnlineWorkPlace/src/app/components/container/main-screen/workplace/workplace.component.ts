@@ -11,11 +11,15 @@ import {WORKPLACE_PHOTO} from '../../../../services/url_const';
 export class WorkplaceComponent implements OnInit {
   @Input()
   workPlace: WorkplaceModel;
-  url = WORKPLACE_PHOTO;
+  url = '#';
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+    if (this.workPlace.photo) {
+      this.url = WORKPLACE_PHOTO;
+    }
   }
 
 }
