@@ -78,7 +78,7 @@ export class WorkplaceElementState {
       ctx.setState(
         temp.filter((ele) => {
           let users = '';
-          ele.assignedUsers.map(user => users = users + (user.username + ' ' + user.usersurname + ', '));
+          ele.assignedUsers.map(user => users = users + (user.userName + ' ' + user.userSurname + ', '));
           return users.includes(action.value.substr(3 , action.value.length - 1));
         })
       );

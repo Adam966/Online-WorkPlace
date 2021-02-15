@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {TaskModel} from '../../../../../../models/workplacemodels/task.model';
-import {User} from '../../../../../../models/application-models/user.model';
+import {UserModel} from '../../../../../../models/application-models/user.model';
 import {Select} from '@ngxs/store';
 import {WorkplaceSettingsState} from '../../../../../../store/workplace-settings';
 import {Observable} from 'rxjs';
@@ -30,12 +30,12 @@ export class TaskComponent implements OnInit {
   @Output()
   taskChangedEmitter = new EventEmitter<{task: TaskModel, index: number}>();
 
-  users: User[] = [];
+  users: UserModel[] = [];
   descriptionChanged = false;
   userLength: number;
 
   @Select(WorkplaceSettingsState.users)
-  users$: Observable<User[]>;
+  users$: Observable<UserModel[]>;
 
   constructor() { }
 
@@ -65,7 +65,7 @@ export class TaskComponent implements OnInit {
   }
 
   //////////////////////////////// HANDLE USER LABEL /////////////////////////////////////
-  addUser(user: User): void {
+  addUser(user: UserModel): void {
     const temp = this.users.filter(data => data.photo == user.photo);
     if (temp.length !== 1) {
       this.users.push(user);

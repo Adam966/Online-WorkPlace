@@ -58,8 +58,7 @@ export class NoteThreadDialogComponent implements OnInit {
     }
   }
 
-  @Dispatch()
-  handleElement(form: NgForm): AddWorkplaceElement {
+  handleElement(form: NgForm): void {
     const data = {
       id: this.element?.id ?? null,
       name: form.value.name,
@@ -73,10 +72,8 @@ export class NoteThreadDialogComponent implements OnInit {
 
     this.elementService.addWorkPlaceElement(this.setType(data), this.currentWorkplaceId)
       .subscribe(element => {
-        return new AddWorkplaceElement(element, this?.index);
+        this.storeElement(element, element.id);
       });
-
-    return null;
   }
 
   private setDueDate(data: { name: any; description: any }, form: NgForm): void {
@@ -98,6 +95,11 @@ export class NoteThreadDialogComponent implements OnInit {
   @Dispatch()
   delete(): DeleteWorkplaceElement {
     return new DeleteWorkplaceElement(this.index);
+  }
+
+  @Dispatch()
+  storeElement(element: WorkplaceElementModel, index: number): AddWorkplaceElement {
+    return new AddWorkplaceElement(element, index);
   }
 
   ////////////////////////////////// ELEMENT ACTIONS ///////////////////////////////////////

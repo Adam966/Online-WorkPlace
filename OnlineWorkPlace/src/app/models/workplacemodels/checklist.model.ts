@@ -1,13 +1,13 @@
 import {WorkplaceElementModel} from './workplaceelement.model';
 import {TaskModel} from './task.model';
-import {User} from '../application-models/user.model';
+import {UserModel} from '../application-models/user.model';
 import {LabelModel} from '../application-models/label.model';
 
 export class ChecklistModel implements WorkplaceElementModel{
   constructor(name: string,
               tasks: TaskModel[],
               assignedLabels: LabelModel[],
-              assignedUsers: User[],
+              assignedUsers: UserModel[],
               dueDate?: Date,
               id?: number)
   {
@@ -22,5 +22,5 @@ export class ChecklistModel implements WorkplaceElementModel{
   tasks: TaskModel[];
   dueDate?: Date;
   assignedLabels: LabelModel[];
-  assignedUsers: User[];
+  assignedUsers: UserModel[];
 }

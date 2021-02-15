@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {WorkplaceElementModel} from '../../../../models/workplacemodels/workplaceelement.model';
 import {ChecklistModel} from '../../../../models/workplacemodels/checklist.model';
 import {LabelModel} from '../../../../models/application-models/label.model';
-import {User} from '../../../../models/application-models/user.model';
+import {UserModel} from '../../../../models/application-models/user.model';
 
 @Component({
   selector: 'app-workplace-element',
@@ -21,7 +21,7 @@ export class WorkplaceElementComponent implements OnInit {
   isCompleted: boolean;
 
   assignedLabels: LabelModel[];
-  assignedUsers: User[];
+  assignedUsers: UserModel[];
 
 
   constructor() { }

@@ -25,6 +25,8 @@ export class CreateWorkplaceDialogComponent implements OnInit {
 
     if (this.file) {
       workplace.backgroundColor = null;
+    } else {
+      workplace.photo = null;
     }
     this.dialog.close({workplace, file: this.file});
   }
