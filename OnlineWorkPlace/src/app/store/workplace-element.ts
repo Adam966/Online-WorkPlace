@@ -45,7 +45,8 @@ export class WorkplaceElementState {
   addWorkplace(ctx: StateContext<WorkplaceElementModel[]>, action: AddWorkplaceElement): void {
     if (action.index || action.index === 0) {
       const temp = [...ctx.getState()];
-      temp.splice(action.index, 1, action.workplaceElement);
+      const indexOfElement = temp.indexOf(action.workplaceElement);
+      temp.splice(indexOfElement, 1, action.workplaceElement);
       ctx.setState(temp);
     } else {
       const temp = [...ctx.getState()];

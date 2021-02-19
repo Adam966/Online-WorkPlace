@@ -68,11 +68,10 @@ export class NoteThreadDialogComponent implements OnInit {
       isArchived: this.element?.isArchived ?? false,
     };
     this.setDueDate(data, form);
-    console.log(data);
 
     this.elementService.addWorkPlaceElement(this.setType(data), this.currentWorkplaceId)
       .subscribe(element => {
-        this.storeElement(element, element.id);
+        this.storeElement(element, element?.id);
       });
   }
 
