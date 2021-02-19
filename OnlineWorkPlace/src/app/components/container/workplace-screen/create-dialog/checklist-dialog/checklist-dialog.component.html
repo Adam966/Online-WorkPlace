@@ -58,7 +58,7 @@
             [matDatepicker]="datePicker"
             [ngModel]="element ? element?.dueDate : ''"
             matInput
-            name="notificationDate"
+            name="dueDate"
             ngModel>
         </mat-form-field>
         <div>
@@ -75,6 +75,7 @@
     </div>
     <div class="center-button">
       <button
+        mat-dialog-close
         mat-raised-button
         color="primary"
         type="submit"

@@ -10,6 +10,10 @@ import {Observable} from 'rxjs';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {WorkplaceElementModel} from '../../../../../models/workplacemodels/workplaceelement.model';
 import {AddWorkplaceElement} from '../../../../../store/workplace-element';
+import {WorkplaceElementApiService} from '../../../../../services/workplace-element-api/workplace-element-api.service';
+import {LoginState} from '../../../../../store/login';
+import {ApplicationState} from '../../../../../store/application';
+import {UtilsMessage} from '../../../../../shared/utils/utils-message';
 
 @Component({
   selector: 'app-checklist-dialog',
@@ -24,7 +28,12 @@ export class ChecklistDialogComponent implements OnInit {
   @Select(WorkplaceSettingsState.labels)
   labels$: Observable<LabelModel[]>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any) { }
+  @Select(ApplicationState.currentWorkplaceId)
+  workplaceId$: Observable<string>;
+  workplaceId: string;
+
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private workplaceElementService: WorkplaceElementApiService) {
+  }
 
   ngOnInit(): void {
     if (this.data?.object) {
@@ -32,15 +41,26 @@ export class ChecklistDialogComponent implements OnInit {
       this.tasks = [...this.element?.taskEntities];
       this.labels = [...this.element.assignedLabels];
     }
+
+    this.workplaceId$.subscribe(workplaceId => this.workplaceId = workplaceId);
   }
 
   createCheckList(form: NgForm): void {
-    const checklist = {
+    const checklist: ChecklistModel = {
       ...form.value,
-      labels: this.labels,
-      tasks: this.tasks
+      assignedLabels: this.labels,
+      taskEntities: this.tasks,
+      isArchived: false,
+      id: this.element?.id ?? null  ,
+      type: 'checklist'
     };
-    this.addChecklist(checklist);
+
+    this.workplaceElementService.addWorkPlaceElement(checklist, this.workplaceId)
+      .subscribe(data => {
+        this.addChecklist(data);
+        console.log(checklist);
+        UtilsMessage.showMessage(UtilsMessage.MESSAGE_ELEMENT_CREATED, UtilsMessage.MESSAGE_STATUS_POSITIVE);
+      });
   }
 
   ////////////////////////////////// TASKS ACTIONS ///////////////////////////////////////
@@ -52,7 +72,7 @@ export class ChecklistDialogComponent implements OnInit {
     this.tasks.splice(index, 1);
   }
 
-  changeTask(model: {task: TaskModel, index: number}): void  {
+  changeTask(model: { task: TaskModel, index: number }): void {
     this.tasks[model.index] = model.task;
   }
 
