@@ -32,6 +32,11 @@
 
 .link-cursor {
   cursor: pointer;
+
+}
+
+.toolbar-title {
+  margin-left: 10px;
 }
 
 input {

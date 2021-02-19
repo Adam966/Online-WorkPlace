@@ -68,3 +68,7 @@ li {
 .assigned div h3 {
   margin-top: 20px;
 }
+
+app-user-label {
+  cursor: pointer;
+}

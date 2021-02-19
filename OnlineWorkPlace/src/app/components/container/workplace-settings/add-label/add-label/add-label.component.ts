@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {WorkplaceSettingsApiService} from '../../../../../services/workplace-settings-api/workplace-settings-api.service';
-import {LabelModel} from '../../../../../models/label.model';
+import {LabelModel} from '../../../../../models/application-models/label.model';
 import {Select} from '@ngxs/store';
 import {ApplicationState} from '../../../../../store/application';
 import {Observable} from 'rxjs';

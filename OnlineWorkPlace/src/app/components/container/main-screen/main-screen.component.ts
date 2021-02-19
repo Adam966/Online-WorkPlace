@@ -8,7 +8,11 @@ import {Observable} from 'rxjs';
 import {Select} from '@ngxs/store';
 import {WorkplaceModel} from '../../../models/workplace.model';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
-import {SetApplicationToolbarState, SetApplicationToolbarTitle} from '../../../store/application';
+import {
+  SetApplicationToolbarState,
+  SetApplicationToolbarTitle,
+  SetApplicationWorkplace
+} from '../../../store/application';
 import {LoginState} from '../../../store/login';
 
 
@@ -34,7 +38,8 @@ export class MainScreenComponent implements OnInit {
 
   ngOnInit(): void {
     this.changeToolbar();
-    this.setApplicationTitle();
+    // this.setApplicationTitle();
+    this.setApplicationWorkplace();
 
     this.userId$.subscribe(data => {
       this.userId = data;
@@ -57,17 +62,22 @@ export class MainScreenComponent implements OnInit {
 
   getWorkPlace(workplace: WorkplaceModel): void {
     this.router.navigate(['main/workplace', workplace.id], {
-      state: { workplacePhoto: workplace.photo, colorOfElement: workplace.colorOfElement, workplaceBackground: workplace.backgroundColor }
+      state: { workplacePhoto: workplace.id, colorOfElement: workplace.colorOfElement, workplaceBackground: workplace.backgroundColor }
     });
   }
 
-  @Dispatch()
-  setApplicationTitle(): SetApplicationToolbarTitle {
-    return new SetApplicationToolbarTitle('Online workplace');
-  }
+  // @Dispatch()
+  // setApplicationTitle(): SetApplicationToolbarTitle {
+  //   return new SetApplicationToolbarTitle('Online workplace');
+  // }
 
   @Dispatch()
   changeToolbar(): SetApplicationToolbarState {
     return new SetApplicationToolbarState(false);
+  }
+
+  @Dispatch()
+  setApplicationWorkplace(): SetApplicationWorkplace {
+    return new SetApplicationWorkplace('');
   }
 }

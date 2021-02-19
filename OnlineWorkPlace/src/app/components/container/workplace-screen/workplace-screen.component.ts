@@ -46,7 +46,7 @@ export class WorkplaceScreenComponent implements OnInit {
 
   openEditDialog(element: WorkplaceElementModel, i: number): void {
     let dialogRef: MatDialogRef<any>;
-    if (element.hasOwnProperty('tasks')) {
+    if (element.type === 'checklist') {
       dialogRef = this.dialog.open(ChecklistDialogComponent, {
         data: {
           object: element as ChecklistModel,
@@ -54,7 +54,7 @@ export class WorkplaceScreenComponent implements OnInit {
         },
         panelClass: 'dialogStyle'
       });
-    } else if (element.hasOwnProperty('dueDate')) {
+    } else if (element.type === 'note') {
       dialogRef = this.dialog.open(NoteThreadDialogComponent, {
         data: {
           type: 'Note',

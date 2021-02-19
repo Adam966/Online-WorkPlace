@@ -18,12 +18,12 @@ export class UserLabelComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    if (this.user.photo) {
+    if (this.user?.photo) {
       this.showImage = true;
-      this.photo = USER_PHOTO + this.user.id.toString();
+      this.photo = USER_PHOTO + this.user?.id.toString();
     } else {
       this.showImage = false;
-      this.initials = this.user.userName.charAt(0) + this.user.userSurname.charAt(0);
+      this.initials = this.user?.userName.charAt(0) + this.user?.userSurname.charAt(0);
       this.photo = '';
     }
   }

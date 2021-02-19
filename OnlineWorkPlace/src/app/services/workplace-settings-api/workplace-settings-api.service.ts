@@ -9,7 +9,7 @@ import {
   GET_WORKPLACE_LABELS,
   GET_WORKPLACE_USERS
 } from '../url_const';
-import {LabelModel} from '../../models/label.model';
+import {LabelModel} from '../../models/application-models/label.model';
 import {AbstractApiService} from '../abstract-api.service';
 
 @Injectable({

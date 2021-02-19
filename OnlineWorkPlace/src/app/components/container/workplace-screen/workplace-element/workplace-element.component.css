@@ -11,7 +11,7 @@
   font-weight: 550;
 }
 
-.images {
+.users-container {
   margin-top: 10px;
   display: flex;
   overflow-x: auto;
@@ -25,23 +25,18 @@
 }
 
 .text {
+  margin-top: 5px;
   font-size: 24px;
-}
-
-.labels {
-  display: flex;
-}
-
-.clearFloat {
-  clear: left;
 }
 
 p {
   word-wrap:break-word;
 }
 
-app-color-label {
-  float: left;
+.labels-container {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .scrollbar::-webkit-scrollbar-track {

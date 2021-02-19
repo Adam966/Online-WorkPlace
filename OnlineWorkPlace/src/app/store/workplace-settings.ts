@@ -2,7 +2,7 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {WorkplaceSettingsApiService} from '../services/workplace-settings-api/workplace-settings-api.service';
 import {UserModel} from '../models/application-models/user.model';
-import {LabelModel} from '../models/label.model';
+import {LabelModel} from '../models/application-models/label.model';
 
 export class GetWorkplaceUsers {
   static readonly type = '[WorkPlace Settings] GetWorkplaceUsers';

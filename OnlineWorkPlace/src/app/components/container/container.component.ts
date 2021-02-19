@@ -8,7 +8,7 @@ import {ApplicationState} from '../../store/application';
 import {Observable} from 'rxjs';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {LoginState, Logout} from '../../store/login';
-import {LabelModel} from '../../models/label.model';
+import {LabelModel} from '../../models/application-models/label.model';
 import {WorkplaceSettingsState} from '../../store/workplace-settings';
 import {DefaultElements, SortElements} from '../../store/workplace-element';
 import {AddLabelComponent} from './workplace-settings/add-label/add-label/add-label.component';
