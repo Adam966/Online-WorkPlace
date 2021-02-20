@@ -7,6 +7,7 @@ import {Select} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {MessageState} from './store/message-pop-up';
 import {MessageModel} from './models/application-models/message.model';
+import {SseNotificationApiService} from './services/sse-notification-api/sse-notification-api.service';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,8 @@ export class AppComponent implements OnInit {
   @Select(MessageState.message)
   message$!: Observable<MessageModel>;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private sseNotifications: SseNotificationApiService) {
+  }
 
   ngOnInit(): void {
     this.isLoggedIn$.subscribe(token => {
@@ -33,6 +35,8 @@ export class AppComponent implements OnInit {
         this.router.navigate(['main']);
       }
     });
+
+    this.sseNotifications.setListeners();
 
     this.router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event);
