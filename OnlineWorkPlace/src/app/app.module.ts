@@ -1,10 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { ContainerComponent } from './components/container/container.component';
-import { AppRoutingModule } from './app-routing.module';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms';
+import {ContainerComponent} from './components/container/container.component';
+import {AppRoutingModule} from './app-routing.module';
 import {NgxsModule} from '@ngxs/store';
 import {LoginState} from './store/login';
 import {WorkplaceState} from './store/workplace';
@@ -29,14 +29,16 @@ import {DocumentModule} from './components/container/document/document.module';
 import {MatOptionModule} from '@angular/material/core';
 import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
 import {NgxsRouterPluginModule} from '@ngxs/router-plugin';
+import {NotificationState} from './store/notification.state';
 
 const states = [
-    LoginState,
-    WorkplaceState,
-    WorkplaceElementState,
-    ApplicationState,
-    WorkplaceSettingsState,
-    MessageState
+  LoginState,
+  WorkplaceState,
+  WorkplaceElementState,
+  ApplicationState,
+  WorkplaceSettingsState,
+  MessageState,
+  NotificationState
 ];
 
 @NgModule({
@@ -69,9 +71,10 @@ const states = [
   ],
   providers: [
     MatDatepickerModule,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},
-    { provide: HTTP_INTERCEPTORS, useClass: HandleResponseInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: HandleResponseInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

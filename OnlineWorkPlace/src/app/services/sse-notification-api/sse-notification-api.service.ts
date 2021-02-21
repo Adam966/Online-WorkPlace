@@ -3,6 +3,10 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {NotificationModel} from '../../models/notification.model';
 import {AbstractApiService} from '../abstract-api.service';
+import {SET_NOTIFICATIONS_STREAM} from '../url_const';
+import {Dispatch} from '@ngxs-labs/dispatch-decorator';
+import {AddNewNotification} from '../../store/notification.state';
+import {UtilsMessage} from '../../shared/utils/utils-message';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +14,34 @@ import {AbstractApiService} from '../abstract-api.service';
 export class SseNotificationApiService extends AbstractApiService {
   constructor(private http: HttpClient) {
     super();
-    this.notificationsSource = this.getSseNotificationsStream();
   }
 
   private notificationsSource: EventSource;
 
-  getSseNotificationsStream(): EventSource {
-    return new EventSource('api/sse/notification/1');
+  startSseNotificationsStream(workplaceId: number, userId: number): void {
+    this.notificationsSource = new EventSource(`${this.createUrl(SET_NOTIFICATIONS_STREAM, userId.toString())}/workplace/${workplaceId}`);
+    this.setListeners();
   }
 
-  setListeners(): void {
-    this.notificationsSource.addEventListener('notification', (event) => {
-      console.log(event);
+  stopNotificationsStream(): void {
+    this.notificationsSource.close();
+  }
+
+  private setListeners(): void {
+    this.notificationsSource.addEventListener('notification', (event: MessageEvent) => {
+      const notification = JSON.parse(event.data);
+      this.addNewNotification(notification);
+      UtilsMessage.showMessage(UtilsMessage.NEW_NOTIFICATION, UtilsMessage.MESSAGE_STATUS_NEUTRAL);
     });
   }
 
-  getNotifications(): Observable<NotificationModel[]> {
+  getNotifications(workplaceId: number, userId: number): Observable<NotificationModel[]> {
     // TODO create request
-    return this.http.get<NotificationModel[]>(this.createUrl(''));
+    return this.http.get<NotificationModel[]>(this.createUrl(`${this.createUrl(SET_NOTIFICATIONS_STREAM, userId.toString())}/workplace/${workplaceId}`));
+  }
+
+  @Dispatch()
+  addNewNotification(notification: NotificationModel): AddNewNotification {
+    return new AddNewNotification(notification);
   }
 }

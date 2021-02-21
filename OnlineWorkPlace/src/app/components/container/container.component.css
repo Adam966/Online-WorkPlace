@@ -1,5 +1,5 @@
 .mat-icon {
-  padding: 0 14px;
+  margin: 0 14px;
   cursor: pointer;
 }
 .example-spacer {
@@ -12,6 +12,12 @@
 
 ::ng-deep .my-menu {
   width: 190px;
+}
+
+::ng-deep .notification {
+  max-width: 350px !important;
+  max-height: 350px !important;
+  overflow-y: scroll;
 }
 
 .isLoading {

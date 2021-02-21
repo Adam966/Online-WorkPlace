@@ -13,6 +13,8 @@ import {WorkplaceSettingsState} from '../../store/workplace-settings';
 import {DefaultElements, SortElements} from '../../store/workplace-element';
 import {AddLabelComponent} from './workplace-settings/add-label/add-label/add-label.component';
 import {AddUserComponent} from './workplace-settings/add-user/add-user/add-user.component';
+import {NotificationState} from '../../store/notification.state';
+import {NotificationModel} from '../../models/notification.model';
 
 @Component({
   selector: 'app-container',
@@ -44,6 +46,9 @@ export class ContainerComponent implements OnInit {
   @Select(WorkplaceSettingsState.labels)
   labels$: Observable<LabelModel[]>;
 
+  @Select(NotificationState)
+  notifications$: Observable<NotificationModel[]>;
+
   input: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
@@ -54,7 +59,7 @@ export class ContainerComponent implements OnInit {
       this.currentWorkplaceId = data;
     });
 
-    // TODO check if parameter working properly with different userId
+    // TODO check if parameter working properly with different userId, maybe you can access evryone
     this.userId$.subscribe(userId => {
       this.userId = userId;
       this.navigateToHome(userId);
