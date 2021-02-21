@@ -3,9 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {NotificationModel} from '../../models/notification.model';
 import {AbstractApiService} from '../abstract-api.service';
-import {SET_NOTIFICATIONS_STREAM} from '../url_const';
+import {GET_ALL_NOTIFICATIONS, SET_NOTIFICATIONS_STREAM} from '../url_const';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
-import {AddNewNotification} from '../../store/notification.state';
+import {AddNewNotification, SetNotifications} from '../../store/notification.state';
 import {UtilsMessage} from '../../shared/utils/utils-message';
 
 @Injectable({
@@ -19,8 +19,13 @@ export class SseNotificationApiService extends AbstractApiService {
   private notificationsSource: EventSource;
 
   startSseNotificationsStream(workplaceId: number, userId: number): void {
-    this.notificationsSource = new EventSource(`${this.createUrl(SET_NOTIFICATIONS_STREAM, userId.toString())}/workplace/${workplaceId}`);
-    this.setListeners();
+    this.getNotifications(workplaceId, userId)
+      .subscribe(notifications => {
+        this.notificationsSource = new EventSource(`${this.createUrl(SET_NOTIFICATIONS_STREAM, userId.toString())}/workplace/${workplaceId}`);
+        this.setListeners();
+        this.setAllNotifications(notifications);
+      });
+
   }
 
   stopNotificationsStream(): void {
@@ -36,12 +41,16 @@ export class SseNotificationApiService extends AbstractApiService {
   }
 
   getNotifications(workplaceId: number, userId: number): Observable<NotificationModel[]> {
-    // TODO create request
-    return this.http.get<NotificationModel[]>(this.createUrl(`${this.createUrl(SET_NOTIFICATIONS_STREAM, userId.toString())}/workplace/${workplaceId}`));
+    return this.http.get<NotificationModel[]>(`${this.createUrl(GET_ALL_NOTIFICATIONS, userId.toString())}/workplace/${workplaceId.toString()}`);
   }
 
   @Dispatch()
   addNewNotification(notification: NotificationModel): AddNewNotification {
     return new AddNewNotification(notification);
+  }
+
+  @Dispatch()
+  setAllNotifications(notifications: NotificationModel[]): SetNotifications {
+    return new SetNotifications(notifications);
   }
 }

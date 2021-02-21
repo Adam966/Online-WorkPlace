@@ -30,4 +30,4 @@ export const DOWNLOAD_FILE = '';
 
 ////////////////////// NOTIFICATION API //////////////////////
 export const SET_NOTIFICATIONS_STREAM = 'sse/notification/user/';
-export const GET_ALL_NOTIFICATIONS = '';
+export const GET_ALL_NOTIFICATIONS = 'notifications/user/';

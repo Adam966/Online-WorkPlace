@@ -10,6 +10,6 @@ export interface NotificationModel {
 }
 
 enum NotificationType {
-  GENERAL_INFO
+  GENERAL_INFO, USER_ADDED_TO_ELEMENT, MESSAGE_SENT_TO_USER, DUE_DATE
 }
 
