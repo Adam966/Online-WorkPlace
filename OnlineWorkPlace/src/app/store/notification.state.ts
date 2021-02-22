@@ -22,8 +22,7 @@ export class SetNotifications {
 export class NotificationState {
   @Action(AddNewNotification)
   addNewNotification(ctx: StateContext<NotificationModel[]>, action: AddNewNotification): void {
-    const list = [...ctx.getState()];
-    list.push(action.payload);
+    const list = [action.payload, ...ctx.getState()];
     ctx.setState(list);
   }
 

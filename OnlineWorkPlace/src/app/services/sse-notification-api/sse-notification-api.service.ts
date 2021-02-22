@@ -51,6 +51,6 @@ export class SseNotificationApiService extends AbstractApiService {
 
   @Dispatch()
   setAllNotifications(notifications: NotificationModel[]): SetNotifications {
-    return new SetNotifications(notifications);
+    return new SetNotifications(notifications.reverse());
   }
 }
