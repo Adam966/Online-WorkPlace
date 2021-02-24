@@ -48,6 +48,7 @@ export class ContainerComponent implements OnInit {
 
   @Select(NotificationState)
   notifications$: Observable<NotificationModel[]>;
+  freshNotifications: number;
 
   input: string;
 
@@ -55,6 +56,10 @@ export class ContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.notifications$.subscribe(data => {
+      this.freshNotifications = data.filter(notification => notification.fresh).length;
+    });
+
     this.currentWorkplaceId$.subscribe(data => {
       this.currentWorkplaceId = data;
     });
@@ -125,5 +130,9 @@ export class ContainerComponent implements OnInit {
 
   openLabelDialog(): void {
     this.dialog.open(AddLabelComponent);
+  }
+
+  removeBadgeNumber(): void {
+    this.freshNotifications = 0;
   }
 }
