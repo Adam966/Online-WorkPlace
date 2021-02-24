@@ -17,7 +17,7 @@
       {{taskInfo}}
     </p>
   </ng-template>
-  <div class="scrollbar users-container" *ngIf="element.assignedUsers.length">
+  <div class="scrollbar users-container" *ngIf="element?.assignedUsers?.length">
     <app-user-label
       *ngFor="let user of assignedUsers"
       [user]="user">

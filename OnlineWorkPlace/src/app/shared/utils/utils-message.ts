@@ -16,6 +16,7 @@ export class UtilsMessage {
   static MESSAGE_USER_ADDED =  `User was successfully added.`;
   static MESSAGE_LABEL_REMOVED =  `Label ${UtilsMessage.MESSAGE_REMOVED}`;
   static MESSAGE_USER_REMOVED =  `User ${UtilsMessage.MESSAGE_REMOVED}`;
+  static NEW_NOTIFICATION = 'You have new notification';
 
   @Dispatch()
   static showMessage(message: string, status: string, description?: string): SetPopUpMessage {

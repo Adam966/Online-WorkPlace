@@ -27,7 +27,7 @@ export class WorkplaceServiceApi extends AbstractApiService {
   addWorkplace(data: WorkplaceModel, file: File): void {
     this.http.post(this.createUrl(ADD_WORKPLACE), data)
       .subscribe((element: WorkplaceModel) => {
-        if (element.photo) {
+        if (file) {
           this.photoService.addWorkplacePhoto(file, element.id)
             .pipe(
               catchError(_ => {
@@ -42,6 +42,7 @@ export class WorkplaceServiceApi extends AbstractApiService {
           return;
         }
         this.storeWorkplace(element);
+        UtilsMessage.showMessage(UtilsMessage.MESSAGE_WORKPLACE_CREATED, UtilsMessage.MESSAGE_STATUS_POSITIVE);
       });
   }
 

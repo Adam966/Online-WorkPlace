@@ -15,7 +15,6 @@ import {
 } from '../../../store/application';
 import {LoginState} from '../../../store/login';
 
-
 @Component({
   selector: 'app-main-screen',
   templateUrl: './main-screen.component.html',

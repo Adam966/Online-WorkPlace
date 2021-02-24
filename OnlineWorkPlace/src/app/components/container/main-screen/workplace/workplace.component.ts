@@ -17,7 +17,7 @@ export class WorkplaceComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.workPlace.photo) {
+    if (this.workPlace?.photo) {
       this.url = WORKPLACE_PHOTO;
     }
   }

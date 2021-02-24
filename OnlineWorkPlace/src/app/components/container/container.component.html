@@ -49,20 +49,22 @@
         </mat-icon>
         <mat-icon
           matTooltip="Notifications"
+          [matBadgeHidden]="!freshNotifications"
           matBadgeOverlap="true"
           matBadgeSize="small"
-          matBadge="15"
+          [matBadge]="freshNotifications"
           matBadgeColor="warn"
           [matMenuTriggerFor]="notifications">
           notifications
         </mat-icon>
+        <!-- TODO change to only not seen notifications -->
       </ng-container>
       <mat-icon [matMenuTriggerFor]="menu">keyboard_arrow_down</mat-icon>
     </mat-toolbar-row>
   </mat-toolbar>
   <!-- APPLICATION MENU SETTINGS -->
   <mat-menu class="my-menu" #menu="matMenu">
-    <p mat-menu-item><img src="" alt="">Adam Ivan</p>
+    <p mat-menu-item><img src="">Adam Ivan</p>
     <hr>
     <button mat-menu-item (click)="navigateProfile()">
       <mat-icon>person</mat-icon>
@@ -102,7 +104,8 @@
     </button>
   </mat-menu>
   <!-- APPLICATION NOTIFICATIONS MENU -->
-  <mat-menu #notifications class="my-menu">
+  <mat-menu #notifications class="notification" (click)="removeBadgeNumber()">
+    <app-notification *ngFor="let notification of notifications$ | async" [notification]="notification"></app-notification>
   </mat-menu>
   <!-- APPLICATION LOADING SCREEN -->
   <ng-template [ngIf]="(isLoading$ | async)">

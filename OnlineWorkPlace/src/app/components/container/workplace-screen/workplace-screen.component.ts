@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {WorkplaceElementModel} from '../../../models/workplacemodels/workplaceelement.model';
 import {WorkplaceElementApiService} from '../../../services/workplace-element-api/workplace-element-api.service';
 import {Select} from '@ngxs/store';
 import {Observable} from 'rxjs';
-import { WorkplaceElementState} from '../../../store/workplace-element';
+import {WorkplaceElementState} from '../../../store/workplace-element';
 import {NoteModel} from '../../../models/workplacemodels/note.model';
 import {ThreadModel} from '../../../models/workplacemodels/thread.model';
 import {NoteThreadDialogComponent} from './create-dialog/note-thread-dialog/note-thread-dialog.component';
@@ -12,36 +12,58 @@ import {ChecklistDialogComponent} from './create-dialog/checklist-dialog/checkli
 import {ChecklistModel} from '../../../models/workplacemodels/checklist.model';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {
+  ApplicationState,
   SetApplicationToolbarState,
   SetApplicationToolbarTitle,
   SetApplicationWorkplace
 } from '../../../store/application';
 import {ActivatedRoute} from '@angular/router';
 import {WORKPLACE_PHOTO} from '../../../services/url_const';
+import {LoginState} from '../../../store/login';
+import {SseNotificationApiService} from '../../../services/sse-notification-api/sse-notification-api.service';
 
 @Component({
   selector: 'app-workplace-screen',
   templateUrl: './workplace-screen.component.html',
   styleUrls: ['./workplace-screen.component.css']
 })
-export class WorkplaceScreenComponent implements OnInit {
+export class WorkplaceScreenComponent implements OnInit, OnDestroy {
   @Select(WorkplaceElementState)
   workPlaceElements$: Observable<WorkplaceElementModel[]>;
 
-  workplaceConfig: {workplacePhoto: number, colorOfElement: string, workplaceBackground: string};
+  @Select(LoginState.userId)
+  private userId$: Observable<number>;
+  userId: number;
+
+  @Select(ApplicationState.currentWorkplaceId)
+  private workplaceId$: Observable<number>;
+  workplaceId: number;
+
+  workplaceConfig: { workplacePhoto: number, colorOfElement: string, workplaceBackground: string };
   url = WORKPLACE_PHOTO;
+
   constructor(
     private elementApiService: WorkplaceElementApiService,
     private dialog: MatDialog,
     private activeRoute: ActivatedRoute,
-  ) {}
+    private sseNotificationService: SseNotificationApiService
+  ) {
+    this.workplaceId$.subscribe(workplaceId => this.workplaceId = workplaceId);
+    this.userId$.subscribe(userId => this.userId = userId);
+  }
 
   ngOnInit(): void {
     this.setApplicationWorkplace();
     this.changeToolbarStatus();
-    this.setApplicationTitle();
+    // this.setApplicationTitle();
+    this.sseNotificationService.startSseNotificationsStream(this.workplaceId, this.userId);
 
-    this.workplaceConfig = window.history.state as {workplacePhoto: number, colorOfElement: string, workplaceBackground: string};
+    // TODO wtf is this??
+    this.workplaceConfig = window.history.state as { workplacePhoto: number, colorOfElement: string, workplaceBackground: string };
+    if (this.workplaceConfig?.workplacePhoto) {
+      this.url = '#';
+    }
+
   }
 
   openEditDialog(element: WorkplaceElementModel, i: number): void {
@@ -88,8 +110,12 @@ export class WorkplaceScreenComponent implements OnInit {
     return new SetApplicationWorkplace(this.activeRoute.snapshot.paramMap.get('workplaceId'));
   }
 
-  @Dispatch()
-  setApplicationTitle(): SetApplicationToolbarTitle {
-    return new SetApplicationToolbarTitle('Online workplace');
+  ngOnDestroy(): void {
+    this.sseNotificationService.stopNotificationsStream();
   }
+
+  // @Dispatch()
+  // setApplicationTitle(): SetApplicationToolbarTitle {
+  //   return new SetApplicationToolbarTitle('Online workplace');
+  // }
 }

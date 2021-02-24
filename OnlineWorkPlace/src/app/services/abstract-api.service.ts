@@ -7,7 +7,7 @@ import {SERVER_URL} from './url_const';
 export abstract class AbstractApiService {
   protected urlPrefix = '';
 
-  createUrl(path: string, pathVariable: string = ''): string {
+  protected createUrl(path: string, pathVariable: string = ''): string {
     return `${SERVER_URL}${this.urlPrefix}${path}${pathVariable}`;
   }
 }

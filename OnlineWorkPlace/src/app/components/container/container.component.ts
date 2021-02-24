@@ -13,6 +13,8 @@ import {WorkplaceSettingsState} from '../../store/workplace-settings';
 import {DefaultElements, SortElements} from '../../store/workplace-element';
 import {AddLabelComponent} from './workplace-settings/add-label/add-label/add-label.component';
 import {AddUserComponent} from './workplace-settings/add-user/add-user/add-user.component';
+import {NotificationState} from '../../store/notification.state';
+import {NotificationModel} from '../../models/notification.model';
 
 @Component({
   selector: 'app-container',
@@ -44,17 +46,25 @@ export class ContainerComponent implements OnInit {
   @Select(WorkplaceSettingsState.labels)
   labels$: Observable<LabelModel[]>;
 
+  @Select(NotificationState)
+  notifications$: Observable<NotificationModel[]>;
+  freshNotifications: number;
+
   input: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
+    this.notifications$.subscribe(data => {
+      this.freshNotifications = data.filter(notification => notification.fresh).length;
+    });
+
     this.currentWorkplaceId$.subscribe(data => {
       this.currentWorkplaceId = data;
     });
 
-    // TODO check if parameter working properly with different userId
+    // TODO check if parameter working properly with different userId, maybe you can access evryone
     this.userId$.subscribe(userId => {
       this.userId = userId;
       this.navigateToHome(userId);
@@ -120,5 +130,9 @@ export class ContainerComponent implements OnInit {
 
   openLabelDialog(): void {
     this.dialog.open(AddLabelComponent);
+  }
+
+  removeBadgeNumber(): void {
+    this.freshNotifications = 0;
   }
 }
