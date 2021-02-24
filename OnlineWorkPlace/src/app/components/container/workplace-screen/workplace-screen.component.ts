@@ -60,6 +60,10 @@ export class WorkplaceScreenComponent implements OnInit, OnDestroy {
 
     // TODO wtf is this??
     this.workplaceConfig = window.history.state as { workplacePhoto: number, colorOfElement: string, workplaceBackground: string };
+    if (this.workplaceConfig?.workplacePhoto) {
+      this.url = '#';
+    }
+
   }
 
   openEditDialog(element: WorkplaceElementModel, i: number): void {
