@@ -67,7 +67,6 @@ interface WorkplaceSettings {
   labels: LabelModel[];
 }
 
-
 @State<WorkplaceSettings>({
   name: 'workplaceSettings',
   defaults: {
@@ -90,6 +89,16 @@ export class WorkplaceSettingsState {
   @Selector()
   static labels(currentState: WorkplaceSettings): LabelModel[] {
     return currentState.labels;
+  }
+
+  @Selector()
+  static notificationsRights(currentState: WorkplaceSettings): NotificationRightsModel {
+    return currentState.notificationRights;
+  }
+
+  @Selector()
+  static userRights(currentState: WorkplaceSettings): UserRightModel {
+    return currentState.userRights;
   }
 
   @Action(GetWorkplaceUsers)

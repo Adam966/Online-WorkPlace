@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DeleteWorkplaceLabel, DeleteWorkplaceUser, WorkplaceSettingsState} from '../../../store/workplace-settings';
 import {Select} from '@ngxs/store';
 import {UserModel} from '../../../models/application-models/user.model';
@@ -8,6 +8,9 @@ import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {ApplicationState, SetApplicationToolbarTitle} from '../../../store/application';
 import {WorkplaceSettingsApiService} from '../../../services/workplace-settings-api/workplace-settings-api.service';
 import {UtilsMessage} from '../../../shared/utils/utils-message';
+import {NotificationModel} from '../../../models/notification.model';
+import {UserRightModel} from '../../../models/rights-model/user-right.model';
+import {NotificationRightsModel} from '../../../models/rights-model/notification-rights.model';
 
 @Component({
   selector: 'app-workplace-settings',
@@ -25,7 +28,14 @@ export class WorkplaceSettingsComponent implements OnInit {
   workplaceId$: Observable<number>;
   workplaceId: number;
 
-  constructor(private workplaceSettingService: WorkplaceSettingsApiService) { }
+  @Select(WorkplaceSettingsState.notificationsRights)
+  notificationsRights$: Observable<NotificationRightsModel>;
+
+  @Select(WorkplaceSettingsState.userRights)
+  userRights$: Observable<UserRightModel>;
+
+  constructor(private workplaceSettingService: WorkplaceSettingsApiService) {
+  }
 
   ngOnInit(): void {
     this.workplaceId$.subscribe(id => this.workplaceId = id);

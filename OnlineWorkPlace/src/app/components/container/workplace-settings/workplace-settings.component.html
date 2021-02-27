@@ -45,10 +45,10 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="column-container">
-      <mat-checkbox color="primary">receipt of the message</mat-checkbox>
-      <mat-checkbox color="primary">added to element</mat-checkbox>
-      <mat-checkbox color="primary">due date</mat-checkbox>
-      <mat-checkbox color="primary">removed from element</mat-checkbox>
+      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).sentMessage">receipt of the message</mat-checkbox>
+      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).addedToElement">added to element</mat-checkbox>
+      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).dueDate">due date</mat-checkbox>
+      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).removedFromElement">removed from element</mat-checkbox>
     </div>
   </mat-expansion-panel>
   <!------------  Workplace rights settings ------------>
@@ -68,10 +68,10 @@
           <span>&nbsp;</span>
           <span>{{ user.userSurname }}</span>
         </div>
-        <mat-checkbox color="primary">add user</mat-checkbox>
-        <mat-checkbox color="primary">delete user</mat-checkbox>
-        <mat-checkbox color="primary">delete element</mat-checkbox>
-        <mat-checkbox color="primary">change rights</mat-checkbox>
+        <mat-checkbox color="primary" [checked]="(userRights$ | async).addToWorkplace">add user</mat-checkbox>
+        <mat-checkbox color="primary" [checked]="(userRights$ | async).removeFromWorkplace">delete user</mat-checkbox>
+        <mat-checkbox color="primary" [checked]="(userRights$ | async).archiveElement">archive element</mat-checkbox>
+        <mat-checkbox color="primary" [checked]="(userRights$ | async).changeRights">change rights</mat-checkbox>
       </div>
     </div>
   </mat-expansion-panel>
