@@ -4,6 +4,7 @@ export const SERVER_URL = 'api/';
 export const LOGIN = 'login';
 export const REGISTER = 'register';
 export const USER_PHOTO = 'http://localhost:8080/api/user-photo/';
+export const GET_WORKPLACE_RIGHTS = 'rights';
 
 ////////////////////// WORKPLACE API //////////////////////
 export const GET_ALL_WORKPLACES = 'workplaces';
