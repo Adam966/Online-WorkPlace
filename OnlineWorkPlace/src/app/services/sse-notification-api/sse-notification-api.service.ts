@@ -7,6 +7,7 @@ import {GET_ALL_NOTIFICATIONS, SET_NOTIFICATIONS_STREAM} from '../url_const';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {AddNewNotification, SetNotifications} from '../../store/notification.state';
 import {UtilsMessage} from '../../shared/utils/utils-message';
+import {NotificationRightsModel} from '../../models/rights-model/notification-rights.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,18 +19,21 @@ export class SseNotificationApiService extends AbstractApiService {
 
   private notificationsSource: EventSource;
 
-  startSseNotificationsStream(workplaceId: number, userId: number): void {
+  startSseNotificationsStream(workplaceId: number, userId: number, rights: NotificationRightsModel): void {
     this.getNotifications(workplaceId, userId)
       .subscribe(notifications => {
-        this.notificationsSource = new EventSource(`${this.createUrl(SET_NOTIFICATIONS_STREAM, userId.toString())}/workplace/${workplaceId}`);
+        this.notificationsSource = new EventSource(
+          this.addQueryParameters(
+            `${this.createUrl(SET_NOTIFICATIONS_STREAM, userId.toString())}/workplace/${workplaceId}?`,
+            rights)
+        );
         this.setListeners();
         this.setAllNotifications(notifications);
       });
-
   }
 
   stopNotificationsStream(): void {
-    this.notificationsSource.close();
+    this.notificationsSource?.close();
   }
 
   private setListeners(): void {
@@ -52,5 +56,24 @@ export class SseNotificationApiService extends AbstractApiService {
   @Dispatch()
   setAllNotifications(notifications: NotificationModel[]): SetNotifications {
     return new SetNotifications(notifications.reverse());
+  }
+
+  private addQueryParameters(url: string, rights: NotificationRightsModel): string {
+    if (rights.sentMessage) {
+      url = url.concat('setMessage=true&');
+    }
+
+    if (rights.removedFromElement) {
+      url = url.concat('removedFromElement=true&');
+    }
+
+    if (rights.dueDate) {
+      url = url.concat('dueDate=true&');
+    }
+
+    if (rights.addedToElement) {
+      url = url.concat('addedToElement=true&');
+    }
+    return url;
   }
 }

@@ -8,7 +8,6 @@ import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {ApplicationState, SetApplicationToolbarTitle} from '../../../store/application';
 import {WorkplaceSettingsApiService} from '../../../services/workplace-settings-api/workplace-settings-api.service';
 import {UtilsMessage} from '../../../shared/utils/utils-message';
-import {NotificationModel} from '../../../models/notification.model';
 import {UserRightModel} from '../../../models/rights-model/user-right.model';
 import {NotificationRightsModel} from '../../../models/rights-model/notification-rights.model';
 

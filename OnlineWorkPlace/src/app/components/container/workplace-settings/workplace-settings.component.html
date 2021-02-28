@@ -33,7 +33,9 @@
           <span>&nbsp;</span>
           <span>{{ user.userSurname }}</span>
         </div>
-        <mat-icon matTooltip="Delete user" (click)="deleteUser(user)">delete</mat-icon>
+        <button mat-icon-button matTooltip="Delete user" (click)="deleteUser(user)" [disabled]="!(userRights$ | async).removeFromWorkplace">
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
     </div>
   </mat-expansion-panel>
@@ -68,10 +70,10 @@
           <span>&nbsp;</span>
           <span>{{ user.userSurname }}</span>
         </div>
-        <mat-checkbox color="primary" [checked]="(userRights$ | async).addToWorkplace">add user</mat-checkbox>
-        <mat-checkbox color="primary" [checked]="(userRights$ | async).removeFromWorkplace">delete user</mat-checkbox>
-        <mat-checkbox color="primary" [checked]="(userRights$ | async).archiveElement">archive element</mat-checkbox>
-        <mat-checkbox color="primary" [checked]="(userRights$ | async).changeRights">change rights</mat-checkbox>
+        <mat-checkbox color="primary" [checked]="(userRights$ | async).addToWorkplace" [disabled]="!(userRights$ | async).changeRights">add user</mat-checkbox>
+        <mat-checkbox color="primary" [checked]="(userRights$ | async).removeFromWorkplace" [disabled]="!(userRights$ | async).changeRights">delete user</mat-checkbox>
+        <mat-checkbox color="primary" [checked]="(userRights$ | async).archiveElement" [disabled]="!(userRights$ | async).changeRights">archive element</mat-checkbox>
+        <mat-checkbox color="primary" [checked]="(userRights$ | async).changeRights" [disabled]="!(userRights$ | async).changeRights">change rights</mat-checkbox>
       </div>
     </div>
   </mat-expansion-panel>

@@ -14,6 +14,7 @@ import {Router} from '@angular/router';
 import {ApplicationState} from '../../../../../store/application';
 import {WorkplaceElementApiService} from '../../../../../services/workplace-element-api/workplace-element-api.service';
 import {WorkplaceElementModel} from '../../../../../models/workplacemodels/workplaceelement.model';
+import {UserRightModel} from '../../../../../models/rights-model/user-right.model';
 
 @Component({
   selector: 'app-note-thread-dialog',
@@ -35,6 +36,9 @@ export class NoteThreadDialogComponent implements OnInit {
   @Select(ApplicationState.currentWorkplaceId)
   currentWorkplaceId$!: Observable<string>;
   currentWorkplaceId: string;
+
+  @Select(WorkplaceSettingsState.userRights)
+  userRights$!: Observable<UserRightModel>;
 
   users: UserModel[] = [];
   labels: LabelModel[] = [];
@@ -92,7 +96,8 @@ export class NoteThreadDialogComponent implements OnInit {
   }
 
   @Dispatch()
-  delete(): DeleteWorkplaceElement {
+  archive(): DeleteWorkplaceElement {
+    this.elementService.archiveWorkplaceElement(this.element.id);
     return new DeleteWorkplaceElement(this.index);
   }
 
