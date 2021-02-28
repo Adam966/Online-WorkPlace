@@ -50,6 +50,12 @@ export class WorkplaceScreenComponent implements OnInit, OnDestroy {
   ) {
     this.workplaceId$.subscribe(workplaceId => this.workplaceId = workplaceId);
     this.userId$.subscribe(userId => this.userId = userId);
+
+    // TODO wtf is this??
+    this.workplaceConfig = window.history.state as { workplacePhoto: number, colorOfElement: string, workplaceBackground: string };
+    if (!this.workplaceConfig?.workplacePhoto) {
+      this.url = '#';
+    }
   }
 
   ngOnInit(): void {
@@ -57,13 +63,6 @@ export class WorkplaceScreenComponent implements OnInit, OnDestroy {
     this.changeToolbarStatus();
     // this.setApplicationTitle();
     this.sseNotificationService.startSseNotificationsStream(this.workplaceId, this.userId);
-
-    // TODO wtf is this??
-    this.workplaceConfig = window.history.state as { workplacePhoto: number, colorOfElement: string, workplaceBackground: string };
-    if (this.workplaceConfig?.workplacePhoto) {
-      this.url = '#';
-    }
-
   }
 
   openEditDialog(element: WorkplaceElementModel, i: number): void {
