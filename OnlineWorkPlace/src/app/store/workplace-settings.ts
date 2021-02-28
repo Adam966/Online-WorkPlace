@@ -105,8 +105,7 @@ export class WorkplaceSettingsState {
   getWorkplaceUsers(ctx: StateContext<WorkplaceSettings>, action: GetWorkplaceUsers): void {
     this.workplaceSettingsService.getWorkplaceUsers(action.workplaceId)
       .subscribe(data => {
-        const state = ctx.getState();
-        ctx.setState({users: data, ...state});
+        ctx.setState({...ctx.getState(), users: data});
       });
   }
 
@@ -114,8 +113,7 @@ export class WorkplaceSettingsState {
   getWorkplaceLabels(ctx: StateContext<WorkplaceSettings>, action: GetWorkplaceLabels): void {
     this.workplaceSettingsService.getWorkplaceLabels(action.workplaceId)
       .subscribe(data => {
-        const state = ctx.getState();
-        ctx.setState({...state, labels: data});
+        ctx.setState({...ctx.getState(), labels: data});
       });
   }
 
@@ -146,17 +144,17 @@ export class WorkplaceSettingsState {
     const index = state.users.indexOf(action.user);
     const array = [...state.users];
     array.splice(index, 1);
-    ctx.setState({users: array, ...state});
+    ctx.setState({...state, users: array});
   }
 
   @Action(AddNotificationRights)
   addNotificationRights(ctx: StateContext<WorkplaceSettings>, action: AddNotificationRights): void {
-    ctx.setState({notificationRights: action.notificationRights, ...ctx.getState()});
+    ctx.setState({...ctx.getState(), notificationRights: action.notificationRights});
   }
 
   @Action(AddUserRights)
   addUserRights(ctx: StateContext<WorkplaceSettings>, action: AddUserRights): void {
-    ctx.setState({notificationRights: action.userRights, ...ctx.getState()});
+    ctx.setState({...ctx.getState(), userRights: action.userRights});
   }
 
   @Action(GetRights)
