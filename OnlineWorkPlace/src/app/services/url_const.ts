@@ -3,13 +3,13 @@ export const SERVER_URL = 'api/';
 ////////////////////// WORKPLACE API //////////////////////
 export const LOGIN = 'login';
 export const REGISTER = 'register';
-export const USER_PHOTO = 'http://localhost:8080/api/user-photo/';
+export const USER_PHOTO = 'http://localhost:8080/api/photo/';
 export const GET_WORKPLACE_RIGHTS = 'rights';
 
 ////////////////////// WORKPLACE API //////////////////////
 export const GET_ALL_WORKPLACES = 'workplaces';
 export const ADD_WORKPLACE = 'workplace';
-export const WORKPLACE_PHOTO = 'http://localhost:8080/api/workplace-photo/';
+export const WORKPLACE_PHOTO = 'http://localhost:8080/api/photo/';
 export const ADD_WORKPLACE_PHOTO = 'workplace-photo';
 export const GET_WORKPLACE_USERS = 'users';
 export const GET_WORKPLACE_LABELS = 'labels';
