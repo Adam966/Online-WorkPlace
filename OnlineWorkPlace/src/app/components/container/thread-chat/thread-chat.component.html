@@ -6,7 +6,7 @@
     <app-message *ngFor="let message of messages"></app-message>
   </div>
   <div class="massage-input">
-    <input matInput type="text" placeholder="Type message">
-    <mat-icon matTooltip="Send message">send</mat-icon>
+    <input matInput type="text" placeholder="Type message" #message>
+    <mat-icon matTooltip="Send message" (click)="sendMessage(message.value)">send</mat-icon>
   </div>
 </div>
