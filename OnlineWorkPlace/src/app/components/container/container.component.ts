@@ -15,6 +15,7 @@ import {AddLabelComponent} from './workplace-settings/add-label/add-label/add-la
 import {AddUserComponent} from './workplace-settings/add-user/add-user/add-user.component';
 import {NotificationState} from '../../store/notification.state';
 import {NotificationModel} from '../../models/notification.model';
+import {UserRightModel} from '../../models/rights-model/user-right.model';
 
 @Component({
   selector: 'app-container',
@@ -49,6 +50,9 @@ export class ContainerComponent implements OnInit {
   @Select(NotificationState)
   notifications$: Observable<NotificationModel[]>;
   freshNotifications: number;
+
+  @Select(WorkplaceSettingsState.userRights)
+  userRights$: Observable<UserRightModel>;
 
   input: string;
 

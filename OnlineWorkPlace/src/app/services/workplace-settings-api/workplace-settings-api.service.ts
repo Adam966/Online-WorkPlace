@@ -6,11 +6,12 @@ import {
   ADD_WORKPLACE_LABEL,
   ADD_WORKPLACE_USER, DELETE_WORKPLACE_LABEL, DELETE_WORKPLACE_USER,
   FIND_USERS_BY_EMAIL,
-  GET_WORKPLACE_LABELS,
+  GET_WORKPLACE_LABELS, GET_WORKPLACE_RIGHTS,
   GET_WORKPLACE_USERS
 } from '../url_const';
 import {LabelModel} from '../../models/application-models/label.model';
 import {AbstractApiService} from '../abstract-api.service';
+import {RightsModel} from '../../models/rights-model/rights.model';
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +58,10 @@ export class WorkplaceSettingsApiService extends AbstractApiService {
   deleteWorkplaceLabel(workplaceId: number, labelId: number): Observable<any> {
     this.urlPrefix = `workplace/${workplaceId}/`;
     return this.http.delete(this.createUrl(DELETE_WORKPLACE_LABEL, labelId.toString()));
+  }
+
+  getUserRights(workplaceId: number, userId: number): Observable<RightsModel> {
+    this.urlPrefix = `workplace/${workplaceId}/user/${userId}/`;
+    return this.http.get<RightsModel>(this.createUrl(GET_WORKPLACE_RIGHTS));
   }
 }

@@ -6,9 +6,3 @@ export interface UserModel {
   token: string;
   photo: number;
 }
-
-export interface User {
-  username: string;
-  usersurname: string;
-  photo: number;
-}

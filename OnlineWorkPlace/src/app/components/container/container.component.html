@@ -82,7 +82,7 @@
   </mat-menu>
   <!-- APPLICATION CREATE ELEMENTS MENU -->
   <mat-menu #add class="my-menu">
-    <button mat-menu-item (click)="openUserDialog()">
+    <button mat-menu-item (click)="openUserDialog()" [disabled]="!(userRights$ | async)?.addToWorkplace">
       <mat-icon>add</mat-icon>
       Add User
     </button>

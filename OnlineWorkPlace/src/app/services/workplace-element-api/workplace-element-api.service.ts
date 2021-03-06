@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {WorkplaceElementModel} from '../../models/workplacemodels/workplaceelement.model';
 import {AbstractApiService} from '../abstract-api.service';
-import {ADD_ELEMENT, GET_ELEMENTS} from '../url_const';
+import {ADD_ELEMENT, ARCHIVE_ELEMENT, GET_ELEMENTS} from '../url_const';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class WorkplaceElementApiService extends AbstractApiService {
     return this.http.put<WorkplaceElementModel>(this.createUrl(ADD_ELEMENT), data);
   }
 
-  removeWorkplaceElement(data: WorkplaceElementModel): void {
-
+  archiveWorkplaceElement(elementId: number): void {
+    this.http.put(this.createUrl(ARCHIVE_ELEMENT, elementId.toString()), null);
   }
 }

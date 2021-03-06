@@ -3,16 +3,19 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/rou
 import {Observable} from 'rxjs';
 import {WorkplaceElementModel} from '../../models/workplacemodels/workplaceelement.model';
 import {WorkplaceElementApiService} from '../../services/workplace-element-api/workplace-element-api.service';
-import { tap} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {SaveWorkplacesElements} from '../../store/workplace-element';
-import {GetWorkplaceLabels, GetWorkplaceUsers} from '../../store/workplace-settings';
+import {GetRights, GetWorkplaceLabels, GetWorkplaceUsers} from '../../store/workplace-settings';
+import {Store} from '@ngxs/store';
+import {LoginState} from '../../store/login';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkplaceScreenResolver implements Resolve<WorkplaceElementModel[]> {
-  constructor(private workplaceElementService: WorkplaceElementApiService) {}
+  constructor(private workplaceElementService: WorkplaceElementApiService, private store: Store) {
+  }
 
   resolve(
     route: ActivatedRouteSnapshot,
@@ -23,6 +26,7 @@ export class WorkplaceScreenResolver implements Resolve<WorkplaceElementModel[]>
           this.saveWorkplaceElements(data);
           this.getWorkplaceLabels(Number(+route.paramMap.get('workplaceId')));
           this.getWorkplaceUsers(Number(+route.paramMap.get('workplaceId')));
+          this.getRights(+route.paramMap.get('workplaceId'), this.store.selectSnapshot(LoginState.userId));
         })
       );
   }
@@ -40,5 +44,10 @@ export class WorkplaceScreenResolver implements Resolve<WorkplaceElementModel[]>
   @Dispatch()
   getWorkplaceUsers(workplaceId: number): GetWorkplaceUsers {
     return new GetWorkplaceUsers(workplaceId);
+  }
+
+  @Dispatch()
+  getRights(workplaceId: number, userId: number): GetRights {
+    return new GetRights(workplaceId, userId);
   }
 }

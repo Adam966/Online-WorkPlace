@@ -92,11 +92,11 @@
           </mat-form-field>
         </ng-template>
         <p
-          (click)="delete()"
-          *ngIf="isUpdateState"
+          (click)="archive()"
+          *ngIf="isUpdateState && (userRights$ | async).archiveElement"
           [mat-dialog-close]="i">
-          <mat-icon>delete</mat-icon>
-          Delete {{type}}
+          <mat-icon>archive</mat-icon>
+          Archive {{type}}
         </p>
         <ng-template [ngIf]="type === 'Thread'">
           <p

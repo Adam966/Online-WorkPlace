@@ -21,6 +21,8 @@ import {ActivatedRoute} from '@angular/router';
 import {WORKPLACE_PHOTO} from '../../../services/url_const';
 import {LoginState} from '../../../store/login';
 import {SseNotificationApiService} from '../../../services/sse-notification-api/sse-notification-api.service';
+import {WorkplaceSettingsState} from '../../../store/workplace-settings';
+import {NotificationRightsModel} from '../../../models/rights-model/notification-rights.model';
 
 @Component({
   selector: 'app-workplace-screen',
@@ -39,6 +41,9 @@ export class WorkplaceScreenComponent implements OnInit, OnDestroy {
   private workplaceId$: Observable<number>;
   workplaceId: number;
 
+  @Select(WorkplaceSettingsState.notificationsRights)
+  notificationRights$!: Observable<NotificationRightsModel>;
+
   workplaceConfig: { workplacePhoto: number, colorOfElement: string, workplaceBackground: string };
   url = WORKPLACE_PHOTO;
 
@@ -50,20 +55,21 @@ export class WorkplaceScreenComponent implements OnInit, OnDestroy {
   ) {
     this.workplaceId$.subscribe(workplaceId => this.workplaceId = workplaceId);
     this.userId$.subscribe(userId => this.userId = userId);
+
+    // TODO wtf is this??
+    this.workplaceConfig = window.history.state as { workplacePhoto: number, colorOfElement: string, workplaceBackground: string };
+    if (!this.workplaceConfig?.workplacePhoto) {
+      this.url = '#';
+    }
   }
 
   ngOnInit(): void {
     this.setApplicationWorkplace();
     this.changeToolbarStatus();
     // this.setApplicationTitle();
-    this.sseNotificationService.startSseNotificationsStream(this.workplaceId, this.userId);
-
-    // TODO wtf is this??
-    this.workplaceConfig = window.history.state as { workplacePhoto: number, colorOfElement: string, workplaceBackground: string };
-    if (this.workplaceConfig?.workplacePhoto) {
-      this.url = '#';
-    }
-
+    this.notificationRights$.subscribe(rights => {
+      this.sseNotificationService.startSseNotificationsStream(this.workplaceId, this.userId, rights);
+    });
   }
 
   openEditDialog(element: WorkplaceElementModel, i: number): void {

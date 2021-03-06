@@ -48,11 +48,12 @@ export class MainScreenComponent implements OnInit {
   addWorkPlace(): void {
     this.dialogRef = this.dialog.open(CreateWorkplaceDialogComponent);
     this.dialogRef.afterClosed()
-      .subscribe(workplace => {
-        if (workplace?.workplace) {
-          const file = workplace.file;
-          workplace = {
-            ...workplace.workplace, adminId: this.userId.toString(),
+      .subscribe(dialogWorkplaceObj => {
+        if (dialogWorkplaceObj?.workplace) {
+          const file = dialogWorkplaceObj.file;
+
+          const workplace = {
+            ...dialogWorkplaceObj.workplace, adminId: this.userId.toString(),
           };
           this.workplaceService.addWorkplace(workplace, file);
         }
@@ -61,7 +62,7 @@ export class MainScreenComponent implements OnInit {
 
   getWorkPlace(workplace: WorkplaceModel): void {
     this.router.navigate(['main/workplace', workplace.id], {
-      state: { workplacePhoto: workplace.id, colorOfElement: workplace.colorOfElement, workplaceBackground: workplace.backgroundColor }
+      state: { workplacePhoto: workplace.photo, colorOfElement: workplace.colorOfElement, workplaceBackground: workplace.backgroundColor }
     });
   }
 
