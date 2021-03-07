@@ -37,5 +37,6 @@ export const GET_ALL_NOTIFICATIONS = 'notifications/user/';
 
 ////////////////////// WEBSOCKET API //////////////////////
 export const SET_SOCKET_URL = 'ws://localhost:8080/api/socket';
-export const GET_NEW_MESSAGE = '/thread/message';
+export const GET_NEW_MESSAGE = '/message/thread';
 export const SEND_NEW_MESSAGE = '/chat/message';
+export const GET_OLD_MESSAGES = '/thread/';

@@ -1,9 +1,11 @@
 <div class="message-container">
   <div class="user-photo">
-    <app-user-label></app-user-label>
+    <app-user-label [user]="message.senderUser"></app-user-label>
   </div>
   <div class="text-message">
-    <b>User name <span>20:55</span></b>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac elementum libero. Phasellus malesuada mattis urna, ac accumsan ex. Nullam consequat, urna non blandit lobortis, tortor magna porttitor erat, et feugiat libero nisi a turpis. Sed porttitor rhoncus enim eget lacinia. Ut ac </p>
+    <b>{{ userName }}<span>{{ message.timestamp }}</span></b>
+    <p>
+      {{ message.description }}
+    </p>
   </div>
 </div>

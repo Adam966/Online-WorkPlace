@@ -6,6 +6,8 @@ import {LoginState} from '../../../store/login';
 import {Observable} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {threadId} from 'worker_threads';
+import {MessageModel} from '../../../models/message.model';
+import {mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-thread-chat',
@@ -13,32 +15,36 @@ import {threadId} from 'worker_threads';
   styleUrls: ['./thread-chat.component.css']
 })
 export class ThreadChatComponent implements OnInit, OnDestroy {
-  messages = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null];
-
   @Select(LoginState)
   user$!: Observable<UserModel>;
+
+  messages: MessageModel[] = [];
+
   private user: UserModel;
-  private threadId: string;
+  private readonly threadId: string;
+  private page = 1;
 
   constructor(private chatService: ChatService, private route: ActivatedRoute) {
-    chatService.connectClient();
     this.threadId = this.route.snapshot.paramMap.get('threadId');
     this.user$.subscribe(user => this.user = user);
+    this.chatService.getOldMessages(this.threadId, this.page.toString())
+      .subscribe(messages => this.messages.push(...messages));
   }
 
   ngOnInit(): void {
-    this.chatService.getOldMessages(this.threadId);
-    this.chatService.getNewMessage(this.threadId)
-      .subscribe((newMessage) => {
-        this.messages.push(newMessage);
-      });
+    this.chatService.connectClient()
+      .pipe(
+        mergeMap(_ => this.chatService.getNewMessage(this.threadId))
+      ).subscribe((newMessage) => {
+      this.messages.push(newMessage);
+    });
   }
 
   sendMessage(message: string): void {
     // TODO set date to be utc
     const threadMessage = {
       description: message,
-      timestamp: new Date().getUTCMilliseconds().toString(),
+      timestamp: new Date().toLocaleString(),
       senderUser: this.user
     };
     this.chatService.sendMessage(threadMessage, this.threadId);

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {MessageModel} from '../../../../models/message.model';
 
 @Component({
   selector: 'app-message',
@@ -7,11 +8,14 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class MessageComponent implements OnInit {
   @Input()
-  message;
+  message: MessageModel;
+  userName: string;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+    this.userName = `${this.message?.senderUser.userName} ${this.message?.senderUser.userSurname} `;
   }
 
 }
