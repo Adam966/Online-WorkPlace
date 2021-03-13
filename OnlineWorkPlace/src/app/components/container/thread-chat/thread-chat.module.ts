@@ -5,6 +5,7 @@ import {MaterialModule} from '../../../material/material.module';
 import {RouterModule} from '@angular/router';
 import { MessageComponent } from './message/message.component';
 import {SharedModule} from '../../../shared/shared.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 const routes = [
   {
@@ -15,11 +16,12 @@ const routes = [
 
 @NgModule({
   declarations: [ThreadChatComponent, MessageComponent],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    SharedModule,
-    RouterModule.forChild(routes)
-  ]
+    imports: [
+        CommonModule,
+        MaterialModule,
+        SharedModule,
+        RouterModule.forChild(routes),
+        ReactiveFormsModule
+    ]
 })
 export class ThreadChatModule { }
