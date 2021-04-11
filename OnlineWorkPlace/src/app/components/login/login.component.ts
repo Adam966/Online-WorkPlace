@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {RegistrationDialogComponent} from './registration-dialog/registration-dialog.component';
 import {NgForm} from '@angular/forms';
@@ -17,6 +17,9 @@ import {UtilsMessage} from '../../shared/utils/utils-message';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('signUpForm', { static: true })
+  form: NgForm;
+
   constructor(private dialog: MatDialog,
               private router: Router,
               private loginApiService: LoginApiService) {}
@@ -34,7 +37,8 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     const login = {email: form.value.email, password: form.value.password};
     this.loginApiService.login(login)
-      .pipe(catchError((_: HttpErrorResponse)  => {
+      .pipe(
+        catchError((_: HttpErrorResponse)  => {
         this.isLoading = false;
         return null;
       }))

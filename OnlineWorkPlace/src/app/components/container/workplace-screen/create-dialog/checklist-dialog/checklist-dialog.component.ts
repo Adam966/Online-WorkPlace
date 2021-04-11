@@ -58,7 +58,7 @@ export class ChecklistDialogComponent implements OnInit {
 
   ////////////////////////////////// LABEL ACTIONS ///////////////////////////////////////
   addLabel(label: LabelModel): void {
-    const temp = this.labels.filter(data => data.id == label.id);
+    const temp = this.labels.filter(data => data.id === label.id);
     if (temp.length !== 1) {
       this.labels.push(label);
     }

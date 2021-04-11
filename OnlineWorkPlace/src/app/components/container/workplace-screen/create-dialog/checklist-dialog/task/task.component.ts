@@ -66,7 +66,7 @@ export class TaskComponent implements OnInit {
 
   //////////////////////////////// HANDLE USER LABEL /////////////////////////////////////
   addUser(user: UserModel): void {
-    const temp = this.users.filter(data => data.photo == user.photo);
+    const temp = this.users.filter(data => data.photo === user.photo);
     if (temp.length !== 1) {
       this.users.push(user);
     }
