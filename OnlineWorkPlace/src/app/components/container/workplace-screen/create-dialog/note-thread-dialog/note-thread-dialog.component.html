@@ -101,6 +101,7 @@
         <ng-template [ngIf]="type === 'Thread'">
           <p
             (click)="enterThread()"
+            mat-dialog-close
             *ngIf="isUpdateState">
             <mat-icon>message</mat-icon>
             Enter Chat {{type}}

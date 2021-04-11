@@ -1,12 +1,15 @@
 <div class="chat-container">
-  <div class="online-users">
-
-  </div>
-  <div class="messages">
-    <app-message *ngFor="let message of messages"></app-message>
+  <div class="messages" #container>
+    <app-message *ngFor="let message of messages"
+                 [message]="message">
+    </app-message>
   </div>
   <div class="massage-input">
-    <input matInput type="text" placeholder="Type message">
-    <mat-icon matTooltip="Send message">send</mat-icon>
+    <span>{{ notify }}</span>
+    <input matInput type="text"
+           placeholder="Type message"
+           [formControl]="messageInput"
+           #message>
+    <mat-icon matTooltip="Send message" (click)="sendMessage(message.value)">send</mat-icon>
   </div>
 </div>
