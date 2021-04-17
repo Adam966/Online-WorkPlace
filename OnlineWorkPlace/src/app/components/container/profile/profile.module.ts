@@ -4,6 +4,8 @@ import { ProfileComponent } from './profile.component';
 import {RouterModule} from '@angular/router';
 import {MaterialModule} from '../../../material/material.module';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {SharedModule} from '../../../shared/shared.module';
+import {FormsModule} from '@angular/forms';
 
 const routes = [
   {
@@ -18,7 +20,9 @@ const routes = [
     CommonModule,
     MaterialModule,
     MatExpansionModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedModule,
+    FormsModule
   ],
   exports: [
     RouterModule

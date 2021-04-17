@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UserModel} from '../../models/application-models/user.model';
 import {AbstractApiService} from '../abstract-api.service';
-import {LOGIN, REGISTER} from '../url_const';
+import {CHANGE_EMAIL, LOGIN, REGISTER} from '../url_const';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -19,5 +19,9 @@ export class LoginApiService extends AbstractApiService {
 
   register(user: any): Observable<any> {
     return this.http.post<any>(this.createUrl(REGISTER), user);
+  }
+
+  updateEmail(userId: number, email: string): Observable<any> {
+    return this.http.post(this.createUrl(CHANGE_EMAIL + userId.toString()), email);
   }
 }
