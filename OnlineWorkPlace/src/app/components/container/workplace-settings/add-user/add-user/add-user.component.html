@@ -24,7 +24,7 @@
   </div>
   <button mat-raised-button
           color="primary"
-          [disabled]="user.invalid"
+          [disabled]="!chosenUser"
           (click)="create()">
     Add
   </button>
