@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {WorkplaceElementModel} from '../../../models/workplacemodels/workplaceelement.model';
 import {WorkplaceElementApiService} from '../../../services/workplace-element-api/workplace-element-api.service';
 import {Select} from '@ngxs/store';
@@ -51,7 +51,8 @@ export class WorkplaceScreenComponent implements OnInit, OnDestroy {
     private elementApiService: WorkplaceElementApiService,
     private dialog: MatDialog,
     private activeRoute: ActivatedRoute,
-    private sseNotificationService: SseNotificationApiService
+    private sseNotificationService: SseNotificationApiService,
+    private cdr: ChangeDetectorRef
   ) {
     this.workplaceId$.subscribe(workplaceId => this.workplaceId = workplaceId);
     this.userId$.subscribe(userId => this.userId = userId);
@@ -103,7 +104,7 @@ export class WorkplaceScreenComponent implements OnInit, OnDestroy {
     }
 
     dialogRef.afterClosed()
-      .subscribe();
+      .subscribe(() => this.cdr.detectChanges());
   }
 
   @Dispatch()

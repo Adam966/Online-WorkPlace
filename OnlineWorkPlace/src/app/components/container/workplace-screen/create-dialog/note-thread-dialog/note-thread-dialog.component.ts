@@ -75,7 +75,7 @@ export class NoteThreadDialogComponent implements OnInit {
 
     this.elementService.addWorkPlaceElement(this.setType(data), this.currentWorkplaceId)
       .subscribe(element => {
-        this.storeElement(element, element?.id);
+        this.storeElement(element, element?.id, this.isUpdateState);
       });
   }
 
@@ -102,8 +102,8 @@ export class NoteThreadDialogComponent implements OnInit {
   }
 
   @Dispatch()
-  storeElement(element: WorkplaceElementModel, index: number): AddWorkplaceElement {
-    return new AddWorkplaceElement(element, index);
+  storeElement(element: WorkplaceElementModel, index: number, isUpdate: boolean): AddWorkplaceElement {
+    return new AddWorkplaceElement(element, isUpdate, index);
   }
 
   ////////////////////////////////// ELEMENT ACTIONS ///////////////////////////////////////

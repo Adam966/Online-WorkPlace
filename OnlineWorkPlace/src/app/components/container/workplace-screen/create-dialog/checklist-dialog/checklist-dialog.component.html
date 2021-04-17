@@ -5,6 +5,7 @@
       <input
         matInput
         ngModel
+        maxlength="300"
         type="text"
         name="name"
         required
@@ -78,6 +79,7 @@
         mat-raised-button
         color="primary"
         type="submit"
+        mat-dialog-close
         [disabled]="form.invalid">{{element ? 'Update' : 'Create'}}</button>
     </div>
   </form>

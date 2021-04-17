@@ -12,6 +12,7 @@
           name="name"
           ngModel
           required
+          maxlength="300"
           type="text">
         <mat-error *ngIf="name.invalid">"Please enter value"</mat-error>
       </mat-form-field>
@@ -26,6 +27,7 @@
           matInput
           name="description"
           ngModel
+          maxlength="1000"
           required
           type="text">
           </textarea>

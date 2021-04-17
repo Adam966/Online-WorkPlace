@@ -10,6 +10,8 @@ import {Observable} from 'rxjs';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {WorkplaceElementModel} from '../../../../../models/workplacemodels/workplaceelement.model';
 import {AddWorkplaceElement} from '../../../../../store/workplace-element';
+import {WorkplaceElementApiService} from '../../../../../services/workplace-element-api/workplace-element-api.service';
+import {ApplicationState} from '../../../../../store/application';
 
 @Component({
   selector: 'app-checklist-dialog',
@@ -20,14 +22,25 @@ export class ChecklistDialogComponent implements OnInit {
   tasks: TaskModel[] = [];
   element: ChecklistModel;
   labels: LabelModel[] = [];
+  isUpdate = false;
+  type = 'checklist';
 
   @Select(WorkplaceSettingsState.labels)
   labels$: Observable<LabelModel[]>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any) { }
+  @Select(ApplicationState.currentWorkplaceId)
+  currentWorkplaceId$!: Observable<string>;
+  currentWorkplaceId: string;
+
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private elementService: WorkplaceElementApiService) { }
 
   ngOnInit(): void {
+    this.currentWorkplaceId$.subscribe(data => {
+      this.currentWorkplaceId = data;
+    });
+
     if (this.data?.object) {
+      this.isUpdate = true;
       this.element = this.data.object;
       this.tasks = [...this.element?.taskEntities];
       this.labels = [...this.element.assignedLabels];
@@ -37,10 +50,11 @@ export class ChecklistDialogComponent implements OnInit {
   createCheckList(form: NgForm): void {
     const checklist = {
       ...form.value,
-      labels: this.labels,
-      tasks: this.tasks
+      assignedLabels: this.labels,
+      taskEntities: this.tasks,
+      type: this.type
     };
-    this.addChecklist(checklist);
+    this.sendCheckList(checklist);
   }
 
   ////////////////////////////////// TASKS ACTIONS ///////////////////////////////////////
@@ -74,6 +88,13 @@ export class ChecklistDialogComponent implements OnInit {
 
   @Dispatch()
   addChecklist(element: WorkplaceElementModel): AddWorkplaceElement {
-    return new AddWorkplaceElement(element);
+    return new AddWorkplaceElement(element, this.isUpdate);
+  }
+
+  private sendCheckList(checklist: WorkplaceElementModel): void {
+    this.elementService.addWorkPlaceElement(checklist, this.currentWorkplaceId)
+      .subscribe((element) => {
+        this.addChecklist(element);
+      });
   }
 }

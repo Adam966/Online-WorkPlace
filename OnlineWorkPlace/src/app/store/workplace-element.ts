@@ -9,7 +9,7 @@ export class SaveWorkplacesElements {
 
 export class AddWorkplaceElement {
   static readonly type = '[WorkPlace Component] AddWorkplaceElement';
-  constructor(public workplaceElement: WorkplaceElementModel, public index?: number) {}
+  constructor(public workplaceElement: WorkplaceElementModel, public isUpdate: boolean, public index?: number) {}
 }
 
 export class DeleteWorkplaceElement {
@@ -43,7 +43,7 @@ export class WorkplaceElementState {
 
   @Action(AddWorkplaceElement)
   addWorkplace(ctx: StateContext<WorkplaceElementModel[]>, action: AddWorkplaceElement): void {
-    if (action.index || action.index === 0) {
+    if (action.isUpdate) {
       const temp = [...ctx.getState()];
       const indexOfElement = temp.indexOf(action.workplaceElement);
       temp.splice(indexOfElement, 1, action.workplaceElement);
