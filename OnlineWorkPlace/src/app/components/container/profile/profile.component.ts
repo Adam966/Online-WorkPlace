@@ -25,16 +25,20 @@ export class ProfileComponent implements OnInit {
 
   @Select(LoginState)
   user$!: Observable<UserModel>;
+  user: UserModel;
+  newPass = '';
+  repeatPass = '';
 
   constructor(private sanitizer: DomSanitizer, private loginApiService: LoginApiService) {
   }
 
   ngOnInit(): void {
-   this.user$.subscribe((data) => {
-     if (data.photo) {
-       this.photoUrl = USER_PHOTO + data.photo;
-     }
-   });
+    this.user$.subscribe((data) => {
+      this.user = data;
+      if (data.photo) {
+        this.photoUrl = USER_PHOTO + data.photo;
+      }
+    });
   }
 
   choosePhoto(file: File): void {
@@ -67,5 +71,20 @@ export class ProfileComponent implements OnInit {
     }, () => {
       UtilsMessage.showMessage(UtilsMessage.MESSAGE_UNEXPECTED_ERROR, UtilsMessage.MESSAGE_STATUS_ERROR);
     });
+  }
+
+  changePassword(): void {
+    this.loginApiService.changePassword(this.user.id, this.repeatPass)
+      .subscribe(() => {
+        UtilsMessage.showMessage(UtilsMessage.PASS_CHANGED_SUCCESSFULLY, UtilsMessage.MESSAGE_STATUS_POSITIVE);
+        this.newPass = '';
+        this.repeatPass = '';
+      }, () => {
+      UtilsMessage.showMessage(UtilsMessage.MESSAGE_UNEXPECTED_ERROR, UtilsMessage.MESSAGE_STATUS_ERROR);
+    });
+  }
+
+  checkPass(): boolean {
+    return !(this.newPass === this.repeatPass && this.newPass !== '');
   }
 }

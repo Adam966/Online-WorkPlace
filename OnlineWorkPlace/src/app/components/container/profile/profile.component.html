@@ -6,7 +6,7 @@
       <label for="photo-input" class="choose-img">Choose photo</label>
     </p>
     <button mat-raised-button color="primary" (click)="changeUserPhoto(image)" *ngIf="image">Change photo</button>
-    <p class="name-title">{{'Adam Ivan'}}</p>
+    <p class="name-title">{{ user.userName + " " + user.userSurname }}</p>
   </div>
   <div class="profile-edit-content">
     <mat-accordion>
@@ -20,13 +20,16 @@
         <div class="password-form">
           <mat-form-field appearance="outline">
             <mat-label>New Password</mat-label>
-            <input matInput type="password">
+            <input matInput type="password" [(ngModel)]="newPass">
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Repeat Password</mat-label>
-            <input matInput type="password">
+            <input matInput type="password" [(ngModel)]="repeatPass" (change)="checkPass()">
           </mat-form-field>
-          <button mat-raised-button color="primary">Update Password</button>
+          <button mat-raised-button
+                  [disabled]="checkPass()"
+                  color="primary"
+                  (click)="changePassword()">Update Password</button>
         </div>
       </mat-expansion-panel>
       <!------------ UPDATE EMAIL ------------>
@@ -39,7 +42,7 @@
         <div class="password-form">
           <mat-form-field appearance="outline">
             <mat-label>Old Email</mat-label>
-            <input matInput type="email" [value]="(user$ | async).email" [disabled]="true" #currentEmail>
+            <input matInput type="email" [value]="user.email" [disabled]="true" #currentEmail>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>New Email</mat-label>

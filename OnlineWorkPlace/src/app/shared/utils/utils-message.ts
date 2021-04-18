@@ -18,6 +18,7 @@ export class UtilsMessage {
   static MESSAGE_USER_REMOVED =  `User ${UtilsMessage.MESSAGE_REMOVED}`;
   static NEW_NOTIFICATION = 'You have new notification';
   static EMAIL_CHANGED_SUCCESSFULLY = 'Email was successfully changed';
+  static PASS_CHANGED_SUCCESSFULLY = 'Password was successfully changed';
 
 
   @Dispatch()
