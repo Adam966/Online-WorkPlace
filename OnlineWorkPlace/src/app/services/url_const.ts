@@ -8,6 +8,7 @@ export const USER_PHOTO = SERVER_ORIGIN_URL + '/api/photo/';
 export const GET_WORKPLACE_RIGHTS = 'rights';
 export const CHANGE_EMAIL = 'change-email/user/';
 export const CHANGE_PASS = 'change-password/user/';
+export const ADD_PHOTO = 'user-photo/';
 
 ////////////////////// WORKPLACE API //////////////////////
 export const GET_ALL_WORKPLACES = 'workplaces';

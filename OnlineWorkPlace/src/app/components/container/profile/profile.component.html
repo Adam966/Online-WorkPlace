@@ -5,8 +5,13 @@
       <input type="file" id="photo-input" (change)="choosePhoto($event.target.files[0])" hidden>
       <label for="photo-input" class="choose-img">Choose photo</label>
     </p>
-    <button mat-raised-button color="primary" (click)="changeUserPhoto(image)" *ngIf="image">Change photo</button>
     <p class="name-title">{{ user.userName + " " + user.userSurname }}</p>
+    <img [src]="image" *ngIf="image">
+    <button mat-raised-button
+            color="primary"
+            style="margin-top: 10px"
+            (click)="changeUserPhoto()"
+            *ngIf="image">Change photo</button>
   </div>
   <div class="profile-edit-content">
     <mat-accordion>

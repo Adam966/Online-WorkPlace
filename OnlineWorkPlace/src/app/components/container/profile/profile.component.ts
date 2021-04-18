@@ -20,7 +20,8 @@ export class ProfileComponent implements OnInit {
   @ViewChild('currentEmail')
   input: HTMLInputElement;
 
-  image = '';
+  image: File;
+  filePhoto: File;
   photoUrl: string;
 
   @Select(LoginState)
@@ -42,6 +43,7 @@ export class ProfileComponent implements OnInit {
   }
 
   choosePhoto(file: File): void {
+    this.filePhoto = file;
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (event) => {
@@ -53,8 +55,14 @@ export class ProfileComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(event.target.result.toString());
   }
 
-  changeUserPhoto(image: string): void {
-    // TODO change user image
+  changeUserPhoto(): void {
+    this.loginApiService.changePhoto(this.user.id, this.filePhoto)
+      .subscribe(() => {
+        this.image = null;
+        UtilsMessage.showMessage(UtilsMessage.PHOTO_CHANGED_SUCCESSFULLY, UtilsMessage.MESSAGE_STATUS_POSITIVE);
+      }, () => {
+        UtilsMessage.showMessage(UtilsMessage.MESSAGE_UNEXPECTED_ERROR, UtilsMessage.MESSAGE_STATUS_ERROR);
+      });
   }
 
   @Dispatch()

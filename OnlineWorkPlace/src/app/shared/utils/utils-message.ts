@@ -19,7 +19,7 @@ export class UtilsMessage {
   static NEW_NOTIFICATION = 'You have new notification';
   static EMAIL_CHANGED_SUCCESSFULLY = 'Email was successfully changed';
   static PASS_CHANGED_SUCCESSFULLY = 'Password was successfully changed';
-
+  static PHOTO_CHANGED_SUCCESSFULLY = 'Photo was successfully changed please login again to see changes';
 
   @Dispatch()
   static showMessage(message: string, status: string, description?: string): SetPopUpMessage {
