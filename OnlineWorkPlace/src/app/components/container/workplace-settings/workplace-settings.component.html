@@ -47,11 +47,13 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="column-container">
-      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).sentMessage">receipt of the message</mat-checkbox>
-      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).addedToElement">added to element</mat-checkbox>
-      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).dueDate">due date</mat-checkbox>
-      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).removedFromElement">removed from element</mat-checkbox>
+      <form #notificationForm="ngForm"></form>
+      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).sentMessage" (change)="notificationSettingsChange({ sentMessage: $event.checked })">receipt of the message</mat-checkbox>
+      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).addedToElement" (change)="notificationSettingsChange({ addedToElement: $event.checked })">added to element</mat-checkbox>
+      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).dueDate" (change)="notificationSettingsChange({ dueDate: $event.checked })">due date</mat-checkbox>
+      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).removedFromElement" (change)="notificationSettingsChange({ removedFromElement: $event.checked })">removed from element</mat-checkbox>
     </div>
+    <button mat-raised-button color="primary" [disabled]="!notificationChanged" (click)="changeNotificationSettings()">Change Notification Settings</button>
   </mat-expansion-panel>
   <!------------  Workplace rights settings ------------>
   <mat-expansion-panel>

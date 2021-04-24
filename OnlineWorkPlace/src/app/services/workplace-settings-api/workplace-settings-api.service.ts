@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {UserModel} from '../../models/application-models/user.model';
 import {
   ADD_WORKPLACE_LABEL,
-  ADD_WORKPLACE_USER, DELETE_WORKPLACE_LABEL, DELETE_WORKPLACE_USER,
+  ADD_WORKPLACE_USER, CHANGE_USER_NOTIFICATIONS, DELETE_WORKPLACE_LABEL, DELETE_WORKPLACE_USER,
   FIND_USERS_BY_EMAIL,
   GET_WORKPLACE_LABELS, GET_WORKPLACE_RIGHTS,
   GET_WORKPLACE_USERS
@@ -63,5 +63,10 @@ export class WorkplaceSettingsApiService extends AbstractApiService {
   getUserRights(workplaceId: number, userId: number): Observable<RightsModel> {
     this.urlPrefix = `workplace/${workplaceId}/user/${userId}/`;
     return this.http.get<RightsModel>(this.createUrl(GET_WORKPLACE_RIGHTS));
+  }
+
+  changeUserNotifications(workplaceId: string, userId: string, notifications: any): Observable<any> {
+    this.urlPrefix = `workplace/${workplaceId}/user/${userId}/`;
+    return this.http.put(this.createUrl(CHANGE_USER_NOTIFICATIONS), notifications);
   }
 }

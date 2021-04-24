@@ -9,6 +9,7 @@ export const GET_WORKPLACE_RIGHTS = 'rights';
 export const CHANGE_EMAIL = 'change-email/user/';
 export const CHANGE_PASS = 'change-password/user/';
 export const ADD_PHOTO = 'user-photo/';
+export const CHANGE_USER_NOTIFICATIONS = 'notification-rights';
 
 ////////////////////// WORKPLACE API //////////////////////
 export const GET_ALL_WORKPLACES = 'workplaces';

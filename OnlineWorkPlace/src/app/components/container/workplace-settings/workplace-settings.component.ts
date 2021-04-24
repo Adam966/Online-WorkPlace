@@ -10,6 +10,8 @@ import {WorkplaceSettingsApiService} from '../../../services/workplace-settings-
 import {UtilsMessage} from '../../../shared/utils/utils-message';
 import {UserRightModel} from '../../../models/rights-model/user-right.model';
 import {NotificationRightsModel} from '../../../models/rights-model/notification-rights.model';
+import {LoginState} from '../../../store/login';
+import {mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-workplace-settings',
@@ -32,12 +34,20 @@ export class WorkplaceSettingsComponent implements OnInit {
 
   @Select(WorkplaceSettingsState.userRights)
   userRights$: Observable<UserRightModel>;
+  notificationChanged = false;
+
+  @Select(LoginState.userId)
+  userId$!: Observable<number>;
+  userId: number;
+
+  notificationRights: any = {};
 
   constructor(private workplaceSettingService: WorkplaceSettingsApiService) {
   }
 
   ngOnInit(): void {
     this.workplaceId$.subscribe(id => this.workplaceId = id);
+    this.userId$.subscribe(id => this.userId = id);
   }
 
   @Dispatch()
@@ -70,5 +80,21 @@ export class WorkplaceSettingsComponent implements OnInit {
   @Dispatch()
   deleteUserState(user: UserModel): DeleteWorkplaceUser {
     return new DeleteWorkplaceUser(user);
+  }
+
+  notificationSettingsChange(obj: any): void {
+    this.notificationRights = {...this.notificationRights, ...obj};
+    this.notificationChanged = true;
+  }
+
+  changeNotificationSettings(): void {
+    console.log(this.notificationRights);
+    this.notificationsRights$
+      .pipe(
+        mergeMap(notificationsRight => {
+          this.notificationRights = {id: notificationsRight.id, ...this.notificationRights};
+          return this.workplaceSettingService.changeUserNotifications(this.workplaceId.toString(), this.userId.toString(), this.notificationRights);
+        })
+      ).subscribe();
   }
 }

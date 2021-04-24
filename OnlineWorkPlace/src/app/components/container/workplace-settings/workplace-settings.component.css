@@ -59,3 +59,7 @@ span {
 mat-icon {
   cursor: pointer;
 }
+
+button {
+  margin-top: 25px;
+}
