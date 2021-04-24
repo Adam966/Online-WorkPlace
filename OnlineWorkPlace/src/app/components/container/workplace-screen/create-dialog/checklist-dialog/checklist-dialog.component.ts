@@ -9,9 +9,10 @@ import {WorkplaceSettingsState} from '../../../../../store/workplace-settings';
 import {Observable} from 'rxjs';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {WorkplaceElementModel} from '../../../../../models/workplacemodels/workplaceelement.model';
-import {AddWorkplaceElement} from '../../../../../store/workplace-element';
+import {AddWorkplaceElement, DeleteWorkplaceElement} from '../../../../../store/workplace-element';
 import {WorkplaceElementApiService} from '../../../../../services/workplace-element-api/workplace-element-api.service';
 import {ApplicationState} from '../../../../../store/application';
+import {UserRightModel} from '../../../../../models/rights-model/user-right.model';
 
 @Component({
   selector: 'app-checklist-dialog',
@@ -24,6 +25,7 @@ export class ChecklistDialogComponent implements OnInit {
   labels: LabelModel[] = [];
   isUpdate = false;
   type = 'checklist';
+  index: number;
 
   @Select(WorkplaceSettingsState.labels)
   labels$: Observable<LabelModel[]>;
@@ -31,6 +33,9 @@ export class ChecklistDialogComponent implements OnInit {
   @Select(ApplicationState.currentWorkplaceId)
   currentWorkplaceId$!: Observable<string>;
   currentWorkplaceId: string;
+
+  @Select(WorkplaceSettingsState.userRights)
+  userRights$!: Observable<UserRightModel>;
 
   constructor(@Inject(MAT_DIALOG_DATA) private data: any, private elementService: WorkplaceElementApiService) { }
 
@@ -40,6 +45,7 @@ export class ChecklistDialogComponent implements OnInit {
     });
 
     if (this.data?.object) {
+      this.index = this.data?.index;
       this.isUpdate = true;
       this.element = this.data.object;
       this.tasks = [...this.element?.taskEntities];
@@ -96,5 +102,12 @@ export class ChecklistDialogComponent implements OnInit {
       .subscribe((element) => {
         this.addChecklist(element);
       });
+  }
+
+  @Dispatch()
+  archive(): DeleteWorkplaceElement {
+    this.elementService.archiveWorkplaceElement(this.element.id)
+      .subscribe();
+    return new DeleteWorkplaceElement(this.index);
   }
 }

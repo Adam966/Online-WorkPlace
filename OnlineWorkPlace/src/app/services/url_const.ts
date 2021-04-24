@@ -26,7 +26,9 @@ export const DELETE_WORKPLACE_LABEL = 'label/';
 ////////////////////// WORKPLACE ELEMENTS API //////////////////////
 export const GET_ELEMENTS = 'elements';
 export const ADD_ELEMENT = 'element';
-export const ARCHIVE_ELEMENT = 'archive-element';
+export const ARCHIVE_ELEMENT = 'archive-element/';
+export const GET_ARCHIVED_ELEMENTS = 'archived-elements';
+
 
 ////////////////////// STORAGE API //////////////////////
 export const GET_ALL_FILES = 'workplace-storage';

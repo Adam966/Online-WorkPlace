@@ -1,39 +1,52 @@
 import {Action, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {WorkplaceElementModel} from '../models/workplacemodels/workplaceelement.model';
+import {WorkplaceElementApiService} from '../services/workplace-element-api/workplace-element-api.service';
 
 export class SaveWorkplacesElements {
   static readonly type = '[WorkPlace Component] GetWorkplaceElements';
-  constructor(public workplaces: WorkplaceElementModel[]) {}
+
+  constructor(public workplaces: WorkplaceElementModel[]) {
+  }
 }
 
 export class AddWorkplaceElement {
   static readonly type = '[WorkPlace Component] AddWorkplaceElement';
-  constructor(public workplaceElement: WorkplaceElementModel, public isUpdate: boolean, public index?: number) {}
+
+  constructor(public workplaceElement: WorkplaceElementModel, public isUpdate: boolean, public index?: number) {
+  }
 }
 
 export class DeleteWorkplaceElement {
   static readonly type = '[WorkPlace Component] DeleteWorkplaceElement';
-  constructor(public index: number) {}
+
+  constructor(public index: number) {
+  }
 }
 
 export class SortElements {
   static readonly type = '[WorkPlace Component] SortWorkplaceElements';
-  constructor(public value: string) {}
+
+  constructor(public value: string, public workplaceId?: string) {
+  }
 }
 
 export class DefaultElements {
   static readonly type = '[WorkPlace Component] SetDefaultElements';
-  constructor() {}
+
+  constructor() {
+  }
 }
 
-@State<WorkplaceElementModel[]> ({
+@State<WorkplaceElementModel[]>({
   name: 'workplaceElements',
   defaults: []
 })
 @Injectable()
 export class WorkplaceElementState {
-  constructor() {}
+  constructor(private workplaceElementService: WorkplaceElementApiService) {
+  }
+
   private elements = [];
 
   @Action(SaveWorkplacesElements)
@@ -66,6 +79,13 @@ export class WorkplaceElementState {
   sortElements(ctx: StateContext<WorkplaceElementModel[]>, action: SortElements): void {
     this.elements = ctx.getState();
     const temp = ctx.getState();
+    if (action.value.includes('archived:')) {
+      this.workplaceElementService.getArchivedWorkplaceElements(action.workplaceId)
+        .subscribe((elements) => {
+          ctx.setState(elements);
+        });
+    }
+
     if (action.value.includes('#')) {
       ctx.setState(
         temp.filter((ele) => {
@@ -75,12 +95,12 @@ export class WorkplaceElementState {
         })
       );
     } else if (action.value.includes('u:')) {
-      console.log(action.value.substr(3 , action.value.length - 1));
+      console.log(action.value.substr(3, action.value.length - 1));
       ctx.setState(
         temp.filter((ele) => {
           let users = '';
           ele.assignedUsers.map(user => users = users + (user.userName + ' ' + user.userSurname + ', '));
-          return users.includes(action.value.substr(3 , action.value.length - 1));
+          return users.includes(action.value.substr(3, action.value.length - 1));
         })
       );
     } else {

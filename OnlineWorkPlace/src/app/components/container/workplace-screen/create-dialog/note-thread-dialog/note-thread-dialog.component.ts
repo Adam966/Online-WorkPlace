@@ -97,7 +97,8 @@ export class NoteThreadDialogComponent implements OnInit {
 
   @Dispatch()
   archive(): DeleteWorkplaceElement {
-    this.elementService.archiveWorkplaceElement(this.element.id);
+    this.elementService.archiveWorkplaceElement(this.element.id)
+      .subscribe();
     return new DeleteWorkplaceElement(this.index);
   }
 
