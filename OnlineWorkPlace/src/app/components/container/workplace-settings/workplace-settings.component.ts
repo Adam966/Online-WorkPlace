@@ -12,6 +12,7 @@ import {UserRightModel} from '../../../models/rights-model/user-right.model';
 import {NotificationRightsModel} from '../../../models/rights-model/notification-rights.model';
 import {LoginState} from '../../../store/login';
 import {mergeMap} from 'rxjs/operators';
+import {SseNotificationApiService} from '../../../services/sse-notification-api/sse-notification-api.service';
 
 @Component({
   selector: 'app-workplace-settings',
@@ -42,7 +43,7 @@ export class WorkplaceSettingsComponent implements OnInit {
 
   notificationRights: any = {};
 
-  constructor(private workplaceSettingService: WorkplaceSettingsApiService) {
+  constructor(private workplaceSettingService: WorkplaceSettingsApiService, private sseNotificationsService: SseNotificationApiService) {
   }
 
   ngOnInit(): void {
@@ -95,6 +96,9 @@ export class WorkplaceSettingsComponent implements OnInit {
           this.notificationRights = {id: notificationsRight.id, ...this.notificationRights};
           return this.workplaceSettingService.changeUserNotifications(this.workplaceId.toString(), this.userId.toString(), this.notificationRights);
         })
-      ).subscribe();
+      ).subscribe((notificationModel) => {
+      this.sseNotificationsService.stopNotificationsStream();
+      this.sseNotificationsService.startSseNotificationsStream(this.workplaceId, this.userId, notificationModel);
+    });
   }
 }
