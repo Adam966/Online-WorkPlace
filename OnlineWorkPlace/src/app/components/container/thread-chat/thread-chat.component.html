@@ -1,6 +1,7 @@
 <div class="chat-container">
-  <div class="messages" #container>
-    <app-message *ngFor="let message of messages"
+  <mat-spinner diameter="50" *ngIf="loadingMessages"></mat-spinner>
+  <div class="messages" #container (scroll)="onTop($event)">
+    <app-message *ngFor="let message of messages.reverse()"
                  [message]="message">
     </app-message>
   </div>
