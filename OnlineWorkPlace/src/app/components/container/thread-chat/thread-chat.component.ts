@@ -1,5 +1,4 @@
 import {
-  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -24,7 +23,7 @@ import {UtilsMessage} from '../../../shared/utils/utils-message';
   templateUrl: './thread-chat.component.html',
   styleUrls: ['./thread-chat.component.css']
 })
-export class ThreadChatComponent implements OnInit, OnDestroy, AfterViewChecked, AfterViewInit {
+export class ThreadChatComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('container')
   container: ElementRef;
 
@@ -70,14 +69,14 @@ export class ThreadChatComponent implements OnInit, OnDestroy, AfterViewChecked,
         this.connectionStatus.next(true);
       });
 
-/*    this.messageInput.valueChanges
-      .subscribe(text => {
-        if ((text as string).length > 5) {
-          this.chatService.notifyTyping(this.threadId, true);
-        } else {
-          this.chatService.notifyTyping(this.threadId, false);
-        }
-      });*/
+    /*    this.messageInput.valueChanges
+          .subscribe(text => {
+            if ((text as string).length > 5) {
+              this.chatService.notifyTyping(this.threadId, true);
+            } else {
+              this.chatService.notifyTyping(this.threadId, false);
+            }
+          });*/
 
     this.connectionStatus
       .pipe(
@@ -126,11 +125,8 @@ export class ThreadChatComponent implements OnInit, OnDestroy, AfterViewChecked,
       );
   }
 
-  ngAfterViewChecked(): void {
-  }
-
   onTop($event: Event): void {
-    if ($event.target.scrollTop === 0 && !this.notOldMessagesAnymore) {
+    if (($event.target as HTMLElement).scrollTop === 0 && !this.notOldMessagesAnymore) {
       this.getOldMessages();
     }
   }
