@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterViewInit, ChangeDetectorRef,
   Component,
   ElementRef,
   OnDestroy,
@@ -42,7 +42,7 @@ export class ThreadChatComponent implements OnInit, OnDestroy, AfterViewInit {
   private notOldMessagesAnymore = false;
   loadingMessages = false;
 
-  constructor(private chatService: ChatService, private route: ActivatedRoute) {
+  constructor(private chatService: ChatService, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
     this.threadId = this.route.snapshot.paramMap.get('threadId');
     this.user$.subscribe(user => this.user = user);
     this.getOldMessages();
@@ -91,11 +91,13 @@ export class ThreadChatComponent implements OnInit, OnDestroy, AfterViewInit {
     if (message) {
       const threadMessage = {
         description: message,
-        timestamp: new Date().toLocaleString(),
+        timestamp: new Date().toString(),
         senderUser: this.user
       };
       this.chatService.sendMessage(threadMessage, this.threadId);
       this.messageInput.patchValue('');
+      this.messages.unshift(threadMessage);
+
       this.scrollToBottom();
       // this.chatService.notifyTyping(this.threadId, false);
     }
@@ -108,7 +110,8 @@ export class ThreadChatComponent implements OnInit, OnDestroy, AfterViewInit {
   private getNewMessage(): void {
     this.chatService.getNewMessage(this.threadId)
       .subscribe(message => {
-        this.messages.push(message);
+        this.messages.unshift(message);
+        this.scrollToBottom();
       });
   }
 
