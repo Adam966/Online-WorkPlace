@@ -16,6 +16,8 @@ import {AddUserComponent} from './workplace-settings/add-user/add-user/add-user.
 import {NotificationState} from '../../store/notification.state';
 import {NotificationModel} from '../../models/notification.model';
 import {UserRightModel} from '../../models/rights-model/user-right.model';
+import {USER_PHOTO} from '../../services/url_const';
+import {UserModel} from '../../models/application-models/user.model';
 
 @Component({
   selector: 'app-container',
@@ -54,6 +56,12 @@ export class ContainerComponent implements OnInit {
   @Select(WorkplaceSettingsState.userRights)
   userRights$: Observable<UserRightModel>;
 
+  @Select(LoginState.userName)
+  userName$: Observable<string>;
+
+  @Select(LoginState)
+  user$: Observable<UserModel>;
+
   input: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
@@ -63,6 +71,7 @@ export class ContainerComponent implements OnInit {
     this.notifications$.subscribe(data => {
       this.freshNotifications = data.filter(notification => notification.fresh).length;
     });
+
 
     this.currentWorkplaceId$.subscribe(data => {
       this.currentWorkplaceId = data;

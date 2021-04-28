@@ -5,21 +5,26 @@ import {Navigate} from '@ngxs/router-plugin';
 
 export class Login {
   static readonly type = '[Login User] Login';
-  constructor(public user: UserModel) {}
+
+  constructor(public user: UserModel) {
+  }
 }
 
 export class Logout {
   static readonly type = '[Logout User] Logout';
-  constructor() {}
+
+  constructor() {
+  }
 }
 
-@State<UserModel> ({
+@State<UserModel>({
   name: 'user',
-  defaults: { id: null, userName: null, userSurname: null, email: null, token: null, photo: null }
+  defaults: {id: null, userName: null, userSurname: null, email: null, token: null, photo: null}
 })
 @Injectable()
 export class LoginState {
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+  }
 
   @Selector()
   static userId(state: UserModel): number {
@@ -29,6 +34,16 @@ export class LoginState {
   @Selector()
   static token(state: UserModel): string {
     return state.token;
+  }
+
+  @Selector()
+  static userName(state: UserModel): string {
+    return `${state.userName} ${state.userSurname}`;
+  }
+
+  @Selector()
+  static photo(state: UserModel): number {
+    return state.photo;
   }
 
   @Action(Login)
