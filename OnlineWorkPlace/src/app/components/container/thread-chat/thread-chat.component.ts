@@ -1,5 +1,5 @@
 import {
-  AfterViewInit, ChangeDetectorRef,
+  AfterViewInit,
   Component,
   ElementRef,
   OnDestroy,
@@ -17,6 +17,7 @@ import {MessageModel} from '../../../models/message.model';
 import {filter} from 'rxjs/operators';
 import {FormControl} from '@angular/forms';
 import {UtilsMessage} from '../../../shared/utils/utils-message';
+import {ApplicationState} from '../../../store/application';
 
 @Component({
   selector: 'app-thread-chat',
@@ -30,6 +31,10 @@ export class ThreadChatComponent implements OnInit, OnDestroy, AfterViewInit {
   @Select(LoginState)
   user$!: Observable<UserModel>;
 
+  @Select(ApplicationState.currentWorkplaceId)
+  currentWorkplaceId$!: Observable<string>;
+  currentWorkplaceId: string;
+
   messages: MessageModel[] = [];
   messageInput = new FormControl();
 
@@ -42,15 +47,19 @@ export class ThreadChatComponent implements OnInit, OnDestroy, AfterViewInit {
   private notOldMessagesAnymore = false;
   loadingMessages = false;
 
-  constructor(private chatService: ChatService, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
+  constructor(private chatService: ChatService, private route: ActivatedRoute) {
     this.threadId = this.route.snapshot.paramMap.get('threadId');
     this.user$.subscribe(user => this.user = user);
     this.getOldMessages();
+
+    this.currentWorkplaceId$.subscribe(data => {
+      this.currentWorkplaceId = data;
+    });
   }
 
   private getOldMessages(): void {
     this.loadingMessages = true;
-    this.chatService.getOldMessages(this.threadId, this.page.toString())
+    this.chatService.getOldMessages(this.threadId, this.page.toString(), +this.currentWorkplaceId)
       .subscribe(messages => {
         this.messages.push(...messages);
         this.page = this.page + 1;

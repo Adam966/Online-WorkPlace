@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {WorkplaceElementModel} from '../../../models/workplacemodels/workplaceelement.model';
 import {WorkplaceElementApiService} from '../../../services/workplace-element-api/workplace-element-api.service';
 import {Select} from '@ngxs/store';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {WorkplaceElementState} from '../../../store/workplace-element';
 import {NoteModel} from '../../../models/workplacemodels/note.model';
 import {ThreadModel} from '../../../models/workplacemodels/thread.model';
@@ -46,6 +46,7 @@ export class WorkplaceScreenComponent implements OnInit, OnDestroy {
 
   workplaceConfig: { workplacePhoto: number, colorOfElement: string, workplaceBackground: string };
   url = WORKPLACE_PHOTO;
+  notificationSubscription: Subscription;
 
   constructor(
     private elementApiService: WorkplaceElementApiService,
@@ -69,6 +70,7 @@ export class WorkplaceScreenComponent implements OnInit, OnDestroy {
     this.changeToolbarStatus();
     // this.setApplicationTitle();
     this.notificationRights$.subscribe(rights => {
+      console.log('RIGHTS');
       this.sseNotificationService.startSseNotificationsStream(this.workplaceId, this.userId, rights);
     });
   }

@@ -23,9 +23,9 @@ export class WorkplaceElementApiService extends AbstractApiService {
     return this.http.put<WorkplaceElementModel>(this.createUrl(ADD_ELEMENT), data);
   }
 
-  archiveWorkplaceElement(elementId: number): Observable<any> {
+  archiveWorkplaceElement(elementId: number, workplaceId: number): Observable<any> {
     this.urlPrefix = '';
-    return this.http.put(this.createUrl(ARCHIVE_ELEMENT, elementId.toString()), null);
+    return this.http.put(this.createUrl(`workplace/${workplaceId}/${ARCHIVE_ELEMENT}`, elementId.toString()), null);
   }
 
   getArchivedWorkplaceElements(workplaceId: string): Observable<WorkplaceElementModel[]> {

@@ -47,4 +47,4 @@ export const GET_NEW_MESSAGE = '/message/thread';
 export const SEND_NEW_MESSAGE = '/chat/message';
 export const GET_TYPING_NOTIFICATION = '/message/notify/thread';
 export const SEND_NOTIFY_TYPING_MESSAGE = '/chat/notify';
-export const GET_OLD_MESSAGES = '/thread/';
+export const GET_OLD_MESSAGES = 'thread/';
