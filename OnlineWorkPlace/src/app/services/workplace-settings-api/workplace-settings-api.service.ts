@@ -4,14 +4,15 @@ import {Observable} from 'rxjs';
 import {UserModel} from '../../models/application-models/user.model';
 import {
   ADD_WORKPLACE_LABEL,
-  ADD_WORKPLACE_USER, CHANGE_USER_NOTIFICATIONS, DELETE_WORKPLACE_LABEL, DELETE_WORKPLACE_USER,
-  FIND_USERS_BY_EMAIL,
+  ADD_WORKPLACE_USER, CHANGE_USER_NOTIFICATIONS, CHANGE_USER_RIGHTS, DELETE_WORKPLACE_LABEL, DELETE_WORKPLACE_USER,
+  FIND_USERS_BY_EMAIL, GET_ALL_USER_RIGHT,
   GET_WORKPLACE_LABELS, GET_WORKPLACE_RIGHTS,
   GET_WORKPLACE_USERS
 } from '../url_const';
 import {LabelModel} from '../../models/application-models/label.model';
 import {AbstractApiService} from '../abstract-api.service';
 import {RightsModel} from '../../models/rights-model/rights.model';
+import {UserRightModel} from '../../models/rights-model/user-right.model';
 
 @Injectable({
   providedIn: 'root'
@@ -68,5 +69,15 @@ export class WorkplaceSettingsApiService extends AbstractApiService {
   changeUserNotifications(workplaceId: string, userId: string, notifications: any): Observable<any> {
     this.urlPrefix = `workplace/${workplaceId}/user/${userId}/`;
     return this.http.put(this.createUrl(CHANGE_USER_NOTIFICATIONS), notifications);
+  }
+
+  getAllUsersRights(workplaceId: string): Observable<UserRightModel[]> {
+    this.urlPrefix = `workplace/${workplaceId}/`;
+    return this.http.get<UserRightModel[]>(this.createUrl(GET_ALL_USER_RIGHT));
+  }
+
+  changeUserRights(workplaceId: string, rights: UserRightModel): Observable<any> {
+    this.urlPrefix = `workplace/${workplaceId}/user/${rights.userId}/`;
+    return this.http.put(this.createUrl(CHANGE_USER_RIGHTS), rights);
   }
 }

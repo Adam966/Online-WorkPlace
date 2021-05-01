@@ -41,7 +41,9 @@ export class WorkplaceSettingsComponent implements OnInit {
   userId$!: Observable<number>;
   userId: number;
 
+  allUsersRights: UserRightModel[] = [];
   notificationRights: any = {};
+  loadingOfChangeRights = false;
 
   constructor(private workplaceSettingService: WorkplaceSettingsApiService, private sseNotificationsService: SseNotificationApiService) {
   }
@@ -49,6 +51,8 @@ export class WorkplaceSettingsComponent implements OnInit {
   ngOnInit(): void {
     this.workplaceId$.subscribe(id => this.workplaceId = id);
     this.userId$.subscribe(id => this.userId = id);
+    this.workplaceSettingService.getAllUsersRights(this.workplaceId.toString())
+      .subscribe((rights) => this.allUsersRights = rights);
   }
 
   @Dispatch()
@@ -100,5 +104,38 @@ export class WorkplaceSettingsComponent implements OnInit {
       this.sseNotificationsService.stopNotificationsStream();
       this.sseNotificationsService.startSseNotificationsStream(this.workplaceId, this.userId, notificationModel);
     });
+  }
+
+  filterUserById(userId: number): UserRightModel {
+    return this.allUsersRights.filter((right) => right.userId === userId)[0];
+  }
+
+  changeUserRights(addToWorkplace: boolean,
+                   removeFromWorkplace: boolean,
+                   archiveElement: boolean,
+                   changeRights: boolean,
+                   index: number): void {
+    this.loadingOfChangeRights = true;
+    let obj;
+    const rightsMap = new Map([
+      ['addToWorkplace', addToWorkplace],
+      ['removeFromWorkplace', removeFromWorkplace],
+      ['archiveElement', archiveElement],
+      ['changeRights', changeRights]]);
+
+    rightsMap.forEach((value: any, key) => {
+      if (value !== '') {
+        obj = {...obj, [key]: value};
+      }
+    });
+
+    this.workplaceSettingService.changeUserRights(this.workplaceId.toString(), {...this.allUsersRights[index], ...obj})
+      .subscribe(() => {
+        this.loadingOfChangeRights = false;
+        UtilsMessage.showMessage(UtilsMessage.RIGHTS_CHANGED, UtilsMessage.MESSAGE_STATUS_POSITIVE);
+      }, () => {
+        this.loadingOfChangeRights = false;
+        UtilsMessage.showMessage(UtilsMessage.MESSAGE_UNEXPECTED_ERROR, UtilsMessage.MESSAGE_STATUS_ERROR);
+      });
   }
 }

@@ -23,6 +23,8 @@ export const ADD_WORKPLACE_LABEL = 'label';
 export const FIND_USERS_BY_EMAIL = 'users';
 export const DELETE_WORKPLACE_USER = 'user/';
 export const DELETE_WORKPLACE_LABEL = 'label/';
+export const GET_ALL_USER_RIGHT = 'users-rights';
+export const CHANGE_USER_RIGHTS = 'user-rights';
 
 ////////////////////// WORKPLACE ELEMENTS API //////////////////////
 export const GET_ELEMENTS = 'elements';
