@@ -32,7 +32,6 @@ export class HandleResponseInterceptor implements HttpInterceptor {
       } else if (error.status === 409) {
         UtilsMessage.showMessage(error.error.message, UtilsMessage.MESSAGE_STATUS_ERROR);
       } else if (error.status === 403) {
-        this.logoutUser();
         UtilsMessage.showMessage(error.error.message, UtilsMessage.MESSAGE_STATUS_ERROR);
       }
     } else if (error.status > 500) {

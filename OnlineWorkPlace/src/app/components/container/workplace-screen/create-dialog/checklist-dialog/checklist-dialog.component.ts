@@ -56,6 +56,7 @@ export class ChecklistDialogComponent implements OnInit {
   createCheckList(form: NgForm): void {
     const checklist = {
       ...form.value,
+      id: this.data.object.id ?? null,
       assignedLabels: this.labels,
       taskEntities: this.tasks,
       type: this.type
