@@ -73,8 +73,8 @@ export class ChatService extends AbstractApiService {
     this.stompClient.send(`${SEND_NEW_MESSAGE}/${threadId}`, {}, this.toJson(threadMessage));
   }
 
-  getOldMessages(threadId: string, page: string): Observable<MessageModel[]> {
-    return this.http.get<MessageModel[]>(this.createUrl(GET_OLD_MESSAGES, threadId) + `?page=${page}`);
+  getOldMessages(threadId: string, page: string, workplaceId: number): Observable<MessageModel[]> {
+    return this.http.get<MessageModel[]>(this.createUrl(`workplace/${workplaceId}/${GET_OLD_MESSAGES}`, threadId) + `?page=${page}`);
   }
 
   notifyTyping(threadId: string, isTyping: boolean): void {

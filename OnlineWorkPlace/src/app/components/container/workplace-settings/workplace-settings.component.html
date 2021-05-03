@@ -47,11 +47,13 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="column-container">
-      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).sentMessage">receipt of the message</mat-checkbox>
-      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).addedToElement">added to element</mat-checkbox>
-      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).dueDate">due date</mat-checkbox>
-      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).removedFromElement">removed from element</mat-checkbox>
+      <form #notificationForm="ngForm"></form>
+      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).sentMessage" (change)="notificationSettingsChange({ sentMessage: $event.checked })">receipt of the message</mat-checkbox>
+      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).addedToElement" (change)="notificationSettingsChange({ addedToElement: $event.checked })">added to element</mat-checkbox>
+      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).dueDate" (change)="notificationSettingsChange({ dueDate: $event.checked })">due date</mat-checkbox>
+      <mat-checkbox color="primary" [checked]="(notificationsRights$ | async).removedFromElement" (change)="notificationSettingsChange({ removedFromElement: $event.checked })">removed from element</mat-checkbox>
     </div>
+    <button mat-raised-button color="primary" [disabled]="!notificationChanged" (click)="changeNotificationSettings()">Change Notification Settings</button>
   </mat-expansion-panel>
   <!------------  Workplace rights settings ------------>
   <mat-expansion-panel>
@@ -61,7 +63,7 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="user-rights-container">
-      <div class="user-rights-content" *ngFor="let user of users$ | async">
+      <div class="user-rights-content" *ngFor="let user of (users$ | async); let i = index">
         <div class="user-rights-label">
           <app-user-label
             [user]="user">
@@ -70,10 +72,31 @@
           <span>&nbsp;</span>
           <span>{{ user.userSurname }}</span>
         </div>
-        <mat-checkbox color="primary" [checked]="(userRights$ | async).addToWorkplace" [disabled]="!(userRights$ | async).changeRights">add user</mat-checkbox>
-        <mat-checkbox color="primary" [checked]="(userRights$ | async).removeFromWorkplace" [disabled]="!(userRights$ | async).changeRights">delete user</mat-checkbox>
-        <mat-checkbox color="primary" [checked]="(userRights$ | async).archiveElement" [disabled]="!(userRights$ | async).changeRights">archive element</mat-checkbox>
-        <mat-checkbox color="primary" [checked]="(userRights$ | async).changeRights" [disabled]="!(userRights$ | async).changeRights">change rights</mat-checkbox>
+        <mat-checkbox color="primary"
+                      ngModel #addToWorkplace="ngModel"
+                      [checked]="filterUserById(user.id)?.addToWorkplace"
+                      [disabled]="!(userRights$ | async).changeRights">add user</mat-checkbox>
+        <mat-checkbox color="primary"
+                      ngModel
+                      #removeFromWorkplace="ngModel"
+                      [checked]="filterUserById(user.id)?.removeFromWorkplace"
+                      [disabled]="!(userRights$ | async).changeRights">delete user</mat-checkbox>
+        <mat-checkbox color="primary"
+                      ngModel #archiveElement="ngModel"
+                      [checked]="filterUserById(user.id)?.archiveElement"
+                      [disabled]="!(userRights$ | async).changeRights">archive element</mat-checkbox>
+        <mat-checkbox color="primary"
+                      ngModel #changeRights="ngModel"
+                      [checked]="filterUserById(user.id)?.changeRights"
+                      [disabled]="!(userRights$ | async).changeRights">change rights</mat-checkbox>
+        <button
+          *ngIf="!loadingOfChangeRights"
+          (click)="changeUserRights(addToWorkplace.value, removeFromWorkplace.value, archiveElement.value, changeRights.value, i)"
+          [disabled]="!(userRights$ | async).changeRights"
+          mat-raised-button
+          color="primary"
+          style="margin-top: 0">Change Rights</button>
+        <mat-spinner diameter="20" *ngIf="loadingOfChangeRights"></mat-spinner>
       </div>
     </div>
   </mat-expansion-panel>

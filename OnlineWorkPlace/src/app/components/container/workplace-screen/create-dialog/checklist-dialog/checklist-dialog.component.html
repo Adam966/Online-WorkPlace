@@ -5,6 +5,7 @@
       <input
         matInput
         ngModel
+        maxlength="300"
         type="text"
         name="name"
         required
@@ -61,6 +62,13 @@
             name="notificationDate"
             ngModel>
         </mat-form-field>
+        <p
+          (click)="archive()"
+          *ngIf="isUpdate && (userRights$ | async).archiveElement"
+          [mat-dialog-close]="i">
+          <mat-icon>archive</mat-icon>
+          Archive Checklist
+        </p>
         <div>
           <h3>Assigned labels</h3>
           <div class="labels-content">
@@ -78,6 +86,7 @@
         mat-raised-button
         color="primary"
         type="submit"
+        mat-dialog-close
         [disabled]="form.invalid">{{element ? 'Update' : 'Create'}}</button>
     </div>
   </form>

@@ -4,4 +4,5 @@ export interface UserRightModel {
   addToWorkplace: boolean;
   archiveElement: boolean;
   changeRights: boolean;
+  userId: number;
 }

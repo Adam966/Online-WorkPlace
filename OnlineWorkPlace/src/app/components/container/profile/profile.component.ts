@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {SetApplicationToolbarTitle} from '../../../store/application';
@@ -6,6 +6,10 @@ import {USER_PHOTO} from '../../../services/url_const';
 import {Select} from '@ngxs/store';
 import {LoginState} from '../../../store/login';
 import {Observable} from 'rxjs';
+import {UserModel} from '../../../models/application-models/user.model';
+import {LoginApiService} from '../../../services/login-api/login-api.service';
+import {switchMap} from 'rxjs/operators';
+import {UtilsMessage} from '../../../shared/utils/utils-message';
 
 @Component({
   selector: 'app-profile',
@@ -13,21 +17,33 @@ import {Observable} from 'rxjs';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  image = '';
+  @ViewChild('currentEmail')
+  input: HTMLInputElement;
+
+  image: File;
+  filePhoto: File;
   photoUrl: string;
 
-  @Select(LoginState.userId)
-  userId$: Observable<number>;
-  userId: number;
+  @Select(LoginState)
+  user$!: Observable<UserModel>;
+  user: UserModel;
+  newPass = '';
+  repeatPass = '';
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private sanitizer: DomSanitizer, private loginApiService: LoginApiService) {
   }
 
   ngOnInit(): void {
-   this.userId$.subscribe(data => this.photoUrl = USER_PHOTO + data);
+    this.user$.subscribe((data) => {
+      this.user = data;
+      if (data.photo) {
+        this.photoUrl = USER_PHOTO + data.photo;
+      }
+    });
   }
 
   choosePhoto(file: File): void {
+    this.filePhoto = file;
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (event) => {
@@ -39,12 +55,44 @@ export class ProfileComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(event.target.result.toString());
   }
 
-  changeUserPhoto(image: string): void {
-    // TODO change user image
+  changeUserPhoto(): void {
+    this.loginApiService.changePhoto(this.user.id, this.filePhoto)
+      .subscribe(() => {
+        this.image = null;
+        UtilsMessage.showMessage(UtilsMessage.PHOTO_CHANGED_SUCCESSFULLY, UtilsMessage.MESSAGE_STATUS_POSITIVE);
+      }, () => {
+        UtilsMessage.showMessage(UtilsMessage.MESSAGE_UNEXPECTED_ERROR, UtilsMessage.MESSAGE_STATUS_ERROR);
+      });
   }
 
   @Dispatch()
   setApplicationTitle(): SetApplicationToolbarTitle {
     return new SetApplicationToolbarTitle('Profile Settings');
+  }
+
+  updateEmail(email: string): void {
+    this.user$.pipe(
+      switchMap((user) => this.loginApiService.updateEmail(user.id, email))
+    ).subscribe(() => {
+      this.input.value = email;
+      UtilsMessage.showMessage(UtilsMessage.EMAIL_CHANGED_SUCCESSFULLY, UtilsMessage.MESSAGE_STATUS_POSITIVE);
+    }, () => {
+      UtilsMessage.showMessage(UtilsMessage.MESSAGE_UNEXPECTED_ERROR, UtilsMessage.MESSAGE_STATUS_ERROR);
+    });
+  }
+
+  changePassword(): void {
+    this.loginApiService.changePassword(this.user.id, this.repeatPass)
+      .subscribe(() => {
+        UtilsMessage.showMessage(UtilsMessage.PASS_CHANGED_SUCCESSFULLY, UtilsMessage.MESSAGE_STATUS_POSITIVE);
+        this.newPass = '';
+        this.repeatPass = '';
+      }, () => {
+      UtilsMessage.showMessage(UtilsMessage.MESSAGE_UNEXPECTED_ERROR, UtilsMessage.MESSAGE_STATUS_ERROR);
+    });
+  }
+
+  checkPass(): boolean {
+    return !(this.newPass === this.repeatPass && this.newPass !== '');
   }
 }

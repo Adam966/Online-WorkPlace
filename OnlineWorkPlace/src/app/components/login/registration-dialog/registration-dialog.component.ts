@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {MatDialogRef} from '@angular/material/dialog';
 import {LoginApiService} from '../../../services/login-api/login-api.service';
 import {catchError} from 'rxjs/operators';
 import {UtilsMessage} from '../../../shared/utils/utils-message';
@@ -11,8 +10,10 @@ import {UtilsMessage} from '../../../shared/utils/utils-message';
   styleUrls: ['./registration-dialog.component.css']
 })
 export class RegistrationDialogComponent implements OnInit {
-  constructor(private dialogRef: MatDialogRef<RegistrationDialogComponent>,
-              private loginService: LoginApiService) {}
+  @ViewChild('signUpForm', { static: true })
+  form: NgForm;
+
+  constructor(private loginService: LoginApiService) {}
 
   registrationStart = true;
   registrationInProgress = false;

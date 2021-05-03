@@ -23,8 +23,9 @@
     <mat-spinner [diameter]="35" *ngIf="isLoading"></mat-spinner>
   </div>
   <button mat-raised-button
+          mat-dialog-close
           color="primary"
-          [disabled]="user.invalid"
+          [disabled]="!chosenUser"
           (click)="create()">
     Add
   </button>

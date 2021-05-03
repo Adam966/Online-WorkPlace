@@ -14,7 +14,7 @@
           <input
             matInput
             #searchInput
-            placeholder="Sort by name, u: user or # tag"
+            placeholder="Sort by name, u: user, # tag or archived:"
             [(ngModel)]="input">
           <button
             mat-button
@@ -64,7 +64,10 @@
   </mat-toolbar>
   <!-- APPLICATION MENU SETTINGS -->
   <mat-menu class="my-menu" #menu="matMenu">
-    <p mat-menu-item><img src="">Adam Ivan</p>
+    <div class="user-info">
+      <app-user-label [user]="(user$ | async)"></app-user-label>
+      <span>{{ userName$ | async }}</span>
+    </div>
     <hr>
     <button mat-menu-item (click)="navigateProfile()">
       <mat-icon>person</mat-icon>
@@ -92,7 +95,7 @@
     </button>
     <button mat-menu-item (click)="createTaskDialog()">
       <mat-icon>add</mat-icon>
-      Add Task
+      Add Checklist
     </button>
     <button mat-menu-item (click)="createDialog('Note')">
       <mat-icon>add</mat-icon>

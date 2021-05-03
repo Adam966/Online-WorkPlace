@@ -17,7 +17,7 @@ import {UtilsMessage} from '../../shared/utils/utils-message';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('signUpForm', { static: true })
+  @ViewChild('registrationForm', { static: true })
   form: NgForm;
 
   constructor(private dialog: MatDialog,

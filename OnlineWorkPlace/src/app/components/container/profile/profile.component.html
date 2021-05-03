@@ -1,12 +1,17 @@
 <div class="profile-container">
   <div class="user-photo-content">
-    <img [src]="image ? image : photoUrl" alt="">
+    <app-user-label [user]="user$ | async"></app-user-label>
     <p>
       <input type="file" id="photo-input" (change)="choosePhoto($event.target.files[0])" hidden>
       <label for="photo-input" class="choose-img">Choose photo</label>
     </p>
-    <button mat-raised-button color="primary" (click)="changeUserPhoto(image)" *ngIf="image">Change photo</button>
-    <p class="name-title">{{'Adam Ivan'}}</p>
+    <p class="name-title">{{ user.userName + " " + user.userSurname }}</p>
+    <img [src]="image" *ngIf="image">
+    <button mat-raised-button
+            color="primary"
+            style="margin-top: 10px"
+            (click)="changeUserPhoto()"
+            *ngIf="image">Change photo</button>
   </div>
   <div class="profile-edit-content">
     <mat-accordion>
@@ -20,13 +25,16 @@
         <div class="password-form">
           <mat-form-field appearance="outline">
             <mat-label>New Password</mat-label>
-            <input matInput type="password">
+            <input matInput type="password" [(ngModel)]="newPass">
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Repeat Password</mat-label>
-            <input matInput type="password">
+            <input matInput type="password" [(ngModel)]="repeatPass" (change)="checkPass()">
           </mat-form-field>
-          <button mat-raised-button color="primary">Update Password</button>
+          <button mat-raised-button
+                  [disabled]="checkPass()"
+                  color="primary"
+                  (click)="changePassword()">Update Password</button>
         </div>
       </mat-expansion-panel>
       <!------------ UPDATE EMAIL ------------>
@@ -39,13 +47,13 @@
         <div class="password-form">
           <mat-form-field appearance="outline">
             <mat-label>Old Email</mat-label>
-            <input matInput type="email" [value]="'adam.ivan@kosickaakademia.sk'" [disabled]="true">
+            <input matInput type="email" [value]="user.email" [disabled]="true" #currentEmail>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>New Email</mat-label>
-            <input matInput type="email">
+            <input matInput type="email" maxlength="500" #email="ngModel" ngModel>
           </mat-form-field>
-          <button mat-raised-button color="primary">Update Email</button>
+          <button mat-raised-button color="primary" (click)="updateEmail(email.value)" [disabled]="email.invalid">Update Email</button>
         </div>
       </mat-expansion-panel>
     </mat-accordion>

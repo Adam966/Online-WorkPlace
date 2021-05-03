@@ -10,6 +10,9 @@ import {WorkplaceSettingsApiService} from '../../../services/workplace-settings-
 import {UtilsMessage} from '../../../shared/utils/utils-message';
 import {UserRightModel} from '../../../models/rights-model/user-right.model';
 import {NotificationRightsModel} from '../../../models/rights-model/notification-rights.model';
+import {LoginState} from '../../../store/login';
+import {mergeMap} from 'rxjs/operators';
+import {SseNotificationApiService} from '../../../services/sse-notification-api/sse-notification-api.service';
 
 @Component({
   selector: 'app-workplace-settings',
@@ -32,12 +35,24 @@ export class WorkplaceSettingsComponent implements OnInit {
 
   @Select(WorkplaceSettingsState.userRights)
   userRights$: Observable<UserRightModel>;
+  notificationChanged = false;
 
-  constructor(private workplaceSettingService: WorkplaceSettingsApiService) {
+  @Select(LoginState.userId)
+  userId$!: Observable<number>;
+  userId: number;
+
+  allUsersRights: UserRightModel[] = [];
+  notificationRights: any = {};
+  loadingOfChangeRights = false;
+
+  constructor(private workplaceSettingService: WorkplaceSettingsApiService, private sseNotificationsService: SseNotificationApiService) {
   }
 
   ngOnInit(): void {
     this.workplaceId$.subscribe(id => this.workplaceId = id);
+    this.userId$.subscribe(id => this.userId = id);
+    this.workplaceSettingService.getAllUsersRights(this.workplaceId.toString())
+      .subscribe((rights) => this.allUsersRights = rights);
   }
 
   @Dispatch()
@@ -70,5 +85,57 @@ export class WorkplaceSettingsComponent implements OnInit {
   @Dispatch()
   deleteUserState(user: UserModel): DeleteWorkplaceUser {
     return new DeleteWorkplaceUser(user);
+  }
+
+  notificationSettingsChange(obj: any): void {
+    this.notificationRights = {...this.notificationRights, ...obj};
+    this.notificationChanged = true;
+  }
+
+  changeNotificationSettings(): void {
+    console.log(this.notificationRights);
+    this.notificationsRights$
+      .pipe(
+        mergeMap(notificationsRight => {
+          this.notificationRights = {id: notificationsRight.id, ...this.notificationRights};
+          return this.workplaceSettingService.changeUserNotifications(this.workplaceId.toString(), this.userId.toString(), this.notificationRights);
+        })
+      ).subscribe((notificationModel) => {
+      this.sseNotificationsService.stopNotificationsStream();
+      this.sseNotificationsService.startSseNotificationsStream(this.workplaceId, this.userId, notificationModel);
+    });
+  }
+
+  filterUserById(userId: number): UserRightModel {
+    return this.allUsersRights.filter((right) => right.userId === userId)[0];
+  }
+
+  changeUserRights(addToWorkplace: boolean,
+                   removeFromWorkplace: boolean,
+                   archiveElement: boolean,
+                   changeRights: boolean,
+                   index: number): void {
+    this.loadingOfChangeRights = true;
+    let obj;
+    const rightsMap = new Map([
+      ['addToWorkplace', addToWorkplace],
+      ['removeFromWorkplace', removeFromWorkplace],
+      ['archiveElement', archiveElement],
+      ['changeRights', changeRights]]);
+
+    rightsMap.forEach((value: any, key) => {
+      if (value !== '') {
+        obj = {...obj, [key]: value};
+      }
+    });
+
+    this.workplaceSettingService.changeUserRights(this.workplaceId.toString(), {...this.allUsersRights[index], ...obj})
+      .subscribe(() => {
+        this.loadingOfChangeRights = false;
+        UtilsMessage.showMessage(UtilsMessage.RIGHTS_CHANGED, UtilsMessage.MESSAGE_STATUS_POSITIVE);
+      }, () => {
+        this.loadingOfChangeRights = false;
+        UtilsMessage.showMessage(UtilsMessage.MESSAGE_UNEXPECTED_ERROR, UtilsMessage.MESSAGE_STATUS_ERROR);
+      });
   }
 }

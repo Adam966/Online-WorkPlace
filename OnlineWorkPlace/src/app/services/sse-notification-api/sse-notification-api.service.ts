@@ -8,6 +8,7 @@ import {Dispatch} from '@ngxs-labs/dispatch-decorator';
 import {AddNewNotification, SetNotifications} from '../../store/notification.state';
 import {UtilsMessage} from '../../shared/utils/utils-message';
 import {NotificationRightsModel} from '../../models/rights-model/notification-rights.model';
+import {first} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,9 @@ export class SseNotificationApiService extends AbstractApiService {
   private notificationsSource: EventSource;
 
   startSseNotificationsStream(workplaceId: number, userId: number, rights: NotificationRightsModel): void {
+    console.log('CALLED');
     this.getNotifications(workplaceId, userId)
+      .pipe(first())
       .subscribe(notifications => {
         this.notificationsSource = new EventSource(
           this.addQueryParameters(
@@ -60,7 +63,7 @@ export class SseNotificationApiService extends AbstractApiService {
 
   private addQueryParameters(url: string, rights: NotificationRightsModel): string {
     if (rights.sentMessage) {
-      url = url.concat('setMessage=true&');
+      url = url.concat('sentMessage=true&');
     }
 
     if (rights.removedFromElement) {

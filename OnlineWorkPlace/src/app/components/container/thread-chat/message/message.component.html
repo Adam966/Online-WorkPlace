@@ -3,7 +3,7 @@
     <app-user-label [user]="message.senderUser"></app-user-label>
   </div>
   <div class="text-message">
-    <b>{{ userName }}<span>{{ message.timestamp }}</span></b>
+    <b>{{ userName }}<span>{{ message.timestamp | date }}</span></b>
     <p>
       {{ message.description }}
     </p>
